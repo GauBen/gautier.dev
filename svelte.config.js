@@ -1,36 +1,45 @@
-import { mdsvex } from 'mdsvex';
-import mdsvexConfig from './mdsvex.config.js';
-import adapter from '@sveltejs/adapter-auto';
-import preprocess from 'svelte-preprocess';
+import { mdsvex } from 'mdsvex'
+import adapter from '@sveltejs/adapter-auto'
+import preprocess from 'svelte-preprocess'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	extensions: ['.svelte', ...mdsvexConfig.extensions],
+  extensions: ['.svelte', '.md'],
 
-	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
-	preprocess: [
-		preprocess({
-			scss: {
-				prependData: '@use "src/variables.scss" as *;'
-			}
-		}),
-		mdsvex(mdsvexConfig)
-	],
+  // Consult https://github.com/sveltejs/svelte-preprocess
+  // for more information about preprocessors
+  preprocess: [
+    preprocess({
+      scss: {
+        prependData: '@use "src/variables.scss" as *;',
+      },
+    }),
+    mdsvex({
+      extensions: ['.md'],
+      layout: {
+        _: './src/layouts/article.svelte',
+      },
+      smartypants: {
+        dashes: 'oldschool',
+      },
+      remarkPlugins: [],
+      rehypePlugins: [],
+    }),
+  ],
 
-	kit: {
-		adapter: adapter(),
+  kit: {
+    adapter: adapter(),
+    trailingSlash: 'always',
+    vite: {
+      css: {
+        preprocessorOptions: {
+          scss: {
+            additionalData: '@use "src/variables.scss" as *;',
+          },
+        },
+      },
+    },
+  },
+}
 
-		vite: {
-			css: {
-				preprocessorOptions: {
-					scss: {
-						additionalData: '@use "src/variables.scss" as *;'
-					}
-				}
-			}
-		}
-	}
-};
-
-export default config;
+export default config
