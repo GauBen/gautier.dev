@@ -1,5 +1,12 @@
-<script context="module">
+<script lang="ts" context="module">
+  import type { Load } from '@sveltejs/kit'
+
   export const hydrate = false
+
+  export const load: Load = ({ props }) => ({
+    props,
+    stuff: { title: 'Articles' },
+  })
 </script>
 
 <script lang="ts">
@@ -9,10 +16,6 @@
     snippet: { code: string }
   }>
 </script>
-
-<svelte:head>
-  <title>Articles</title>
-</svelte:head>
 
 <main>
   {#each articles as { path, title, snippet }}

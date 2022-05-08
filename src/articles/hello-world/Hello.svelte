@@ -1,8 +1,14 @@
 <script lang="ts">
   export let name: string
+  export let checked = false
 </script>
 
-<div>Hello {name}!</div>
+<div class:checked>
+  <label>
+    <input type="checkbox" bind:checked />
+    Hello {name}!
+  </label>
+</div>
 
 <style lang="scss">
   div {
@@ -10,5 +16,9 @@
     font-variant: small-caps;
     border: 1px solid black;
     padding: 1em;
+  }
+
+  .checked {
+    background: sandybrown;
   }
 </style>

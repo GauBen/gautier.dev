@@ -16,9 +16,6 @@ const config = {
     }),
     mdsvex({
       extensions: ['.md'],
-      layout: {
-        _: './src/layouts/article.svelte',
-      },
       smartypants: {
         dashes: 'oldschool',
       },

@@ -4,12 +4,13 @@ title: Hello World!
 
 <script>
   import Hello from './Hello.svelte'
+  let checked
 </script>
 
 ## This is my first article!
 
 This seems to be a great start
 
-<Hello name="World"/>
+<Hello name="World" bind:checked />
 
-Youpi!
+<p>{#if checked}Youpi!{/if}</p>
