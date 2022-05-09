@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
   import { page } from '$app/stores'
+  import Prism from '$lib/Prism.svelte'
   import type { Load } from '@sveltejs/kit'
   import type { SvelteComponent } from 'svelte'
 
@@ -42,7 +43,7 @@
 
 <h1>{title}</h1>
 {#if snippet}
-  <pre>{snippet.code}</pre>
+  <Prism {...snippet} />
 {/if}
 
 <svelte:component this={component} />

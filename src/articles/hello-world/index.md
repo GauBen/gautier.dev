@@ -1,5 +1,8 @@
 ---
 title: Hello World!
+snippet:
+  code: <button on:click={() => count++}>{count}</button>
+  lang: svelte
 ---
 
 <script>

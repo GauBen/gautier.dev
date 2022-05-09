@@ -12,3 +12,10 @@ snippet:
 ## This is a fantastic article
 
 You _should_ read it.
+
+```css
+button {
+  all: unset;
+  outline: revert;
+}
+```

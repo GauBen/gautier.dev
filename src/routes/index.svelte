@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
   import type { Load } from '@sveltejs/kit'
+  import Prism from '$lib/Prism.svelte'
 
   export const hydrate = false
 
@@ -21,7 +22,7 @@
   {#each articles as { path, title, snippet }}
     <div class="card">
       {#if snippet}
-        <pre>{snippet.code}</pre>
+        <Prism {...snippet} />
       {/if}
       <h2><a href={path} sveltekit:prefetch>{title}</a></h2>
     </div>
@@ -41,15 +42,12 @@
     border-radius: 1em;
     overflow: hidden;
 
-    h2 {
-      padding: 0 1em;
+    :global(pre) {
+      margin: 0;
     }
 
-    pre {
-      margin: 0;
-      padding: 1em;
-      background: rgb(48, 11, 63);
-      color: #fff;
+    h2 {
+      padding: 0 1em;
     }
 
     a::before {
