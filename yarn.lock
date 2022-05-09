@@ -622,13 +622,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iarna/toml@npm:^2.2.5":
-  version: 2.2.5
-  resolution: "@iarna/toml@npm:2.2.5"
-  checksum: b63b2b2c4fd67969a6291543ada0303d45593801ee744b60f5390f183c03d9192bc67a217abb24be945158f1935f02840d9ffff40c0142aa171b5d3b6b6a3ea5
-  languageName: node
-  linkType: hard
-
 "@jest/types@npm:^27.2.5, @jest/types@npm:^27.5.1":
   version: 27.5.1
   resolution: "@jest/types@npm:27.5.1"
@@ -767,44 +760,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/adapter-auto@next":
-  version: 1.0.0-next.40
-  resolution: "@sveltejs/adapter-auto@npm:1.0.0-next.40"
+"@sveltejs/adapter-static@npm:next":
+  version: 1.0.0-next.29
+  resolution: "@sveltejs/adapter-static@npm:1.0.0-next.29"
   dependencies:
-    "@sveltejs/adapter-cloudflare": 1.0.0-next.19
-    "@sveltejs/adapter-netlify": 1.0.0-next.56
-    "@sveltejs/adapter-vercel": 1.0.0-next.50
-  checksum: e78b68843f4b71dbc547530953c446cda81c85dadf6a147e7def6265ac9dcd8b0ee93056266bdb5d1e610081b5d5c0b000804a034dac6b8feab70eb3fc6a2f97
-  languageName: node
-  linkType: hard
-
-"@sveltejs/adapter-cloudflare@npm:1.0.0-next.19":
-  version: 1.0.0-next.19
-  resolution: "@sveltejs/adapter-cloudflare@npm:1.0.0-next.19"
-  dependencies:
-    esbuild: ^0.14.21
-    worktop: 0.8.0-next.13
-  checksum: 5ff638c75b3ef7ffc51ed166b62a049e9eef20fafb032139beac0d2fc6e6f4968dee240b336a3c723d731caf03dc0957bb6ae3d1c432bf46486c5fecc7335985
-  languageName: node
-  linkType: hard
-
-"@sveltejs/adapter-netlify@npm:1.0.0-next.56":
-  version: 1.0.0-next.56
-  resolution: "@sveltejs/adapter-netlify@npm:1.0.0-next.56"
-  dependencies:
-    "@iarna/toml": ^2.2.5
-    esbuild: ^0.14.21
     tiny-glob: ^0.2.9
-  checksum: 6ac8b383e48f62c60ac17d6637d663191205a0cd06757353e3358422b3cbf733f5767c7769108ac870a830dd2c68512ba544d2eb8a733d2081c0321cd83ce7c8
-  languageName: node
-  linkType: hard
-
-"@sveltejs/adapter-vercel@npm:1.0.0-next.50":
-  version: 1.0.0-next.50
-  resolution: "@sveltejs/adapter-vercel@npm:1.0.0-next.50"
-  dependencies:
-    esbuild: ^0.14.21
-  checksum: a5b478d8fb2ee1b0e56f592c43d12eb098b4f8241e48822bb5a3fba4dee474c93f01e1864557f96e21eff75d5fc2fd8a6918853f3f85e77661365d3d6b2f14dc
+  checksum: 4cd130ff79fc7db5449eedc730aecdf103d93ed09a03e8c949a0613953434cd62a3ad147e43600af0894795d540a2f4fd2d0957ea118e33d3caeded186e1e93f
   languageName: node
   linkType: hard
 
@@ -1763,7 +1724,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.14.21, esbuild@npm:^0.14.27":
+"esbuild@npm:^0.14.27":
   version: 0.14.38
   resolution: "esbuild@npm:0.14.38"
   dependencies:
@@ -2218,7 +2179,7 @@ __metadata:
   resolution: "gautier.dev@workspace:."
   dependencies:
     "@playwright/test": ^1.21.0
-    "@sveltejs/adapter-auto": next
+    "@sveltejs/adapter-static": next
     "@sveltejs/kit": next
     "@typescript-eslint/eslint-plugin": ^5.10.1
     "@typescript-eslint/parser": ^5.10.1
@@ -3011,13 +2972,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mrmime@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "mrmime@npm:1.0.0"
-  checksum: 2c72a40942af7c53bc97d1e9e9c5cb0e6541d18f736811c3a1b46fa2a2b2362480d687daa8ae8372523acaacd82426a4f7ce34b0bf1825ea83b3983e8cb91afd
-  languageName: node
-  linkType: hard
-
 "ms@npm:2.1.2":
   version: 2.1.2
   resolution: "ms@npm:2.1.2"
@@ -3444,13 +3398,6 @@ __metadata:
   dependencies:
     picomatch: ^2.2.1
   checksum: 1ced032e6e45670b6d7352d71d21ce7edf7b9b928494dcaba6f11fba63180d9da6cd7061ebc34175ffda6ff529f481818c962952004d273178acd70f7059b320
-  languageName: node
-  linkType: hard
-
-"regexparam@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "regexparam@npm:2.0.0"
-  checksum: 8db9559041b5f5304fd224b5c87b33f12bbb97e07292e7f573a57d73690c0f2e3e2a956fefe6169527b5585d7d0828b8aecedcf61ce5fae40530185ebcae3031
   languageName: node
   linkType: hard
 
@@ -4149,16 +4096,6 @@ __metadata:
   version: 1.2.3
   resolution: "word-wrap@npm:1.2.3"
   checksum: 30b48f91fcf12106ed3186ae4fa86a6a1842416df425be7b60485de14bec665a54a68e4b5156647dec3a70f25e84d270ca8bc8cd23182ed095f5c7206a938c1f
-  languageName: node
-  linkType: hard
-
-"worktop@npm:0.8.0-next.13":
-  version: 0.8.0-next.13
-  resolution: "worktop@npm:0.8.0-next.13"
-  dependencies:
-    mrmime: ^1.0.0
-    regexparam: ^2.0.0
-  checksum: 6939db42f0e4b15118d9445e802a286afa633d9aa549f5001066a371ffc793e70e986347aa90edc94cf68fbe98952f4ece341317a3dea719dc94e0e649abb358
   languageName: node
   linkType: hard
 

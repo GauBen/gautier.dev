@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-auto'
+import adapter from '@sveltejs/adapter-static'
 import { mdsvex } from 'mdsvex'
 import preprocess from 'svelte-preprocess'
 import { highlighter } from './src/lib/highlight.js'
