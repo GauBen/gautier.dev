@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.21.1",
-    "@sveltejs/adapter-static": "^1.0.0-next.30",
+    "@sveltejs/adapter-vercel": "next",
     "@sveltejs/kit": "^1.0.0-next.328",
     "@types/prismjs": "^1.26.0",
     "@typescript-eslint/eslint-plugin": "^5.23.0",

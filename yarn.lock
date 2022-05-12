@@ -760,12 +760,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/adapter-static@npm:^1.0.0-next.30":
-  version: 1.0.0-next.30
-  resolution: "@sveltejs/adapter-static@npm:1.0.0-next.30"
+"@sveltejs/adapter-vercel@npm:next":
+  version: 1.0.0-next.50
+  resolution: "@sveltejs/adapter-vercel@npm:1.0.0-next.50"
   dependencies:
-    tiny-glob: ^0.2.9
-  checksum: 6224c188b6bc3c38e266ae492e4ebee7e5ee28b1dee0353b1d8b3cc717d225a70ad799f61b3ff687cb61279b214bbefa29a019a85e8f1caf67083cef03ee59a0
+    esbuild: ^0.14.21
+  checksum: a5b478d8fb2ee1b0e56f592c43d12eb098b4f8241e48822bb5a3fba4dee474c93f01e1864557f96e21eff75d5fc2fd8a6918853f3f85e77661365d3d6b2f14dc
   languageName: node
   linkType: hard
 
@@ -1731,7 +1731,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.14.27":
+"esbuild@npm:^0.14.21, esbuild@npm:^0.14.27":
   version: 0.14.39
   resolution: "esbuild@npm:0.14.39"
   dependencies:
@@ -2186,7 +2186,7 @@ __metadata:
   resolution: "gautier.dev@workspace:."
   dependencies:
     "@playwright/test": ^1.21.1
-    "@sveltejs/adapter-static": ^1.0.0-next.30
+    "@sveltejs/adapter-vercel": next
     "@sveltejs/kit": ^1.0.0-next.328
     "@types/prismjs": ^1.26.0
     "@typescript-eslint/eslint-plugin": ^5.23.0
@@ -2296,13 +2296,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globalyzer@npm:0.1.0":
-  version: 0.1.0
-  resolution: "globalyzer@npm:0.1.0"
-  checksum: 419a0f95ba542534fac0842964d31b3dc2936a479b2b1a8a62bad7e8b61054faa9b0a06ad9f2e12593396b9b2621cac93358d9b3071d33723fb1778608d358a1
-  languageName: node
-  linkType: hard
-
 "globby@npm:^11.0.4":
   version: 11.1.0
   resolution: "globby@npm:11.1.0"
@@ -2314,13 +2307,6 @@ __metadata:
     merge2: ^1.4.1
     slash: ^3.0.0
   checksum: b4be8885e0cfa018fc783792942d53926c35c50b3aefd3fdcfb9d22c627639dc26bd2327a40a0b74b074100ce95bb7187bfeae2f236856aa3de183af7a02aea6
-  languageName: node
-  linkType: hard
-
-"globrex@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "globrex@npm:0.1.2"
-  checksum: adca162494a176ce9ecf4dd232f7b802956bb1966b37f60c15e49d2e7d961b66c60826366dc2649093cad5a0d69970cfa8875bd1695b5a1a2f33dcd2aa88da3c
   languageName: node
   linkType: hard
 
@@ -3887,16 +3873,6 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: b6937a38c80c7f84d9c11dd75e49d5c44f71d95e810a3250bd1f1797fc7117c57698204adf676b71497acc205d769d65c16ae8fa10afad832ae1322630aef10a
-  languageName: node
-  linkType: hard
-
-"tiny-glob@npm:^0.2.9":
-  version: 0.2.9
-  resolution: "tiny-glob@npm:0.2.9"
-  dependencies:
-    globalyzer: 0.1.0
-    globrex: ^0.1.2
-  checksum: aea5801eb6663ddf77ebb74900b8f8bd9dfcfc9b6a1cc8018cb7421590c00bf446109ff45e4b64a98e6c95ddb1255a337a5d488fb6311930e2a95334151ec9c6
   languageName: node
   linkType: hard
 
