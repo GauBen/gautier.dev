@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
   import { page } from '$app/stores'
-  import { articles } from '$lib/articles.js'
+  import { articles } from '$lib/articles'
   import Prism from '$lib/Prism.svelte'
   import type { Load } from '@sveltejs/kit'
   import type { SvelteComponent } from 'svelte'

@@ -1,4 +1,4 @@
-import { articles } from '$lib/articles.js'
+import { articles } from '$lib/articles'
 import type { RequestHandler } from '@sveltejs/kit'
 
 export const get: RequestHandler = async ({ params }) => {

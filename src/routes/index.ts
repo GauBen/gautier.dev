@@ -1,6 +1,6 @@
 import type { RequestHandler } from '@sveltejs/kit'
 
-import { articles } from '$lib/articles.js'
+import { articles } from '$lib/articles'
 
 export const get: RequestHandler = async () => {
   return {

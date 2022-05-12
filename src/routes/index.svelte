@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
   import type { Load } from '@sveltejs/kit'
   import Prism from '$lib/Prism.svelte'
-  import { formatDate } from '$lib/articles.js'
+  import { formatDate } from '$lib/articles'
 
   export const hydrate = false
 
