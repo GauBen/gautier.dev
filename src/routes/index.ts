@@ -1,19 +1,15 @@
 import type { RequestHandler } from '@sveltejs/kit'
 
-export const get: RequestHandler = async () => {
-  const files = Object.entries(
-    import.meta.glob('../articles/*{.md,.svelte,/index.md,/index.svelte}')
-  )
-  const articles = files.map(([file, importFile]) =>
-    importFile().then(({ metadata }) => ({
-      path: file.replace(/(\/index)?\.md$/, ''),
-      ...metadata,
-    }))
-  )
+import { articles } from '$lib/articles.js'
 
+export const get: RequestHandler = async () => {
   return {
     body: {
-      articles: await Promise.all(articles),
+      articles: await Promise.all(
+        [...articles.entries()].map(([path, load]) =>
+          load().then(({ metadata }) => ({ path, ...metadata }))
+        )
+      ),
     },
   }
 }

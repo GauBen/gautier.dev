@@ -1,9 +1,9 @@
 <script lang="ts" context="module">
   import { page } from '$app/stores'
+  import { articles } from '$lib/articles.js'
   import Prism from '$lib/Prism.svelte'
   import type { Load } from '@sveltejs/kit'
   import type { SvelteComponent } from 'svelte'
-  import { articles } from './[article].js'
 
   export const load: Load = async ({ props, params }) => {
     const { stuff, hydrate, css, html } = props

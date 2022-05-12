@@ -24,7 +24,7 @@
       {#if snippet}
         <Prism {...snippet} />
       {/if}
-      <h2><a href={path} sveltekit:prefetch>{title}</a></h2>
+      <h2><a href="/articles/{path}" sveltekit:prefetch>{title}</a></h2>
     </div>
   {/each}
 </main>
