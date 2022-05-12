@@ -23,7 +23,10 @@ const config = {
       remarkPlugins: [],
       rehypePlugins: [],
       highlight: {
-        highlighter,
+        highlighter: (code, lang) =>
+          `<pre class="language-${lang}">{@html ${JSON.stringify(
+            highlighter(code, lang)
+          )}}</pre>`,
       },
     }),
   ],

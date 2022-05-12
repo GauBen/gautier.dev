@@ -1,23 +1,22 @@
-import hljs from 'highlight.js'
-// @ts-expect-error This lib is not typed
-import svelte from 'highlightjs-svelte'
-svelte(hljs)
+import Prism from 'prismjs'
 
-export const highlight = (
-  /** @type {string} */ code,
-  /** @type {string} */ language
-) => hljs.highlight(code, { language }).value
+import 'prism-svelte'
+import 'prismjs/components/prism-diff.js'
+import 'prismjs/components/prism-ocaml.js'
+import 'prismjs/components/prism-ruby.js'
+import 'prismjs/plugins/diff-highlight/prism-diff-highlight.js'
+
+Prism.manual = true
+
+for (const lang of Object.keys(Prism.languages))
+  Prism.languages[`diff-${lang}`] = Prism.languages.diff
 
 export const highlighter = (
   /** @type {string} */ code,
-  /** @type {string} */ language
-) => {
-  const highlighted = highlight(code, language)
-    .replace(
-      /[{}`]/g,
-      // @ts-expect-error No undefined here
-      (c) => ({ '{': '&#123;', '}': '&#125;', '`': '&#96;' }[c])
-    )
-    .replace(/\\([trn])/g, '&#92;$1')
-  return `<pre><code class="hljs language-${language}">${highlighted}</code></pre>`
-}
+  /** @type {string} */ lang
+) =>
+  `<code class="language-${lang}">${Prism.highlight(
+    code,
+    Prism.languages[lang],
+    lang
+  )}</code>`

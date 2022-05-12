@@ -761,11 +761,11 @@ __metadata:
   linkType: hard
 
 "@sveltejs/adapter-static@npm:next":
-  version: 1.0.0-next.29
-  resolution: "@sveltejs/adapter-static@npm:1.0.0-next.29"
+  version: 1.0.0-next.30
+  resolution: "@sveltejs/adapter-static@npm:1.0.0-next.30"
   dependencies:
     tiny-glob: ^0.2.9
-  checksum: 4cd130ff79fc7db5449eedc730aecdf103d93ed09a03e8c949a0613953434cd62a3ad147e43600af0894795d540a2f4fd2d0957ea118e33d3caeded186e1e93f
+  checksum: 6224c188b6bc3c38e266ae492e4ebee7e5ee28b1dee0353b1d8b3cc717d225a70ad799f61b3ff687cb61279b214bbefa29a019a85e8f1caf67083cef03ee59a0
   languageName: node
   linkType: hard
 
@@ -849,6 +849,13 @@ __metadata:
   version: 17.0.31
   resolution: "@types/node@npm:17.0.31"
   checksum: 704618350f8420d5c47db0f7778398e821b7724369946f5c441a7e6b9343295553936400eb8309f0b07d5e39c240988ab3456b983712ca86265dabc9aee4ad3d
+  languageName: node
+  linkType: hard
+
+"@types/prismjs@npm:^1":
+  version: 1.26.0
+  resolution: "@types/prismjs@npm:1.26.0"
+  checksum: cd5e7a6214c1f4213ec512a5fcf6d8fe37a56b813fc57ac95b5ff5ee074742bfdbd2f2730d9fd985205bf4586728e09baa97023f739e5aa1c9735a7c1ecbd11a
   languageName: node
   linkType: hard
 
@@ -2181,16 +2188,17 @@ __metadata:
     "@playwright/test": ^1.21.0
     "@sveltejs/adapter-static": next
     "@sveltejs/kit": next
+    "@types/prismjs": ^1
     "@typescript-eslint/eslint-plugin": ^5.10.1
     "@typescript-eslint/parser": ^5.10.1
     eslint: ^8.12.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-svelte3: ^4.0.0
-    highlight.js: ^11.5.1
-    highlightjs-svelte: ^1.0.6
     mdsvex: ^0.10.5
     prettier: ^2.5.1
     prettier-plugin-svelte: ^2.5.0
+    prism-svelte: 0.4
+    prismjs: ^1.28.0
     sass: ^1.49.11
     svelte: ^3.44.0
     svelte-check: ^2.2.6
@@ -2367,20 +2375,6 @@ __metadata:
   dependencies:
     function-bind: ^1.1.1
   checksum: b9ad53d53be4af90ce5d1c38331e712522417d017d5ef1ebd0507e07c2fbad8686fffb8e12ddecd4c39ca9b9b47431afbb975b8abf7f3c3b82c98e9aad052792
-  languageName: node
-  linkType: hard
-
-"highlight.js@npm:^11.5.1":
-  version: 11.5.1
-  resolution: "highlight.js@npm:11.5.1"
-  checksum: bff556101d7691c6275ad19318e368fc971cd0621ef3d86222f5373df7d8191a2fc1ffd47f118138cbcf85e5fe91cfeefaecd6184f49a3ec18090955efc9edef
-  languageName: node
-  linkType: hard
-
-"highlightjs-svelte@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "highlightjs-svelte@npm:1.0.6"
-  checksum: d9624e8a1e187033bfad120be57a3a66df4433d81398aa9347d6189916c061e693c9e6b8083007a37ebf0b54c3ae3bbeae7178159cfbdc8027d6280d555dceec
   languageName: node
   linkType: hard
 
@@ -3294,14 +3288,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prism-svelte@npm:^0.4.7":
+"prism-svelte@npm:0.4, prism-svelte@npm:^0.4.7":
   version: 0.4.7
   resolution: "prism-svelte@npm:0.4.7"
   checksum: 7f3648ba67558eb510380587fecc511e903164f7c5eed856cbd16bbc00b144e1398eda84537f0e48cbc1a14cdb3835aba3a266f357848aa0e80f5b28d848d0b5
   languageName: node
   linkType: hard
 
-"prismjs@npm:^1.17.1":
+"prismjs@npm:^1.17.1, prismjs@npm:^1.28.0":
   version: 1.28.0
   resolution: "prismjs@npm:1.28.0"
   checksum: bde93fb2beb45b7243219fc53855f59ee54b3fa179f315e8f9d66244d756ef984462e10561bbdc6713d3d7e051852472d7c284f5794a8791eeaefea2fb910b16
