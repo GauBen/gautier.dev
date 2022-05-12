@@ -15,3 +15,8 @@ export const articles: Map<string, () => Promise<Mdsvex>> = new Map(
     load as () => Promise<Mdsvex>,
   ])
 )
+
+export const formatDate = (date: string | undefined) =>
+  Intl.DateTimeFormat('en-US', {
+    dateStyle: 'medium',
+  }).format(new Date(date ?? 0))

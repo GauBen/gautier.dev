@@ -1,5 +1,6 @@
 ---
 title: yeah
+date: 2022-05-12
 snippet:
   code: |2
       <main>

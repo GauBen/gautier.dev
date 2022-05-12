@@ -1,5 +1,6 @@
 ---
 title: Hello World!
+date: 2022-05-11
 snippet:
   code: |
     let rec fib n = match n with

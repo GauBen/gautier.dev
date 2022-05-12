@@ -1,5 +1,6 @@
 ---
 title: A text-like button
+date: 2022-05-10
 snippet:
   code: |
     button {

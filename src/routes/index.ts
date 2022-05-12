@@ -9,6 +9,10 @@ export const get: RequestHandler = async () => {
         [...articles.entries()].map(([path, load]) =>
           load().then(({ metadata }) => ({ path, ...metadata }))
         )
+      ).then((articles) =>
+        articles.sort(({ date: a }, { date: z }) => {
+          return new Date(z ?? 0).getTime() - new Date(a ?? 0).getTime()
+        })
       ),
     },
   }

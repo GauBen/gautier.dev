@@ -8,6 +8,7 @@ declare namespace App {
   // interface Session {}
   interface Stuff {
     title: string
+    date?: string
     snippet?: { code: string; lang: string }
     hydrate?: boolean
   }

@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
   import type { Load } from '@sveltejs/kit'
   import Prism from '$lib/Prism.svelte'
+  import { formatDate } from '$lib/articles.js'
 
   export const hydrate = false
 
@@ -11,20 +12,21 @@
 </script>
 
 <script lang="ts">
-  export let articles: Array<{
-    path: string
-    title: string
-    snippet: { code: string }
-  }>
+  export let articles: Array<
+    {
+      path: string
+    } & App.Stuff
+  >
 </script>
 
 <main>
-  {#each articles as { path, title, snippet }}
+  {#each articles as { path, title, snippet, date }}
     <div class="card">
       {#if snippet}
         <Prism {...snippet} />
       {/if}
       <h2><a href="/articles/{path}" sveltekit:prefetch>{title}</a></h2>
+      <p>{formatDate(date)}</p>
     </div>
   {/each}
 </main>
