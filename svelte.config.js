@@ -1,7 +1,7 @@
-import adapter from '@sveltejs/adapter-vercel'
+import adapter from '@sveltejs/adapter-auto'
 import { mdsvex } from 'mdsvex'
 import preprocess from 'svelte-preprocess'
-import { highlighter } from './src/lib/highlight.js'
+import { highlight } from './src/lib/prism.js'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -25,7 +25,7 @@ const config = {
       highlight: {
         highlighter: (code, lang) =>
           `<pre class="language-${lang}">{@html ${JSON.stringify(
-            highlighter(code, lang)
+            highlight(code, lang)
           )}}</pre>`,
       },
     }),

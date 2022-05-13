@@ -42,3 +42,39 @@ puts say.upcase
 # five times
 5.times { puts say }
 ```
+
+```typescript
+export const listen = async <K extends keyof HTMLElementEventMap>(
+  element: HTMLElement,
+  eventName: K
+) =>
+  new Promise<HTMLElementEventMap[K]>((resolve) => {
+    element.addEventListener(
+      eventName,
+      (event) => {
+        resolve(event)
+      },
+      { once: true }
+    )
+  })
+
+const main = async () => {
+  // On remplace window.addEventListener('load')
+  await listen(window, 'load')
+
+  const $input = document.querySelector('input[type=search]')
+
+  while (true) {
+    // On remplace $input.addEventListener('input')
+    await listen($input, 'input')
+    const search = $input.value
+
+    // On remplace fetch().then()
+    const response = await fetch('./search?q=' + encodeURIComponent(search))
+    const data = await response.json()
+    updateSuggestions(data)
+  }
+}
+
+main()
+```

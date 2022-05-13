@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.21.1",
-    "@sveltejs/adapter-vercel": "next",
+    "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "^1.0.0-next.328",
     "@types/prismjs": "^1.26.0",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
@@ -24,6 +24,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "mdsvex": "^0.10.5",
+    "postcss-html": "^1.4.1",
+    "postcss-scss": "^4.0.4",
     "prettier": "^2.6.2",
     "prettier-plugin-svelte": "^2.7.0",
     "prism-svelte": "^0.4.0",

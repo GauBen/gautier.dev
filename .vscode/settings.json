@@ -1,0 +1,6 @@
+{
+  "cssvar.enableColors": true,
+  "cssvar.extensions": ["css", "scss", "svelte"],
+  "cssvar.files": ["src/*.scss"],
+  "cssvar.postcssSyntax": ["postcss-html", "postcss-scss"]
+}
