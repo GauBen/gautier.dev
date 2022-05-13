@@ -18,6 +18,12 @@ pre {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
+
+  > code {
+    display: block;
+    width: max-content;
+    min-width: 100%;
+  }
 }
 
 .token.cdata,
@@ -83,8 +89,27 @@ pre {
 }
 
 .token.inserted {
+  position: relative;
   display: block;
   background-color: var(--prism-highlight);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1em;
+    background-color: inherit;
+  }
+
+  &::before {
+    left: -1em;
+  }
+
+  &::after {
+    right: -1em;
+  }
 }
 
 .token.prefix {

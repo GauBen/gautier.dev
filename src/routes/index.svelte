@@ -12,11 +12,7 @@
 </script>
 
 <script lang="ts">
-  export let articles: Array<
-    {
-      path: string
-    } & App.Stuff
-  >
+  export let articles: Array<{ path: string } & App.Stuff>
 </script>
 
 <main>
@@ -46,6 +42,7 @@
 
     :global(pre) {
       margin: 0;
+      overflow: hidden;
     }
 
     h2 {

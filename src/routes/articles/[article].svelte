@@ -6,27 +6,28 @@
   import type { SvelteComponent } from 'svelte'
 
   export const load: Load = async ({ props, params }) => {
-    const { stuff, hydrate, css, html } = props
-    if (!hydrate) return { stuff, props: { hydrate, css, html } }
+    const { stuff, css, html } = props
+    if (html) return { stuff, props: { css, html } }
 
     const load = articles.get(params.article)
     if (!load) return { status: 404 }
 
     const { default: component } = await load()
-    return { stuff, props: { hydrate, css, component } }
+    return { stuff, props: { css, component } }
   }
 </script>
 
 <script lang="ts">
-  export let hydrate = false
   export let css = ''
-  export let html = ''
+  export let html: string | false = false
   export let component: SvelteComponent | undefined = undefined
   $: ({ title, snippet } = $page.stuff)
 </script>
 
 <svelte:head>
-  {@html '<' + 'style>' + css + '<' + '/style>'}
+  {#if css}
+    {@html '<' + 'style>' + css + '<' + '/style>'}
+  {/if}
 </svelte:head>
 
 <h1>{title}</h1>
@@ -34,10 +35,10 @@
   <Prism {...snippet} />
 {/if}
 
-{#if hydrate}
-  <svelte:component this={component} />
-{:else}
+{#if html}
   {@html html}
+{:else}
+  <svelte:component this={component} />
 {/if}
 
 <p><a href="/" sveltekit:prefetch>Back to the article list</a></p>
