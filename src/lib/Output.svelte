@@ -12,7 +12,7 @@
 <style lang="scss">
   div {
     position: relative;
-    height: 100%;
+    min-height: 100%;
     padding: 2em;
     border: 2px solid #666;
     border-radius: 2px;
