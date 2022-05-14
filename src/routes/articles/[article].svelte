@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
   import { page } from '$app/stores'
-  import { articles } from '$lib/articles'
+  import { articles, formatDate } from '$lib/articles'
   import Prism from '$lib/Prism.svelte'
   import type { Load } from '@sveltejs/kit'
   import type { SvelteComponent } from 'svelte'
@@ -18,8 +18,6 @@
 </script>
 
 <script lang="ts">
-  import { formatDate } from '$lib/articles.js'
-
   export let css = ''
   export let html: string | false = false
   export let component: SvelteComponent | undefined = undefined
