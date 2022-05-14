@@ -1,10 +1,13 @@
 <script lang="ts">
   import { page } from '$app/stores'
   import '../app.scss'
+
+  $: ({ title, description } = $page.stuff)
 </script>
 
 <svelte:head>
-  <title>{$page.stuff.title}</title>
+  <title>{title}</title>
+  {#if description}<meta name="description" content={description} />{/if}
 </svelte:head>
 
 <slot />
