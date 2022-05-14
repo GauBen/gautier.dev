@@ -1,0 +1,27 @@
+.markdown-content {
+  > :where(*) {
+    width: 600px;
+    max-width: 100%;
+    margin: 1rem auto;
+  }
+
+  table {
+    display: block;
+    overflow: auto;
+
+    tr {
+      height: 1px;
+    }
+
+    tr + tr {
+      border-top: 1px solid gray;
+    }
+
+    td,
+    th {
+      height: inherit;
+      padding: 0.25rem;
+      vertical-align: top;
+    }
+  }
+}

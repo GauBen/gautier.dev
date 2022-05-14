@@ -18,10 +18,12 @@
 </script>
 
 <script lang="ts">
+  import { formatDate } from '$lib/articles.js'
+
   export let css = ''
   export let html: string | false = false
   export let component: SvelteComponent | undefined = undefined
-  $: ({ title, snippet } = $page.stuff)
+  $: ({ title, description, date, snippet } = $page.stuff)
 </script>
 
 <svelte:head>
@@ -31,14 +33,23 @@
 </svelte:head>
 
 <h1>{title}</h1>
+{#if description || date}
+  <p>{description ?? ''} {date ? formatDate(date) : ''}</p>
+{/if}
 {#if snippet}
   <Prism {...snippet} />
 {/if}
 
-{#if html}
-  {@html html}
-{:else}
-  <svelte:component this={component} />
-{/if}
+<div class="markdown-content">
+  {#if html}
+    {@html html}
+  {:else}
+    <svelte:component this={component} />
+  {/if}
+</div>
 
 <p><a href="/" sveltekit:prefetch>Back to the article list</a></p>
+
+<style lang="scss" global>
+  @use '../../assets/markdown-content.scss';
+</style>

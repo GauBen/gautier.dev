@@ -24,9 +24,11 @@ const config = {
       rehypePlugins: [],
       highlight: {
         highlighter: (code, lang) =>
-          `<pre class="language-${lang}">{@html ${JSON.stringify(
-            highlight(code, lang)
-          )}}</pre>`,
+          lang
+            ? `<pre class="language-${lang}">{@html ${JSON.stringify(
+                highlight(code, lang)
+              )}}</pre>`
+            : `<pre>{@html ${JSON.stringify(code)}}</pre>`,
       },
     }),
   ],

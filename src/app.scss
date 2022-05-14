@@ -4,6 +4,18 @@
 
 @use './assets/prism.scss';
 
+:root {
+  --prism-color: #1c1b1d;
+  --prism-bg: #fafaff;
+  --prism-highlight: #e9e9ff;
+  --prism-function: #0077bf;
+  --prism-keyword: #5c33bd;
+  --prism-class: #ab6000;
+  --prism-scalar: #bd2a33;
+  --prism-string: #4e7e06;
+  --prism-comment: #355454;
+}
+
 ::selection {
   background-color: #ff48;
 }
