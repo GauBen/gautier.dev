@@ -1,3 +1,7 @@
+@use 'sanitize.css';
+@use 'sanitize.css/assets.css';
+@use 'sanitize.css/typography.css';
+
 @use './assets/prism.scss';
 
 ::selection {
