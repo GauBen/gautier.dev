@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-playwright.playwright",
+    "phoenisx.cssvar",
+    "stylelint.vscode-stylelint",
+    "svelte.svelte-vscode",
+    "webhint.vscode-webhint",
+    "streetsidesoftware.code-spell-checker"
+  ]
+}

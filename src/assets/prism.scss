@@ -1,23 +1,18 @@
 pre,
 code {
-  color: var(--prism-color);
-  background: var(--prism-bg);
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: 1em;
+  color: var(--prism-color);
+  background: var(--prism-bg);
 }
 
 pre {
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.5;
-  tab-size: 4;
-  hyphens: none;
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
+  line-height: 1.5;
+  tab-size: 4;
+  white-space: pre;
 
   > code {
     display: block;
@@ -95,11 +90,11 @@ pre {
 
   &::before,
   &::after {
-    content: '';
     position: absolute;
     top: 0;
     bottom: 0;
     width: 1em;
+    content: '';
     background-color: inherit;
   }
 

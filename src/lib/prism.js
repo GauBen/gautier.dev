@@ -1,5 +1,4 @@
 import Prism from 'prismjs'
-export { Prism }
 
 import 'prism-svelte'
 import 'prismjs/components/prism-diff.js'

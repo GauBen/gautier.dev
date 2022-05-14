@@ -1,0 +1,4 @@
+.svelte-kit/
+.yarn/
+node_modules/
+build/
