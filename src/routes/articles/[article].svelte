@@ -79,8 +79,10 @@
     }
 
     h1 {
+      margin-top: 1em;
       margin-bottom: 0;
       font-size: 3em;
+      line-height: 1;
     }
 
     .date {
