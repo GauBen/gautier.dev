@@ -40,26 +40,26 @@ h6 {
 
 a {
   --link: rgb(58, 58, 153);
-  padding: 2px 0;
+  padding: 0.125em 0;
   color: var(--link);
   text-decoration: none;
   background-image: linear-gradient(var(--link), var(--link)),
     linear-gradient(var(--link), var(--link));
   background-repeat: no-repeat, no-repeat;
   background-position: bottom left, bottom right;
-  background-size: 100% 1px, 0% 2px;
+  background-size: 100% 0.0625em, 0% 0.125em;
   transition: 150ms color, 150ms background-size;
 
   &:hover {
     background-position: bottom left, bottom left;
-    background-size: 100% 1px, 100% 2px;
+    background-size: 100% 0.0625em, 100% 0.125em;
   }
 
   &:active,
   &:focus {
     color: var(--bg, #fff);
     background-position: bottom left, bottom left;
-    background-size: 100% 100%, 0% 2px;
+    background-size: 100% 100%, 0% 0.125em;
     outline: none;
   }
 }
