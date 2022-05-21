@@ -9,7 +9,11 @@
 
   export const load: Load = ({ props }) => ({
     props,
-    stuff: { title: 'Gautier Ben Aïm' },
+    stuff: {
+      title: 'Gautier Ben Aïm',
+      description:
+        'Fullstack web developer, security specialist & design enthusiast.',
+    },
   })
 </script>
 

@@ -2,7 +2,8 @@
   <header>
     <h1>
       <a href="/" sveltekit:prefetch>
-        <img src="/favicon.svg" alt="" aria-hidden="true" /> gautier.dev
+        <img src="/favicon.svg" alt="Site icon" width="72" height="72" />
+        gautier.dev
       </a>
     </h1>
   </header>
@@ -51,6 +52,7 @@
   }
 
   img {
+    width: 1.5em;
     height: 1.5em;
     background-color: #fff;
     border: 1px solid #000;
