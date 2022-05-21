@@ -13,11 +13,12 @@ hydrate: true
 ---
 
 <script>
-  import Tldr from '$lib/Tldr.svelte';
-  import Output from '$lib/Example.svelte';
   import Breadcrumbs from './Breadcrumbs.svelte';
-  import Item from './Item.svelte';
   import Dropdown from './Dropdown.svelte';
+  import Item from './Item.svelte';
+  import Output from '$lib/Example.svelte';
+  import Table from '$lib/markdown/table.svelte';
+  import Tldr from '$lib/Tldr.svelte';
 </script>
 
 <Tldr>
@@ -73,7 +74,7 @@ This property can take four different values, let's try them all!
 <button style="all: ...">Button</button>
 ```
 
-<table>
+<Table>
   <tr>
     <th><code>revert</code></th>
     <th><code>initial</code></th>
@@ -92,7 +93,7 @@ This property can take four different values, let's try them all!
     <td>✅ Uses the default raw-text style.</td>
     <td>❌ Copies its parent styles (here the <code>{'<Example>'}</code> element).</td>
   </tr>
-</table>
+</Table>
 
 Okay, this looks quite chaotic, but we have found what we wanted: `unset` make our button look like is surrounding text, with the correct font and all. Let's try it on our dropdown activator:
 
@@ -119,7 +120,7 @@ Indeed, I quite like the default focus ring, and it creates a sense of unity wit
 <button style="all: unset; outline: ...">Button</button>
 ```
 
-<table>
+<Table>
   <tr>
     <th><code>revert</code></th>
     <th><code>initial</code></th>
@@ -132,7 +133,7 @@ Indeed, I quite like the default focus ring, and it creates a sense of unity wit
     <td>✅ Brings back the default focus ring.</td>
     <td>❌ Raw-text does not have a focus ring.</td>
   </tr>
-</table>
+</Table>
 
 Sorry mobile users, you will have to trust me on this one. However, if you have a keyboard near your fingers, you may try <kbd>tab</kbd>bing between the buttons.
 

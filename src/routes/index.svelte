@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
   import { formatDate } from '$lib/articles'
+  import Card from '$lib/Card.svelte'
+  import Header from '$lib/Header.svelte'
   import Prism from '$lib/Prism.svelte'
   import type { Load } from '@sveltejs/kit'
 
@@ -12,9 +14,6 @@
 </script>
 
 <script lang="ts">
-  import Card from '$lib/Card.svelte'
-  import Header from '$lib/Header.svelte'
-
   export let articles: Array<{ path: string } & App.Stuff>
 </script>
 
@@ -48,7 +47,7 @@
   }
 
   h1 {
-    margin-top: 2rem;
+    margin: 2rem auto 1rem;
   }
 
   .grid {

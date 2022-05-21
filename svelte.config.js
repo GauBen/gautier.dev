@@ -19,8 +19,15 @@ const config = {
     }),
     mdsvex({
       extensions: ['.md'],
-      smartypants: { dashes: 'oldschool' },
-      remarkPlugins: [],
+      layout: './src/lib/markdown/layout.svelte',
+      highlight: {
+        highlighter: (code, lang) =>
+          lang
+            ? `<pre class="language-${lang}">{@html ${JSON.stringify(
+                highlight(code, lang)
+              )}}</pre>`
+            : `<pre>{@html ${JSON.stringify(code)}}</pre>`,
+      },
       rehypePlugins: [
         rehypeSlug,
         [
@@ -31,14 +38,7 @@ const config = {
           }),
         ],
       ],
-      highlight: {
-        highlighter: (code, lang) =>
-          lang
-            ? `<pre class="language-${lang}">{@html ${JSON.stringify(
-                highlight(code, lang)
-              )}}</pre>`
-            : `<pre>{@html ${JSON.stringify(code)}}</pre>`,
-      },
+      smartypants: { dashes: 'oldschool' },
     }),
   ],
 
