@@ -33,6 +33,8 @@
     "prettier-plugin-svelte": "^2.7.0",
     "prism-svelte": "^0.4.0",
     "prismjs": "^1.28.0",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-slug": "^5.0.1",
     "sanitize.css": "^13.0.0",
     "sass": "^1.51.0",
     "stylelint": "^14.8.2",

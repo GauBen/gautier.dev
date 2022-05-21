@@ -3,6 +3,7 @@
 @use 'sanitize.css/typography.css';
 
 @use './assets/prism.scss';
+@use './assets/techna-sans.scss';
 
 :root {
   --prism-color: #1c1b1d;
@@ -14,8 +15,21 @@
   --prism-scalar: #bd2a33;
   --prism-string: #4e7e06;
   --prism-comment: #355454;
+
+  scroll-behavior: smooth;
 }
 
 ::selection {
-  background-color: #ff48;
+  background-color: #ffff4488;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Techna Sans', sans-serif;
+  font-weight: initial;
+  font-feature-settings: 'ss01' 1;
 }

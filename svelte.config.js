@@ -2,6 +2,8 @@ import adapter from '@sveltejs/adapter-auto'
 import { mdsvex } from 'mdsvex'
 import preprocess from 'svelte-preprocess'
 import { highlight } from './src/lib/prism.js'
+import rehypeAutolink from 'rehype-autolink-headings'
+import rehypeSlug from 'rehype-slug'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -17,11 +19,17 @@ const config = {
     }),
     mdsvex({
       extensions: ['.md'],
-      smartypants: {
-        dashes: 'oldschool',
-      },
+      smartypants: { dashes: 'oldschool' },
       remarkPlugins: [],
-      rehypePlugins: [],
+      rehypePlugins: [
+        rehypeSlug,
+        [
+          rehypeAutolink,
+          /** @type {import('rehype-autolink-headings').Options} */ ({
+            content: { type: 'text', value: '#' },
+          }),
+        ],
+      ],
       highlight: {
         highlighter: (code, lang) =>
           lang
