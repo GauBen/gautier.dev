@@ -40,7 +40,7 @@ h6 {
 
 a {
   --link: rgb(58, 58, 153);
-  padding-bottom: 2px;
+  padding-bottom: 2px 0;
   color: var(--link);
   text-decoration: none;
   background-image: linear-gradient(var(--link), var(--link)),
