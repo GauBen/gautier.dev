@@ -1,0 +1,32 @@
+<div class="card">
+  <slot name="header" />
+  <div class="body">
+    <slot />
+  </div>
+</div>
+
+<style lang="scss">
+  .card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1em;
+    box-shadow: 0 0.25em 0.5em #ccc;
+
+    :global(a::before) {
+      position: absolute;
+      inset: 0;
+      content: '';
+    }
+
+    .body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+      padding: 1rem;
+
+      > :global(*) {
+        margin: 0;
+      }
+    }
+  }
+</style>

@@ -1,6 +1,8 @@
 .markdown-content {
+  padding: 0 0.5em;
+
   > :where(*) {
-    width: 600px;
+    width: var(--main-width);
     max-width: 100%;
     margin: 1rem auto;
   }
@@ -31,18 +33,8 @@
   h4,
   h5,
   h6 {
-    position: relative;
-
     > a {
-      position: absolute;
-      right: 100%;
-      padding: 0 0.25em;
-      opacity: 0;
-      transition: opacity 150ms;
-    }
-
-    &:hover > a {
-      opacity: 1;
+      margin-right: 0.5rem;
     }
   }
 }

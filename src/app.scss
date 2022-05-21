@@ -16,7 +16,11 @@
   --prism-string: #4e7e06;
   --prism-comment: #355454;
 
+  --main-width: 50rem;
+
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
 }
 
 ::selection {
@@ -32,4 +36,30 @@ h6 {
   font-family: 'Techna Sans', sans-serif;
   font-weight: initial;
   font-feature-settings: 'ss01' 1;
+}
+
+a {
+  --link: rgb(58, 58, 153);
+  padding-bottom: 2px;
+  color: var(--link);
+  text-decoration: none;
+  background-image: linear-gradient(var(--link), var(--link)),
+    linear-gradient(var(--link), var(--link));
+  background-repeat: no-repeat, no-repeat;
+  background-position: bottom left, bottom right;
+  background-size: 100% 1px, 0% 2px;
+  transition: 150ms color, 150ms background-size;
+
+  &:hover {
+    background-position: bottom left, bottom left;
+    background-size: 100% 1px, 100% 2px;
+  }
+
+  &:active,
+  &:focus {
+    color: var(--bg, #fff);
+    background-position: bottom left, bottom left;
+    background-size: 100% 100%, 0% 2px;
+    outline: none;
+  }
 }

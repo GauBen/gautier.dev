@@ -27,6 +27,7 @@ const config = {
           rehypeAutolink,
           /** @type {import('rehype-autolink-headings').Options} */ ({
             content: { type: 'text', value: '#' },
+            properties: {},
           }),
         ],
       ],

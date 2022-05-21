@@ -4,6 +4,7 @@
   import Prism from '$lib/Prism.svelte'
   import type { Load } from '@sveltejs/kit'
   import type { SvelteComponent } from 'svelte'
+  import '../../assets/markdown-content.scss'
 
   export const load: Load = async ({ props, params }) => {
     const { stuff, css, html } = props
@@ -18,10 +19,12 @@
 </script>
 
 <script lang="ts">
+  import Header from '$lib/Header.svelte'
+
   export let css = ''
   export let html: string | false = false
   export let component: SvelteComponent | undefined = undefined
-  $: ({ title, description, date, snippet } = $page.stuff)
+  $: ({ title, date, snippet } = $page.stuff)
 </script>
 
 <svelte:head>
@@ -30,24 +33,75 @@
   {/if}
 </svelte:head>
 
-<h1>{title}</h1>
-{#if description || date}
-  <p>{description ?? ''} {date ? formatDate(date) : ''}</p>
-{/if}
-{#if snippet}
-  <Prism {...snippet} />
-{/if}
-
-<div class="markdown-content">
-  {#if html}
-    {@html html}
-  {:else}
-    <svelte:component this={component} />
+<Header>
+  {#if snippet}
+    <div class="snippet">
+      <Prism {...snippet} />
+    </div>
   {/if}
-</div>
+</Header>
 
-<p><a href="/" sveltekit:prefetch>Back to the article list</a></p>
+<article>
+  <header>
+    <h1>{title}</h1>
+    {#if date}
+      <p class="date">
+        <time datetime={new Date(date).toISOString()}>{formatDate(date)}</time>
+      </p>
+    {/if}
+  </header>
+  <div class="markdown-content">
+    {#if html}
+      {@html html}
+    {:else}
+      <svelte:component this={component} />
+    {/if}
+  </div>
+</article>
 
-<style lang="scss" global>
-  @use '../../assets/markdown-content.scss';
+<footer>
+  <p><a href="/" sveltekit:prefetch>Back to the article list</a></p>
+</footer>
+
+<style lang="scss">
+  header {
+    padding: 0 1em;
+    overflow: hidden;
+
+    > :global(*) {
+      max-width: var(--main-width);
+      margin-inline: auto;
+    }
+
+    h1,
+    .date {
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 0;
+      font-size: 3em;
+    }
+
+    .date {
+      margin-top: 0;
+      font-size: 1.5em;
+      font-weight: lighter;
+      color: #666;
+    }
+  }
+  footer {
+    text-align: center;
+  }
+
+  .snippet {
+    padding: 1em 0.5em;
+    background-color: var(--prism-bg);
+
+    :global(pre) {
+      max-width: var(--main-width);
+      padding: 0;
+      margin: 0 auto;
+    }
+  }
 </style>
