@@ -16,12 +16,13 @@
 </script>
 
 <main>
-  {#each articles as { path, title, snippet, date }}
+  {#each articles as { path, title, description, date, snippet }}
     <div class="card">
       {#if snippet}
         <Prism {...snippet} />
       {/if}
       <h2><a href="/articles/{path}" sveltekit:prefetch>{title}</a></h2>
+      {#if description}<p>{description}</p>{/if}
       <p>{formatDate(date)}</p>
     </div>
   {/each}
@@ -30,15 +31,15 @@
 <style lang="scss">
   main {
     display: flex;
-    gap: 1em;
     flex-direction: column;
+    gap: 1em;
   }
 
   .card {
     position: relative;
-    box-shadow: 0 0 1em #888;
-    border-radius: 1em;
     overflow: hidden;
+    border-radius: 1em;
+    box-shadow: 0 0 1em #888;
 
     :global(pre) {
       margin: 0;
@@ -50,9 +51,9 @@
     }
 
     a::before {
-      content: '';
       position: absolute;
       inset: 0;
+      content: '';
     }
   }
 </style>

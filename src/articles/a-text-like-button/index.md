@@ -14,7 +14,7 @@ hydrate: true
 
 <script>
   import Tldr from '$lib/Tldr.svelte';
-  import Output from '$lib/Output.svelte';
+  import Output from '$lib/Example.svelte';
   import Breadcrumbs from './Breadcrumbs.svelte';
   import Item from './Item.svelte';
   import Dropdown from './Dropdown.svelte';
@@ -90,7 +90,7 @@ This property can take four different values, let's try them all!
     <td>❌ Brings back the default browser button.</td>
     <td>❌ Brings back the default raw-text browser style.</td>
     <td>✅ Uses the default raw-text style.</td>
-    <td>❌ Copies its parent styles (here the <code>{'<Output>'}</code> element).</td>
+    <td>❌ Copies its parent styles (here the <code>{'<Example>'}</code> element).</td>
   </tr>
 </table>
 
