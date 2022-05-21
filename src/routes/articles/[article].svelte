@@ -89,7 +89,7 @@
       margin-top: 0;
       font-size: 1.5em;
       font-weight: lighter;
-      color: #666;
+      opacity: 0.5;
     }
   }
   footer {
