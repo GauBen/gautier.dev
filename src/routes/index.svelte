@@ -24,7 +24,19 @@
 <Header />
 
 <main>
-  <h1>Latest articles</h1>
+  <p>
+    Hey! I'm a full stack web engineer, cybersecurity engineer, design
+    enthusiast and hackathon organizer.
+  </p>
+  <p>
+    I'm currently doing my final engineering project as a software and
+    cybersecurity developer at <a href="https://escape.tech/">Escape</a>.
+  </p>
+  <p>
+    In September 2022, I'll graduate with a master's degree in software
+    engineering and a master's degree in cybersecurity.
+  </p>
+  <h2>Latest articles</h2>
   <div class="grid">
     {#each articles as { path, title, description, date, snippet }}
       <Card>
@@ -46,12 +58,9 @@
 <style lang="scss">
   main {
     max-width: var(--main-width);
-    padding: 0 0.5em;
+    padding: 1em 0.5em;
     margin: 0 auto;
-  }
-
-  h1 {
-    margin: 2rem auto 1rem;
+    overflow: hidden;
   }
 
   .grid {
