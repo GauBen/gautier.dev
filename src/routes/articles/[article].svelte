@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
   import { page } from '$app/stores'
   import { articles, formatDate } from '$lib/articles'
+  import Header from '$lib/Header.svelte'
   import Prism from '$lib/Prism.svelte'
   import type { Load } from '@sveltejs/kit'
   import type { SvelteComponent } from 'svelte'
@@ -19,8 +20,6 @@
 </script>
 
 <script lang="ts">
-  import Header from '$lib/Header.svelte'
-
   export let css = ''
   export let html: string | false = false
   export let component: SvelteComponent | undefined = undefined
@@ -57,11 +56,10 @@
       <svelte:component this={component} />
     {/if}
   </div>
+  <footer>
+    <p><a href="/" sveltekit:prefetch>Back to the article list</a></p>
+  </footer>
 </article>
-
-<footer>
-  <p><a href="/" sveltekit:prefetch>Back to the article list</a></p>
-</footer>
 
 <style lang="scss">
   header {

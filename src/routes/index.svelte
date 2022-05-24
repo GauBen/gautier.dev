@@ -24,9 +24,10 @@
 <Header />
 
 <main>
+  <h1>Hey!</h1>
   <p>
-    Hey! I'm a full stack web engineer, cybersecurity engineer, design
-    enthusiast and hackathon organizer.
+    My name is Gautier and I'm a full stack web engineer, cybersecurity
+    engineer, design enthusiast and hackathon organizer.
   </p>
   <p>
     I'm currently doing my final engineering project as a software and
@@ -36,6 +37,7 @@
     In September 2022, I'll graduate with a master's degree in software
     engineering and a master's degree in cybersecurity.
   </p>
+  <p class="center"><a href="/resume" class="btn">View my resume</a></p>
   <h2>Latest articles</h2>
   <div class="grid">
     {#each articles as { path, title, description, date, snippet }}
@@ -58,15 +60,42 @@
 <style lang="scss">
   main {
     max-width: var(--main-width);
-    padding: 1em 0.5em;
+    padding: 0 0.5em;
     margin: 0 auto;
     overflow: hidden;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+
+    background-image: linear-gradient(var(--link), var(--link));
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 0 100%;
+    border: 0.0625em solid var(--link);
+    border-radius: 0.75em;
+    border-radius: 1.3em;
+    transition: 150ms color, 150ms background-size;
+
+    &:hover,
+    &:focus {
+      color: white;
+      background-position: left;
+      background-size: 100% 100%;
+      outline: none;
+    }
   }
 
   .grid {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    margin: 1em 0;
   }
 
   .snippet {

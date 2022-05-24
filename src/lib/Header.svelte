@@ -33,7 +33,6 @@
     color: inherit;
     text-decoration: none;
     vertical-align: bottom;
-
     background-image: linear-gradient(#000, #000);
     background-repeat: no-repeat;
     background-position: right;
