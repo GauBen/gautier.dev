@@ -75,7 +75,7 @@ I'm using a Svelte/React/Vue-like syntax here, but we'd write it `<div class="ca
   <div class="card">
     <div class="img" />
     <div class="card-body" style:justify-content="right">
-      <a href="/book" on:click|preventDefault>Book now!</a>
+      <a href="?" on:click|preventDefault>Book now!</a>
     </div>
   </div>
 </Example>
@@ -102,7 +102,7 @@ We'll create a pseudo element on our card link, and since it'll be a child of th
   <div class="card">
     <div class="img" />
     <div class="card-body" style:justify-content="right">
-      <a href="/book" class="p1" on:click|preventDefault>Book now!</a>
+      <a href="?" class="p1" on:click|preventDefault>Book now!</a>
     </div>
   </div>
 </Example>
@@ -129,7 +129,7 @@ Now, let's try positioning it.
   <div class="card" style="position:relative">
     <div class="img" />
     <div class="card-body" style:justify-content="right">
-      <a href="/book" class="p2" on:click|preventDefault>Book now!</a>
+      <a href="?" class="p2" on:click|preventDefault>Book now!</a>
     </div>
   </div>
 </Example>
@@ -158,7 +158,7 @@ There is a shorthand property that means the same as `top/bottom/left/right: 0`:
   <div class="card" style="position:relative">
     <div class="img" />
     <div class="card-body" style:justify-content="right">
-      <a href="/book" class="p3" on:click|preventDefault>Book now!</a>
+      <a href="?" class="p3" on:click|preventDefault>Book now!</a>
     </div>
   </div>
 </Example>
