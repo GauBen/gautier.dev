@@ -5,14 +5,16 @@ export type Mdsvex = {
   default: ReturnType<typeof create_ssr_component>
 }
 
-export const articles: Map<string, () => Promise<Mdsvex>> = new Map(
+export const articles = new Map(
   Object.entries(
-    import.meta.glob('../articles/*{.md,.svelte,/index.md,/index.svelte}')
+    import.meta.glob<Mdsvex>(
+      '../articles/*{.md,.svelte,/index.md,/index.svelte}'
+    )
   ).map(([path, load]) => [
     path
       .replace(/^\.\.\/articles\//, '')
       .replace(/(\.md|\.svelte|\/index\.md|\/index\.svelte)$/, ''),
-    load as () => Promise<Mdsvex>,
+    load,
   ])
 )
 
