@@ -65,6 +65,11 @@
     overflow: hidden;
   }
 
+  h1,
+  h2 {
+    margin: 2rem 0 1rem;
+  }
+
   .center {
     text-align: center;
   }
