@@ -87,7 +87,7 @@
     </div>
   </header>
   <aside>Développeur web full-stack et expert en cyber sécurité</aside>
-  <div class="row">
+  <div class="grid">
     <div class="column">
       <article>
         <h2>Parcours professionnel</h2>
@@ -132,8 +132,7 @@
         <div class="xp">
           <p>
             <strong>
-              Développement d’une solution de chiffrement à Freemindtronic,
-              Andorre
+              Développement d’une solution de chiffrement à Freemindtronic
             </strong>
           </p>
           <ul>
@@ -208,7 +207,7 @@
     <div class="column">
       <article>
         <h2>Compétences</h2>
-        <p class="column">
+        <p class="xp">
           <strong>Backend</strong>
           <span class="tags">
             <span>JavaScript</span>
@@ -217,7 +216,7 @@
             <span>PHP</span>
           </span>
         </p>
-        <p class="column">
+        <p class="xp">
           <strong>Frontend</strong>
           <span class="tags">
             <span>Vue</span>
@@ -226,7 +225,7 @@
             <span>Accessibilité</span>
           </span>
         </p>
-        <p class="column">
+        <p class="xp">
           <strong>Infrastructure</strong>
           <span class="tags">
             <span>Docker</span>
@@ -234,7 +233,7 @@
             <span>GitHub Actions</span>
           </span>
         </p>
-        <p class="column">
+        <p class="xp">
           <strong>Compétences transversales</strong>
           <span class="tags">
             <span>Cybersec</span>
@@ -273,20 +272,23 @@
 </div>
 
 <style lang="scss">
-  :root {
-    font-size: 14px;
-    line-height: 1.429;
+  @media print {
+    :root {
+      font-size: 14px;
+      scrollbar-gutter: auto !important;
+    }
   }
 
   header {
     display: flex;
+    flex-wrap: wrap;
     gap: 1em;
     align-items: end;
-    margin: 1rem;
+    justify-content: center;
 
     img {
-      width: 10rem;
-      height: 10rem;
+      width: 9rem;
+      height: 9rem;
       border: 2px solid black;
     }
 
@@ -300,7 +302,6 @@
 
   aside {
     padding: 0.5rem 1rem;
-    margin: 1rem;
     font-size: 1.1em;
     font-weight: bold;
     color: white;
@@ -320,7 +321,7 @@
 
       &::before {
         position: absolute;
-        top: calc(1em * 1.429 + 0.25em);
+        top: calc(1em * 1.5 + 0.25em);
         left: 0;
         z-index: -1;
         display: block;
@@ -370,12 +371,14 @@
     }
   }
 
-  .row {
+  .grid {
     display: grid;
-    grid-template-columns: 6fr 4fr;
+    grid-template-columns: 1fr;
     gap: 1rem;
-    padding: 0 1rem;
-    margin: 1rem 0;
+
+    @media print, (min-width: 50rem) {
+      grid-template-columns: 6fr 4fr;
+    }
   }
 
   .column {
@@ -412,12 +415,17 @@
   }
 
   .page {
-    width: 21cm;
-    height: 29.7cm;
-    padding: 0.5rem;
-    margin: 2px;
-    overflow: hidden;
+    padding: 1rem 2rem;
     text-align: justify;
-    outline: 1px solid black;
+
+    > :where(*) {
+      margin: 1rem auto;
+    }
+
+    @media screen {
+      > :where(*) {
+        max-width: 52rem;
+      }
+    }
   }
 </style>
