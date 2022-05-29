@@ -374,10 +374,10 @@
   .grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
 
     @media print, (min-width: 50rem) {
       grid-template-columns: 6fr 4fr;
+      gap: 1rem;
     }
   }
 
