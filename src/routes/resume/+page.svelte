@@ -1,15 +1,3 @@
-<script lang="ts" context="module">
-  import type { Load } from '@sveltejs/kit'
-
-  export const load: Load = () => ({
-    stuff: {
-      title: 'Resume',
-    },
-  })
-
-  export const hydrate = false
-</script>
-
 <div class="page">
   <header>
     <img src="https://gautier.dev/me.46c5928c.webp" alt="Me" />

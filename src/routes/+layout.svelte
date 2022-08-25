@@ -2,7 +2,7 @@
   import { page } from '$app/stores'
   import '../app.scss'
 
-  $: ({ title, description } = $page.stuff)
+  $: ({ title, description } = $page.data)
 </script>
 
 <svelte:head>

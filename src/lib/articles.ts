@@ -1,7 +1,13 @@
 import type { create_ssr_component } from 'svelte/internal'
 
 export type Mdsvex = {
-  metadata: App.Stuff
+  metadata: {
+    title: string
+    description?: string
+    date?: string
+    snippet?: { code: string; lang: string }
+    hydrate?: boolean
+  }
   default: ReturnType<typeof create_ssr_component>
 }
 

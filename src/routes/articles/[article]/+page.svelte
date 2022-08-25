@@ -1,29 +1,13 @@
-<script lang="ts" context="module">
-  import { page } from '$app/stores'
-  import { articles, formatDate } from '$lib/articles'
+<script lang="ts">
+  import { formatDate } from '$lib/articles'
   import Header from '$lib/Header.svelte'
   import Prism from '$lib/Prism.svelte'
-  import type { Load } from '@sveltejs/kit'
-  import type { SvelteComponent } from 'svelte'
-  import '../../assets/markdown-content.scss'
+  import '../../../assets/markdown-content.scss'
+  import type { PageData } from './$types'
 
-  export const load: Load = async ({ props, params }) => {
-    const { stuff, css, html } = props
-    if (html) return { stuff, props: { css, html } }
+  export let data: PageData
 
-    const load = articles.get(params.article)
-    if (!load) return { status: 404 }
-
-    const { default: component } = await load()
-    return { stuff, props: { css, component } }
-  }
-</script>
-
-<script lang="ts">
-  export let css = ''
-  export let html: string | false = false
-  export let component: SvelteComponent | undefined = undefined
-  $: ({ title, date, snippet } = $page.stuff)
+  $: ({ component, css, date, html, snippet, title } = data)
 </script>
 
 <svelte:head>

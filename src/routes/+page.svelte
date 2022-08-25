@@ -1,24 +1,11 @@
-<script lang="ts" context="module">
-  import { formatDate } from '$lib/articles'
+<script lang="ts">
+  import { formatDate } from '$lib/articles.js'
   import Card from '$lib/Card.svelte'
   import Header from '$lib/Header.svelte'
   import Prism from '$lib/Prism.svelte'
-  import type { Load } from '@sveltejs/kit'
+  import type { PageData } from './$types'
 
-  export const hydrate = false
-
-  export const load: Load = ({ props }) => ({
-    props,
-    stuff: {
-      title: 'Gautier Ben Aïm',
-      description:
-        'Fullstack web developer, security specialist & design enthusiast.',
-    },
-  })
-</script>
-
-<script lang="ts">
-  export let articles: Array<{ path: string } & App.Stuff>
+  export let data: PageData
 </script>
 
 <Header />
@@ -40,7 +27,7 @@
   <p class="center"><a href="/resume" class="btn">View my resume</a></p>
   <h2>Latest articles</h2>
   <div class="grid">
-    {#each articles as { path, title, description, date, snippet }}
+    {#each data.articles as { path, title, description, date, snippet }}
       <Card>
         <svelte:fragment slot="header">
           {#if snippet}

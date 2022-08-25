@@ -1,9 +1,9 @@
 import adapter from '@sveltejs/adapter-auto'
 import { mdsvex } from 'mdsvex'
-import preprocess from 'svelte-preprocess'
-import { highlight } from './src/lib/prism.js'
 import rehypeAutolink from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
+import preprocess from 'svelte-preprocess'
+import { highlight } from './src/lib/prism.js'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -47,15 +47,6 @@ const config = {
     trailingSlash: 'never',
     prerender: {
       default: true,
-    },
-    vite: {
-      css: {
-        preprocessorOptions: {
-          scss: {
-            additionalData: '@use "src/variables.scss" as *;',
-          },
-        },
-      },
     },
   },
 }
