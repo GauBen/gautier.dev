@@ -1,7 +1,5 @@
 import type { PageLoad } from './$types'
 
-export const hydrate = false
-
 export const load: PageLoad = ({ data }) => ({
   ...data,
   title: 'Gautier Ben Aïm',
