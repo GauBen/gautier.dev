@@ -7,14 +7,8 @@
 
   export let data: PageData
 
-  $: ({ component, css, date, html, snippet, title } = data)
+  $: ({ component, date, snippet, title } = data)
 </script>
-
-<svelte:head>
-  {#if css}
-    {@html '<' + 'style>' + css + '<' + '/style>'}
-  {/if}
-</svelte:head>
 
 <Header>
   {#if snippet}
@@ -34,14 +28,10 @@
     {/if}
   </header>
   <div class="markdown-content">
-    {#if html}
-      {@html html}
-    {:else}
-      <svelte:component this={component} />
-    {/if}
+    <svelte:component this={component} />
   </div>
   <footer>
-    <p><a href="/" sveltekit:prefetch>Back to the article list</a></p>
+    <p><a href="/" data-sveltekit-prefetch>Back to the article list</a></p>
   </footer>
 </article>
 

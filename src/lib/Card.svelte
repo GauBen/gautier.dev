@@ -10,7 +10,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 0.5em;
-    box-shadow: 0 0.25em 0.5em #ccc;
+    box-shadow: 0 0 0.5em #0002;
 
     :global(a::before) {
       position: absolute;

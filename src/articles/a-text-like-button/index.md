@@ -9,7 +9,6 @@ snippet:
       all: unset;
       outline: revert;
     }
-hydrate: true
 ---
 
 <script>

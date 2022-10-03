@@ -6,7 +6,6 @@ export type Mdsvex = {
     description?: string
     date?: string
     snippet?: { code: string; lang: string }
-    hydrate?: boolean
   }
   default: ReturnType<typeof create_ssr_component>
 }

@@ -36,7 +36,7 @@
             </div>
           {/if}
         </svelte:fragment>
-        <h2><a href="/articles/{path}" sveltekit:prefetch>{title}</a></h2>
+        <h2><a href="/articles/{path}" data-sveltekit-prefetch>{title}</a></h2>
         {#if description}<p>{description}</p>{/if}
         <p>{formatDate(date)}</p>
       </Card>

@@ -1,5 +1,5 @@
 ---
-title: Huge Links
+title: Huge links
 description: A guide on how to create element-level links.
 date: 2022-05-24
 snippet:
@@ -13,7 +13,6 @@ snippet:
       position: absolute;
       inset: 0;
     }
-hydrate: true
 ---
 
 <script>

@@ -6,7 +6,6 @@ export const load: PageServerLoad = async ({ params }) => {
   const load = articles.get(params.article)
   if (!load) throw error(404)
 
-  const { metadata, default: component } = await load()
-  const { css, html } = component.render()
-  return { ...metadata, html: !metadata.hydrate && html, css: css.code }
+  const { metadata } = await load()
+  return metadata
 }
