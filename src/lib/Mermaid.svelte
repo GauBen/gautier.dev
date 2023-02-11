@@ -3,16 +3,13 @@
 
 <script lang="ts">
   import mermaid from 'mermaid'
-  import { onMount } from 'svelte'
 
-  let diagram: HTMLElement
-
-  onMount(() => {
-    mermaid.init(diagram)
-  })
+  const mermaidify = (node: HTMLElement) => {
+    mermaid.init({}, node)
+  }
 </script>
 
-<div bind:this={diagram}><slot /></div>
+<div use:mermaidify><slot /></div>
 
 <style lang="scss">
   div {

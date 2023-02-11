@@ -13,10 +13,7 @@ hydrate: true
 <script>
   import { onMount } from 'svelte';
   import Automaton from './Automaton.svelte';
-  onMount(async () => {
-    const mermaid = await import('mermaid')
-    mermaid.default.init(document.querySelectorAll('.mermaid'))
-  })
+  import Mermaid from '$lib/Mermaid.svelte';
 </script>
 
 While building a web app in pure JavaScript, I stumbled upon the following problem: _How do I keep my application in a consistent state?_
@@ -38,16 +35,16 @@ States lead to transitions, and transitions lead to states, and this already sou
 
 To begin with, let's try to create a simple application that follows this automaton:
 
-```mermaid
-graph LR
-  A((1))
-  B((2))
-  C((3))
-  A --> B --> C --> B
-  style A fill:gold,stroke:black,stroke-width:2px,color:black
-  style B fill:firebrick,stroke:black,stroke-width:2px,color:#fff
-  style C fill:navy,stroke:black,stroke-width:2px,color:#fff
-```
+<Mermaid>
+  graph LR
+    A((1))
+    B((2))
+    C((3))
+    A --> B --> C --> B
+    style A fill:gold,stroke:black,stroke-width:2px,color:black
+    style B fill:firebrick,stroke:black,stroke-width:2px,color:#fff
+    style C fill:navy,stroke:black,stroke-width:2px,color:#fff
+</Mermaid>
 
 We'll write it in Svelte mostly because I like the language, but everything was designed to run in pure JavaScript.
 

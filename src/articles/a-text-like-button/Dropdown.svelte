@@ -18,6 +18,7 @@
   >
     Gautier ▼
   </button>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div
     style:display={open ? 'block' : 'none'}
     class="dropdown"

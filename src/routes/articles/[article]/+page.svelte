@@ -31,7 +31,7 @@
     <svelte:component this={component} />
   </div>
   <footer>
-    <p><a href="/" data-sveltekit-prefetch>Back to the article list</a></p>
+    <p><a href="/">Back to the article list</a></p>
   </footer>
 </article>
 

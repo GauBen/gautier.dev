@@ -1,7 +1,7 @@
 <div class:shadow={$$slots.default}>
   <header>
     <h1>
-      <a href="/" data-sveltekit-prefetch>
+      <a href="/" data-sveltekit-preload-code="eager">
         <img src="/favicon.svg" alt="Site icon" width="72" height="72" />
         gautier.dev
       </a>

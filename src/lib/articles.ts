@@ -1,4 +1,7 @@
-import type { create_ssr_component } from 'svelte/internal'
+import type {
+  create_ssr_component,
+  SvelteComponentTyped,
+} from 'svelte/internal'
 
 export type Mdsvex = {
   metadata: {
@@ -7,7 +10,8 @@ export type Mdsvex = {
     date?: string
     snippet?: { code: string; lang: string }
   }
-  default: ReturnType<typeof create_ssr_component>
+  default: ReturnType<typeof create_ssr_component> &
+    (new (...args: unknown[]) => SvelteComponentTyped)
 }
 
 export const articles = new Map(
