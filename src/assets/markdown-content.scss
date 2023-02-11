@@ -37,23 +37,4 @@
       margin-right: 0.5rem;
     }
   }
-
-  .mermaid {
-    &:not([data-processed]) {
-      padding: 0.5em;
-      white-space: pre;
-      border: 1px solid currentColor;
-      opacity: 0.5;
-
-      &::before {
-        display: block;
-        font-weight: bold;
-        content: 'The diagram is loading...';
-      }
-    }
-
-    &[data-processed] {
-      text-align: center;
-    }
-  }
 }

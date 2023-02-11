@@ -7,11 +7,9 @@ snippet:
   code: |
     type State = Promise<Transition>
     type Transition = () => State
-hydrate: true
 ---
 
 <script>
-  import { onMount } from 'svelte';
   import Automaton from './Automaton.svelte';
   import Mermaid from '$lib/Mermaid.svelte';
 </script>

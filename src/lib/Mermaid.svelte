@@ -1,6 +1,3 @@
-<script lang="ts" context="module">
-</script>
-
 <script lang="ts">
   import mermaid from 'mermaid'
 
@@ -14,7 +11,21 @@
 <style lang="scss">
   div {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     width: auto;
+
+    // Mermaid sets data-processed=true when the diagram is ready
+    &:not([data-processed='true']) {
+      padding: 0.5em;
+      white-space: pre;
+      opacity: 0.5;
+
+      &::before {
+        font-weight: bold;
+        content: 'The diagram is loading...';
+      }
+    }
   }
 </style>
