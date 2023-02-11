@@ -4,6 +4,7 @@ import rehypeAutolink from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
 import preprocess from 'svelte-preprocess'
 import { highlight } from './src/lib/prism.js'
+import { escape } from 'svelte/internal'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -21,12 +22,14 @@ const config = {
       extensions: ['.md'],
       layout: './src/lib/markdown/layout.svelte',
       highlight: {
-        highlighter: (code, lang) =>
-          lang
-            ? `<pre class="language-${lang}">{@html ${JSON.stringify(
-                highlight(code, lang)
-              )}}</pre>`
-            : `<pre>{@html ${JSON.stringify(code)}}</pre>`,
+        highlighter: (code, lang) => {
+          if (lang === 'mermaid')
+            return `<div class="mermaid">${escape(code)}</div>`
+          if (!lang) return `<pre>{@html ${JSON.stringify(code)}}</pre>`
+          return `<pre class="language-${lang}">{@html ${JSON.stringify(
+            highlight(code, lang)
+          )}}</pre>`
+        },
       },
       rehypePlugins: [
         rehypeSlug,

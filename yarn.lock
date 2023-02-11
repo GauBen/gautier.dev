@@ -1933,10 +1933,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:2.4.0":
-  version: 2.4.0
-  resolution: "dompurify@npm:2.4.0"
-  checksum: c93ea73cf8e3ba044588450198563e56ce6902e36d0e16e3699df2fa59e82c4fdd11d4ad04ef5024569ce96a35b46f29d0bbea522516add33cd39a7f56a8a675
+"dompurify@npm:2.3.8":
+  version: 2.3.8
+  resolution: "dompurify@npm:2.3.8"
+  checksum: dc7b32ee57a03fe5166a850071200897cc13fa069287a709e3b2138052d73ec09a87026b9e28c8d2f254a74eaa52ef30644e98e54294c30acbca2a53f1bbc5f4
   languageName: node
   linkType: hard
 
@@ -2654,12 +2654,12 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-svelte3: ^4.0.0
     mdsvex: ^0.10.6
-    mermaid: ^9.1.7
-    postcss: ^8.4.16
-    postcss-html: ^1.5.0
-    postcss-scss: ^4.0.5
-    prettier: ^2.7.1
-    prettier-plugin-jsdoc: ^0.4.2
+    mermaid: ^9.1.3
+    postcss: ^8.4.14
+    postcss-html: ^1.4.1
+    postcss-scss: ^4.0.4
+    prettier: ^2.6.2
+    prettier-plugin-jsdoc: ^0.3.38
     prettier-plugin-packagejson: ^2.2.18
     prettier-plugin-svelte: ^2.7.1
     prism-svelte: ^0.5.0
@@ -3510,20 +3510,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mermaid@npm:^9.1.7":
-  version: 9.1.7
-  resolution: "mermaid@npm:9.1.7"
+"mermaid@npm:^9.1.3":
+  version: 9.1.3
+  resolution: "mermaid@npm:9.1.3"
   dependencies:
     "@braintree/sanitize-url": ^6.0.0
     d3: ^7.0.0
     dagre: ^0.8.5
     dagre-d3: ^0.6.4
-    dompurify: 2.4.0
+    dompurify: 2.3.8
     graphlib: ^2.1.8
     khroma: ^2.0.0
-    moment-mini: 2.24.0
+    moment-mini: ^2.24.0
     stylis: ^4.0.10
-  checksum: 7f3f4c55de9e290aa4fa37b01d37772bceae8b7fad888a034ba4cebbdba5e25632fcfbdcadc168d9c3589d173399b6bb74517bba91237f3b0ce7f945e62ab21c
+  checksum: 7cec272241258977f539853f9e07eac0cdb81815a5046ba32ddc8f71f24b9102a3a54d2a2042ef151306ad82e11ab57fee5bb590689ff43e9520e3fbbc136d52
   languageName: node
   linkType: hard
 
@@ -3916,7 +3916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"moment-mini@npm:2.24.0":
+"moment-mini@npm:^2.24.0":
   version: 2.24.0
   resolution: "moment-mini@npm:2.24.0"
   checksum: c1162322fd05a305cf5d403107fe702a928e5a72c56a614142fae4882846f66bb21c423cef397fe56802564b0353386f1bca46c8bb080d2097e68cbd687d589e
@@ -4255,7 +4255,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-html@npm:^1.5.0":
+"postcss-html@npm:^1.4.1":
   version: 1.5.0
   resolution: "postcss-html@npm:1.5.0"
   dependencies:
@@ -4299,12 +4299,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-scss@npm:^4.0.5":
-  version: 4.0.5
-  resolution: "postcss-scss@npm:4.0.5"
+"postcss-scss@npm:^4.0.4":
+  version: 4.0.6
+  resolution: "postcss-scss@npm:4.0.6"
   peerDependencies:
-    postcss: ^8.3.3
-  checksum: 5cba2044db3a57ecec9ac64db28be42e145bae0e1c2e4322ef38674e4302b0854f5e16f91658b2bcff3d0f1dbbfb186a9871f988b16895c51993f431a74ed4db
+    postcss: ^8.4.19
+  checksum: 133a1cba31e2e167f4e841e66ec6a798eaf44c7911f9182ade0b5b1e71a8198814aa390b8c9d5db6b01358115232e5b15b1a4f8c5198acfccfb1f3fdbd328cdf
   languageName: node
   linkType: hard
 
@@ -4345,6 +4345,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss@npm:^8.4.14":
+  version: 8.4.21
+  resolution: "postcss@npm:8.4.21"
+  dependencies:
+    nanoid: ^3.3.4
+    picocolors: ^1.0.0
+    source-map-js: ^1.0.2
+  checksum: e39ac60ccd1542d4f9d93d894048aac0d686b3bb38e927d8386005718e6793dbbb46930f0a523fe382f1bbd843c6d980aaea791252bf5e176180e5a4336d9679
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -4352,16 +4363,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-jsdoc@npm:^0.4.2":
-  version: 0.4.2
-  resolution: "prettier-plugin-jsdoc@npm:0.4.2"
+"prettier-plugin-jsdoc@npm:^0.3.38":
+  version: 0.3.38
+  resolution: "prettier-plugin-jsdoc@npm:0.3.38"
   dependencies:
     binary-searching: ^2.0.5
     comment-parser: ^1.3.1
     mdast-util-from-markdown: ^1.2.0
   peerDependencies:
     prettier: ">=2.1.2"
-  checksum: 38a6cec56f49aa1572296c9247295103e13248643a28797269b17f9a4a463ffef110dee581137e0676aea5daa5e5862ce4049be4b0b0d74fe68a86fffa2c35af
+  checksum: 00ee91067a0f340b618b49b35251dab8e05b395c46f99ac4cffdb823d630d77b19b3a6c750a9c8039ec043e050a9b52e22e514a62703eca73047920f8897fa1d
   languageName: node
   linkType: hard
 
@@ -4386,12 +4397,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.7.1":
-  version: 2.7.1
-  resolution: "prettier@npm:2.7.1"
+"prettier@npm:^2.6.2":
+  version: 2.8.4
+  resolution: "prettier@npm:2.8.4"
   bin:
     prettier: bin-prettier.js
-  checksum: 55a4409182260866ab31284d929b3cb961e5fdb91fe0d2e099dac92eaecec890f36e524b4c19e6ceae839c99c6d7195817579cdffc8e2c80da0cb794463a748b
+  checksum: c173064bf3df57b6d93d19aa98753b9b9dd7657212e33b41ada8e2e9f9884066bb9ca0b4005b89b3ab137efffdf8fbe0b462785aba20364798ff4303aadda57e
   languageName: node
   linkType: hard
 
@@ -5144,9 +5155,9 @@ __metadata:
   linkType: hard
 
 "stylis@npm:^4.0.10":
-  version: 4.1.2
-  resolution: "stylis@npm:4.1.2"
-  checksum: de5771526216ca156f7ccdece70d0e2b4d5611a2a64f34d0165707b06bd8b6ba7913f2eb9b7998c0f9145077079f46d5084b6a60c97ec10b8d776bef293e9f8c
+  version: 4.1.1
+  resolution: "stylis@npm:4.1.1"
+  checksum: e9b0a086996a94c44d45933287731313f6ecdbf9334410231d882d31a1890fb36e34a7b163487e2d7f992c2044e4cb37179810fc6f758f359a431343c2374ed2
   languageName: node
   linkType: hard
 
