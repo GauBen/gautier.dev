@@ -4,6 +4,7 @@ import 'prism-svelte'
 import 'prismjs/components/prism-diff.js'
 import 'prismjs/components/prism-scss.js'
 import 'prismjs/components/prism-typescript.js'
+import 'prismjs/components/prism-sql.js'
 import 'prismjs/plugins/diff-highlight/prism-diff-highlight.js'
 
 Prism.manual = true
