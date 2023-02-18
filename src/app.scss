@@ -1,7 +1,6 @@
 @use 'sanitize.css';
 @use 'sanitize.css/assets.css';
 @use 'sanitize.css/typography.css';
-
 @use './assets/prism.scss';
 @use './assets/techna-sans.scss';
 
@@ -15,7 +14,6 @@
   --prism-scalar: #bd2a33;
   --prism-string: #4e7e06;
   --prism-comment: #355454;
-
   --main-width: 50rem;
 
   scrollbar-gutter: stable;
@@ -23,7 +21,7 @@
 }
 
 ::selection {
-  background-color: #ffff4488;
+  background-color: #ff48;
 }
 
 h1,
@@ -38,7 +36,8 @@ h6 {
 }
 
 a {
-  --link: rgb(58, 58, 153);
+  --link: rgb(58 58 153);
+
   padding: 0.125em 0;
   color: var(--link);
   text-decoration: none;

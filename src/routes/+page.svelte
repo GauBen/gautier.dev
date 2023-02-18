@@ -66,7 +66,6 @@
   .btn {
     display: inline-block;
     padding: 0.5em 1em;
-
     background-image: linear-gradient(var(--link), var(--link));
     background-repeat: no-repeat;
     background-position: right;

@@ -64,6 +64,7 @@
       opacity: 0.5;
     }
   }
+
   footer {
     text-align: center;
   }

@@ -2342,7 +2342,6 @@ __metadata:
     sass: "npm:^1.58.3"
     stylelint: "npm:^15.1.0"
     stylelint-config-html: "npm:^1.1.0"
-    stylelint-config-prettier: "npm:^9.0.5"
     stylelint-config-recess-order: "npm:^4.0.0"
     stylelint-config-standard-scss: "npm:^7.0.1"
     svelte: "npm:^3.55.1"
@@ -4723,18 +4722,6 @@ __metadata:
     postcss-html: ^1.0.0
     stylelint: ">=14.0.0"
   checksum: 699ad6c04225e9205c0bb139670c0bb2b28ade09875111602083ecb8fe1608460da018e400569b3da6e5fcb78ab18faea0c5ea1912387bb80697c737f4ab7a46
-  languageName: node
-  linkType: hard
-
-"stylelint-config-prettier@npm:^9.0.5":
-  version: 9.0.5
-  resolution: "stylelint-config-prettier@npm:9.0.5"
-  peerDependencies:
-    stylelint: ">= 11.x < 15"
-  bin:
-    stylelint-config-prettier: bin/check.js
-    stylelint-config-prettier-check: bin/check.js
-  checksum: c03e51b5357b681f9d11dc063c2780fd57edbfc3634d62b3f87850e95db5d810ec4391c3dd939fd1b11f7fd11462d91804c65babb02997c3fc3b57f42dccd838
   languageName: node
   linkType: hard
 

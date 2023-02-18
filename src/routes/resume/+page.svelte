@@ -305,7 +305,7 @@
       margin: 0;
       background-color: white;
       border: 2px solid black;
-      border-width: 2px 2px 0 2px;
+      border-width: 2px 2px 0;
 
       &::before {
         position: absolute;
