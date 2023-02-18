@@ -13,18 +13,17 @@
 <main>
   <h1>Hey!</h1>
   <p>
-    My name is Gautier and I'm a full stack web engineer, cybersecurity
-    engineer, design enthusiast and hackathon organizer.
+    My name is Gautier, I'm a French full stack web engineer, cybersecurity
+    engineer, design enthusiast and hackathon organizer. I work full-time at
+    <a href="https://escape.tech/">Escape</a>
+    as a full stack web engineer. I graduated from
+    <a href="https://en.wikipedia.org/wiki/ENSEEIHT">ENSEEIHT</a>
+    in 2022 with a dual degree in computer science and cybersecurity.
   </p>
   <p>
-    I'm currently doing my final engineering project as a software and
-    cybersecurity developer at <a href="https://escape.tech/">Escape</a>.
+    I sometimes write code that I find <em>aesthetically pleasing</em> so I write
+    articles about it. You'll find them below.
   </p>
-  <p>
-    In September 2022, I'll graduate with a master's degree in software
-    engineering and a master's degree in cybersecurity.
-  </p>
-  <p class="center"><a href="/resume" class="btn">View my resume</a></p>
   <h2>Latest articles</h2>
   <div class="grid">
     {#each data.articles as { path, title, description, date, snippet }}

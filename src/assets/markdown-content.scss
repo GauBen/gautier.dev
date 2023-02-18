@@ -14,7 +14,8 @@
       height: 1px;
     }
 
-    tr + tr {
+    tr + tr,
+    tbody > tr {
       border-top: 1px solid gray;
     }
 

@@ -15,6 +15,7 @@
   --prism-string: #4e7e06;
   --prism-comment: #355454;
   --main-width: 50rem;
+  --link: #3a3a99;
 
   scrollbar-gutter: stable;
   scrollbar-width: thin;
@@ -36,8 +37,6 @@ h6 {
 }
 
 a {
-  --link: rgb(58 58 153);
-
   padding: 0.125em 0;
   color: var(--link);
   text-decoration: none;
