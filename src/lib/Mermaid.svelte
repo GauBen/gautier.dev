@@ -2,7 +2,7 @@
   import mermaid from 'mermaid'
 
   const mermaidify = (node: HTMLElement) => {
-    mermaid.init({}, node)
+    void mermaid.run({ nodes: [node] })
   }
 </script>
 
