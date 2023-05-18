@@ -5,12 +5,18 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:svelte/recommended',
     'prettier',
   ],
-  plugins: ['svelte3', '@typescript-eslint'],
+  plugins: ['@typescript-eslint'],
   ignorePatterns: ['**/build/', '*.cjs'],
-  overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
-  settings: { 'svelte3/typescript': () => require('typescript') },
+  overrides: [
+    {
+      files: ['*.svelte'],
+      parser: 'svelte-eslint-parser',
+      parserOptions: { parser: '@typescript-eslint/parser' },
+    },
+  ],
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 'latest',
@@ -18,6 +24,6 @@ module.exports = {
   },
   rules: {
     curly: ['error', 'multi-or-nest', 'consistent'],
-    'no-undef': 'off',
+    'svelte/no-at-html-tags': 'off',
   },
 }

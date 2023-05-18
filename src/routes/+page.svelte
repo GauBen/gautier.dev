@@ -58,31 +58,6 @@
     margin: 2rem 0 1rem;
   }
 
-  .center {
-    text-align: center;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 0.5em 1em;
-    background-image: linear-gradient(var(--link), var(--link));
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: 0 100%;
-    border: 0.0625em solid var(--link);
-    border-radius: 0.75em;
-    border-radius: 1.3em;
-    transition: 150ms color, 150ms background-size;
-
-    &:hover,
-    &:focus {
-      color: white;
-      background-position: left;
-      background-size: 100% 100%;
-      outline: none;
-    }
-  }
-
   .grid {
     display: flex;
     flex-direction: column;
