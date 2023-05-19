@@ -1,6 +1,6 @@
 ---
 title: Computing percentiles in SQL
-description: It is possible to use window function over SQL arrays, here is how.
+description: Composing window functions with UNNEST to compute percentiles of arrays in SQL.
 date: 2023-02-11
 snippet:
   lang: sql
@@ -33,7 +33,7 @@ Given the following _websites_ table:
 
 </Example>
 
-Note: I'll use Postgre syntax to represent arrays, with the rather unconventional curly brackets for people used to C-inspired languages. You can also use `ARRAY[0.2, 0.4]` to declare arrays.
+Note: I'll use Postgres syntax to represent arrays, with the rather unconventional curly brackets for people used to web languages. You can also use `ARRAY[0.2, 0.4]` to declare arrays.
 
 Is there a way to compute the p50 (median value) of the durations arrays in pure SQL for Postgres?
 

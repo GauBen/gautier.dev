@@ -24,7 +24,7 @@
 
       &::before {
         font-weight: bold;
-        content: 'The diagram is loading...';
+        content: 'Diagram loading...';
       }
     }
   }

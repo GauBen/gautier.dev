@@ -2,7 +2,7 @@
   <header>
     <h1>
       <a href="/" data-sveltekit-preload-code="eager">
-        <img src="/favicon.svg" alt="Site icon" width="72" height="72" />
+        <img src="/favicon.svg" alt="🧔🏻‍♂️" width="72" height="72" />
         gautier.dev
       </a>
     </h1>
