@@ -16,6 +16,7 @@ snippet:
 
 <script>
   import Automaton from './Automaton.svelte';
+  import Tamagotchi from './Tamagotchi.svelte';
   import Mermaid from '$lib/Mermaid.svelte';
 </script>
 
@@ -33,9 +34,9 @@ To begin with, let's try to create a simple application that follows this automa
     B((2))
     C((3))
     A --> B --> C --> A
-    style A fill:gold,stroke:black,stroke-width:2px,color:black
-    style B fill:firebrick,stroke:black,stroke-width:2px,color:#fff
-    style C fill:navy,stroke:black,stroke-width:2px,color:#fff
+    style A fill:gold,stroke:black,color:black
+    style B fill:firebrick,stroke:black,color:white
+    style C fill:navy,stroke:black,color:white
 </Mermaid>
 
 There are three **states** (1, 2 and 3), and three **transitions** (1 → 2, 2 → 3, 3 → 1).
@@ -97,8 +98,8 @@ const next = (automaton) => {
   const state = automaton.states[automaton.state]
 
   // Run the next state's `enter` function
-  const { enter } = automaton.states[state.next]
-  enter()
+  const nextState = automaton.states[state.next]
+  nextState.enter()
 
   // Return a new automaton with the next state
   return {
@@ -111,3 +112,50 @@ const next = (automaton) => {
 And that's all we need for the automaton to run! We can now run our `next` function in a click handler, and this is what we get:
 
 <Automaton />
+
+## More complex automatons
+
+We started with a simple automaton model that only allows for a single transition between states. We will extends this model to allow for more complex transitions, based on user input.
+
+Let's build a simple Tamagotchi! Because I am not very aware of what Tamagotchis do, I will make up a simple model: the Tamagotchi can be happy, hungry, or doing an activity (sleeping, running or eating). The user has three buttons to have the Tamagotchi start an activity, but the Tamagotchi might refuse to do the activity if it is not in the right state.
+
+<Mermaid>
+  graph LR
+    happy([Happy])
+    sleeping([Sleeping])
+    running([Running])
+    hungry([Hungry])
+    eating([Eating])
+    happy --> |sleep| sleeping --> |<em>5 s</em>| hungry
+    happy --> |run| running --> |<em>3 s</em>| hungry
+    hungry --> |eat| eating --> |<em>2 s</em>| happy
+    style happy fill:yellow,stroke:black,color:black
+    style sleeping fill:skyblue,stroke:black,color:black
+    style running fill:purple,stroke:black,color:white
+    style hungry fill:crimson,stroke:black,color:white
+    style eating fill:pink,stroke:black,color:black
+</Mermaid>
+
+This diagram is the automaton of our Tamagotchi: it features all the possible states, as well as the user actions that can trigger a transition. The activities automatically end after a certain amount of time.
+
+To represent the several possible transitions from a single state, we need to replace `next: 'state'` with a slightly more complex structure:
+
+```ts
+const automaton = {
+  state: 'happy',
+  states: {
+    happy: {
+      enter: happy,
+      // Enumerate all the possible next states
+      next: {
+        // transition: nextState
+        sleep: 'sleeping',
+        run: 'running',
+      },
+    },
+    // ...
+  },
+}
+```
+
+<Tamagotchi />

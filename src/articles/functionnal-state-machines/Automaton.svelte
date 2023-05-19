@@ -31,29 +31,16 @@
         // The next state to transition to
         next: 'red',
       },
-      red: {
-        enter: red,
-        next: 'blue',
-      },
-      blue: {
-        enter: blue,
-        next: 'gold',
-      },
+      red: { enter: red, next: 'blue' },
+      blue: { enter: blue, next: 'gold' },
     },
   }
 
-  const next = (automaton: Automaton) => {
-    // Get the current state
-    const { next } = automaton.states[automaton.state]
-    // Get the next state
-    const { enter } = automaton.states[next]
-    // Run the next state's `enter` function
+  const next = ({ state, states }: Automaton) => {
+    const { next } = states[state]
+    const { enter } = states[next]
     enter()
-    // Return a new automaton with the next state
-    return {
-      state: next,
-      states: automaton.states,
-    }
+    return { state: next, states }
   }
 
   gold()
