@@ -1,8 +1,7 @@
 import { articles } from '$lib/articles'
 import { error } from '@sveltejs/kit'
-import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load = async ({ params }) => {
   const load = articles.get(params.article)
   if (!load) throw error(404)
 

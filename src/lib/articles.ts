@@ -3,7 +3,7 @@ import type {
   SvelteComponentTyped,
 } from 'svelte/internal'
 
-export type Mdsvex = {
+export type Article = {
   metadata: {
     title: string
     description?: string
@@ -16,7 +16,7 @@ export type Mdsvex = {
 
 export const articles = new Map(
   Object.entries(
-    import.meta.glob<Mdsvex>(
+    import.meta.glob<Article>(
       '../articles/*{.md,.svelte,/index.md,/index.svelte}'
     )
   ).map(([path, load]) => [

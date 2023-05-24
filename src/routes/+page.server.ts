@@ -1,8 +1,7 @@
 import { articles } from '$lib/articles'
-import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = async () => ({
-  articles: await Promise.all(
+export const load = () => ({
+  articles: Promise.all(
     [...articles.entries()].map(async ([path, load]) =>
       load().then(({ metadata }) => ({ path, ...metadata }))
     )

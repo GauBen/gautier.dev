@@ -3,9 +3,8 @@
   import Header from '$lib/Header.svelte'
   import Prism from '$lib/Prism.svelte'
   import '../../../assets/markdown-content.scss'
-  import type { PageData } from './$types'
 
-  export let data: PageData
+  export let data
 
   $: ({ component, date, snippet, title } = data)
 </script>

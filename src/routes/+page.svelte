@@ -3,9 +3,8 @@
   import Card from '$lib/Card.svelte'
   import Header from '$lib/Header.svelte'
   import Prism from '$lib/Prism.svelte'
-  import type { PageData } from './$types'
 
-  export let data: PageData
+  export let data
 </script>
 
 <Header />

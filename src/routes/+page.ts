@@ -1,8 +1,6 @@
-import type { PageLoad } from './$types'
-
-export const load: PageLoad = ({ data }) => ({
+export const load = ({ data }) => ({
   ...data,
-  title: 'Gautier Ben Aïm',
+  title: 'gautier.dev',
   description:
-    'Fullstack web developer, security specialist & design enthusiast.',
+    'Fullstack web engineer, security specialist & design enthusiast.',
 })
