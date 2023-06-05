@@ -11,6 +11,7 @@
 .env.*
 .pnp.*
 /.svelte-kit
+/.vercel
 /build
 /package
 node_modules

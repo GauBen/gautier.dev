@@ -6,7 +6,7 @@ import { vitePreprocess } from '@sveltejs/kit/vite'
 import { highlight } from './src/lib/prism.js'
 
 /** @type {import('@sveltejs/kit').Config} */
-const config = {
+export default {
   extensions: ['.svelte', '.md'],
 
   preprocess: [
@@ -28,7 +28,6 @@ const config = {
           rehypeAutolink,
           /** @type {import('rehype-autolink-headings').Options} */ ({
             content: { type: 'text', value: '#' },
-            properties: {},
           }),
         ],
       ],
@@ -40,5 +39,3 @@ const config = {
     adapter: adapter(),
   },
 }
-
-export default config
