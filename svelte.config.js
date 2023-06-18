@@ -1,8 +1,8 @@
 import adapter from '@sveltejs/adapter-vercel'
-import { mdsvex } from 'mdsvex'
-import rehypeAutolink from 'rehype-autolink-headings'
-import rehypeSlug from 'rehype-slug'
 import { vitePreprocess } from '@sveltejs/kit/vite'
+import { mdsvex } from 'mdsvex'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeSlug from 'rehype-slug'
 import { highlight } from './src/lib/prism.js'
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -25,7 +25,7 @@ export default {
       rehypePlugins: [
         rehypeSlug,
         [
-          rehypeAutolink,
+          rehypeAutolinkHeadings,
           /** @type {import('rehype-autolink-headings').Options} */ ({
             content: { type: 'text', value: '#' },
           }),
@@ -37,5 +37,6 @@ export default {
 
   kit: {
     adapter: adapter(),
+    inlineStyleThreshold: 256,
   },
 }

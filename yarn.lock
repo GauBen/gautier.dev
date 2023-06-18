@@ -751,6 +751,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vercel/analytics@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@vercel/analytics@npm:1.0.1"
+  checksum: 4cfb2ab9c7005d675e87cc88be2c4ec4ffa2387c99f172e1f32414565cbe7ec7b577619960e12c0cb3633b93b2d4dfd4d04990d40ff30275dadda93dda72c3d8
+  languageName: node
+  linkType: hard
+
 "@vercel/nft@npm:^0.22.6":
   version: 0.22.6
   resolution: "@vercel/nft@npm:0.22.6"
@@ -2604,6 +2611,7 @@ __metadata:
     "@types/prismjs": "npm:^1.26.0"
     "@typescript-eslint/eslint-plugin": "npm:^5.59.11"
     "@typescript-eslint/parser": "npm:^5.59.11"
+    "@vercel/analytics": "npm:^1.0.1"
     eslint: "npm:^8.43.0"
     eslint-config-prettier: "npm:^8.8.0"
     eslint-plugin-svelte: "npm:^2.30.0"

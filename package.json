@@ -1,14 +1,9 @@
 {
   "name": "gautier.dev",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "vite build",
-    "check": "svelte-check --tsconfig ./tsconfig.json & eslint --ignore-path .gitignore . & stylelint --ignore-pattern .gitignore '**/*.{css,scss,svelte}' &",
-    "dev": "vite dev",
-    "format": "prettier --write --ignore-unknown .",
-    "postinstall": "svelte-kit sync",
-    "preview": "vite preview"
+  "dependencies": {
+    "@vercel/analytics": "^1.0.1",
+    "prism-svelte": "^0.5.0",
+    "prismjs": "^1.29.0"
   },
   "devDependencies": {
     "@sveltejs/adapter-vercel": "^3.0.1",
@@ -28,8 +23,6 @@
     "prettier-plugin-jsdoc": "^0.4.2",
     "prettier-plugin-packagejson": "^2.4.3",
     "prettier-plugin-svelte": "^2.10.1",
-    "prism-svelte": "^0.5.0",
-    "prismjs": "^1.29.0",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-slug": "^5.1.0",
     "sanitize.css": "^13.0.0",
@@ -45,6 +38,16 @@
     "vite": "^4.3.9"
   },
   "packageManager": "yarn@4.0.0-rc.45",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "check": "svelte-check --tsconfig ./tsconfig.json & eslint --ignore-path .gitignore . & stylelint --ignore-pattern .gitignore '**/*.{css,scss,svelte}' &",
+    "dev": "vite dev",
+    "format": "prettier --write --ignore-unknown .",
+    "postinstall": "svelte-kit sync",
+    "preview": "vite preview"
+  },
+  "type": "module",
   "volta": {
     "node": "18.16.0",
     "yarn": "1.22.19"
