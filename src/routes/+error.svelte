@@ -19,10 +19,10 @@
     const { scrollWidth, scrollHeight } = document.body
     let { x, y, width, height } = title.getBoundingClientRect()
 
-    const dt = performance.now() - t
+    const dt = performance.now() / 1000 - t
     t += dt
-    x += (vx * dt) / 1000
-    y += (vy * dt) / 1000
+    x += vx * dt
+    y += vy * dt
 
     if (x < 0) {
       x = -x
@@ -47,7 +47,7 @@
 
   onMount(() => {
     playing = true
-    t = performance.now()
+    t = performance.now() / 1000
     play()
 
     return () => {

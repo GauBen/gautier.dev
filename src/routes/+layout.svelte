@@ -10,7 +10,8 @@
 </script>
 
 <svelte:head>
-  <title>{title}</title>
+  <title>{title ? `${title} – gautier.dev` : 'gautier.dev'}</title>
+  <meta property="og:title" content={title} />
   {#if description}<meta name="description" content={description} />{/if}
 </svelte:head>
 

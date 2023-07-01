@@ -3,7 +3,7 @@ import { error } from '@sveltejs/kit'
 
 export const load = async ({ params }) => {
   const load = articles.get(params.article)
-  if (!load) throw error(404)
+  if (!load) throw error(404, 'Article not found')
 
   const { metadata, default: component } = await load()
   return { ...metadata, component }

@@ -3,7 +3,7 @@
 declare global {
   namespace App {
     interface PageData {
-      title: string
+      title?: string
       description?: string
     }
   }

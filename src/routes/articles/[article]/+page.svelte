@@ -1,12 +1,19 @@
 <script lang="ts">
-  import { formatDate } from '$lib/articles'
   import Header from '$lib/Header.svelte'
   import Prism from '$lib/Prism.svelte'
+  import { formatDate } from '$lib/articles'
+  import { onMount } from 'svelte'
   import '../../../assets/markdown-content.scss'
 
   export let data
 
   $: ({ component, date, snippet, title } = data)
+
+  let mounted = false
+  onMount(async () => {
+    await import('giscus')
+    mounted = true
+  })
 </script>
 
 <Header>
@@ -29,6 +36,25 @@
   <div class="markdown-content">
     <svelte:component this={component} />
   </div>
+  {#if mounted}
+    <section>
+      <giscus-widget
+        id="comments"
+        repo="gauben/gautier.dev"
+        repoid="R_kgDOHTUX9A"
+        category="Comments"
+        categoryid="DIC_kwDOHTUX9M4CXmQB"
+        mapping="og:title"
+        strict="0"
+        reactionsenabled="1"
+        emitmetadata="0"
+        inputposition="top"
+        theme="preferred_color_scheme"
+        lang="en"
+        loading="lazy"
+      />
+    </section>
+  {/if}
   <footer>
     <p><a href="/">Back to the article list</a></p>
   </footer>
@@ -62,6 +88,12 @@
       font-weight: lighter;
       opacity: 0.5;
     }
+  }
+
+  section {
+    max-width: var(--main-width);
+    margin: 2em 0;
+    margin-inline: auto;
   }
 
   footer {

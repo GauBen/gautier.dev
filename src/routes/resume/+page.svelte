@@ -363,7 +363,7 @@
     display: grid;
     grid-template-columns: 1fr;
 
-    @media print, (min-width: 50rem) {
+    @media print, (width >= 50rem) {
       grid-template-columns: 6fr 4fr;
       gap: 1rem;
     }
