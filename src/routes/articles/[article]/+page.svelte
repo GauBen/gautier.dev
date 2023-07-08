@@ -38,21 +38,23 @@
   </div>
   {#if mounted}
     <section>
-      <giscus-widget
-        id="comments"
-        repo="gauben/gautier.dev"
-        repoid="R_kgDOHTUX9A"
-        category="Comments"
-        categoryid="DIC_kwDOHTUX9M4CXmQB"
-        mapping="og:title"
-        strict="0"
-        reactionsenabled="1"
-        emitmetadata="0"
-        inputposition="top"
-        theme="preferred_color_scheme"
-        lang="en"
-        loading="lazy"
-      />
+      <div>
+        <giscus-widget
+          id="comments"
+          repo="gauben/gautier.dev"
+          repoid="R_kgDOHTUX9A"
+          category="Comments"
+          categoryid="DIC_kwDOHTUX9M4CXmQB"
+          mapping="og:title"
+          strict="0"
+          reactionsenabled="1"
+          emitmetadata="0"
+          inputposition="top"
+          theme="preferred_color_scheme"
+          lang="en"
+          loading="lazy"
+        />
+      </div>
     </section>
   {/if}
   <footer>
@@ -91,9 +93,12 @@
   }
 
   section {
-    max-width: var(--main-width);
-    margin: 2em 0;
-    margin-inline: auto;
+    padding: 0 0.5em;
+
+    > * {
+      max-width: var(--main-width);
+      margin: 2em auto;
+    }
   }
 
   footer {
