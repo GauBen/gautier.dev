@@ -7,7 +7,7 @@
 
   export let data
 
-  $: ({ component, date, snippet, title } = data)
+  $: ({ component, date, draft, snippet, title } = data)
 
   let mounted = false
   onMount(async () => {
@@ -26,7 +26,7 @@
 
 <article>
   <header>
-    <h1>{title}</h1>
+    <h1 class:draft>{title}</h1>
     {#if date}
       <p class="date">
         <time datetime={new Date(date).toISOString()}>{formatDate(date)}</time>
@@ -103,6 +103,28 @@
 
   footer {
     text-align: center;
+  }
+
+  .draft {
+    max-width: 100%;
+    overflow: hidden;
+
+    &::before {
+      position: absolute;
+      right: 0;
+      left: 0;
+      font-size: 2em;
+      line-height: 0.5;
+      color: #8888;
+      pointer-events: none;
+      content: 'Draft';
+      transition: 0.2s ease-in-out;
+      transform: rotate(-10deg);
+    }
+
+    &:hover::before {
+      transform: rotate(10deg);
+    }
   }
 
   .snippet {

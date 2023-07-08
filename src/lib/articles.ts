@@ -3,6 +3,7 @@ import type { SvelteComponent } from 'svelte'
 export type Article = {
   metadata: {
     title: string
+    draft?: boolean
     description?: string
     date?: string
     snippet?: { code: string; lang: string }

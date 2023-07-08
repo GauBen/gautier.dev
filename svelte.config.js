@@ -37,6 +37,5 @@ export default {
 
   kit: {
     adapter: adapter(),
-    inlineStyleThreshold: 256,
   },
 }
