@@ -1,4 +1,5 @@
 <script lang="ts">
+  import "$assets/markdown-content.scss";
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
   import { formatDate } from "$lib/articles";

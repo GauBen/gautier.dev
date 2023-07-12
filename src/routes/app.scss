@@ -20,6 +20,11 @@
   line-height: 1.5;
 }
 
+:where(iframe, img, input, video, select, textarea) {
+  max-width: 100%;
+  height: auto;
+}
+
 ::selection {
   background-color: #ff48;
 }
@@ -74,7 +79,10 @@ a {
   }
 }
 
-:where(iframe, img, input, video, select, textarea) {
-  max-width: 100%;
-  height: auto;
+table {
+  border-collapse: collapse;
+}
+
+.icon {
+  vertical-align: text-bottom;
 }

@@ -2,7 +2,7 @@
   import { dev } from '$app/environment'
   import { page } from '$app/stores'
   import { inject } from '@vercel/analytics'
-  import '../app.scss'
+  import './app.scss'
 
   inject({ mode: dev ? 'development' : 'production' })
 
