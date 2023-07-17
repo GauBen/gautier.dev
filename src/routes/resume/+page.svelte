@@ -12,31 +12,31 @@
   <Summary />
   <div class="grid">
     <article>
-      <h2><Suitcase /> Parcours professionnel</h2>
+      <h2><Suitcase /> Work Experience</h2>
       <div class="xp">
         <p>
-          <strong>Développeur web full-stack chez Escape</strong>
+          <strong>
+            Full-Stack & Cybersecurity Web Engineer at Escape (YC W2023)
+          </strong>
         </p>
-        <ul>
-          <li>
-            Led major tech migrations: refactoring of the GraphQL API from
-            NestJS to Pothos and of the frontend from Nuxt to SvelteKit
-          </li>
-          <li>
-            Pioneered new technologies: svelte-emails (released as an open
-            source template), end-to-end type safety with GraphQL (same), web
-            containers and various monorepo tools
-          </li>
-          <li>
-            Discovered GraphQL bombs, a vulnerability affecting GraphQL APIs
-            with file uploads enabled
-          </li>
-          <li>
-            Architecture and development of various features, including posture
-            management
-          </li>
-          <li>Technical writing on Escape's corporate blog</li>
-        </ul>
+        <pre>
+Lead engineer
+- Team of 3 developers
+- Pioneered new technologies: svelte-emails (released as an open source template), end-to-end type safety with GraphQL (same), web containers and various monorepo tools
+
+Full-stack engineer
+- Y Combinator
+- Fast-paced environment, complex features
+- Technical writing on Escape's corporate blog
+- Led major tech migrations: refactoring of the GraphQL API from
+NestJS to Pothos and of the frontend from Nuxt to SvelteKit
+- Architecture and development of various features, including posture
+management
+
+Internship
+- Svelte migration
+- Design system
+- Research / Discovered GraphQL bombs, a vulnerability affecting GraphQL APIs with file uploads enabled</pre>
         <div class="stuff">
           <span class="tags">
             <span>Cybersec</span>
@@ -45,25 +45,6 @@
             <span>Python</span>
           </span>
           <em>Mars à août 2022</em>
-        </div>
-      </div>
-      <div class="xp">
-        <p>
-          <strong>Organisation de la Toulouse Hacking Convention</strong>
-        </p>
-        <ul>
-          <li>Développement de plusieurs challenges pour le CTF</li>
-          <li>Création et développement de l’habillage du live YouTube</li>
-          <li>Régisseur principal de la diffusion en direct</li>
-        </ul>
-        <div class="stuff">
-          <span class="tags">
-            <span>Cybersec</span>
-            <span>TypeScript</span>
-            <span>Svelte</span>
-            <span>Docker</span>
-          </span>
-          <em>Janvier à avril 2022</em>
         </div>
       </div>
       <div class="xp">
@@ -89,29 +70,35 @@
           <em>Juin à août 2021</em>
         </div>
       </div>
-      <div class="xp">
-        <p>
-          <strong>
-            Organisation d’un hackathon en partenariat avec Capgemini
-          </strong>
-        </p>
-        <ul>
-          <li>
-            Développement d’un jeu exclusif pour les étudiants de l’ENSEEIHT
-          </li>
-          <li>Établissement d’un partenariat avec Capgemini</li>
-          <li>Animation du live YouTube et du tournoi entre les 60 équipes</li>
-        </ul>
-        <div class="stuff">
-          <span class="tags">
-            <span>Python</span>
-          </span>
-          <em>Décembre 2020</em>
-        </div>
-      </div>
+      <pre>Web developer for N7 Consulting
+Redesigned the site n7consulting.fr into a static site with Eleventy and Parcel
+Stylus TypeScript June to September 2020
+
+Internship at Informatique Banque Populaire
+Junior Java Developer: wrote tests for a banking application, with the frameworks Selenium and Cucumber
+Java June–August 2020</pre>
     </article>
     <article>
       <h2><User /> Parcours personnel</h2>
+      <div class="xp">
+        <p>
+          <strong>Organisation de la Toulouse Hacking Convention</strong>
+        </p>
+        <ul>
+          <li>Développement de plusieurs challenges pour le CTF</li>
+          <li>Création et développement de l’habillage du live YouTube</li>
+          <li>Régisseur principal de la diffusion en direct</li>
+        </ul>
+        <div class="stuff">
+          <span class="tags">
+            <span>Cybersec</span>
+            <span>TypeScript</span>
+            <span>Svelte</span>
+            <span>Docker</span>
+          </span>
+          <em>Janvier à avril 2022</em>
+        </div>
+      </div>
       <div class="xp">
         <p>
           <strong>
@@ -132,6 +119,26 @@
           </span>
           <em>Mars 2020 à mai 2021</em>
         </p>
+      </div>
+      <div class="xp">
+        <p>
+          <strong>
+            Organisation d’un hackathon en partenariat avec Capgemini
+          </strong>
+        </p>
+        <ul>
+          <li>
+            Développement d’un jeu exclusif pour les étudiants de l’ENSEEIHT
+          </li>
+          <li>Établissement d’un partenariat avec Capgemini</li>
+          <li>Animation du live YouTube et du tournoi entre les 60 équipes</li>
+        </ul>
+        <div class="stuff">
+          <span class="tags">
+            <span>Python</span>
+          </span>
+          <em>Décembre 2020</em>
+        </div>
       </div>
       <div class="xp">
         <p><strong>Grimpeur amateur en salle et en falaise</strong></p>
@@ -223,18 +230,14 @@
     color: #0d3c77;
   }
 
-  article {
-    position: relative;
-
-    h2 {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: space-between;
-      margin: 0;
-      color: #0d3c77;
-      background-color: #fff;
-      border-bottom: 2px solid #0d3c77;
-    }
+  h2 {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 0;
+    color: #0d3c77;
+    background-color: #fff;
+    border-bottom: 2px solid #0d3c77;
   }
 
   ul {

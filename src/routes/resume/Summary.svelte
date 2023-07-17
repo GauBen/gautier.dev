@@ -2,13 +2,15 @@
   <h2>Summary</h2>
   <div>
     <em>Full-Stack & Cybersecurity Web Engineer</em>
-    I started learning programming on my own when I was 10 years old and I now have
-    a dual degree in cyber security and digital science. I have extensive experience
-    in all areas of IT: architecture, development and maintenance. Today, I work
-    at Escape, an API security startup, as a security researcher, software architect,
-    developer and designer. I led two major migrations there: the refactoring of
-    the GraphQL API from NestJS to Pothos and the overhaul of the frontend from Nuxt
-    to SvelteKit.
+    I am a software engineer with 3+ years of experience in the IT industry. I am
+    passionate about security and have a proven ability to architect, develop, and
+    maintain secure and scalable software applications. I have a proven track record
+    of successfully leading migrations, which has resulted in increased productivity
+    and happiness for my teams.
+    <strong>
+      I am seeking a challenging role in a fast-paced environment where I can
+      use both my technical and leadership skills to make a significant impact.
+    </strong>
   </div>
 </section>
 
@@ -26,6 +28,10 @@
     text-align: center;
     border-right: 2px solid #0d3c77;
     writing-mode: sideways-lr;
+  }
+
+  div {
+    align-self: center;
   }
 
   em {
