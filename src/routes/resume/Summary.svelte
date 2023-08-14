@@ -5,11 +5,12 @@
     I am a software engineer with 3+ years of experience in the IT industry. I am
     passionate about security and have a proven ability to architect, develop, and
     maintain secure and scalable software applications. I have a proven track record
-    of successfully leading migrations, which has resulted in increased productivity
-    and happiness for my teams.
+    of successfully leading migrations that have resulted in increased productivity
+    and satisfaction for my teams.
     <strong>
-      I am seeking a challenging role in a fast-paced environment where I can
-      use both my technical and leadership skills to make a significant impact.
+      I am looking for a challenging role in a fast-paced environment where I
+      can use both my technical and leadership skills to make a significant
+      impact.
     </strong>
   </div>
 </section>
