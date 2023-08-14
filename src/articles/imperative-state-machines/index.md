@@ -32,8 +32,8 @@ In this article, we'll see how to create a state machine in JavaScript, a new wa
 Let's start by creating two types mapping two usual concepts:
 
 ```ts
-type State = Promise<Transition>
-type Transition = () => State
+type State = Promise<Transition>;
+type Transition = () => State;
 ```
 
 States lead to transitions, and transitions lead to states, and this already sounds like an automaton. However, **what's interesting is the asynchronous nature of these types.** Therefore, states are promises to transitions, and may take time to resolve. For instance, a state might resolve on a user interaction.

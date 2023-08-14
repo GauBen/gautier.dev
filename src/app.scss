@@ -1,6 +1,6 @@
-@use 'modern-normalize/modern-normalize.css';
-@use './assets/prism.scss';
-@use './assets/techna-sans.scss';
+@use "modern-normalize/modern-normalize.css";
+@use "./assets/prism.scss";
+@use "./assets/techna-sans.scss";
 
 :root {
   --prism-color: #1c1b1d;
@@ -30,9 +30,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Techna Sans', sans-serif;
+  font-family: "Techna Sans", sans-serif;
   font-weight: initial;
-  font-feature-settings: 'ss01' 1;
+  font-feature-settings: "ss01" 1;
 }
 
 a {
@@ -42,20 +42,34 @@ a {
   background-image: linear-gradient(var(--link), var(--link)),
     linear-gradient(var(--link), var(--link));
   background-repeat: no-repeat, no-repeat;
-  background-position: bottom left, bottom right;
-  background-size: 100% 0.0625em, 0% 0.125em;
-  transition: 150ms color, 150ms background-size;
+  background-position:
+    bottom left,
+    bottom right;
+  background-size:
+    100% 0.0625em,
+    0% 0.125em;
+  transition:
+    150ms color,
+    150ms background-size;
 
   &:hover {
-    background-position: bottom left, bottom left;
-    background-size: 100% 0.0625em, 100% 0.125em;
+    background-position:
+      bottom left,
+      bottom left;
+    background-size:
+      100% 0.0625em,
+      100% 0.125em;
   }
 
   &:active,
   &:focus {
     color: var(--bg, #fff);
-    background-position: bottom left, bottom left;
-    background-size: 100% 100%, 0% 0.125em;
+    background-position:
+      bottom left,
+      bottom left;
+    background-size:
+      100% 100%,
+      0% 0.125em;
     outline: none;
   }
 }

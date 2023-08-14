@@ -1,1 +1,1 @@
-export const load = () => ({ title: 'Resume' })
+export const load = () => ({ title: "Resume" });

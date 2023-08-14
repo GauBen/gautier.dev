@@ -93,7 +93,7 @@ We'll create a pseudo element on our card link, and since it'll be a child of th
 
 ```scss
 .card a::before {
-  content: 'Hey!';
+  content: "Hey!";
 }
 ```
 
@@ -119,7 +119,7 @@ Now, let's try positioning it.
   position: absolute;
   top: 0;
   left: 0;
-  content: 'Hey!';
+  content: "Hey!";
   outline: 2px solid white;
 }
 ```
@@ -147,7 +147,7 @@ There is a shorthand property that means the same as `top/bottom/left/right: 0`:
 }
 
 .card a::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
 }

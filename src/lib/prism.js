@@ -1,23 +1,23 @@
-import Prism from 'prismjs'
+import Prism from "prismjs";
 
-import 'prism-svelte'
-import 'prismjs/components/prism-diff.js'
-import 'prismjs/components/prism-scss.js'
-import 'prismjs/components/prism-typescript.js'
-import 'prismjs/components/prism-sql.js'
-import 'prismjs/plugins/diff-highlight/prism-diff-highlight.js'
+import "prism-svelte";
+import "prismjs/components/prism-diff.js";
+import "prismjs/components/prism-scss.js";
+import "prismjs/components/prism-typescript.js";
+import "prismjs/components/prism-sql.js";
+import "prismjs/plugins/diff-highlight/prism-diff-highlight.js";
 
-Prism.manual = true
+Prism.manual = true;
 
 for (const lang of Object.keys(Prism.languages))
-  Prism.languages[`diff-${lang}`] = Prism.languages.diff
+  Prism.languages[`diff-${lang}`] = Prism.languages.diff;
 
 export const highlight = (
   /** @type {string} */ code,
-  /** @type {string} */ lang
+  /** @type {string} */ lang,
 ) =>
   `<code class="language-${lang}">${Prism.highlight(
     code,
     Prism.languages[lang],
-    lang
-  )}</code>`
+    lang,
+  )}</code>`;

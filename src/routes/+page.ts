@@ -1,6 +1,6 @@
 export const load = ({ data }) => ({
   ...data,
-  title: 'Hey!',
+  title: "Hey!",
   description:
-    'Fullstack web engineer, security specialist & design enthusiast.',
-})
+    "Fullstack web engineer, security specialist & design enthusiast.",
+});
