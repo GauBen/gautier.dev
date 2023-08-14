@@ -2783,6 +2783,7 @@ __metadata:
     giscus: "npm:^1.3.0"
     mdsvex: "npm:^0.11.0"
     mermaid: "npm:^10.2.4"
+    modern-normalize: "npm:^2.0.0"
     postcss: "npm:^8.4.25"
     postcss-html: "npm:^1.5.0"
     postcss-scss: "npm:^4.0.6"
@@ -2794,7 +2795,6 @@ __metadata:
     prismjs: "npm:^1.29.0"
     rehype-autolink-headings: "npm:^6.1.1"
     rehype-slug: "npm:^5.1.0"
-    sanitize.css: "npm:^13.0.0"
     sass: "npm:^1.63.6"
     stylelint: "npm:^15.10.1"
     stylelint-config-html: "npm:^1.1.0"
@@ -4196,6 +4196,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"modern-normalize@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "modern-normalize@npm:2.0.0"
+  checksum: 9aa5ae7766db10f34e48f16f82143b71252ab819f2015c0c43246e99edf7ecd34568daf004bcafed36b269cab13b12cbac5d4ff3be10a9e82d372feb92814989
+  languageName: node
+  linkType: hard
+
 "mri@npm:^1.1.0":
   version: 1.2.0
   resolution: "mri@npm:1.2.0"
@@ -4987,13 +4994,6 @@ __metadata:
     mkdirp: "npm:^0.5.1"
     rimraf: "npm:^2.5.2"
   checksum: 17fa111185c06b176e4584fdd56e98e7d990e17b89f2d183cedd1313bbcc557e5d36bce97f090ac134a6af208a310179aef694935f0f5eebb3999c4642a70ec6
-  languageName: node
-  linkType: hard
-
-"sanitize.css@npm:^13.0.0":
-  version: 13.0.0
-  resolution: "sanitize.css@npm:13.0.0"
-  checksum: 2eaae096cc968873ce8ecbe963d88e455ef9a5da04851c8bec60d102fa3af134cf8c0b7f2a4ad8c5fb01f3a5258da7282573393d7b54b5790cc000ee1ded8463
   languageName: node
   linkType: hard
 

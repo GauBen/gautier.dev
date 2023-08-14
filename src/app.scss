@@ -1,6 +1,4 @@
-@use 'sanitize.css';
-@use 'sanitize.css/assets.css';
-@use 'sanitize.css/typography.css';
+@use 'modern-normalize/modern-normalize.css';
 @use './assets/prism.scss';
 @use './assets/techna-sans.scss';
 
@@ -19,6 +17,7 @@
 
   scrollbar-gutter: stable;
   scrollbar-width: thin;
+  line-height: 1.5;
 }
 
 ::selection {
@@ -59,4 +58,9 @@ a {
     background-size: 100% 100%, 0% 0.125em;
     outline: none;
   }
+}
+
+:where(iframe, img, input, video, select, textarea) {
+  max-width: 100%;
+  height: auto;
 }
