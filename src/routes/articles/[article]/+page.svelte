@@ -1,19 +1,19 @@
 <script lang="ts">
-  import Header from '$lib/Header.svelte'
-  import Prism from '$lib/Prism.svelte'
-  import { formatDate } from '$lib/articles'
-  import { onMount } from 'svelte'
-  import '../../../assets/markdown-content.scss'
+  import Header from "$lib/Header.svelte";
+  import Prism from "$lib/Prism.svelte";
+  import { formatDate } from "$lib/articles";
+  import { onMount } from "svelte";
+  import "../../../assets/markdown-content.scss";
 
-  export let data
+  export let data;
 
-  $: ({ component, date, draft, snippet, title } = data)
+  $: ({ component, date, draft, snippet, title } = data);
 
-  let mounted = false
+  let mounted = false;
   onMount(async () => {
-    await import('giscus')
-    mounted = true
-  })
+    await import("giscus");
+    mounted = true;
+  });
 </script>
 
 <Header>
@@ -111,13 +111,13 @@
 
     &::before {
       position: absolute;
-      right: 0;
-      left: 0;
+      right: 2em;
+      left: 2em;
       font-size: 2em;
       line-height: 0.5;
       color: #8888;
       pointer-events: none;
-      content: 'Draft';
+      content: "Draft";
       transition: 0.2s ease-in-out;
       transform: rotate(-10deg);
     }

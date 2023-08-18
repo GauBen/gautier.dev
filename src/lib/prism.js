@@ -12,6 +12,8 @@ Prism.manual = true;
 for (const lang of Object.keys(Prism.languages))
   Prism.languages[`diff-${lang}`] = Prism.languages.diff;
 
+Prism.languages["pina"] = Prism.languages["typescript"];
+
 export const highlight = (
   /** @type {string} */ code,
   /** @type {string} */ lang,
