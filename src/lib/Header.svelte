@@ -38,7 +38,9 @@
     background-position: right;
     background-size: 0 100%;
     border-radius: 0.75em;
-    transition: 150ms color, 150ms background-size;
+    transition:
+      150ms color,
+      150ms background-size;
 
     &:hover,
     &:active,

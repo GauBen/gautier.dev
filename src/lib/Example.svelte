@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let title: string | false = 'Example'
+  export let title: string | false = "Example";
 </script>
 
 <div>

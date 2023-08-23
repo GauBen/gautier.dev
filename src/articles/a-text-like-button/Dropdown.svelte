@@ -1,11 +1,11 @@
 <script lang="ts">
-  export let open = false
-  export let css = ''
+  export let open = false;
+  export let css = "";
 
   /** Closes the dropdown menu when it loses focus. */
   const focusHandler = ({ target }: FocusEvent) => {
-    open = Boolean((target as HTMLElement | null)?.closest('.dropdown'))
-  }
+    open = Boolean((target as HTMLElement | null)?.closest(".dropdown"));
+  };
 </script>
 
 <svelte:window on:click={() => (open = false)} on:focusin={focusHandler} />
@@ -20,7 +20,7 @@
   </button>
   <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
   <div
-    style:display={open ? 'block' : 'none'}
+    style:display={open ? "block" : "none"}
     class="dropdown"
     on:click|stopPropagation
   >

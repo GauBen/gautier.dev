@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { highlight } from '$lib/prism.js'
-  export let code: string
-  export let lang = 'javascript'
+  import { highlight } from "$lib/prism.js";
+  export let code: string;
+  export let lang = "javascript";
 </script>
 
 <pre class="language-{lang}">{@html highlight(code, lang)}</pre>

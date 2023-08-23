@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Email from '~icons/ph/envelope-simple-duotone'
-  import Github from '~icons/ph/github-logo-duotone'
-  import Link from '~icons/ph/link-duotone'
-  import Linkedin from '~icons/ph/linkedin-logo-duotone'
-  import Pin from '~icons/ph/map-pin-duotone'
-  import me from './me.jpg?url'
+  import Email from "~icons/ph/envelope-simple-duotone";
+  import Github from "~icons/ph/github-logo-duotone";
+  import Link from "~icons/ph/link-duotone";
+  import Linkedin from "~icons/ph/linkedin-logo-duotone";
+  import Pin from "~icons/ph/map-pin-duotone";
+  import me from "./me.jpg?url";
 </script>
 
 <header>

@@ -1,59 +1,59 @@
 <script lang="ts">
-  import { page } from '$app/stores'
-  import Header from '$lib/Header.svelte'
-  import { onMount } from 'svelte'
+  import { page } from "$app/stores";
+  import Header from "$lib/Header.svelte";
+  import { onMount } from "svelte";
 
-  $: ({ status, error } = $page)
+  $: ({ status, error } = $page);
 
-  let title: HTMLElement
+  let title: HTMLElement;
 
-  const velocity = 200
-  const angle = Math.random() * Math.PI * 2
+  const velocity = 200;
+  const angle = Math.random() * Math.PI * 2;
 
-  let vx = Math.cos(angle) * velocity
-  let vy = Math.sin(angle) * velocity
+  let vx = Math.cos(angle) * velocity;
+  let vy = Math.sin(angle) * velocity;
 
-  let playing = false
-  let t = 0
+  let playing = false;
+  let t = 0;
   const play = () => {
-    const { scrollWidth, scrollHeight } = document.body
-    let { x, y, width, height } = title.getBoundingClientRect()
+    const { scrollWidth, scrollHeight } = document.body;
+    let { x, y, width, height } = title.getBoundingClientRect();
 
-    const dt = performance.now() / 1000 - t
-    t += dt
-    x += vx * dt
-    y += vy * dt
+    const dt = performance.now() / 1000 - t;
+    t += dt;
+    x += vx * dt;
+    y += vy * dt;
 
     if (x < 0) {
-      x = -x
-      vx = -vx
+      x = -x;
+      vx = -vx;
     } else if (x + width > scrollWidth) {
-      x = 2 * scrollWidth - 2 * width - x
-      vx = -vx
+      x = 2 * scrollWidth - 2 * width - x;
+      vx = -vx;
     }
 
     if (y < 0) {
-      y = -y
-      vy = -vy
+      y = -y;
+      vy = -vy;
     } else if (y + height > scrollHeight) {
-      y = 2 * scrollHeight - 2 * height - y
-      vy = -vy
+      y = 2 * scrollHeight - 2 * height - y;
+      vy = -vy;
     }
 
-    title.style.transform = `translate(${x}px, ${y}px)`
+    title.style.transform = `translate(${x}px, ${y}px)`;
 
-    if (playing) requestAnimationFrame(play)
-  }
+    if (playing) requestAnimationFrame(play);
+  };
 
   onMount(() => {
-    playing = true
-    t = performance.now() / 1000
-    play()
+    playing = true;
+    t = performance.now() / 1000;
+    play();
 
     return () => {
-      playing = false
-    }
-  })
+      playing = false;
+    };
+  });
 </script>
 
 <svelte:head>
@@ -64,8 +64,8 @@
 <h1
   bind:this={title}
   on:click={() => {
-    vx *= 2
-    vy *= 2
+    vx *= 2;
+    vy *= 2;
   }}
 >
   {status}
