@@ -1,10 +1,11 @@
 <script lang="ts">
+  import GraduationCap from "~icons/ph/graduation-cap-duotone";
+  import Medal from "~icons/ph/medal-duotone";
+  import Suitcase from "~icons/ph/suitcase-simple-duotone";
+  import User from "~icons/ph/user-duotone";
   import Header from "./Header.svelte";
   import Summary from "./Summary.svelte";
-  import Suitcase from "~icons/ph/suitcase-simple-duotone";
-  import Medal from "~icons/ph/medal-duotone";
-  import User from "~icons/ph/user-duotone";
-  import GraduationCap from "~icons/ph/graduation-cap-duotone";
+  import Timeline from "./Timeline.svelte";
 </script>
 
 <div class="page">
@@ -15,40 +16,42 @@
       <h2><Suitcase /> Work Experience</h2>
       <div class="xp">
         <h3>Full-Stack & Cybersecurity Web Engineer at Escape (YC W2023)</h3>
-        <p>Lead engineer</p>
-        <ul>
-          <li>Team of 3 developers</li>
-          <li>
-            Pioneered new technologies: svelte-emails (released as an open
-            source template), end-to-end type safety with GraphQL (same), web
-            containers and various monorepo tools
-          </li>
-        </ul>
+        <Timeline>
+          <p>Lead engineer</p>
+          <ul>
+            <li>Team of 3 developers</li>
+            <li>
+              Pioneered new technologies: svelte-emails (released as an open
+              source template), end-to-end type safety with GraphQL (same), web
+              containers and various monorepo tools
+            </li>
+          </ul>
 
-        <p>Full-stack engineer</p>
-        <ul>
-          <li>Y Combinator</li>
-          <li>Fast-paced environment, complex features</li>
-          <li>Technical writing on Escape's corporate blog</li>
-          <li>
-            Led major tech migrations: refactoring of the GraphQL API from
-            NestJS to Pothos and of the frontend from Nuxt to SvelteKit
-          </li>
-          <li>
-            Architecture and development of various features, including posture
-            management
-          </li>
-        </ul>
+          <p>Full-stack engineer</p>
+          <ul>
+            <li>Y Combinator</li>
+            <li>Fast-paced environment, complex features</li>
+            <li>Technical writing on Escape's corporate blog</li>
+            <li>
+              Led major tech migrations: refactoring of the GraphQL API from
+              NestJS to Pothos and of the frontend from Nuxt to SvelteKit
+            </li>
+            <li>
+              Architecture and development of various features, including
+              posture management
+            </li>
+          </ul>
 
-        <p>Internship</p>
-        <ul>
-          <li>Svelte migration</li>
-          <li>Design system</li>
-          <li>
-            Research / Discovered GraphQL bombs, a vulnerability affecting
-            GraphQL APIs with file uploads enabled
-          </li>
-        </ul>
+          <p>Internship</p>
+          <ul>
+            <li>Svelte migration</li>
+            <li>Design system</li>
+            <li>
+              Research / Discovered GraphQL bombs, a vulnerability affecting
+              GraphQL APIs with file uploads enabled
+            </li>
+          </ul>
+        </Timeline>
 
         <div class="stuff">
           <span class="tags">
@@ -60,6 +63,7 @@
           <em>Mars à août 2022</em>
         </div>
       </div>
+
       <div class="xp">
         <p>
           <strong>
@@ -83,14 +87,45 @@
           <em>Juin à août 2021</em>
         </div>
       </div>
-      <pre>Web developer for N7 Consulting
-Redesigned the site n7consulting.fr into a static site with Eleventy and Parcel
-Stylus TypeScript June to September 2020
 
-Internship at Informatique Banque Populaire
-Junior Java Developer: wrote tests for a banking application, with the frameworks Selenium and Cucumber
-Java June–August 2020</pre>
+      <div class="xp">
+        <p>
+          <strong>Web developer for N7 Consulting</strong>
+        </p>
+        <ul>
+          <li>
+            Redesigned the site n7consulting.fr into a static site with Eleventy
+            and Parcel
+          </li>
+        </ul>
+        <div class="stuff">
+          <span class="tags">
+            <span>TypeScript</span>
+            <span>Stylus</span>
+          </span>
+          <em>Juin à septembre 2020</em>
+        </div>
+      </div>
+
+      <div class="xp">
+        <p>
+          <strong>Internship at Informatique Banque Populaire</strong>
+        </p>
+        <ul>
+          <li>
+            Junior Java Developer: wrote tests for a banking application, with
+            the frameworks Selenium and Cucumber
+          </li>
+        </ul>
+        <div class="stuff">
+          <span class="tags">
+            <span>Java</span>
+          </span>
+          <em>Juin à août 2020</em>
+        </div>
+      </div>
     </article>
+
     <article>
       <h2><User /> Parcours personnel</h2>
       <div class="xp">

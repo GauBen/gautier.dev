@@ -28,6 +28,7 @@
     color: #0d3c77;
     text-align: center;
     border-right: 2px solid #0d3c77;
+    writing-mode: vertical-rl; // Fallback
     writing-mode: sideways-lr;
   }
 
