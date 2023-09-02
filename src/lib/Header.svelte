@@ -13,8 +13,10 @@
 <style lang="scss">
   header {
     position: relative;
+    z-index: 1;
     padding: 0 0.5em;
     overflow: hidden;
+    view-transition-name: header;
   }
 
   h1 {

@@ -6,5 +6,5 @@ export const load = async ({ params }) => {
   if (!load) throw error(404, "Article not found");
 
   const { metadata, default: component } = await load();
-  return { ...metadata, component };
+  return { ...metadata, component, path: params.article };
 };

@@ -8,7 +8,7 @@
 
   export let data;
 
-  $: ({ component, date, draft, snippet, title } = data);
+  $: ({ component, date, draft, snippet, title, path } = data);
 
   let mounted = false;
   onMount(async () => {
@@ -19,7 +19,7 @@
 
 <Header>
   {#if snippet}
-    <div class="snippet">
+    <div class="snippet" style:--view-transition-name="{path}-snippet">
       <Prism {...snippet} />
     </div>
   {/if}
@@ -131,6 +131,7 @@
   .snippet {
     padding: 1em 0.5em;
     background-color: var(--prism-bg);
+    view-transition-name: var(--view-transition-name);
 
     :global(pre) {
       max-width: var(--main-width);
