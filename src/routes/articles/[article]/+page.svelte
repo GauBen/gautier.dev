@@ -19,7 +19,7 @@
 
 <Header>
   {#if snippet}
-    <div class="snippet" style:--view-transition-name="{path}-snippet">
+    <div class="snippet" style:view-transition-name={path}>
       <Prism {...snippet} />
     </div>
   {/if}
@@ -131,7 +131,6 @@
   .snippet {
     padding: 1em 0.5em;
     background-color: var(--prism-bg);
-    view-transition-name: var(--view-transition-name);
 
     :global(pre) {
       max-width: var(--main-width);

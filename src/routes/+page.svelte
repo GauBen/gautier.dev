@@ -29,7 +29,7 @@
       <Card>
         <svelte:fragment slot="header">
           {#if snippet}
-            <div class="snippet" style:--view-transition-name="{path}-snippet">
+            <div class="snippet" style:view-transition-name={path}>
               <Prism {...snippet} />
             </div>
           {/if}
@@ -66,6 +66,5 @@
 
   .snippet {
     box-shadow: 0 0 0.25em #ccc;
-    view-transition-name: var(--view-transition-name);
   }
 </style>
