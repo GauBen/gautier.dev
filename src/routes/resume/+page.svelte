@@ -15,52 +15,78 @@
     <article>
       <h2><Suitcase /> Work Experience</h2>
       <div class="xp">
-        <h3>Full-Stack & Cybersecurity Web Engineer at Escape (YC W2023)</h3>
+        <h3>Full-Stack & Cybersecurity Lead Engineer at Escape (YC W23)</h3>
         <Timeline>
-          <p>Lead engineer</p>
+          <p><strong>Lead Engineer</strong></p>
           <ul>
-            <li>Team of 3 developers</li>
             <li>
-              Pioneered new technologies: svelte-emails (released as an open
-              source template), end-to-end type safety with GraphQL (same), web
-              containers and various monorepo tools
+              <strong>Managed a team of 3 developers,</strong> ensuring communication,
+              code quality and deadlines. Fostered innovation, independence and healthy
+              team dynamics.
+            </li>
+            <li>
+              Headed the creation of
+              <strong>several corporate side-projects,</strong>
+              including the GraphQL Security Academy, a learning platform for GraphQL
+              security, and svelte-emails, a modern way to build complex transactional
+              emails.
+            </li>
+            <li>
+              Gave a conference talk at <strong>BSides Oslo</strong>
+              on the State of GraphQL Security 2023, highlighting the company's year
+              of research.
+            </li>
+            <li>
+              <strong>Pioneered the adoption of new technologies</strong> such as
+              Temporal and Turbo to enhance developer productivity and product stability.
             </li>
           </ul>
 
-          <p>Full-stack engineer</p>
+          <p><strong>Full-Stack Engineer</strong></p>
           <ul>
-            <li>Y Combinator</li>
-            <li>Fast-paced environment, complex features</li>
-            <li>Technical writing on Escape's corporate blog</li>
             <li>
-              Led major tech migrations: refactoring of the GraphQL API from
-              NestJS to Pothos and of the frontend from Nuxt to SvelteKit
+              Demonstrated resilience and perseverance in the
+              <strong>Y Combinator accelerator program,</strong>
+              shipping several sophisticated products that exceeded customer expectations,
+              even when faced with challenges.
             </li>
             <li>
-              Architecture and development of various features, including
-              posture management
+              <strong>Published technical articles</strong> on the corporate blog
+              to showcase the company's expertise and insights, while ensuring high-quality,
+              informative, and engaging content.
+            </li>
+            <li>
+              <strong>
+                Successfully managed the migration of the GraphQL API
+              </strong>
+              from NestJS to Pothos and the frontend from Nuxt to SvelteKit, ensuring
+              a smooth transition and improved performance and scalability.
             </li>
           </ul>
 
-          <p>Internship</p>
+          <p><strong>Full-Stack Developer & Research Intern</strong></p>
           <ul>
-            <li>Svelte migration</li>
-            <li>Design system</li>
             <li>
-              Research / Discovered GraphQL bombs, a vulnerability affecting
-              GraphQL APIs with file uploads enabled
+              <strong>Discovered GraphQL bombs,</strong> a novel attack vector against
+              GraphQL APIs with file uploads enabled, which could be exploited to
+              disrupt or crash servers.
+            </li>
+            <li>
+              Initiated the <strong>creation of a design system</strong> to create
+              a single source of truth for all design elements, helping to improve
+              collaboration and communication between designers and developers.
             </li>
           </ul>
         </Timeline>
 
         <div class="stuff">
           <span class="tags">
+            <span>Lead Dev</span>
+            <span>Management</span>
             <span>Cybersec</span>
-            <span>TypeScript</span>
-            <span>Vue</span>
-            <span>Python</span>
+            <span>Research</span>
           </span>
-          <em>Mars à août 2022</em>
+          <em>Started in March 2022</em>
         </div>
       </div>
 
