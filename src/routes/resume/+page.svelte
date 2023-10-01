@@ -33,7 +33,7 @@
             </li>
             <li>
               Gave a conference talk at <strong>BSides Oslo</strong>
-              on the State of GraphQL Security 2023, highlighting the company's year
+              on the State of GraphQL Security 2023, highlighting the company’s year
               of research.
             </li>
             <li>
@@ -52,7 +52,7 @@
             </li>
             <li>
               <strong>Published technical articles</strong> on the corporate blog
-              to showcase the company's expertise and insights, while ensuring high-quality,
+              to showcase the company’s expertise and insights, while ensuring high-quality,
               informative, and engaging content.
             </li>
             <li>
@@ -92,25 +92,37 @@
 
       <div class="xp">
         <p>
-          <strong>
-            Développement d’une solution de chiffrement à Freemindtronic
-          </strong>
+          <strong>Full-Stack Developer & Cryptography Advisor Intern</strong>
         </p>
         <ul>
           <li>
-            Conception et développement d’une extension de navigateur pour
-            chiffrer et déchiffrer des emails à l’aide d’une carte NFC
+            Developed a browser extension that provides
+            <strong>secure end-to-end email encryption</strong> leveraging NFC cards
+            as a cold storage device for private keys.
           </li>
-          <li>Conception et développement d’un serveur de clés PGP</li>
-          <li>Formation des nouveaux employés</li>
+          <li>
+            Designed and implemented an OpenPGP HTTP keyserver that meets the
+            <strong>
+              specific security and compliance needs of government agencies.
+            </strong>
+          </li>
+          <li>
+            Architected a key splitting and backup system based on Shamir’s
+            Secret Sharing to
+            <strong>achieve information-theoretic security.</strong>
+          </li>
+          <li>
+            <strong>Onboarded and mentored interns</strong> to ensure a smooth transition
+            of responsibilities, with hands-on experience and training.
+          </li>
         </ul>
         <div class="stuff">
           <span class="tags">
             <span>Cybersec</span>
-            <span>TypeScript</span>
-            <span>Svelte</span>
+            <span>Development</span>
+            <span>Cryptography</span>
           </span>
-          <em>Juin à août 2021</em>
+          <em>June to August 2021</em>
         </div>
       </div>
 
@@ -184,7 +196,7 @@
           <li>Développement et maintenance des services étudiants</li>
           <li>Organisation de formations techniques tout public</li>
           <li>
-            Création de l'édition 2020 de la plaquette alpha de l’ENSEEIHT
+            Création de l’édition 2020 de la plaquette alpha de l’ENSEEIHT
           </li>
         </ul>
         <p class="stuff">
