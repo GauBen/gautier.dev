@@ -23,13 +23,23 @@
   }
 
   h2 {
-    padding-right: 0.5rem;
     margin: 0;
     color: #0d3c77;
     text-align: center;
-    border-right: 2px solid #0d3c77;
-    writing-mode: vertical-rl; // Fallback
-    writing-mode: sideways-lr;
+
+    @supports (writing-mode: sideways-lr) {
+      padding-right: 0.5rem;
+      border-right: 2px solid #0d3c77;
+      writing-mode: sideways-lr;
+    }
+
+    // Write the other way and rotate it
+    @supports not (writing-mode: sideways-lr) {
+      padding-left: 0.5rem;
+      border-left: 2px solid #0d3c77;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
   }
 
   div {

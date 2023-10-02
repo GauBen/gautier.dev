@@ -175,66 +175,83 @@
     <article>
       <h2><User /> Personal Journey</h2>
       <div class="xp">
-        <h3>Organisation de la Toulouse Hacking Convention</h3>
+        <h3>Toulouse Hacking Convention Organizer</h3>
         <ul>
-          <li>Développement de plusieurs challenges pour le CTF</li>
-          <li>Création et développement de l’habillage du live YouTube</li>
-          <li>Régisseur principal de la diffusion en direct</li>
+          <li>
+            <strong>Directed the production</strong> of a live audio and video broadcast.
+          </li>
+          <li>
+            Designed and developed multiple challenges for the CTF competition.
+          </li>
+          <li>
+            Created a professional and engaging visual experience for a YouTube
+            live stream.
+          </li>
         </ul>
         <div class="stuff">
           <span class="tags">
+            <span>Management</span>
             <span>Cybersec</span>
-            <span>TypeScript</span>
-            <span>Svelte</span>
-            <span>Docker</span>
+            <span>Design</span>
           </span>
-          <em>Janvier à avril 2022</em>
+          <em>January to April 2022</em>
         </div>
       </div>
       <div class="xp">
-        <p>
-          <strong>
-            President de l’association informatique de l’ENSEEIHT
-          </strong>
-        </p>
+        <h3>President of the ENSEEIHT IT Association</h3>
         <ul>
-          <li>Administration d’une association loi 1901</li>
-          <li>Développement et maintenance des services étudiants</li>
-          <li>Organisation de formations techniques tout public</li>
           <li>
-            Création de l’édition 2020 de la plaquette alpha de l’ENSEEIHT
+            <strong>Administrated a non-profit association,</strong> taking care
+            of the legal, financial and administrative aspects.
+          </li>
+          <li>
+            Provided technical training to the general public, with a particular
+            focus on emerging technologies.
+          </li>
+          <li>Developed and maintained student services.</li>
+          <li>
+            Created the 2020 ENSEEIHT students brochure to promote the school to
+            prospective students.
           </li>
         </ul>
         <p class="stuff">
           <span class="tags">
-            <span>Kubernetes</span>
+            <span>Legal</span>
+            <span>Development</span>
+            <span>Design</span>
           </span>
-          <em>Mars 2020 à mai 2021</em>
+          <em>March 2020 to May 2021</em>
         </p>
       </div>
       <div class="xp">
-        <p>
-          <strong>
-            Organisation d’un hackathon en partenariat avec Capgemini
-          </strong>
-        </p>
+        <h3>Hackathon Organizer and Host</h3>
         <ul>
           <li>
-            Développement d’un jeu exclusif pour les étudiants de l’ENSEEIHT
+            Secured a partnership with Capgemini to sponsor the contest and
+            provide gifts for the contestants.
           </li>
-          <li>Établissement d’un partenariat avec Capgemini</li>
-          <li>Animation du live YouTube et du tournoi entre les 60 équipes</li>
+          <li>
+            Developed an exclusive game for the event, tailored for ENSEEIHT
+            students.
+          </li>
+          <li>Led a YouTube live stream and tournament with 60 teams.</li>
         </ul>
         <div class="stuff">
           <span class="tags">
-            <span>Python</span>
+            <span>Event Host</span>
+            <span>Development</span>
           </span>
-          <em>Décembre 2020</em>
+          <em>December 2020</em>
         </div>
       </div>
       <div class="xp">
-        <p><strong>Grimpeur amateur en salle et en falaise</strong></p>
-        <p class="stuff"><em>Depuis 2012</em></p>
+        <h3>Amateur Indoor & Outdoor Rock Climber</h3>
+        <div class="stuff">
+          <span class="tags">
+            <span>Sports</span>
+          </span>
+          <em>Since 2012</em>
+        </div>
       </div>
     </article>
     <article>
@@ -334,9 +351,9 @@
 
   h3 {
     display: flex;
+    flex-wrap: wrap;
     column-gap: 0.5em;
     align-items: end;
-    flex-wrap: wrap;
   }
 
   ul {
