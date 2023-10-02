@@ -275,9 +275,9 @@ __metadata:
   linkType: hard
 
 "@eslint-community/regexpp@npm:^4.5.1, @eslint-community/regexpp@npm:^4.6.1":
-  version: 4.9.0
-  resolution: "@eslint-community/regexpp@npm:4.9.0"
-  checksum: 2959ef83874aa85c4fb03cc74fa8994f1ab25b70c842a8d81caa6781fe15ba8f00e8366d553f56ce6277a0c58019259eee0505032f9813c11d23b963ef0225fe
+  version: 4.9.1
+  resolution: "@eslint-community/regexpp@npm:4.9.1"
+  checksum: d0e1bd1a37cb2cb6bbac88dfe97b62b412d4b6ea3a4bb1c4e1e503be03125063db5d80999cef9728f57b19b49979aa902ac68182bcf5f80dfce6fa9a9d34eee1
   languageName: node
   linkType: hard
 
@@ -302,6 +302,13 @@ __metadata:
   version: 8.50.0
   resolution: "@eslint/js@npm:8.50.0"
   checksum: 92cb0a823869e85f287bd172f14a6a20d7d65c3f4db886a0356a9efebfe8fe519e9ead84a5687bd18f45eca417bdcce96e3b83fe3feae8baf0f8f44d14073bae
+  languageName: node
+  linkType: hard
+
+"@fastify/busboy@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@fastify/busboy@npm:2.0.0"
+  checksum: fdaedca865721769a3a8d788c9efd6af90e73b5f2ff0160dbf46a6160631bbe56e6e5770fafb9a6395111372c73fb2bfa8d4698edc98c6b1f7d97cc9b74e37ea
   languageName: node
   linkType: hard
 
@@ -347,8 +354,8 @@ __metadata:
   linkType: hard
 
 "@iconify/utils@npm:^2.1.9":
-  version: 2.1.10
-  resolution: "@iconify/utils@npm:2.1.10"
+  version: 2.1.11
+  resolution: "@iconify/utils@npm:2.1.11"
   dependencies:
     "@antfu/install-pkg": "npm:^0.1.1"
     "@antfu/utils": "npm:^0.7.5"
@@ -356,7 +363,7 @@ __metadata:
     debug: "npm:^4.3.4"
     kolorist: "npm:^1.8.0"
     local-pkg: "npm:^0.4.3"
-  checksum: 5dd24414d02a6e880af5bb3d44ad000f1f8981bc7d728609bf4884c520c8dddf1bbc7d164c51c91a37c0f6fdb2f5cb0ad15766ff498f3bdd40f7c5f45a568696
+  checksum: fd7f1cc3198754488da178e23e273500a7f804aa0244b535ea9c7d81bf112b2cdd5f1356ed6c36ecb4684249b121ec052f5f7577182812a7327ed5cd536045a9
   languageName: node
   linkType: hard
 
@@ -1199,15 +1206,6 @@ __metadata:
   dependencies:
     run-applescript: "npm:^5.0.0"
   checksum: 57bc7f8b025d83961b04db2f1eff6a87f2363c2891f3542a4b82471ff8ebb5d484af48e9784fcdb28ef1d48bb01f03d891966dc3ef58758e46ea32d750ce40f8
-  languageName: node
-  linkType: hard
-
-"busboy@npm:^1.6.0":
-  version: 1.6.0
-  resolution: "busboy@npm:1.6.0"
-  dependencies:
-    streamsearch: "npm:^1.1.0"
-  checksum: fa7e836a2b82699b6e074393428b91ae579d4f9e21f5ac468e1b459a244341d722d2d22d10920cdd849743dbece6dca11d72de939fb75a7448825cf2babfba1f
   languageName: node
   linkType: hard
 
@@ -2096,9 +2094,9 @@ __metadata:
   linkType: hard
 
 "dompurify@npm:^3.0.5":
-  version: 3.0.5
-  resolution: "dompurify@npm:3.0.5"
-  checksum: 0653ce02dbf79c921646fb523c41d29d9b00dbe5bbed372bc3a035805bb2a58e5865a807c7bc31288719fae0796d5d1ef0bb02a891102b9d7f4b17cdc96cec9d
+  version: 3.0.6
+  resolution: "dompurify@npm:3.0.6"
+  checksum: defc5126e1724bbe5dd5835f0de838c6dc9726a73fc74893e4c661a3c1bd5c65189295013afee74ae7097b3be93499539ff9ec66118d3aa46e788266b1f7514c
   languageName: node
   linkType: hard
 
@@ -3592,11 +3590,11 @@ __metadata:
   linkType: hard
 
 "magic-string@npm:^0.30.0, magic-string@npm:^0.30.3":
-  version: 0.30.3
-  resolution: "magic-string@npm:0.30.3"
+  version: 0.30.4
+  resolution: "magic-string@npm:0.30.4"
   dependencies:
     "@jridgewell/sourcemap-codec": "npm:^1.4.15"
-  checksum: f69f0626192131a8daf0d638a8f31fdd85fd26428dff22401ef251f3913a5c74a710b1edff91ef6203a20d2b1edcc8e55f9320ba84e9b224a3413bdd47f5339e
+  checksum: 076c0402334a8f7c69d83175b4ff10c83b50fd2c6d884a758a563ad9bea312db3b5c7b16cf717229c11505a1deb52d6225503b3b638e1879101d65d08f03c467
   languageName: node
   linkType: hard
 
@@ -4145,9 +4143,9 @@ __metadata:
   linkType: hard
 
 "minipass@npm:^5.0.0 || ^6.0.2 || ^7.0.0, minipass@npm:^7.0.3":
-  version: 7.0.3
-  resolution: "minipass@npm:7.0.3"
-  checksum: c85426bce6310368218aad1f20b8f242180b6c2058209c78840959d6fff8a4738076a3224c3a6b651080f95684d559be1bdb084939bc40011c653ec4552cf06e
+  version: 7.0.4
+  resolution: "minipass@npm:7.0.4"
+  checksum: 6c7370a6dfd257bf18222da581ba89a5eaedca10e158781232a8b5542a90547540b4b9b7e7f490e4cda43acfbd12e086f0453728ecf8c19e0ef6921bc5958ac5
   languageName: node
   linkType: hard
 
@@ -4920,8 +4918,8 @@ __metadata:
   linkType: hard
 
 "rollup@npm:^3.27.1":
-  version: 3.29.3
-  resolution: "rollup@npm:3.29.3"
+  version: 3.29.4
+  resolution: "rollup@npm:3.29.4"
   dependencies:
     fsevents: "npm:~2.3.2"
   dependenciesMeta:
@@ -4929,7 +4927,7 @@ __metadata:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: e3f6f89b171092a7d02709eec7f656b8dc0fe353f2bf985f16c22ca7d9cd35577eabe463b4ab81123bd009c59f49a380f94f83f23c69089aa5425f4177970c6a
+  checksum: 65eddf84bf389ea8e4d4c1614b1c6a298d08f8ae785c0c087e723a879190c8aaddbab4aa3b8a0524551b9036750c9f8bfea27b377798accfd2ba5084ceff5aaa
   languageName: node
   linkType: hard
 
@@ -5219,13 +5217,6 @@ __metadata:
   dependencies:
     minipass: "npm:^7.0.3"
   checksum: b091f2ae92474183c7ac5ed3f9811457e1df23df7a7e70c9476eaa9a0c4a0c8fc190fb45acefbf023ca9ee864dd6754237a697dc52a0fb182afe65d8e77443d8
-  languageName: node
-  linkType: hard
-
-"streamsearch@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "streamsearch@npm:1.1.0"
-  checksum: fbd9aecc2621364384d157f7e59426f4bfd385e8b424b5aaa79c83a6f5a1c8fd2e4e3289e95de1eb3511cb96bb333d6281a9919fafce760e4edb35b2cd2facab
   languageName: node
   linkType: hard
 
@@ -5796,11 +5787,11 @@ __metadata:
   linkType: hard
 
 "undici@npm:~5.25.0":
-  version: 5.25.2
-  resolution: "undici@npm:5.25.2"
+  version: 5.25.3
+  resolution: "undici@npm:5.25.3"
   dependencies:
-    busboy: "npm:^1.6.0"
-  checksum: af3ce7b3665a29350389ebd85a6a8451435c0effdaae091f8799dd807919c3f353407f381c3d810f3535fecdaf7eca4a4e25b8450976d303ee054baec534906e
+    "@fastify/busboy": "npm:^2.0.0"
+  checksum: 385c70a7212a965c412e0854856bb74c084b4f9bbe55403d72178cb1c8bd0d8e5d657c52c57294c150c80ce96cdf40feeb4f796c4e1f11d0017cc8a4cfda3e5a
   languageName: node
   linkType: hard
 
