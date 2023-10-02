@@ -15,7 +15,10 @@
     <article>
       <h2><Suitcase /> Work Experience</h2>
       <div class="xp">
-        <h3>Full-Stack & Cybersecurity Lead Engineer at Escape (YC W23)</h3>
+        <h3>
+          Full-Stack & Cybersecurity Lead Engineer
+          <mark>Escape (YC W23)</mark>
+        </h3>
         <Timeline>
           <p><strong>Lead Engineer</strong></p>
           <ul>
@@ -33,8 +36,8 @@
             </li>
             <li>
               Gave a conference talk at <strong>BSides Oslo</strong>
-              on the State of GraphQL Security 2023, highlighting the company’s year
-              of research.
+              on the <strong>State of GraphQL Security 2023,</strong> highlighting
+              the company’s year of research.
             </li>
             <li>
               <strong>Pioneered the adoption of new technologies</strong> such as
@@ -91,9 +94,10 @@
       </div>
 
       <div class="xp">
-        <p>
-          <strong>Full-Stack Developer & Cryptography Advisor Intern</strong>
-        </p>
+        <h3>
+          Full-Stack Developer & Cryptography Advisor Intern
+          <mark>Freemindtronic</mark>
+        </h3>
         <ul>
           <li>
             Developed a browser extension that provides
@@ -127,49 +131,51 @@
       </div>
 
       <div class="xp">
-        <p>
-          <strong>Web developer for N7 Consulting</strong>
-        </p>
+        <h3>
+          Web Developer Student Consultant
+          <mark>N7 Consulting</mark>
+        </h3>
         <ul>
           <li>
-            Redesigned the site n7consulting.fr into a static site with Eleventy
-            and Parcel
+            Reimagined the Junior Enterprise's website to
+            <strong>create a modern and professional appearance,</strong> while highlighting
+            their expertise and services.
           </li>
         </ul>
         <div class="stuff">
           <span class="tags">
-            <span>TypeScript</span>
-            <span>Stylus</span>
+            <span>Development</span>
+            <span>Design</span>
           </span>
-          <em>Juin à septembre 2020</em>
+          <em>August to September 2020</em>
         </div>
       </div>
 
       <div class="xp">
-        <p>
-          <strong>Internship at Informatique Banque Populaire</strong>
-        </p>
+        <h3>
+          Java Developer Intern
+          <mark>Informatique Banque Populaire</mark>
+        </h3>
         <ul>
           <li>
-            Junior Java Developer: wrote tests for a banking application, with
-            the frameworks Selenium and Cucumber
+            <strong>Automated the testing</strong> of a banking application using
+            the Selenium and Cucumber frameworks.
           </li>
         </ul>
         <div class="stuff">
           <span class="tags">
-            <span>Java</span>
+            <span>Development</span>
+            <span>Testing</span>
           </span>
-          <em>Juin à août 2020</em>
+          <em>June to July 2020</em>
         </div>
       </div>
     </article>
 
     <article>
-      <h2><User /> Parcours personnel</h2>
+      <h2><User /> Personal Journey</h2>
       <div class="xp">
-        <p>
-          <strong>Organisation de la Toulouse Hacking Convention</strong>
-        </p>
+        <h3>Organisation de la Toulouse Hacking Convention</h3>
         <ul>
           <li>Développement de plusieurs challenges pour le CTF</li>
           <li>Création et développement de l’habillage du live YouTube</li>
@@ -326,8 +332,23 @@
     border-bottom: 2px solid #0d3c77;
   }
 
+  h3 {
+    display: flex;
+    column-gap: 0.5em;
+    align-items: end;
+    flex-wrap: wrap;
+  }
+
   ul {
     padding-left: 2em;
+  }
+
+  mark {
+    padding: 0.25em;
+    font-family: system-ui;
+    font-size: 1rem;
+    font-weight: normal;
+    background: linear-gradient(to bottom, #fff0 60%, #0d3c7733 61%);
   }
 
   .grid {
@@ -359,7 +380,7 @@
 
     > span {
       padding: 0.25em 0.5em;
-      background-color: #ced8e4;
+      background-color: #0d3c7733;
       border-radius: 0.25em;
     }
   }
