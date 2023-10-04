@@ -1,53 +1,53 @@
 <script lang="ts">
-  let color: string
-  let label: string
+  let color: string;
+  let label: string;
 
   const gold = () => {
-    color = 'gold'
-    label = 'Magic ✨'
-  }
+    color = "gold";
+    label = "Magic ✨";
+  };
   const red = () => {
-    color = 'firebrick'
-    label = 'Magic 🚒'
-  }
+    color = "firebrick";
+    label = "Magic 🚒";
+  };
   const blue = () => {
-    color = 'navy'
-    label = 'Magic 🚓'
-  }
+    color = "navy";
+    label = "Magic 🚓";
+  };
 
   interface Automaton {
-    state: string
-    states: Record<string, { enter: () => void; next: string }>
+    state: string;
+    states: Record<string, { enter: () => void; next: string }>;
   }
 
   let automaton: Automaton = {
     // Initial state
-    state: 'gold',
+    state: "gold",
     states: {
       // Describe each state
       gold: {
         // Refer to the `gold` function defined above
         enter: gold,
         // The next state to transition to
-        next: 'red',
+        next: "red",
       },
-      red: { enter: red, next: 'blue' },
-      blue: { enter: blue, next: 'gold' },
+      red: { enter: red, next: "blue" },
+      blue: { enter: blue, next: "gold" },
     },
-  }
+  };
 
   const next = ({ state, states }: Automaton) => {
-    const { next } = states[state]
-    const { enter } = states[next]
-    enter()
-    return { state: next, states }
-  }
+    const { next } = states[state];
+    const { enter } = states[next];
+    enter();
+    return { state: next, states };
+  };
 
-  gold()
+  gold();
 
   const click = () => {
-    automaton = next(automaton)
-  }
+    automaton = next(automaton);
+  };
 </script>
 
 <div style:background-color={color}>

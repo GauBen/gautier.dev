@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { formatDate } from '$lib/articles.js'
-  import Card from '$lib/Card.svelte'
-  import Header from '$lib/Header.svelte'
-  import Prism from '$lib/Prism.svelte'
+  import { formatDate } from "$lib/articles.js";
+  import Card from "$lib/Card.svelte";
+  import Header from "$lib/Header.svelte";
+  import Prism from "$lib/Prism.svelte";
 
-  export let data
+  export let data;
 </script>
 
 <Header />
@@ -29,7 +29,7 @@
       <Card>
         <svelte:fragment slot="header">
           {#if snippet}
-            <div class="snippet">
+            <div class="snippet" style:view-transition-name={path}>
               <Prism {...snippet} />
             </div>
           {/if}

@@ -15,7 +15,7 @@
     :global(a::before) {
       position: absolute;
       inset: 0;
-      content: '';
+      content: "";
     }
 
     .body {

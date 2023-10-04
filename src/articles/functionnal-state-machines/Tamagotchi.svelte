@@ -1,64 +1,64 @@
 <script lang="ts">
   const sleep = async (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms))
+    new Promise((resolve) => setTimeout(resolve, ms));
 
   interface Automaton {
-    state: string
+    state: string;
     states: Record<
       string,
       {
-        enter?: () => void
-        next: Record<string, string | undefined>
+        enter?: () => void;
+        next: Record<string, string | undefined>;
       }
-    >
+    >;
   }
 
   let automaton: Automaton = {
-    state: 'happy',
+    state: "happy",
     states: {
-      happy: { next: { sleep: 'sleeping', run: 'running' } },
-      hungry: { next: { eat: 'eating' } },
+      happy: { next: { sleep: "sleeping", run: "running" } },
+      hungry: { next: { eat: "eating" } },
       sleeping: {
         enter: () => {
-          void sleep(5000).then(click('wakeUp'))
+          void sleep(5000).then(click("wakeUp"));
         },
-        next: { wakeUp: 'hungry' },
+        next: { wakeUp: "hungry" },
       },
       running: {
         enter: () => {
-          void sleep(3000).then(click('done'))
+          void sleep(3000).then(click("done"));
         },
-        next: { done: 'hungry' },
+        next: { done: "hungry" },
       },
       eating: {
         enter: () => {
-          void sleep(2000).then(click('done'))
+          void sleep(2000).then(click("done"));
         },
-        next: { done: 'happy' },
+        next: { done: "happy" },
       },
     },
-  }
+  };
 
-  let logs: string[] = []
+  let logs: string[] = [];
 
   const next = ({ state, states }: Automaton, transition: string) => {
-    const nextState = states[state].next[transition]
-    if (!nextState) return { state, states }
-    const { enter } = states[nextState]
-    enter?.()
-    return { state: nextState, states }
-  }
+    const nextState = states[state].next[transition];
+    if (!nextState) return { state, states };
+    const { enter } = states[nextState];
+    enter?.();
+    return { state: nextState, states };
+  };
 
   const click = (transition: string) => () => {
-    const { state } = automaton
-    automaton = next(automaton, transition)
+    const { state } = automaton;
+    automaton = next(automaton, transition);
     logs = [
       ...logs,
       state === automaton.state
         ? `Can't ${transition} when ${state}`
         : `${state} → ${automaton.state}`,
-    ]
-  }
+    ];
+  };
 </script>
 
 <div class="wrapper">
@@ -66,9 +66,9 @@
     <div class="screen">
       {automaton.state}
     </div>
-    <button on:click={click('eat')}>Eat</button>
-    <button on:click={click('sleep')}>Sleep</button>
-    <button on:click={click('run')}>Run</button>
+    <button on:click={click("eat")}>Eat</button>
+    <button on:click={click("sleep")}>Sleep</button>
+    <button on:click={click("run")}>Run</button>
   </div>
   <div class="logs">
     <h3>Logs</h3>
@@ -96,8 +96,8 @@
   .device {
     display: grid;
     grid-template:
-      'screen screen screen'
-      'eat sleep run' / 1fr 1fr 1fr;
+      "screen screen screen"
+      "eat sleep run" / 1fr 1fr 1fr;
     gap: 1rem;
     width: 12rem;
     padding: 1rem;

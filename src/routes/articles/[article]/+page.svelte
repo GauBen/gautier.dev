@@ -1,4 +1,5 @@
 <script lang="ts">
+  import "$assets/markdown-content.scss";
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
   import { formatDate } from "$lib/articles";
@@ -7,7 +8,7 @@
 
   export let data;
 
-  $: ({ component, date, draft, snippet, title } = data);
+  $: ({ component, date, draft, snippet, title, path } = data);
 
   let mounted = false;
   onMount(async () => {
@@ -18,7 +19,7 @@
 
 <Header>
   {#if snippet}
-    <div class="snippet">
+    <div class="snippet" style:view-transition-name={path}>
       <Prism {...snippet} />
     </div>
   {/if}

@@ -20,6 +20,11 @@
   line-height: 1.5;
 }
 
+:where(iframe, img, input, video, select, textarea) {
+  max-width: 100%;
+  height: auto;
+}
+
 ::selection {
   background-color: #ff48;
 }
@@ -31,7 +36,6 @@ h4,
 h5,
 h6 {
   font-family: "Techna Sans", sans-serif;
-  font-weight: initial;
   font-feature-settings: "ss01" 1;
 }
 
@@ -74,7 +78,12 @@ a {
   }
 }
 
-:where(iframe, img, input, video, select, textarea) {
-  max-width: 100%;
-  height: auto;
+table {
+  border-collapse: collapse;
+}
+
+.icon {
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: text-bottom;
 }

@@ -13,8 +13,10 @@
 <style lang="scss">
   header {
     position: relative;
+    z-index: 1;
     padding: 0 0.5em;
     overflow: hidden;
+    view-transition-name: header;
   }
 
   h1 {
@@ -38,7 +40,9 @@
     background-position: right;
     background-size: 0 100%;
     border-radius: 0.75em;
-    transition: 150ms color, 150ms background-size;
+    transition:
+      150ms color,
+      150ms background-size;
 
     &:hover,
     &:active,

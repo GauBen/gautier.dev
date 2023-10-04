@@ -44,6 +44,12 @@ type Point = {
   y Float32
 }
 
+const origin = Point { x = 0.0 y = 0.0 }
+// Also possible to shorten to `Point { 0.0 0.0 }` if the order is correct
+
+// A shape is a list of points
+type Shape = Point[]
+
 // A union type named Option
 type Option<T> = None | Some T
 
@@ -116,7 +122,7 @@ These concepts are inspired by [Temporal](https://temporal.io/) and [ADA](https:
 - A procedure is a computation that has side effects, but does not return a value.
 - A workflow is a computation that can be interrupted, and resumed later. It cannot have direct side effects, but it can call procedures.
 
-I want the syntax to feel natural for C-like programmers, but with less symbols. Python's syntax is also a good inspiration.
+I want the syntax to feel natural for C-like programmers, but with less symbols. Python's syntax is also a good inspiration. Also, I want to get rid of positional arguments, and use key-value arguments instead.
 
 ```pina
 const add = function (a b) -> a + b
