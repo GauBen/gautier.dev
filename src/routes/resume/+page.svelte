@@ -15,19 +15,19 @@
     <h2><Suitcase /> Work Experience</h2>
     <div class="xp">
       <h3>
-        Full-Stack & Cybersecurity Lead Engineer
+        Full-Stack Engineer & Cybersecurity Researcher
         <mark>Escape (YC W23)</mark>
       </h3>
       <Timeline>
         <p><strong>Lead Engineer</strong></p>
         <ul>
           <li>
-            <strong>Managed a team of 3 developers,</strong> ensuring communication,
-            code quality and deadlines. Fostered innovation, independence and healthy
+            <strong>Manage a team of 2 developers,</strong> ensuring communication,
+            code quality and deadlines. Foster innovation, independence and healthy
             team dynamics.
           </li>
           <li>
-            Headed the creation of
+            Head
             <strong>several corporate side-projects,</strong>
             including the GraphQL Security Academy, a learning platform for GraphQL
             security, and svelte-emails, a modern way to build complex transactional
@@ -39,7 +39,7 @@
             the company’s year of research.
           </li>
           <li>
-            <strong>Pioneered the adoption of new technologies</strong> such as Temporal
+            <strong>Pioneer the adoption of new technologies</strong> such as Temporal
             and Turbo to enhance developer productivity and product stability.
           </li>
         </ul>
@@ -320,7 +320,10 @@
     <h2><GraduationCap /> Education</h2>
     <div class="xp">
       <h3>Master of Cybersecurity and Governance (TLS-SEC)</h3>
-      <p>2022, joint training with ENSEEIHT, INSA Toulouse and ENAC</p>
+      <p>
+        2022, joint training with ENSEEIHT, INSA Toulouse and ENAC, Toulouse,
+        France
+      </p>
     </div>
     <div class="xp">
       <h3>Master of Software and Systems Engineering</h3>
@@ -359,6 +362,7 @@
     color: #0d3c77;
     background-color: #fff;
     border-bottom: 2px solid #0d3c77;
+    page-break-after: avoid;
   }
 
   h3 {
@@ -385,6 +389,7 @@
     flex-direction: column;
     gap: 0.25em;
     margin: 1rem 0;
+    page-break-inside: avoid;
 
     > * {
       margin: 0;

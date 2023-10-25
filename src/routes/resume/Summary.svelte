@@ -1,7 +1,7 @@
 <section>
   <h2>Summary</h2>
   <div>
-    <h3>Full-Stack Lead Engineer & Cybersecurity Researcher</h3>
+    <h3>Full-Stack Engineer & Cybersecurity Researcher</h3>
     I am a software engineer with 3+ years of experience in the IT industry. I am
     passionate about security and have a proven ability to architect, develop, and
     maintain secure and scalable software applications. I have a proven track record

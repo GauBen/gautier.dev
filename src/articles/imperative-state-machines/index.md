@@ -1,4 +1,5 @@
 ---
+draft: true
 title: State machines in JavaScript
 description: A guide on how to create a robust state machine in JavaScript.
 date: 2022-09-27
