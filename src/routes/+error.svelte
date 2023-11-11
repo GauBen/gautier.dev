@@ -3,7 +3,7 @@
   import Header from "$lib/Header.svelte";
   import { onMount } from "svelte";
 
-  $: ({ status, error } = $page);
+  const { status, error } = $derived($page);
 
   let title: HTMLElement;
 

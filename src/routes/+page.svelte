@@ -4,7 +4,7 @@
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
 
-  export let data;
+  const { data } = $props();
 </script>
 
 <Header />

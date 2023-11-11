@@ -7,7 +7,7 @@
 
   inject({ mode: dev ? "development" : "production" });
 
-  $: ({ title, description } = $page.data);
+  const { title, description } = $derived($page.data);
 
   onNavigate((navigation) => {
     if (!document.startViewTransition) return;
