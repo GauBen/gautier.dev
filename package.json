@@ -20,10 +20,10 @@
   "devDependencies": {
     "@iconify-json/ph": "^1.1.6",
     "@sveltejs/adapter-vercel": "^3.0.3",
-    "@sveltejs/kit": "^1.27.4",
+    "@sveltejs/kit": "^1.27.6",
     "@types/prismjs": "^1.26.3",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-svelte": "^2.35.0",
@@ -33,7 +33,7 @@
     "postcss": "^8.4.31",
     "postcss-html": "^1.5.0",
     "postcss-scss": "^4.0.9",
-    "prettier": "^3.0.3",
+    "prettier": "^3.1.0",
     "prettier-plugin-jsdoc": "^1.1.1",
     "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-packagejson": "^2.4.6",
@@ -45,12 +45,12 @@
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-recess-order": "^4.3.0",
     "stylelint-config-standard-scss": "^11.1.0",
-    "svelte": "^5.0.0-next.1",
+    "svelte": "^5.0.0-next.4",
     "svelte-check": "^3.6.0",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2",
-    "unplugin-icons": "^0.17.3",
-    "vite": "^4.5.0"
+    "unplugin-icons": "^0.17.4",
+    "vite": "^5.0.0"
   },
-  "packageManager": "yarn@4.0.1"
+  "packageManager": "yarn@4.0.2"
 }
