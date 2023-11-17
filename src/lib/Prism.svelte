@@ -1,10 +1,13 @@
 <script lang="ts">
   import { highlight } from "$lib/prism.js";
-  export let code: string;
-  export let lang = "javascript";
+
+  const { code, lang = "javascript" } = $props<{
+    code: string;
+    lang?: string;
+  }>();
 </script>
 
-<pre class="language-{lang}">{@html highlight(code, lang)}</pre>
+<pre class="language-{lang}">{@html code && highlight(code, lang)}</pre>
 
 <style lang="scss">
   pre {

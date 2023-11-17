@@ -1,12 +1,15 @@
 <script lang="ts">
   import mermaid from "mermaid";
+  import type { Action } from "svelte/action";
 
-  const mermaidify = (node: HTMLElement) => {
+  const { children } = $props<{ children: () => void }>();
+
+  const mermaidify: Action = (node) => {
     void mermaid.run({ nodes: [node] });
   };
 </script>
 
-<div use:mermaidify><slot /></div>
+<div use:mermaidify>{@render children()}</div>
 
 <style lang="scss">
   div {

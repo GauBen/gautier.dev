@@ -27,13 +27,13 @@
   <div class="grid">
     {#each data.articles as { path, title, description, date, snippet }}
       <Card>
-        <svelte:fragment slot="header">
-          {#if snippet}
+        {#snippet header()}
+          {#if typeof snippet === "function" ? snippet() : snippet}
             <div class="snippet" style:view-transition-name={path}>
-              <Prism {...snippet} />
+              <Prism {...typeof snippet === "function" ? snippet() : snippet} />
             </div>
           {/if}
-        </svelte:fragment>
+        {/snippet}
         <h2>
           <a href="/articles/{path}">{title}</a>
         </h2>

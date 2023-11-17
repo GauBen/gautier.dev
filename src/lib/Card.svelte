@@ -1,7 +1,16 @@
+<script lang="ts">
+  const { header, children } = $props<{
+    header?: () => void;
+    children: () => void;
+  }>();
+</script>
+
 <div class="card">
-  <slot name="header" />
+  {#if header}
+    {@render header()}
+  {/if}
   <div class="body">
-    <slot />
+    {@render children()}
   </div>
 </div>
 

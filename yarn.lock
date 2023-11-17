@@ -783,15 +783,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/adapter-vercel@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "@sveltejs/adapter-vercel@npm:3.0.3"
+"@sveltejs/adapter-vercel@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@sveltejs/adapter-vercel@npm:3.1.0"
   dependencies:
-    "@vercel/nft": "npm:^0.23.0"
+    "@vercel/nft": "npm:^0.24.0"
     esbuild: "npm:^0.18.11"
   peerDependencies:
     "@sveltejs/kit": ^1.5.0
-  checksum: b074a9e15311832a7fd9fd343172b92503f8417af096ff5d2a086055e8badf014d342c487239d3d4c5026ec079710f0d9387ebc30bd176200b5cf64e87855ccc
+  checksum: 85f94ff4847cb10b1a1c74cf234a9dabb5a53e93fa7ba40f2174af3c435331677a454508902d3590b23f9dee8ea502cde6aced9b5a05df7e2057c69f25a1e880
   languageName: node
   linkType: hard
 
@@ -1133,9 +1133,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/nft@npm:^0.23.0":
-  version: 0.23.1
-  resolution: "@vercel/nft@npm:0.23.1"
+"@vercel/nft@npm:^0.24.0":
+  version: 0.24.3
+  resolution: "@vercel/nft@npm:0.24.3"
   dependencies:
     "@mapbox/node-pre-gyp": "npm:^1.0.5"
     "@rollup/pluginutils": "npm:^4.0.0"
@@ -1150,7 +1150,7 @@ __metadata:
     resolve-from: "npm:^5.0.0"
   bin:
     nft: out/cli.js
-  checksum: e19278512e9ff8618d8a9d82afe5b6f8783fbceebf6558dee67facd4d571618332bd8b025193ae33311f2e48ba68eacffc020ab621574b6398a9d945484209f6
+  checksum: e7b4e873d075119d339a9655fb45dc8f59aef6f404a1a6f33b2e4734560218edce95461d8fa434a28e0a13f1c67901b2b5884603a9c0f6a7b933c4128912c587
   languageName: node
   linkType: hard
 
@@ -3013,7 +3013,7 @@ __metadata:
   resolution: "gautier.dev@workspace:."
   dependencies:
     "@iconify-json/ph": "npm:^1.1.6"
-    "@sveltejs/adapter-vercel": "npm:^3.0.3"
+    "@sveltejs/adapter-vercel": "npm:^3.1.0"
     "@sveltejs/kit": "npm:^1.27.6"
     "@types/prismjs": "npm:^1.26.3"
     "@typescript-eslint/eslint-plugin": "npm:^6.11.0"
@@ -3043,7 +3043,7 @@ __metadata:
     stylelint-config-html: "npm:^1.1.0"
     stylelint-config-recess-order: "npm:^4.3.0"
     stylelint-config-standard-scss: "npm:^11.1.0"
-    svelte: "npm:^5.0.0-next.4"
+    svelte: "npm:^5.0.0-next.5"
     svelte-check: "npm:^3.6.0"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.2.2"
@@ -6235,9 +6235,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^5.0.0-next.4":
-  version: 5.0.0-next.4
-  resolution: "svelte@npm:5.0.0-next.4"
+"svelte@npm:^5.0.0-next.5":
+  version: 5.0.0-next.5
+  resolution: "svelte@npm:5.0.0-next.5"
   dependencies:
     "@ampproject/remapping": "npm:^2.2.1"
     "@jridgewell/sourcemap-codec": "npm:^1.4.15"
@@ -6250,7 +6250,7 @@ __metadata:
     locate-character: "npm:^3.0.0"
     magic-string: "npm:^0.30.4"
     zimmerframe: "npm:^1.1.0"
-  checksum: 97de5cc54d83a4d909a0dca9173432041797b1c95877a1d906cb0eab6796d8d197c71a6a3c35f5a579b597791ce765f71cfd818254245eac2b782602af4a3969
+  checksum: 86ec4090105706de2511e4bb482d1e087da8fa7a462933e5716d4a3f174cc775c467321fbf0622143e77814330f2dc35c396f08c8e6ef181f12d098928009432
   languageName: node
   linkType: hard
 

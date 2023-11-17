@@ -1,4 +1,8 @@
-<div class:shadow={$$slots.default}>
+<script lang="ts">
+  const { children } = $props<{ children?: () => void }>();
+</script>
+
+<div class:shadow={children}>
   <header>
     <h1>
       <a href="/" data-sveltekit-preload-code="eager">
@@ -7,7 +11,9 @@
       </a>
     </h1>
   </header>
-  <slot />
+  {#if children}
+    {@render children()}
+  {/if}
 </div>
 
 <style lang="scss">
