@@ -1,7 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores";
   import Header from "$lib/Header.svelte";
-  import { onMount } from "svelte";
 
   const { status, error } = $derived($page);
 
@@ -16,6 +15,7 @@
   let playing = false;
   let t = 0;
   const play = () => {
+    if (!playing) return;
     const { scrollWidth, scrollHeight } = document.body;
     let { x, y, width, height } = title.getBoundingClientRect();
 
@@ -42,10 +42,10 @@
 
     title.style.transform = `translate(${x}px, ${y}px)`;
 
-    if (playing) requestAnimationFrame(play);
+    requestAnimationFrame(play);
   };
 
-  onMount(() => {
+  $effect(() => {
     playing = true;
     t = performance.now() / 1000;
     play();

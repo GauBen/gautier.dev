@@ -1,7 +1,9 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
+
   const { header, children } = $props<{
-    header?: () => void;
-    children: () => void;
+    header?: Snippet;
+    children: Snippet;
   }>();
 </script>
 

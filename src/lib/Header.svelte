@@ -1,5 +1,7 @@
 <script lang="ts">
-  const { children } = $props<{ children?: () => void }>();
+  import type { Snippet } from "svelte";
+
+  const { children } = $props<{ children?: Snippet }>();
 </script>
 
 <div class:shadow={children}>

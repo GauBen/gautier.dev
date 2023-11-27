@@ -28,9 +28,9 @@
     {#each data.articles as { path, title, description, date, snippet }}
       <Card>
         {#snippet header()}
-          {#if typeof snippet === "function" ? snippet() : snippet}
+          {#if snippet}
             <div class="snippet" style:view-transition-name={path}>
-              <Prism {...typeof snippet === "function" ? snippet() : snippet} />
+              <Prism {...snippet} />
             </div>
           {/if}
         {/snippet}
