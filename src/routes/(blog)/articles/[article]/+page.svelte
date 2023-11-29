@@ -3,17 +3,15 @@
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
   import { formatDate } from "$lib/articles";
-  import { onMount } from "svelte";
-  import "../../../assets/markdown-content.scss";
 
-  export let data;
+  const { data } = $props();
+  const { component, date, draft, snippet, title, path } = $derived(data);
 
-  $: ({ component, date, draft, snippet, title, path } = data);
-
-  let mounted = false;
-  onMount(async () => {
-    await import("giscus");
-    mounted = true;
+  let mounted = $state(false);
+  $effect(() => {
+    import("giscus").then(() => {
+      mounted = true;
+    });
   });
 </script>
 

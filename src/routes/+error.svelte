@@ -1,59 +1,58 @@
 <script lang="ts">
   import { page } from "$app/stores";
   import Header from "$lib/Header.svelte";
+  import type { Action } from "svelte/action";
 
   const { status, error } = $derived($page);
-
-  let title: HTMLElement;
 
   const velocity = 200;
   const angle = Math.random() * Math.PI * 2;
 
-  let vx = Math.cos(angle) * velocity;
-  let vy = Math.sin(angle) * velocity;
+  let vx = $state(Math.cos(angle) * velocity);
+  let vy = $state(Math.sin(angle) * velocity);
 
-  let playing = false;
-  let t = 0;
-  const play = () => {
-    if (!playing) return;
-    const { scrollWidth, scrollHeight } = document.body;
-    let { x, y, width, height } = title.getBoundingClientRect();
+  const bounce: Action<HTMLElement> = (title) => {
+    let t = performance.now() / 1000;
+    let frame: number;
 
-    const dt = performance.now() / 1000 - t;
-    t += dt;
-    x += vx * dt;
-    y += vy * dt;
+    const play = () => {
+      const { scrollWidth, scrollHeight } = document.body;
+      let { x, y, width, height } = title.getBoundingClientRect();
 
-    if (x < 0) {
-      x = -x;
-      vx = -vx;
-    } else if (x + width > scrollWidth) {
-      x = 2 * scrollWidth - 2 * width - x;
-      vx = -vx;
-    }
+      const dt = performance.now() / 1000 - t;
+      t += dt;
+      x += vx * dt;
+      y += vy * dt;
 
-    if (y < 0) {
-      y = -y;
-      vy = -vy;
-    } else if (y + height > scrollHeight) {
-      y = 2 * scrollHeight - 2 * height - y;
-      vy = -vy;
-    }
+      if (x < 0) {
+        x = -x;
+        vx = -vx;
+      } else if (x + width > scrollWidth) {
+        x = 2 * scrollWidth - 2 * width - x;
+        vx = -vx;
+      }
 
-    title.style.transform = `translate(${x}px, ${y}px)`;
+      if (y < 0) {
+        y = -y;
+        vy = -vy;
+      } else if (y + height > scrollHeight) {
+        y = 2 * scrollHeight - 2 * height - y;
+        vy = -vy;
+      }
 
-    requestAnimationFrame(play);
-  };
+      title.style.transform = `translate(${x}px, ${y}px)`;
 
-  $effect(() => {
-    playing = true;
-    t = performance.now() / 1000;
+      frame = requestAnimationFrame(play);
+    };
+
     play();
 
-    return () => {
-      playing = false;
+    return {
+      destroy() {
+        cancelAnimationFrame(frame);
+      },
     };
-  });
+  };
 </script>
 
 <svelte:head>
@@ -62,7 +61,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <h1
-  bind:this={title}
+  use:bounce
   on:click={() => {
     vx *= 2;
     vy *= 2;
