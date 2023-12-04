@@ -41,4 +41,8 @@ export default {
       $assets: "./src/assets",
     },
   },
+
+  compilerOptions: {
+    preserveWhitespace: true,
+  },
 };

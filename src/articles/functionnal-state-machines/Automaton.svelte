@@ -1,6 +1,6 @@
 <script lang="ts">
-  let color: string;
-  let label: string;
+  let color = $state("");
+  let label = $state("");
 
   const gold = () => {
     color = "gold";

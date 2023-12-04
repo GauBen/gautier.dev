@@ -4,7 +4,7 @@
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
 
-  export let data;
+  const { data } = $props();
 </script>
 
 <Header />
@@ -27,13 +27,13 @@
   <div class="grid">
     {#each data.articles as { path, title, description, date, snippet }}
       <Card>
-        <svelte:fragment slot="header">
+        {#snippet header()}
           {#if snippet}
             <div class="snippet" style:view-transition-name={path}>
               <Prism {...snippet} />
             </div>
           {/if}
-        </svelte:fragment>
+        {/snippet}
         <h2>
           <a href="/articles/{path}">{title}</a>
         </h2>

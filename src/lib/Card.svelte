@@ -1,7 +1,18 @@
+<script lang="ts">
+  import type { Snippet } from "svelte";
+
+  const { header, children } = $props<{
+    header?: Snippet;
+    children: Snippet;
+  }>();
+</script>
+
 <div class="card">
-  <slot name="header" />
+  {#if header}
+    {@render header()}
+  {/if}
   <div class="body">
-    <slot />
+    {@render children()}
   </div>
 </div>
 

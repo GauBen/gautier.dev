@@ -1,12 +1,18 @@
 <script lang="ts">
   import mermaid from "mermaid";
+  import type { Snippet } from "svelte";
+  import type { Action } from "svelte/action";
 
-  const mermaidify = (node: HTMLElement) => {
+  const { children } = $props<{ children: Snippet }>();
+
+  const mermaidify: Action = (node) => {
+    // Remove SSR landmarks
+    node.innerHTML = node.textContent!;
     void mermaid.run({ nodes: [node] });
   };
 </script>
 
-<div use:mermaidify><slot /></div>
+<div use:mermaidify>{@render children()}</div>
 
 <style lang="scss">
   div {
