@@ -51,7 +51,7 @@
 </script>
 
 <div style:background-color={color}>
-  <button on:click={click}>{label}</button>
+  <button onclick={click}>{label}</button>
 </div>
 
 <style>

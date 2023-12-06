@@ -62,7 +62,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <h1
   use:bounce
-  on:click={() => {
+  onclick={() => {
     vx *= 2;
     vy *= 2;
   }}

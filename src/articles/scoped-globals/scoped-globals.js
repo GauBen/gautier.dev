@@ -1,11 +1,12 @@
 import { setTimeout } from "node:timers/promises";
 
-/** @return {Array<string|null>} */
+/** @returns {(string | null)[]} */
 function getStack() {
   const originalPrepareStackTrace = Error.prepareStackTrace;
   try {
     Error.prepareStackTrace = (_, traces) =>
       traces.map((trace) => trace.getFunctionName());
+    // @ts-expect-error We've updated `.stack` to return an array
     return new Error().stack;
   } finally {
     Error.prepareStackTrace = originalPrepareStackTrace;
@@ -13,6 +14,10 @@ function getStack() {
 }
 
 const PREFIX = "*scope=";
+/**
+ * @param {string} suffix
+ * @param {() => Promise<void>} callback
+ */
 const scope = (suffix, callback) =>
   ({
     async [PREFIX + suffix]() {
@@ -25,6 +30,7 @@ const getScope = () =>
     .find((fn) => fn?.startsWith(PREFIX))
     ?.slice(PREFIX.length);
 
+/** @param {unknown[]} args */
 const log = (...args) => {
   console.log(`[${getScope()}]`, ...args);
 };

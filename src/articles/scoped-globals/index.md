@@ -36,7 +36,7 @@ With this naive implementation, we lose track of the scope after the first async
 ```js
 import { setTimeout } from "node:timers/promises";
 
-/** @return {Array<string|null>} */
+/** @returns {(string | null)[]} */
 function getStack() {
   const originalPrepareStackTrace = Error.prepareStackTrace;
   try {

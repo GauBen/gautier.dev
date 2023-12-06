@@ -23,7 +23,7 @@
     width: auto;
 
     // Mermaid sets data-processed=true when the diagram is ready
-    &:not([data-processed="true"]) {
+    &:not([data-processed]) {
       padding: 0.5em;
       white-space: pre;
       opacity: 0.5;

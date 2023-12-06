@@ -13,7 +13,7 @@
     >;
   }
 
-  let automaton: Automaton = {
+  let automaton: Automaton = $state({
     state: "happy",
     states: {
       happy: { next: { sleep: "sleeping", run: "running" } },
@@ -37,9 +37,9 @@
         next: { done: "happy" },
       },
     },
-  };
+  });
 
-  let logs: string[] = [];
+  let logs = $state<string[]>([]);
 
   const next = ({ state, states }: Automaton, transition: string) => {
     const nextState = states[state].next[transition];
@@ -66,9 +66,9 @@
     <div class="screen">
       {automaton.state}
     </div>
-    <button on:click={click("eat")}>Eat</button>
-    <button on:click={click("sleep")}>Sleep</button>
-    <button on:click={click("run")}>Run</button>
+    <button onclick={click("eat")}>Eat</button>
+    <button onclick={click("sleep")}>Sleep</button>
+    <button onclick={click("run")}>Run</button>
   </div>
   <div class="logs">
     <h3>Logs</h3>

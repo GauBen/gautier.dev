@@ -1,32 +1,44 @@
 <script lang="ts">
-  export let open = false;
-  export let css = "";
+  let { open, style } = $props<{ open: boolean; style?: string }>();
+  let dropdown = $state<HTMLElement>();
 
-  /** Closes the dropdown menu when it loses focus. */
-  const focusHandler = ({ target }: FocusEvent) => {
-    open = Boolean((target as HTMLElement | null)?.closest(".dropdown"));
+  const preventDefault = (event: Event) => {
+    event.preventDefault();
   };
 </script>
 
-<svelte:window on:click={() => (open = false)} on:focusin={focusHandler} />
+<svelte:window
+  onclick={() => {
+    open = false;
+  }}
+  onfocusin={({ target }) => {
+    open = Boolean(dropdown?.contains(target as Node));
+  }}
+/>
 
 <div class="wrapper">
   <button
     type="button"
-    on:click|stopPropagation={() => (open = !open)}
-    style={css}
+    {style}
+    onclick={(event) => {
+      event.stopPropagation();
+      open = !open;
+    }}
   >
     Gautier ▼
   </button>
   <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
   <div
-    style:display={open ? "block" : "none"}
+    bind:this={dropdown}
     class="dropdown"
-    on:click|stopPropagation
+    style:display={open ? "block" : "none"}
+    onclick={(event) => {
+      event.stopPropagation();
+    }}
   >
-    <a href="?" on:click|preventDefault>Gautier</a>
-    <a href="?" on:click|preventDefault>Antoine</a>
-    <a href="?" on:click|preventDefault>Simon</a>
+    <a href="/" onclick={preventDefault}>Gautier</a>
+    <a href="/" onclick={preventDefault}>Antoine</a>
+    <a href="/" onclick={preventDefault}>Simon</a>
   </div>
 </div>
 

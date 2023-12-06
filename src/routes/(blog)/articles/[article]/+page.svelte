@@ -7,10 +7,10 @@
   const { data } = $props();
   const { component, date, draft, snippet, title, path } = $derived(data);
 
-  let mounted = $state(false);
+  let loaded = $state(false);
   $effect(() => {
     import("giscus").then(() => {
-      mounted = true;
+      loaded = true;
     });
   });
 </script>
@@ -35,7 +35,7 @@
   <div class="markdown-content">
     <svelte:component this={component} />
   </div>
-  {#if mounted}
+  {#if loaded}
     <section>
       <div>
         <giscus-widget

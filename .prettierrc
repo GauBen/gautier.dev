@@ -1,8 +1,8 @@
 {
   "quoteProps": "consistent",
   "plugins": [
-    "prettier-plugin-jsdoc",
     "prettier-plugin-organize-imports",
+    "prettier-plugin-jsdoc",
     "prettier-plugin-packagejson",
     "prettier-plugin-svelte"
   ]

@@ -14,10 +14,11 @@ for (const lang of Object.keys(Prism.languages))
 
 Prism.languages["pina"] = Prism.languages["typescript"];
 
-export const highlight = (
-  /** @type {string} */ code,
-  /** @type {string} */ lang,
-) =>
+/**
+ * @param {string} code
+ * @param {string} lang
+ */
+export const highlight = (code, lang) =>
   `<code class="language-${lang}">${Prism.highlight(
     code,
     Prism.languages[lang],

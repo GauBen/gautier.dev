@@ -5,15 +5,10 @@
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["es2020", "DOM"],
-    "module": "es2020",
-    "moduleResolution": "node",
-    "outDir": "build",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": true,
-    "target": "es2020",
-    "types": ["@sveltejs/kit"]
+    "strict": true
   }
 }
