@@ -28,7 +28,7 @@
     <h1 class:draft>{title}</h1>
     {#if date}
       <p class="date">
-        <time datetime={new Date(date).toISOString()}>{formatDate(date)}</time>
+        <time datetime={date}>{formatDate(date)}</time>
       </p>
     {/if}
   </header>

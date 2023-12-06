@@ -1,7 +1,7 @@
 <script lang="ts">
   import Github from "~icons/ph/github-logo";
   import Linkedin from "~icons/ph/linkedin-logo";
-  import DevTo from "~icons/ph/dev-to-logo";
+  import Rss from "~icons/ph/rss";
 </script>
 
 <slot />
@@ -23,8 +23,8 @@
     <a href="https://github.com/GauBen/" title="My GitHub Profile">
       <Github aria-label="GitHub" />
     </a>
-    <a href="https://dev.to/gauben" title="My DEV Profile">
-      <DevTo aria-label="DEV" />
+    <a href="/feed" title="Atom feed">
+      <Rss aria-label="Atom" />
     </a>
   </p>
 </footer>
