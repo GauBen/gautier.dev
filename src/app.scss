@@ -23,6 +23,7 @@
 :where(iframe, img, input, video, select, textarea) {
   max-width: 100%;
   height: auto;
+  vertical-align: bottom;
 }
 
 ::selection {

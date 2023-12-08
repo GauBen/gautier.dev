@@ -5,7 +5,8 @@
   import { formatDate } from "$lib/articles";
 
   const { data } = $props();
-  const { component, date, draft, snippet, title, path } = $derived(data);
+  const { title, date, draft, snippet, path, banner, component } =
+    $derived(data);
 
   let loaded = $state(false);
   $effect(() => {
@@ -16,7 +17,13 @@
 </script>
 
 <Header>
-  {#if snippet}
+  {#if banner}
+    <enhanced:img
+      src={banner}
+      alt=""
+      style="width: 100%; max-height: 8rem; object-fit: cover"
+    />
+  {:else if snippet}
     <div class="snippet" style:view-transition-name={path}>
       <Prism {...snippet} />
     </div>

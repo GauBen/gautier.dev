@@ -4,7 +4,7 @@ import { articles } from "$lib/articles";
 export const load = () => ({
   articles: Promise.all(
     [...articles.entries()].map(async ([path, load]) =>
-      load().then(({ metadata }) => ({ path, ...metadata })),
+      load().then(({ metadata, banner }) => ({ ...metadata, path, banner })),
     ),
   ).then((articles) =>
     articles

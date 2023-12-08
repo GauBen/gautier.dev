@@ -8,20 +8,17 @@ export type Article = {
     date?: string;
     snippet?: { code: string; lang: string };
   };
+  banner?: string;
   default: new (...args: unknown[]) => SvelteComponent;
 };
 
 export const articles = new Map(
-  Object.entries(
-    import.meta.glob<Article>(
-      "../articles/*{.md,.svelte,/index.md,/index.svelte}",
-    ),
-  ).map(([path, load]) => [
-    path
-      .replace(/^\.\.\/articles\//, "")
-      .replace(/(\.md|\.svelte|\/index\.md|\/index\.svelte)$/, ""),
-    load,
-  ]),
+  Object.entries(import.meta.glob<Article>("../articles/*/index.md")).map(
+    ([path, load]) => [
+      path.slice("../articles/".length, -"/index.md".length),
+      load,
+    ],
+  ),
 );
 
 export const formatDate = (date: string | undefined) =>

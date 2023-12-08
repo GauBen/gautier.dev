@@ -25,10 +25,12 @@
   </p>
   <h2>Latest articles</h2>
   <div class="grid">
-    {#each data.articles as { path, title, description, date, snippet }}
+    {#each data.articles as { path, banner, title, description, date, snippet }}
       <Card>
         {#snippet header()}
-          {#if snippet}
+          {#if banner}
+            <enhanced:img src={banner} alt="" />
+          {:else if snippet}
             <div class="snippet" style:view-transition-name={path}>
               <Prism {...snippet} />
             </div>
