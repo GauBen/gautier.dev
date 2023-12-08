@@ -1,7 +1,6 @@
 ---
 draft: true
 title: Meet Piña, a new programming language
-date: 2023-08-14
 ---
 
 Let's design a new programming language, with the features we want. I learnt a lot of various programming languages, with various features, and I want to create a new one, with the best features of all of them.

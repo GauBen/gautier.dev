@@ -25,22 +25,27 @@
   </p>
   <h2>Latest articles</h2>
   <div class="grid">
-    {#each data.articles as { path, banner, title, description, date, snippet }}
+    {#each data.articles as { slug, banner, title, description, date, snippet }}
       <Card>
         {#snippet header()}
           {#if banner}
-            <enhanced:img src={banner} alt="" />
+            <enhanced:img
+              src={banner}
+              alt=""
+              class="banner"
+              style:view-transition-name={slug}
+            />
           {:else if snippet}
-            <div class="snippet" style:view-transition-name={path}>
+            <div class="banner" style:view-transition-name={slug}>
               <Prism {...snippet} />
             </div>
           {/if}
         {/snippet}
         <h2>
-          <a href="/articles/{path}">{title}</a>
+          <a href="/articles/{slug}">{title}</a>
         </h2>
         {#if description}<p>{description}</p>{/if}
-        <p>{formatDate(date)}</p>
+        <p><time datetime={date.toISOString()}>{formatDate(date)}</time></p>
       </Card>
     {/each}
   </div>
@@ -66,7 +71,11 @@
     margin: 1em 0;
   }
 
-  .snippet {
-    box-shadow: 0 0 0.25em #ccc;
+  .banner {
+    box-shadow: 0 0 0.25em #0002;
+
+    :global(pre) {
+      margin: 0;
+    }
   }
 </style>

@@ -5,7 +5,7 @@
   import { formatDate } from "$lib/articles";
 
   const { data } = $props();
-  const { title, date, draft, snippet, path, banner, component } =
+  const { title, date, draft, snippet, slug, banner, component } =
     $derived(data);
 
   let loaded = $state(false);
@@ -21,10 +21,11 @@
     <enhanced:img
       src={banner}
       alt=""
-      style="width: 100%; max-height: 8rem; object-fit: cover"
+      style="width: 100%; max-height: 10rem; object-fit: cover"
+      style:view-transition-name={slug}
     />
   {:else if snippet}
-    <div class="snippet" style:view-transition-name={path}>
+    <div class="snippet" style:view-transition-name={slug}>
       <Prism {...snippet} />
     </div>
   {/if}
@@ -35,7 +36,7 @@
     <h1 class:draft>{title}</h1>
     {#if date}
       <p class="date">
-        <time datetime={date}>{formatDate(date)}</time>
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
       </p>
     {/if}
   </header>

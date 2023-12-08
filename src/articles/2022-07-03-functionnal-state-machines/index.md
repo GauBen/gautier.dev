@@ -1,7 +1,6 @@
 ---
 title: Functional State Machines
 description: A functional approach to state machines in JavaScript.
-date: 2022-07-03
 snippet:
   lang: ts
   code: |

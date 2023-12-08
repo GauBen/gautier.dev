@@ -51,12 +51,12 @@ export const GET = async () => {
         </author>
         <id>https://gautier.dev/</id>
         ${articles.map(
-          ({ path, title, date, description }) =>
+          ({ slug, title, date, description }) =>
             /* HTML */ `<entry>
               <title>${title}</title>
-              <link href="https://gautier.dev/articles/${path}" />
-              <id>https://gautier.dev/articles/${path}</id>
-              <updated>${date}</updated>
+              <link href="https://gautier.dev/articles/${slug}" />
+              <id>https://gautier.dev/articles/${slug}</id>
+              <updated>${date.toISOString()}</updated>
               <summary>${description}</summary>
             </entry>`,
         )}

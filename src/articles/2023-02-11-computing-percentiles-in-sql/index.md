@@ -1,7 +1,6 @@
 ---
 title: Computing percentiles in SQL
 description: Composing window functions with UNNEST to compute percentiles of arrays in SQL.
-date: 2023-02-11
 snippet:
   lang: sql
   code: |

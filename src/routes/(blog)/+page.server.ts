@@ -3,15 +3,17 @@ import { articles } from "$lib/articles";
 
 export const load = () => ({
   articles: Promise.all(
-    [...articles.entries()].map(async ([path, load]) =>
-      load().then(({ metadata, banner }) => ({ ...metadata, path, banner })),
+    [...articles.entries()].map(async ([slug, { date, load }]) =>
+      load().then(({ metadata, banner }) => ({
+        ...metadata,
+        date,
+        slug,
+        banner,
+      })),
     ),
   ).then((articles) =>
     articles
       .filter(({ draft }) => dev || !draft)
-      .sort(
-        ({ date: a }, { date: z }) =>
-          new Date(z ?? 0).getTime() - new Date(a ?? 0).getTime(),
-      ),
+      .sort(({ date: a }, { date: z }) => z.getTime() - a.getTime()),
   ),
 });

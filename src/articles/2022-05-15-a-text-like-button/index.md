@@ -1,7 +1,6 @@
 ---
 title: A text-like button
 description: Working with default styles without losing accessibility.
-date: 2022-05-15
 snippet:
   lang: css
   code: |

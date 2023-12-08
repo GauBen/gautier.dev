@@ -1,7 +1,6 @@
 ---
 draft: true
 title: Tailwind
-date: 2023-12-08
 ---
 
 <script context="module">

@@ -5,7 +5,6 @@ export type Article = {
     title: string;
     draft?: boolean;
     description?: string;
-    date?: string;
     snippet?: { code: string; lang: string };
   };
   banner?: string;
@@ -14,14 +13,17 @@ export type Article = {
 
 export const articles = new Map(
   Object.entries(import.meta.glob<Article>("../articles/*/index.md")).map(
-    ([path, load]) => [
-      path.slice("../articles/".length, -"/index.md".length),
-      load,
-    ],
+    ([path, load]) => {
+      const match = path.match(
+        /^..\/articles\/(?<date>\d\d\d\d-\d\d-\d\d)-(?<slug>.+)\/index.md$/,
+      );
+      if (!match?.groups) throw new Error(`Invalid article path: ${path}`);
+      return [match.groups.slug, { date: new Date(match.groups.date), load }];
+    },
   ),
 );
 
-export const formatDate = (date: string | undefined) =>
+export const formatDate = (date: Date) =>
   Intl.DateTimeFormat("en-US", {
     dateStyle: "medium",
-  }).format(new Date(date ?? 0));
+  }).format(date);

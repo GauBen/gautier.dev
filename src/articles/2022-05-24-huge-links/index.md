@@ -1,7 +1,6 @@
 ---
 title: Huge links
 description: A guide on how to create element-level links.
-date: 2022-05-24
 snippet:
   lang: css
   code: |
@@ -23,7 +22,7 @@ snippet:
 <style>
   .card {
     max-width: 300px;
-    box-shadow: 0 .25em .5em #ccc;
+    box-shadow: 0 .25em .5em #0002;
     border-radius: .5em;
     overflow: hidden;
   }

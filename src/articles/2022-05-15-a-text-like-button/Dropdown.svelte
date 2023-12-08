@@ -52,7 +52,7 @@
     padding: 1em;
     background-color: white;
     border-radius: 0.25em;
-    box-shadow: 0 0 0.5em #ccc;
+    box-shadow: 0 0 0.5em #0002;
 
     a {
       display: block;

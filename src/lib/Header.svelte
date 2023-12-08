@@ -4,7 +4,7 @@
   const { children } = $props<{ children?: Snippet }>();
 </script>
 
-<div class:shadow={children}>
+<div class="wrapper">
   <header>
     <h1>
       <a href="/" data-sveltekit-preload-code="eager">
@@ -71,7 +71,7 @@
   }
 
   header,
-  .shadow {
-    box-shadow: 0 0 0.5em #ccc;
+  .wrapper:has(header + *) {
+    box-shadow: 0 0 0.5em #0002;
   }
 </style>
