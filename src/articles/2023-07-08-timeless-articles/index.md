@@ -29,12 +29,12 @@ We need to solve hard problems to keep being entertained. If these problems don'
 
 ## Technical Debt is a Choice
 
-[blog.izs.me/2022/11/technical-debt-is-a-choice/](https://blog.izs.me/2022/11/technical-debt-is-a-choice/)
+[blog.izs.me/2022/11/technical-debt-is-a-choice](https://blog.izs.me/2022/11/technical-debt-is-a-choice/)
 
 A new perspective on technical debt as a compromise between business and engineering.
 
 ## Principle of Most Restrictive Production
 
-[blog.izs.me/2022/04/principle-of-most-restrictive-production/](https://blog.izs.me/2022/04/principle-of-most-restrictive-production/)
+[blog.izs.me/2022/04/principle-of-most-restrictive-production](https://blog.izs.me/2022/04/principle-of-most-restrictive-production/)
 
 Keep your code readable for the next maintainer, because code is not only written for the computer, but also for humans.
