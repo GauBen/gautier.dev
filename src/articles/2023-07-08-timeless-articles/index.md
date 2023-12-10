@@ -1,5 +1,6 @@
 ---
 title: Timeless articles
+description: Personal collection of articles that I find myself referring to over and over again.
 ---
 
 <script>
