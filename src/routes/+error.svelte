@@ -56,7 +56,7 @@
 </script>
 
 <svelte:head>
-  <title>{status} {error?.message}</title>
+  <title>{status} {error?.message} – gautier.dev</title>
 </svelte:head>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->

@@ -24,7 +24,7 @@
     articles about it. You'll find them below.
   </p>
   <h2>Latest articles</h2>
-  <div class="grid">
+  <div class="list">
     {#each data.articles as { slug, banner, title, description, date, snippet }}
       <Card>
         {#snippet header()}
@@ -64,7 +64,7 @@
     margin: 2rem 0 1rem;
   }
 
-  .grid {
+  .list {
     display: flex;
     flex-direction: column;
     gap: 1em;
