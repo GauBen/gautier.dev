@@ -1,20 +1,19 @@
 <script lang="ts">
-  import { derived, readable } from "svelte/store";
-
   type State = Promise<Transition>;
   type Transition = () => State;
 
-  export let words: string[];
+  const {words}=$props<{words: string[]}>();
 
   const sleep = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
 
-  const word = readable("", (set) => {
+  let word = $state("");
+  $effect(() => {
     const pick = (index = -1): State => type((index + 1) % words.length, 0);
 
     const type = async (index: number, length: number): State => {
       await sleep(150);
-      set(words[index].slice(0, length + 1));
+      word = (words[index].slice(0, length + 1));
 
       if (length + 1 === words[index].length) return () => pause(index);
       else return () => type(index, length + 1);
@@ -27,7 +26,7 @@
 
     const erase = async (index: number, length: number): State => {
       await sleep(150);
-      set(words[index].slice(0, length));
+      word = (words[index].slice(0, length));
 
       if (length === 0) return () => pick(index);
       else return () => erase(index, length - 1);
@@ -43,25 +42,23 @@
     run();
 
     return () => {
-      running = false;
+      running =  false;
     };
   });
 
-  const blink = readable(false, (set) => {
+  let blink = $state(false)
+  $effect(() => {
     let on = false;
     const interval = setInterval(() => {
       on = !on;
-      set(on);
+      blink = (on);
     }, 450);
     return () => {
       clearInterval(interval);
     };
   });
 
-  const cursor = derived([word, blink], ([$word, $blink]) => {
-    if (!$word || $blink) return "|";
-    else return "";
-  });
+  const cursor = $derived(!word || blink ? "|" : '');
 </script>
 
-{$word}{$cursor}
+{word}{cursor}
