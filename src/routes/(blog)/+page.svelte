@@ -20,8 +20,7 @@
     in 2022 with a dual degree in computer science and cybersecurity.
   </p>
   <p>
-    I sometimes write code that I find <em>aesthetically pleasing</em> so I write
-    articles about it. You'll find them below.
+    I sometimes write articles, you'll find them below.
   </p>
   <h2>Latest articles</h2>
   <div class="list">
