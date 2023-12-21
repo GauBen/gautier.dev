@@ -32,6 +32,7 @@
     margin: 1rem auto;
     font-size: 3em;
     text-align: center;
+    text-wrap: balance;
   }
 
   a {

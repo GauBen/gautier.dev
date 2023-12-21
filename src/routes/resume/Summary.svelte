@@ -26,6 +26,7 @@
     margin: 0;
     color: #0d3c77;
     text-align: center;
+    text-wrap: balance;
 
     @supports (writing-mode: sideways-lr) {
       padding-right: 0.5rem;

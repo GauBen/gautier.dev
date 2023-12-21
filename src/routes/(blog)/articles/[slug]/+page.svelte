@@ -81,6 +81,7 @@
     h1,
     .date {
       text-align: center;
+      text-wrap: balance;
     }
 
     h1 {
@@ -94,7 +95,7 @@
       margin-top: 0;
       font-size: 1.5em;
       font-weight: lighter;
-      opacity: 0.5;
+      opacity: 0.75;
     }
   }
 
@@ -109,6 +110,7 @@
 
   footer {
     text-align: center;
+    text-wrap: balance;
   }
 
   .draft {

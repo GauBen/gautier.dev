@@ -36,6 +36,7 @@
     margin: 0 auto;
     overflow: hidden;
     text-align: center;
+    text-wrap: balance;
   }
 
   .icons {

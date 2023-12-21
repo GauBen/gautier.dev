@@ -26,7 +26,7 @@
     &:not([data-processed]) {
       padding: 0.5em;
       white-space: pre;
-      opacity: 0.5;
+      opacity: 0.75;
 
       &::before {
         font-weight: bold;

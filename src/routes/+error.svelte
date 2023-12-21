@@ -105,5 +105,6 @@
   p {
     margin: 0;
     text-align: center;
+    text-wrap: balance;
   }
 </style>

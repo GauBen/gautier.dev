@@ -17,7 +17,7 @@
     font-size: 2em;
     font-weight: lighter;
     border-right: 2px solid currentcolor;
-    opacity: 0.5;
+    opacity: 0.75;
   }
 
   .content {

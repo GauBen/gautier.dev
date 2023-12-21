@@ -22,6 +22,7 @@
 
     th {
       text-align: center;
+      text-wrap: balance;
     }
 
     td,
@@ -43,5 +44,42 @@
     > a {
       margin-right: 0.5rem;
     }
+  }
+
+  pre {
+    border-radius: 2px;
+  }
+
+  figure {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+
+    img {
+      border-radius: 2px;
+    }
+
+    figcaption {
+      font-size: 0.8em;
+      text-align: center;
+      text-wrap: balance;
+      opacity: 0.75;
+    }
+  }
+
+  blockquote {
+    padding-inline-start: 2em;
+    overflow: hidden;
+    font-style: italic;
+    border-left: 4px solid currentcolor;
+    opacity: 0.75;
+  }
+
+  kbd {
+    padding: 0.125em 0.25em;
+    margin-inline: 0.125em;
+    border-radius: 2px;
+    box-shadow: 0 0 0.25em #0002;
   }
 }
