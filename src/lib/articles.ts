@@ -13,12 +13,23 @@ export type Article = {
 
 export const articles = new Map(
   Object.entries(import.meta.glob<Article>("../articles/*/index.md")).map(
-    ([path, load]) => {
-      const match = path.match(
+    ([file, load]) => {
+      const match = file.match(
         /^..\/articles\/(?<date>\d\d\d\d-\d\d-\d\d)-(?<slug>.+)\/index.md$/,
       );
-      if (!match?.groups) throw new Error(`Invalid article path: ${path}`);
-      return [match.groups.slug, { date: new Date(match.groups.date), load }];
+      if (!match?.groups) throw new Error(`Invalid article file name: ${file}`);
+      const { date, slug } = match.groups;
+      return [
+        slug,
+        {
+          date: new Date(date),
+          load,
+          raw: () =>
+            import(`../articles/${date}-${slug}/index.md?raw`).then(
+              (m) => m.default,
+            ),
+        },
+      ];
     },
   ),
 );

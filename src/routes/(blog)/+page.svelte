@@ -1,8 +1,12 @@
 <script lang="ts">
-  import { formatDate } from "$lib/articles.js";
   import Card from "$lib/Card.svelte";
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
+  import { formatDate } from "$lib/articles.js";
+  import SearchBar from "./SearchBar.svelte";
+
+  const escape = (s: string) =>
+    s.replaceAll("&", "&amp;").replaceAll("<", "&lt;");
 
   const { data } = $props();
 </script>
@@ -19,35 +23,44 @@
     <a href="https://en.wikipedia.org/wiki/ENSEEIHT">ENSEEIHT</a>
     in 2022 with a dual degree in computer science and cybersecurity.
   </p>
-  <p>
-    I sometimes write articles, you'll find them below.
-  </p>
-  <h2>Latest articles</h2>
-  <div class="list">
-    {#each data.articles as { slug, banner, title, description, date, snippet }}
-      <Card>
-        {#snippet header()}
-          {#if banner}
-            <enhanced:img
-              src={banner}
-              alt=""
-              class="banner"
-              style:view-transition-name={slug}
-            />
-          {:else if snippet}
-            <div class="banner" style:view-transition-name={slug}>
-              <Prism {...snippet} />
-            </div>
-          {/if}
-        {/snippet}
-        <h2>
-          <a href="/articles/{slug}">{title}</a>
-        </h2>
-        {#if description}<p>{description}</p>{/if}
-        <p><time datetime={date.toISOString()}>{formatDate(date)}</time></p>
-      </Card>
-    {/each}
-  </div>
+  <p>I sometimes write articles, you'll find them below.</p>
+
+  <SearchBar {...data} />
+
+  {#each data.articles as { slug, banner, title, description, date, snippet }}
+    <Card>
+      {#snippet header()}
+        {#if banner}
+          <enhanced:img
+            src={banner}
+            alt=""
+            class="banner"
+            style:view-transition-name={slug}
+          />
+        {:else if snippet}
+          <div class="banner" style:view-transition-name={slug}>
+            <Prism {...snippet} />
+          </div>
+        {/if}
+      {/snippet}
+      <h2>
+        <a href="/articles/{slug}">{title}</a>
+      </h2>
+      {#if Array.isArray(description)}
+        {#each description as line}
+          {@const rendered = escape(line)
+            .replaceAll(/\[hl\](.+?)\[\/hl\]/g, "<mark>$1</mark>")
+            .replaceAll("\n", "<br />")}
+          <p style="white-space: pre-wrap">{@html rendered}</p>
+        {/each}
+      {:else if description}
+        <p>{description}</p>
+      {/if}
+      <p><time datetime={date.toISOString()}>{formatDate(date)}</time></p>
+    </Card>
+  {:else}
+    <p>No articles match <strong>{data.q}</strong></p>
+  {/each}
 </main>
 
 <style lang="scss">
@@ -58,16 +71,8 @@
     overflow: hidden;
   }
 
-  h1,
-  h2 {
+  h1 {
     margin: 2rem 0 1rem;
-  }
-
-  .list {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    margin: 1em 0;
   }
 
   .banner {

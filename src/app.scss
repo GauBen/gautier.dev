@@ -26,7 +26,8 @@
   vertical-align: bottom;
 }
 
-::selection {
+::selection,
+mark {
   background-color: #ff48;
 }
 
@@ -91,7 +92,5 @@ table {
 }
 
 .icon {
-  width: 1.25em;
-  height: 1.25em;
   vertical-align: text-bottom;
 }

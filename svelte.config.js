@@ -39,6 +39,7 @@ export default {
     adapter: adapter(),
     alias: {
       $assets: "./src/assets",
+      $search: "./src/search",
     },
   },
 

@@ -65,7 +65,7 @@
 
       &:hover,
       &:active,
-      &:focus {
+      &:focus-visible {
         color: var(--bg, #fff);
         background-position: left;
         background-size: 100% 100%;
