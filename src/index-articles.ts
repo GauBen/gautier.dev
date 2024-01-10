@@ -7,15 +7,11 @@ import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import { unified } from "unified";
 
-/** Markdown processor. Use `processor.parse` to convert markdown to AST. */
+/** Markdown processor. */
 const processor = unified()
   .use(remarkParse)
   .use(remarkGfm)
   .use(remarkFrontmatter);
-
-/** Lowercases and removes non alphanumeric characters from input. */
-const normalize = (str: string) =>
-  str.toLowerCase().replaceAll(/[^a-z0-9']/gi, " ");
 
 /**
  * A markdown block can be transformed into a list of tokens:
@@ -45,14 +41,14 @@ type Token = {
   weight: number;
 };
 
-/** Create a token out of a format-less string. */
+/** Normalizes and create a token out of a string. */
 const tokenize = (original: string, weight: number): Token => ({
   original,
-  normalized: normalize(original),
+  normalized: original.toLowerCase().replaceAll(/[^a-z0-9']/gi, " "),
   weight,
 });
 
-/** Tokenize a markdown AST element, recursively. @see {Token} */
+/** Tokenizes a markdown AST element, recursively. @see {Token} */
 const tokenizeAst = (child: RootContent, weight = 1): Token[] => {
   if (
     child.type === "text" ||

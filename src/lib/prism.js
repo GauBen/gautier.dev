@@ -2,6 +2,8 @@ import Prism from "prismjs";
 
 import "prism-svelte";
 import "prismjs/components/prism-diff.js";
+import "prismjs/components/prism-json.js";
+import "prismjs/components/prism-markdown.js";
 import "prismjs/components/prism-scss.js";
 import "prismjs/components/prism-sql.js";
 import "prismjs/components/prism-typescript.js";
