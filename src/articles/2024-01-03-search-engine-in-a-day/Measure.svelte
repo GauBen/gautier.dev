@@ -1,32 +1,25 @@
 <script lang="ts">
-  // Hacky stuff to get the URL of the search index
-  const measure = async () => {
-    const currentModule = await fetch(import.meta.url).then((r) => r.text());
-    const searchIndexModule = currentModule.match(
-      /import\("(.+?search\..+?)"\)/,
-    )?.[1];
+  const measure = async () =>
+    new Promise<Record<string, number>>((resolve) => {
+      const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries())
+          if (entry.name.includes("/search.")) resolve(entry as never);
+      });
+      observer.observe({ entryTypes: ["resource"] });
+      import("../../routes/(blog)/search.js").then(() => observer.disconnect());
+    });
 
-    if (!searchIndexModule) {
-      await import("../../routes/(blog)/search.js");
-      throw new Error("Could not find the search index module");
-    }
-
-    const start = performance.now();
-    const response = await fetch(new URL(searchIndexModule, import.meta.url));
-
-    return {
-      time: performance.now() - start,
-      size: Number(response.headers.get("content-length")),
-    };
-  };
+  const format = (n: number) => Number(n.toPrecision(2));
 </script>
 
 <p>
   {#await measure()}
     Loading search index...
-  {:then { time, size }}
-    It took <strong>{Number(time.toPrecision(2))}ms</strong> to load the
-    <strong>{Number((size / 1024).toPrecision(2))}kB</strong> search index.
+  {:then { duration, decodedBodySize, encodedBodySize }}
+    It took <strong>{format(duration)}ms</strong> to load the
+    <strong>{format(decodedBodySize / 1024)}kB</strong> search index (<strong
+      >{format(encodedBodySize / 1024)}kB</strong
+    > transferred).
   {:catch error}
     {error.message}
   {/await}
