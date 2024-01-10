@@ -19,6 +19,7 @@
 <style lang="scss">
   .card {
     position: relative;
+    margin-block: 1rem;
     overflow: hidden;
     border-radius: 0.5em;
     box-shadow: 0 0 0.5em #0002;

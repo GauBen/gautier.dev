@@ -5,7 +5,8 @@
   import { formatDate } from "$lib/articles";
 
   const { data } = $props();
-  const { title, date, draft, snippet, slug, banner, component } = $derived(data);
+  const { title, date, draft, snippet, slug, banner, component } =
+    $derived(data);
 
   let loaded = $state(false);
   $effect(() => {
