@@ -43,9 +43,10 @@ export const GET = async () => {
   return new Response(
     rodent/* HTML */ `<?xml version="1.0" encoding="utf-8"?>
       <feed xmlns="http://www.w3.org/2005/Atom">
-        <title>gautier.dev</title>
+        <title>gautier.dev articles</title>
         <link href="https://gautier.dev/" />
-        <updated>${articles[0].date}</updated>
+        <link rel="self" href="https://gautier.dev/feed" />
+        <updated>${articles[0].date.toISOString()}</updated>
         <author>
           <name>Gautier Ben Aïm</name>
         </author>
