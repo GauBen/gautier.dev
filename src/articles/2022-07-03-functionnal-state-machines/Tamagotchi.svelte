@@ -1,4 +1,6 @@
 <script lang="ts">
+  // https://elthen.itch.io/2d-pixel-art-cat-sprites
+
   const sleep = async (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
 
