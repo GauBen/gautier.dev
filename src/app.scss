@@ -13,11 +13,15 @@
   --prism-string: #4e7e06;
   --prism-comment: #355454;
   --main-width: 50rem;
+  --color: #000;
+  --bg: #fff;
   --link: #3a3a99;
 
   scrollbar-gutter: stable;
   scrollbar-width: thin;
   line-height: 1.5;
+  color: var(--color);
+  background-color: var(--bg);
 }
 
 :where(iframe, img, input, video, select, textarea) {
