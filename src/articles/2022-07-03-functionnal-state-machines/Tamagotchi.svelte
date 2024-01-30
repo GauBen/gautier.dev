@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Action } from "svelte/action";
   import squirrelSrc from "./squirrel.png";
   import zzzSrc from "./zzz.png";
 
@@ -20,30 +21,22 @@
     happy: { next: { sleep: "sleeping", run: "running" } },
     hungry: { next: { eat: "eating" } },
     sleeping: {
-      enter: () => {
-        void sleep(5000).then(click("wakeUp"));
-      },
+      enter: () => sleep(5000).then(click("wakeUp")),
       next: { wakeUp: "hungry" },
     },
     running: {
-      enter: () => {
-        void sleep(3500).then(click("done"));
-      },
+      enter: () => sleep(3500).then(click("done")),
       next: { done: "hungry" },
     },
     eating: {
-      enter: () => {
-        void sleep(2000).then(click("done"));
-      },
+      enter: () => sleep(2000).then(click("done")),
       next: { done: "happy" },
     },
   } as const;
-  let automaton: Automaton<keyof typeof states> = $state({
+  let automaton = $state<Automaton<keyof typeof states>>({
     state: "happy",
     states,
   });
-
-  let logs = $state<string[]>([]);
 
   const next = <T extends string>(
     { state, states }: Automaton<T>,
@@ -51,101 +44,86 @@
   ) => {
     const nextState = states[state].next[transition];
     if (!nextState) throw new Error(`Can't ${transition} when ${state}`);
-    const { enter } = states[nextState];
-    enter?.();
+    states[nextState].enter?.();
     return { state: nextState, states };
   };
 
+  let logs = $state<string[]>([]);
   const click = (transition: string) => () => {
     const { state } = automaton;
     try {
       automaton = next(automaton, transition);
-
-      logs = [...logs, `${state} → ${automaton.state}`];
+      logs.push(`${state} → ${automaton.state}`);
     } catch (error) {
-      logs = [...logs, (error as Error).message];
+      logs.push((error as Error).message);
     }
   };
-
-  let canvas = $state<HTMLCanvasElement>();
-  const ctx = $derived(canvas?.getContext("2d"));
-
-  let squirrel = $state<HTMLImageElement>();
-  $effect(() => {
-    const img = new Image();
-    img.src = squirrelSrc;
-    img.onload = () => {
-      squirrel = img;
-    };
-  });
-  let zzz = $state<HTMLImageElement>();
-  $effect(() => {
-    const img = new Image();
-    img.src = zzzSrc;
-    img.onload = () => {
-      zzz = img;
-    };
-  });
-
-  let start = $state(performance.now());
-  $effect(() => {
-    automaton;
-    start = performance.now();
-  });
 
   const animations = {
     happy: { row: 0, frames: [0, 1, 2, 3, 4, 5], mspf: 250 },
     hungry: { row: 1, frames: [0, 1, 2, 3, 4, 5], mspf: 250 },
     sleeping: {
       row: 3,
-      frames: [0, 1, 2, ...Array.from({ length: 36 }, () => 3), 0],
+      frames: [0, ...Array.from({ length: 38 }, () => 3), 0],
       mspf: 125,
     },
     running: { row: 2, frames: [0, 1, 2, 3, 4, 5, 6, 7], mspf: 125 },
     eating: { row: 4, frames: [0, 1], mspf: 125 },
   };
-  const dest = [32, 32, 32, 0, 64, 64] as const;
+  const dest = [32, 32, -32, -32, 64, 64] as const;
 
+  let squirrel = $state<HTMLImageElement>();
+  $effect(() => {
+    const img = new Image();
+    img.src = squirrelSrc;
+    img.onload = () => (squirrel = img);
+  });
+
+  let zzz = $state<HTMLImageElement>();
+  $effect(() => {
+    const img = new Image();
+    img.src = zzzSrc;
+    img.onload = () => (zzz = img);
+  });
+
+  let canvas = $state<HTMLCanvasElement>();
+  const ctx = $derived(canvas?.getContext("2d"));
   $effect(() => {
     if (!canvas || !ctx) return;
     const { width, height } = canvas.getBoundingClientRect();
-    canvas.width = width;
-    canvas.height = height;
+    const dpr = window.devicePixelRatio;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, canvas.width / 2, canvas.height / 2);
     ctx.imageSmoothingEnabled = false;
 
+    const start = performance.now();
+    let animationFrame: number;
     const play = () => {
       if (!ctx || !squirrel || !zzz) return;
-      ctx.clearRect(0, 0, width, height);
-      const frame = Math.floor(
-        (performance.now() - start) / animations[automaton.state].mspf,
-      );
-      const sprite =
-        animations[automaton.state].frames[
-          frame % animations[automaton.state].frames.length
-        ];
-      ctx.drawImage(
-        squirrel,
-        sprite * 32,
-        animations[automaton.state].row * 32,
-        ...dest,
-      );
-      if (automaton.state === "sleeping" && sprite === 3) {
-        ctx.drawImage(
-          zzz,
-          (Math.floor((performance.now() - start) / 250) % 4) * 32,
-          0,
-          ...dest,
-        );
-      }
-      request = requestAnimationFrame(play);
+      ctx.clearRect(-width / 2, -height / 2, width, height);
+
+      const t = performance.now() - start;
+      const { frames, mspf, row } = animations[automaton.state];
+      const sprite = frames[Math.floor(t / mspf) % frames.length];
+      ctx.drawImage(squirrel, sprite * 32, row * 32, ...dest);
+
+      if (automaton.state === "sleeping" && sprite === 3)
+        ctx.drawImage(zzz, (Math.floor(t / 250) % 4) * 32, 0, ...dest);
+
+      animationFrame = requestAnimationFrame(play);
     };
-    let request = requestAnimationFrame(play);
     play();
-    return () => cancelAnimationFrame(request);
+    return () => cancelAnimationFrame(animationFrame);
   });
+
+  const scrollToBottom: Action<HTMLElement, unknown> = (node) => {
+    node.scrollTop = node.scrollHeight;
+    return { update: () => (node.scrollTop = node.scrollHeight) };
+  };
 </script>
 
-<div class="wrapper">
+<section>
   <div class="device">
     <canvas bind:this={canvas}></canvas>
     <button onclick={click("eat")} title="Eat">🌰</button>
@@ -154,30 +132,37 @@
   </div>
   <div class="logs">
     <h3>Logs</h3>
-    {#each logs.slice(-3) as log}
-      <div>{log}</div>
-    {/each}
+    <pre use:scrollToBottom={logs.length}>{logs.slice(-10).join("\n")}</pre>
   </div>
+</section>
 
-  <footer>
-    <a href="https://elthen.itch.io/2d-pixel-art-squirrel-sprites">
-      Squirrel Art by Elthen
-    </a>
-  </footer>
-</div>
+<footer>
+  <a href="https://elthen.itch.io/2d-pixel-art-squirrel-sprites">
+    Squirrel Art by Elthen
+  </a>
+</footer>
 
 <style lang="scss">
-  h3 {
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h3,
+  pre {
     margin: 0;
   }
 
   canvas {
     grid-area: screen;
     width: 100%;
-    height: 5rem;
+    height: 6rem;
     background-color: #fff;
     border-radius: 1rem;
-    box-shadow: 0 0.125rem 0.25rem #0004;
+    box-shadow: 0 0.125rem 0.25rem #0004 inset;
   }
 
   button {
@@ -198,19 +183,8 @@
   footer {
     --link: #888;
 
-    align-self: flex-end;
     font-size: 0.8em;
-  }
-
-  .logs {
-    flex: 1;
-    padding: 1rem 0;
-  }
-
-  .wrapper {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
+    text-align: center;
   }
 
   .device {
@@ -221,8 +195,18 @@
     gap: 1rem;
     width: 10rem;
     padding: 1rem;
-    background: linear-gradient(180deg, #f0bd30 60%, #ca1c1c);
+    background: linear-gradient(to bottom, #f0bd30 60%, #ca1c1c);
     border-radius: 2rem;
     box-shadow: 0 0.125rem 0.25rem #0004;
+  }
+
+  .logs {
+    flex: 1;
+    flex-basis: 20rem;
+    max-width: 100%;
+
+    pre {
+      height: 8rem;
+    }
   }
 </style>
