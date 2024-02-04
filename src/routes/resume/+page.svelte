@@ -204,7 +204,7 @@
     <h2><User /> Personal Journey</h2>
     <div class="xp">
       <h3>
-        <a href="https://www.linkedin.com/company/toulouse-hacking-convention/">
+        <a href="https://thcon.party/">
           Toulouse Hacking Convention Organizer
         </a>
       </h3>
@@ -273,8 +273,10 @@
           provide gifts for the contestants.
         </li>
         <li>
-          Developed an exclusive game for the event, tailored for ENSEEIHT
-          students.
+          <a href="https://github.com/GauBen/perfect-aim">
+            Developed an exclusive game for the event, tailored for ENSEEIHT
+            students.
+          </a>
         </li>
         <li>
           <a href="https://www.youtube.com/watch?v=ntsPfQbeVCw">
