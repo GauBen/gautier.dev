@@ -8,7 +8,7 @@ More than just code, though, I believe in the power of collaboration. As a Lead 
 
 My skillset is as diverse as my interests. I'm a generalist with a specialist's touch, adept at tackling a wide range of challenges while possessing deep expertise in specific areas. This flexibility allows me to seamlessly adapt to your needs, ensuring every project receives the perfect blend of breadth and depth.
 
-So, if you're looking for a web developer who's not just technically skilled but also **passionate, collaborative, and pragmatic,** someone who believes in building together and building better, let's connect! I'm eager to share my experience and turn your vision into a reality.
+So, if you're looking for a lead developer who's not just technically skilled but also **passionate, collaborative, and pragmatic,** someone who believes in building together and building better, let's connect! I'm eager to share my experience and turn your vision into a reality.
 
 <footer style="text-align: right">
   — Gautier Ben Aïm
