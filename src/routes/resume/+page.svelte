@@ -16,7 +16,11 @@
     <div class="xp">
       <h3>
         Full-Stack Lead Engineer & Cybersecurity Researcher
-        <mark>Escape (YC W23)</mark>
+        <mark>
+          <a href="https://www.linkedin.com/company/escapetech/">
+            Escape (YC W23)
+          </a>
+        </mark>
       </h3>
       <Timeline>
         <p><strong>Lead Engineer</strong></p>
@@ -29,14 +33,20 @@
           <li>
             Head
             <strong>several open source side-projects,</strong>
-            including the GraphQL Security Academy, a learning platform for GraphQL
-            security, and svelte-emails, a modern way to build complex transactional
-            emails.
+            including the
+            <a href="https://escape.tech/academy/">API Security Academy,</a> a
+            learning platform for GraphQL security, and
+            <a href="https://github.com/GauBen/svelte-emails">svelte-emails,</a>
+            a modern way to build complex transactional emails.
           </li>
           <li>
-            Gave a conference talk at <strong>BSides Oslo</strong>
-            on the <strong>State of GraphQL Security 2023,</strong> highlighting
-            the company’s year of research.
+            <a
+              href="https://bsidesoslo.no/talks/StateofGraphQLSecurity2023.html"
+            >
+              Gave a conference talk at <strong>BSides Oslo</strong>
+              on the <strong>State of GraphQL Security 2023,</strong> highlighting
+              the company’s year of research.
+            </a>
           </li>
           <li>
             <strong>Pioneer the adoption of new technologies</strong> such as SvelteKit,
@@ -52,8 +62,10 @@
             shipping several sophisticated products that exceeded customer expectations.
           </li>
           <li>
-            <strong>Published technical articles</strong> on the corporate blog,
-            ensuring high-quality, informative, and engaging content.
+            <a href="https://escape.tech/blog/author/gautier/">
+              <strong>Published technical articles</strong> on the corporate blog,
+              ensuring high-quality, informative, and engaging content.
+            </a>
           </li>
           <li>
             <strong>
@@ -67,8 +79,12 @@
         <p><strong>Full-Stack Developer & Research Intern</strong></p>
         <ul>
           <li>
-            <strong>Discovered GraphQL bombs,</strong> a novel attack vector against
-            GraphQL APIs.
+            <a
+              href="https://escape.tech/blog/forging-graphql-bombs-the-2022-version-of-zip-bombs/"
+            >
+              <strong>Discovered GraphQL bombs,</strong> a novel attack vector against
+              GraphQL APIs.
+            </a>
           </li>
           <li>
             Initiated the <strong>creation of a design system</strong> to create
@@ -91,19 +107,27 @@
     <div class="xp">
       <h3>
         Full-Stack Developer & Cryptography Advisor Intern
-        <mark>Freemindtronic</mark>
+        <mark>
+          <a href="https://www.linkedin.com/company/freemindtronic-sl/">
+            Freemindtronic
+          </a>
+        </mark>
       </h3>
       <ul>
         <li>
-          Developed a browser extension that provides
-          <strong>secure end-to-end email encryption</strong> leveraging NFC cards
-          as a cold storage device for private keys.
+          <a href="https://github.com/Freemindtronic/evicypher-webmail">
+            Developed a browser extension that provides
+            <strong>secure end-to-end email encryption</strong> leveraging NFC cards
+            as a cold storage device for private keys.
+          </a>
         </li>
         <li>
-          Designed and implemented an OpenPGP HTTP keyserver that meets the
-          <strong>
-            specific security and compliance needs of government agencies.
-          </strong>
+          <a href="https://github.com/Freemindtronic/keyserver">
+            Designed and implemented an OpenPGP HTTP keyserver that meets the
+            <strong>
+              specific security and compliance needs of government agencies.
+            </strong>
+          </a>
         </li>
         <li>
           Architected a backup system based on Shamir’s Secret Sharing to
@@ -127,7 +151,11 @@
     <div class="xp">
       <h3>
         Web Developer Student Consultant
-        <mark>N7 Consulting</mark>
+        <mark>
+          <a href="https://www.linkedin.com/company/n7-consulting/">
+            N7 Consulting
+          </a>
+        </mark>
       </h3>
       <ul>
         <li>
@@ -148,7 +176,13 @@
     <div class="xp">
       <h3>
         Java Developer Intern
-        <mark>Informatique Banque Populaire</mark>
+        <mark>
+          <a
+            href="https://www.linkedin.com/company/informatique-banque-populaire/"
+          >
+            Informatique Banque Populaire
+          </a>
+        </mark>
       </h3>
       <ul>
         <li>
@@ -169,17 +203,27 @@
   <article>
     <h2><User /> Personal Journey</h2>
     <div class="xp">
-      <h3>Toulouse Hacking Convention Organizer</h3>
+      <h3>
+        <a href="https://www.linkedin.com/company/toulouse-hacking-convention/">
+          Toulouse Hacking Convention Organizer
+        </a>
+      </h3>
       <ul>
         <li>
-          <strong>Directed the production</strong> of a live audio and video broadcast.
+          <a href="https://www.youtube.com/watch?v=kgNqzx8aR0I">
+            <strong>Directed the production</strong> of a live audio and video broadcast.
+          </a>
         </li>
         <li>
-          Designed and developed multiple challenges for the CTF competition.
+          <a href="https://github.com/GauBen/bastion">
+            Designed and developed multiple challenges for the CTF competition.
+          </a>
         </li>
         <li>
-          Created a professional and engaging visual experience for the official
-          website and the YouTube live stream.
+          <a href="https://21.thcon.fr/">
+            Created a professional and engaging visual experience for the
+            official website and the YouTube live stream.
+          </a>
         </li>
       </ul>
       <div class="stuff">
@@ -192,7 +236,11 @@
       </div>
     </div>
     <div class="xp">
-      <h3>President of the ENSEEIHT IT Association</h3>
+      <h3>
+        <a href="https://net7.dev/">
+          President of net7, the ENSEEIHT IT Association
+        </a>
+      </h3>
       <ul>
         <li>
           <strong>Administrated a non-profit association,</strong> taking care of
@@ -204,7 +252,7 @@
         </li>
         <li>Developed and maintained student services.</li>
         <li>
-          Created the 2020 ENSEEIHT students brochure to promote the school to
+          Created the 2020 students brochure to promote the school to
           prospective students.
         </li>
       </ul>
@@ -228,7 +276,11 @@
           Developed an exclusive game for the event, tailored for ENSEEIHT
           students.
         </li>
-        <li>Led a YouTube live stream and tournament with 60 teams.</li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=ntsPfQbeVCw">
+            Led a YouTube live stream and tournament with 60 teams.
+          </a>
+        </li>
       </ul>
       <div class="stuff">
         <span class="tags">
@@ -314,18 +366,28 @@
   <article>
     <h2><GraduationCap /> Education</h2>
     <div class="xp">
-      <h3>Master of Cybersecurity and Governance (TLS-SEC)</h3>
+      <h3>
+        <a href="https://tls-sec.github.io/">
+          Master of Cybersecurity and Governance (TLS-SEC)
+        </a>
+      </h3>
       <p>
         2022, joint training with ENSEEIHT, INSA Toulouse and ENAC, Toulouse,
         France
       </p>
     </div>
     <div class="xp">
-      <h3>Master of Software and Systems Engineering</h3>
+      <h3>
+        <a
+          href="https://www.enseeiht.fr/en/training/full-time-engineering-program/sn.html"
+        >
+          Master of Software and Systems Engineering
+        </a>
+      </h3>
       <p>2019–2022, ENSEEIHT, Toulouse, France</p>
     </div>
     <div class="xp">
-      <h3>Preparatory classes MPSI and MP*</h3>
+      <h3>Preparatory classes MPSI and MP* (Maths and Physics, Elite level)</h3>
       <p>2017–2019, Lycée Saint-Louis, Paris, France</p>
     </div>
   </article>
