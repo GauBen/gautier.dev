@@ -1,12 +1,12 @@
 <section>
   <h2>Summary</h2>
   <div>
-    <h3>Full-Stack Engineer & Cybersecurity Researcher</h3>
-    I am a software engineer with 3+ years of experience in the IT industry. I am
-    passionate about security and have a proven ability to architect, develop, and
-    maintain secure and scalable software applications. I have a proven track record
-    of successfully leading migrations that have resulted in increased productivity
-    and satisfaction for my teams.
+    <h3>Full-Stack Lead Engineer</h3>
+    I am a lead engineer with 3+ years of experience in the IT industry. I am passionate
+    about security and have a proven ability to architect, develop, and maintain
+    secure and scalable software applications. I have a proven track record of successfully
+    leading migrations that have resulted in increased productivity and satisfaction
+    for my teams.
     <strong>
       I am looking for a challenging role in a fast-paced environment where I
       can use both my technical and leadership skills to make a significant

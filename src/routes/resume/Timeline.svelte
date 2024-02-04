@@ -1,5 +1,11 @@
+<script lang="ts">
+  import type { Snippet } from "svelte";
+
+  const { children } = $props<{ children: Snippet }>();
+</script>
+
 <div>
-  <slot />
+  {@render children()}
 </div>
 
 <style lang="scss">

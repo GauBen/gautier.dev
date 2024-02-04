@@ -15,20 +15,20 @@
     <h2><Suitcase /> Work Experience</h2>
     <div class="xp">
       <h3>
-        Full-Stack Engineer & Cybersecurity Researcher
+        Full-Stack Lead Engineer & Cybersecurity Researcher
         <mark>Escape (YC W23)</mark>
       </h3>
       <Timeline>
         <p><strong>Lead Engineer</strong></p>
         <ul>
           <li>
-            <strong>Manage a team of 2 developers,</strong> ensuring communication,
+            <strong>Manage and train a team of 3 developers,</strong> ensuring communication,
             code quality and deadlines. Foster innovation, independence and healthy
             team dynamics.
           </li>
           <li>
             Head
-            <strong>several corporate side-projects,</strong>
+            <strong>several open source side-projects,</strong>
             including the GraphQL Security Academy, a learning platform for GraphQL
             security, and svelte-emails, a modern way to build complex transactional
             emails.
@@ -39,8 +39,8 @@
             the company’s year of research.
           </li>
           <li>
-            <strong>Pioneer the adoption of new technologies</strong> such as Temporal
-            and Turbo to enhance developer productivity and product stability.
+            <strong>Pioneer the adoption of new technologies</strong> such as SvelteKit,
+            Temporal and Turbo to enhance developer productivity and product stability.
           </li>
         </ul>
 
@@ -49,20 +49,18 @@
           <li>
             Demonstrated resilience and perseverance in the
             <strong>Y Combinator accelerator program,</strong>
-            shipping several sophisticated products that exceeded customer expectations,
-            even when faced with challenges.
+            shipping several sophisticated products that exceeded customer expectations.
           </li>
           <li>
-            <strong>Published technical articles</strong> on the corporate blog to
-            showcase the company’s expertise and insights, while ensuring high-quality,
-            informative, and engaging content.
+            <strong>Published technical articles</strong> on the corporate blog,
+            ensuring high-quality, informative, and engaging content.
           </li>
           <li>
             <strong>
               Successfully managed the migration of the GraphQL API
             </strong>
-            from NestJS to Pothos and the frontend from Nuxt to SvelteKit, ensuring
-            a smooth transition and improved performance and scalability.
+            from NestJS to Pothos and the frontend from Nuxt to SvelteKit, for improved
+            performance and scalability.
           </li>
         </ul>
 
@@ -70,13 +68,11 @@
         <ul>
           <li>
             <strong>Discovered GraphQL bombs,</strong> a novel attack vector against
-            GraphQL APIs with file uploads enabled, which could be exploited to disrupt
-            or crash servers.
+            GraphQL APIs.
           </li>
           <li>
             Initiated the <strong>creation of a design system</strong> to create
-            a single source of truth for all design elements, helping to improve
-            collaboration and communication between designers and developers.
+            a single source of truth for all design elements.
           </li>
         </ul>
       </Timeline>
@@ -110,8 +106,7 @@
           </strong>
         </li>
         <li>
-          Architected a key splitting and backup system based on Shamir’s Secret
-          Sharing to
+          Architected a backup system based on Shamir’s Secret Sharing to
           <strong>achieve information-theoretic security.</strong>
         </li>
         <li>
@@ -183,8 +178,8 @@
           Designed and developed multiple challenges for the CTF competition.
         </li>
         <li>
-          Created a professional and engaging visual experience for a YouTube
-          live stream.
+          Created a professional and engaging visual experience for the official
+          website and the YouTube live stream.
         </li>
       </ul>
       <div class="stuff">
@@ -268,8 +263,8 @@
       <div class="xp">
         <strong>Frontend</strong>
         <span class="tags">
-          <span>Vue</span>
           <span>Svelte</span>
+          <span>Vue</span>
           <span>CSS</span>
           <span>Accessibility</span>
         </span>
@@ -312,7 +307,7 @@
       <ul>
         <li><strong>French</strong>: mother tongue</li>
         <li><strong>English</strong>: fluent (C2, Linguaskill 180+)</li>
-        <li><strong>Spanish</strong>: academic (B1)</li>
+        <li><strong>Spanish</strong>: independent (B1)</li>
       </ul>
     </div>
   </article>
