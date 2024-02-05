@@ -337,13 +337,15 @@
           <span>Docker</span>
           <span>Kubernetes</span>
           <span>GitHub Actions</span>
+          <span>GitLab CI</span>
         </span>
       </div>
       <div class="xp">
         <strong>Cross-functional skills</strong>
         <span class="tags">
-          <span>Cybersec</span>
           <span>Architecture</span>
+          <span>Technical Writing</span>
+          <span>Digital Security</span>
           <span>Database Tuning</span>
         </span>
       </div>
