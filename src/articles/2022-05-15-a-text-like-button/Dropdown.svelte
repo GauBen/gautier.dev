@@ -12,7 +12,8 @@
     open = false;
   }}
   onfocusin={({ target }) => {
-    open = Boolean(dropdown?.contains(target as Node));
+    // @ts-expect-error target is not null
+    open = Boolean(dropdown?.contains(target));
   }}
 />
 
