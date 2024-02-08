@@ -17,16 +17,16 @@ const processor = unified()
  * A markdown block can be transformed into a list of tokens:
  *
  * ```md
- * An article! About **Something**.
+ * This is very **important**.
  * ```
  *
  * Is transformed into:
  *
  * ```json
  * [
- *   {"original": "An article! About ", "normalized": "an article  about ", "weight": 1},
- *   {"original": "Something",          "normalized": "something",          "weight": 2},
- *   {"original": ".",                  "normalized": " ",                  "weight": 1}
+ *   {"original": "This is very ", "normalized": "this is very ", "weight": 1},
+ *   {"original": "important",     "normalized": "important",     "weight": 2},
+ *   {"original": ".",             "normalized": " ",             "weight": 1}
  * ]
  * ```
  *
@@ -35,14 +35,14 @@ const processor = unified()
 type Token = {
   /** Original markdown content. */
   original: string;
-  /** Normalized markdown content. @see {normalize} */
+  /** Normalized markdown content. */
   normalized: string;
   /** Weight of the block. For instance, headings weigh more than paragraphs. */
   weight: number;
 };
 
 /** Normalizes and create a token out of a string. */
-const tokenize = (original: string, weight: number): Token => ({
+const createToken = (original: string, weight: number): Token => ({
   original,
   normalized: original.toLowerCase().replaceAll(/[^a-z0-9']/gi, " "),
   weight,
@@ -55,7 +55,7 @@ const tokenizeAst = (child: RootContent, weight = 1): Token[] => {
     child.type === "inlineCode" ||
     child.type === "code"
   )
-    return [tokenize(child.value, weight)];
+    return [createToken(child.value, weight)];
 
   if (
     child.type === "heading" ||
@@ -76,13 +76,13 @@ const tokenizeAst = (child: RootContent, weight = 1): Token[] => {
   if (child.type === "listItem" || child.type === "tableRow") {
     return child.children
       .flatMap((child) => tokenizeAst(child, weight))
-      .concat([tokenize("\n", weight)]);
+      .concat([createToken("\n", weight)]);
   }
 
   if (child.type === "tableCell") {
     return child.children
       .flatMap((child) => tokenizeAst(child, weight))
-      .concat([tokenize("\t", weight)]);
+      .concat([createToken("\t", weight)]);
   }
 
   if (child.type === "html")
@@ -258,8 +258,8 @@ const indexedArticles = await Promise.all(
 
     // Add the title and description to the index
     if (metadata.description)
-      nodes.unshift([tokenize(metadata.description, 2)]);
-    nodes.unshift([tokenize(metadata.title, 4)]);
+      nodes.unshift([createToken(metadata.description, 2)]);
+    nodes.unshift([createToken(metadata.title, 4)]);
 
     return { slug, keywords: parse(nodes), extracts: extract(nodes) };
   }),
@@ -267,6 +267,7 @@ const indexedArticles = await Promise.all(
 
 // Parse all tokens into keyword maps
 const weightedKeywords = reverseKeywordMapping(indexedArticles);
+console.log(weightedKeywords);
 
 // Compress and save the weighted keywords
 const compressedWeightedKeywords = stringify(

@@ -23,7 +23,7 @@ Here is how small and fast it is to load the whole search engine and associated 
 
 <Measure />
 
-In this article I will describe how I built an Algolia-like search engine in a day, with a naive yet effective ranking algorithm. **There are two parts to this search engine: the indexing and the searching.** The indexing is done at build time, and the searching is done client-side. The heavy lifting should be done at build time, so that the client-side search is fast.
+In this article I will describe how I built an Algolia-like search engine in a day, with a naive yet effective ranking algorithm. **There are two parts to this search engine: the indexing and the searching.** The indexing is done at build time, and the searching is done at run time, client-side. The heavy lifting should be done at build time, so that the client-side search is fast.
 
 These two steps work roughly as follows:
 
@@ -56,7 +56,7 @@ Let's take this sample markdown file:
 This is a paragraph... with **important** words.
 ```
 
-The first three indexing steps (parsing, tokenization and normalization) transform the markdown into a list of equally weighted extracts. The structure of this list maps the one of the markdown document. Each root node (heading, paragraph...) will map to one extract. Each extract is then a list of strings, with an associated weight. For instance, headings and bold words will have a higher weight than regular words.
+The first three indexing steps (parsing, tokenization and normalization) transform the markdown into a list of weighted extracts. The structure of this list maps the one of the markdown document. Each root node (heading, paragraph) will map to one extract. Each extract is then a list of strings, with an associated weight. For instance, headings and bold words will have a higher weight than regular words.
 
 ```json
 [
@@ -112,29 +112,39 @@ The final step is to favor rare keywords and remove too common ones. To do so, I
 - If a keyword is present in more than half of the articles, it is removed.
 - Divide the score of a keyword by the number of articles it can be found in.
 
-To prevent absurdly large scores, I actually use the logarithm of the sum of the weights. This evens out the scores and makes the search results more relevant.
+I actually use the logarithm of the sum of the weights, for this evens out the scores and makes the search results more relevant. The formula is as follows:
 
-The resulting index produced is a map of maps:
+$$
+\text{score} = 50 \cdot \frac{\displaystyle \log\left(\sum_{\text{article}} \text{weight}\right)}{\# \text{matches} + 1}
+$$
+
+The 50 factor is arbitrary to produce scores mostly between between 0 and 100.
+
+The resulting index is a map of maps:
 
 ```json
 {
   // Maps keywords to matching articles
-  "state": {
+
+  "javascript": {
     // Each article is associated with the weight of the keyword
-    "state-of-js": 14,
-    "finite-state-automatons": 8
+    "state-of-js": 8,
+    "finite-state-automatons": 2
   },
-  "automatons": {
-    "finite-state-automatons": 12
+  "state": {
+    "finite-state-automatons": 14,
+    "state-of-js": 5
   }
 }
 ```
 
-Therefore, searching for `state` will return the article `state-of-js` first, but `state automatons` will return `finite-state-automatons` first.
+With this index, searching for _javascript_ will return the article `state-of-js` first, but _javascript state_ will return `finite-state-automatons` first.
 
-The whole indexer [can be found on GitHub](https://github.com/GauBen/gautier.dev/blob/main/src/index-articles.ts).
+This concludes this first part on how the index is built. The whole indexer [can be found on GitHub](https://github.com/GauBen/gautier.dev/blob/main/src/index-articles.ts).
 
 ## Searching the index
+
+Searching the index really is the easy part. It's done in two steps: matching individual keywords against the index to get a list of matching articles, and then keeping only the articles that match all keywords.
 
 ```ts
 // Find all articles that match all keywords, and sort them by score
