@@ -1,13 +1,16 @@
 <script lang="ts">
-  const measure = async () =>
-    new Promise<Record<string, number>>((resolve) => {
-      const observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries())
-          if (entry.name.includes("/search.")) resolve(entry as never);
-      });
-      observer.observe({ entryTypes: ["resource"] });
-      import("$lib/search.js").then(() => observer.disconnect());
-    });
+  const measure = async () => {
+    const matches = String(() => import("$lib/search.js")).match(
+      /import\((["']).+?\1\)/,
+    );
+    if (!matches) throw new Error("No import found");
+    const url = matches[0].slice(8, -2);
+    const start = performance.now();
+    const response = await fetch(new URL(url, import.meta.url));
+    const { size } = await response.blob();
+    const duration = performance.now() - start;
+    return { duration, size };
+  };
 
   const format = (n: number) => Number(n.toPrecision(2));
 </script>
@@ -15,11 +18,10 @@
 <p>
   {#await measure()}
     Loading search engine and index...
-  {:then { duration, decodedBodySize, encodedBodySize }}
-    It took <strong>{format(duration)}ms</strong> to load the
-    <strong>{format(decodedBodySize / 1024)}kB</strong>
-    search engine and index (<strong>{format(encodedBodySize / 1024)}kB</strong>
-    transferred).
+  {:then { duration, size }}
+    It took <strong>{format(duration)}ms</strong> to download the
+    <strong>{format(size / 1024)}kB</strong>
+    search engine and index.
   {:catch error}
     {error.message}
   {/await}
