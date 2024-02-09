@@ -9,7 +9,9 @@ description: Personal collection of articles that I find myself referring to ove
 </script>
 
 <Tldr>
-  Here is an ever-growing list of articles that I find myself referring to over and over again. If I sent you here, it's because I think you should read one of these, or maybe all of them.
+
+Here is an ever-growing list of articles that I find myself referring to over and over again. If I sent you here, it's because I think you should read one of these, or maybe all of them.
+
 </Tldr>
 
 Reading articles is a big chunk of my technical watch routine. I usually find them on Hacker News or Twitter, read them and then forget about them. However, **some articles struck me by their inherent simplistic truth**. Because they are so simple, they are timeless and will probably be relevant for as long as human-written software exists.
@@ -27,6 +29,10 @@ A humbling article about how we, developers, are not as smart as we think we are
 [cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software](https://cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software) [<Comments aria-label="Hacker News Comments" />](https://news.ycombinator.com/item?id=36380711)
 
 We need to solve hard problems to keep being entertained. If these problems don't exist, we will create them. This article is a great reminder that we should not try to solve problems that don't exist.
+
+And it has a sequel! [cerebralab.com/Stop_future_proofing_software](https://cerebralab.com/Stop_future_proofing_software) [<Comments aria-label="Hacker News Comments" />](https://news.ycombinator.com/item?id=17897727)
+
+In this sequel, the author writes about the "we should do things this way in case _Z_ happens" bias being a trap, and usually the most common "imaginary problem" we developers create.
 
 ## Technical Debt is a Choice
 

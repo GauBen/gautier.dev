@@ -227,7 +227,7 @@ const reverseKeywordMapping = (
     const matches = matchingArticles.length;
 
     // Ignore keywords that are too common (> half of articles)
-    if (matches > articles.size / 2) continue;
+    if (matches > indexedArticles.length / 2) continue;
 
     weightedKeywords.set(
       keyword,
@@ -235,8 +235,8 @@ const reverseKeywordMapping = (
         .sort((a, z) => z.weight - a.weight)
         .map(({ slug, weight, nodes }) => ({
           slug,
-          // Multiply the result by 50 to get a nice integer score
-          score: Math.ceil((50 * Math.log(weight)) / (matches + 1)),
+          // Multiply the result by 5 to get a nice integer score
+          score: Math.ceil((5 * weight) / Math.cosh(matches - 1.5)),
           nodes,
         }))
         .sort((a, z) => z.score - a.score),
@@ -261,19 +261,22 @@ const indexedArticles = await Promise.all(
       nodes.unshift([createToken(metadata.description, 2)]);
     nodes.unshift([createToken(metadata.title, 4)]);
 
-    return { slug, keywords: parse(nodes), extracts: extract(nodes) };
+    return { slug, metadata, keywords: parse(nodes), extracts: extract(nodes) };
   }),
 ).then((articles) => articles.filter(Boolean));
 
 // Parse all tokens into keyword maps
 const weightedKeywords = reverseKeywordMapping(indexedArticles);
-console.log(weightedKeywords);
 
 // Compress and save the weighted keywords
 const compressedWeightedKeywords = stringify(
   Object.fromEntries(
     [...weightedKeywords]
-      .sort((a, z) => z[1][0].score - a[1][0].score)
+      .sort(
+        (a, z) =>
+          z[1].reduce((acc, { score }) => acc + score, 0) -
+          a[1].reduce((acc, { score }) => acc + score, 0),
+      )
       .map(([keyword, articles]) => [
         keyword,
         articles.flatMap(({ slug, score, nodes }) => [slug, score, [...nodes]]),
@@ -294,6 +297,16 @@ const compressedExtracts = stringify(
 writeFileSync(
   new URL("search/extracts.json", import.meta.url),
   compressedExtracts,
+);
+
+// Not used for search but useful for other purposes
+writeFileSync(
+  new URL("search/metadata.json", import.meta.url),
+  JSON.stringify(
+    Object.fromEntries(
+      indexedArticles.map(({ slug, metadata }) => [slug, metadata]),
+    ),
+  ),
 );
 
 console.timeEnd("Index articles");

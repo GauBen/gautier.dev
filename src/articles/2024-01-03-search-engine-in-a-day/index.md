@@ -1,12 +1,14 @@
 ---
-draft: true
 title: Building a search engine in a day
 description: I built a search engine in a day for the very website you are reading this on.
 ---
 
 <script>
+  import Explorer from './Explorer.svelte'
   import Measure from './Measure.svelte'
   import Mermaid from '$lib/Mermaid.svelte'
+
+  const search = import('$lib/search')
 </script>
 
 > How is [Marginalia](https://search.marginalia.nu/), a search engine built by a single person, so good?
@@ -110,22 +112,21 @@ The next step is to sum the weights of the extracts for each word, and store the
 The final step is to favor rare keywords and remove too common ones. To do so, I use the following heuristics:
 
 - If a keyword is present in more than half of the articles, it is removed.
-- Divide the score of a keyword by the number of articles it can be found in.
+- Divide the score of a keyword by the number of articles it can be found in (written as $\# \text{matches}$).
 
 I actually use the logarithm of the sum of the weights, for this evens out the scores and makes the search results more relevant. The formula is as follows:
 
 $$
-\text{score} = 50 \cdot \frac{\displaystyle \log\left(\sum_{\text{article}} \text{weight}\right)}{\# \text{matches} + 1}
+\text{score} = 5 \cdot \frac{\displaystyle \sum_{\text{article}} \text{weight}}{\cosh\left(\text{\# matches} - 1.5\right)}
 $$
 
-The 50 factor is arbitrary to produce scores mostly between between 0 and 100.
+The 5 factor is arbitrary to produce scores mostly between between 0 and 100. The [$\cosh(x-1.5)$](https://en.wikipedia.org/wiki/Hyperbolic_functions) dividend will favor the number of matches 1 and 2 equally, and then decrease the score for higher numbers of matches. This is to favor rare keywords.
 
 The resulting index is a map of maps:
 
 ```json
 {
   // Maps keywords to matching articles
-
   "javascript": {
     // Each article is associated with the weight of the keyword
     "state-of-js": 8,
@@ -146,21 +147,33 @@ This concludes this first part on how the index is built. The whole indexer [can
 
 Searching the index really is the easy part. It's done in two steps: matching individual keywords against the index to get a list of matching articles, and then keeping only the articles that match all keywords.
 
-```ts
-// Find all articles that match all keywords, and sort them by score
-const matches = [...articles]
-  .reduce((matches, [slug]) => {
-    let score = 0;
-    const matchingNodes = [];
-    for (const [keyword, matchingArticles] of keywords) {
-      const match = matchingArticles.get(slug);
-      if (!match) return matches;
-      score += match.score;
-      matchingNodes.push({ keyword, nodes: match.nodes });
-    }
-    return [...matches, { slug, score, matchingNodes }];
-  }, [])
-  .sort((a, z) => z.score - a.score);
+Searching _search engine_ in the following index:
+
+```
+{
+  "search": {
+    "search-engine-in-a-day": 25,
+    "svelte-tenor-1": 13
+  },
+  "engine": {
+    "finite-state-automatons": 14,
+    "search-engine-in-a-day": 5
+  }
+}
 ```
 
+Will only return `search-engine-in-a-day`, as it is the only article that matches both keywords.
+
 The whole search algorithm [can be found on GitHub](https://github.com/GauBen/gautier.dev/tree/main/src/lib/search.ts).
+
+## Explore the index
+
+The following table allows you to explore the index of this very website, as created by [the indexer](https://github.com/GauBen/gautier.dev/blob/main/src/index-articles.ts). It is a list of keywords, with the articles they match and their score. It will be updated as I add more articles to the website.
+
+<div>
+  {#await search}
+    <p>Loading...</p>
+  {:then search}
+    <Explorer {...search} />
+  {/await}
+</div>

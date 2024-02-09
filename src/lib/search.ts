@@ -1,13 +1,14 @@
-import { articles } from "$lib/articles.js";
+import { articles, type Article } from "$lib/articles.js";
 import extractsRaw from "$search/extracts.json?raw";
 import keywordsRaw from "$search/keywords.json?raw";
+import metadataRaw from "$search/metadata.json?raw";
 import { parse } from "devalue";
 
 /** Number of characters on each side of an highlight. */
 const extractMargin = 60;
 
 /** Indexed keywords. */
-const weightedKeywords = new Map(
+export const weightedKeywords = new Map(
   Object.entries<unknown[]>(parse(keywordsRaw)).map(([keyword, entries]) => [
     keyword,
     Array.from({ length: entries.length / 3 }, (_, i) => ({
@@ -19,7 +20,7 @@ const weightedKeywords = new Map(
 );
 
 /** Maps articles to relevant text nodes. */
-const extracts = new Map(
+export const extracts = new Map(
   Object.entries<unknown[]>(parse(extractsRaw)).map(([slug, entries]) => [
     slug,
     Array.from({ length: entries.length / 2 }, (_, i) => ({
@@ -28,6 +29,11 @@ const extracts = new Map(
     })),
   ]),
 );
+
+export const metadata = JSON.parse(metadataRaw) as Record<
+  string,
+  Article["metadata"]
+>;
 
 /** Lowercases and removes non alphanumeric characters from input. */
 const normalize = (str: string) =>
@@ -102,9 +108,8 @@ export const search = (q: string) => {
     if (
       matchingArticles.some(({ slug }) =>
         [...matches]
-          .filter(
-            (match) =>
-              weightedKeywords.get(last)?.some(({ slug }) => slug === match),
+          .filter((match) =>
+            weightedKeywords.get(last)?.some(({ slug }) => slug === match),
           )
           .includes(slug),
       )
