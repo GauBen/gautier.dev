@@ -120,7 +120,7 @@ $$
 \text{score} = 5 \cdot \frac{\displaystyle \sum_{\text{article}} \text{weight}}{\cosh\left(\text{\# matches} - 1.5\right)}
 $$
 
-The 5 factor is arbitrary to produce scores mostly between between 0 and 100. The [$\cosh(x-1.5)$](https://en.wikipedia.org/wiki/Hyperbolic_functions) dividend will favor the number of matches 1 and 2 equally, and then decrease the score for higher numbers of matches. This is to favor rare keywords.
+The 5 factor is arbitrary to produce scores mostly between between 0 and 100. The $\cosh(x-1.5)$ dividend will favor the number of matches 1 and 2 equally, and then decrease the score for higher numbers of matches. This is to favor rare keywords.
 
 The resulting index is a map of maps:
 

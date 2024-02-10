@@ -107,12 +107,15 @@
       >
         Previous
       </button>
-      <select bind:value={pageNumber}>
-        {#each Array.from({ length: Math.ceil(filtered.length / pageLength) }, (_, i) => i) as i}
-          <option value={i}>{i + 1}</option>
-        {/each}
-      </select>
-      / {Math.ceil(filtered.length / pageLength)}
+      <label class="row">
+        Page:
+        <select bind:value={pageNumber}>
+          {#each Array.from({ length: Math.ceil(filtered.length / pageLength) }, (_, i) => i) as i}
+            <option value={i}>{i + 1}</option>
+          {/each}
+        </select>
+        / {Math.ceil(filtered.length / pageLength)}
+      </label>
       <button
         type="button"
         disabled={pageNumber === Math.floor(filtered.length / pageLength)}
