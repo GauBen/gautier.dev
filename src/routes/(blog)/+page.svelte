@@ -56,7 +56,11 @@
       {:else if description}
         <p>{description}</p>
       {/if}
-      <p><time datetime={date.toISOString()}>{formatDate(date)}</time></p>
+      {#if date}
+        <p><time datetime={date.toISOString()}>{formatDate(date)}</time></p>
+      {:else}
+        <p>Unpublished draft</p>
+      {/if}
     </Card>
   {:else}
     <p>No articles match <strong>{data.q}</strong></p>

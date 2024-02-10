@@ -16,7 +16,9 @@ export const load = async () => ({
     ),
   ).then((articles) =>
     articles
-      .filter(({ draft }) => dev || !draft)
-      .sort(({ date: a }, { date: z }) => z.getTime() - a.getTime()),
+      .filter(({ date }) => dev || date)
+      .sort(({ date: a }, { date: z }) =>
+        a === null ? -1 : z === null ? 1 : z.getTime() - a.getTime(),
+      ),
   ),
 });

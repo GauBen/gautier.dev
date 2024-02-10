@@ -1,6 +1,5 @@
 ---
 title: "Scoped globals"
-draft: true
 ---
 
 <script>

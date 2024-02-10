@@ -46,20 +46,21 @@ export const GET = async () => {
         <title>gautier.dev articles</title>
         <link href="https://gautier.dev/" />
         <link rel="self" href="https://gautier.dev/feed" />
-        <updated>${articles[0].date.toISOString()}</updated>
+        <updated>${articles[0].date?.toISOString()}</updated>
         <author>
           <name>Gautier Ben Aïm</name>
         </author>
         <id>https://gautier.dev/</id>
-        ${articles.map(
-          ({ slug, title, date, description }) =>
-            /* HTML */ `<entry>
-              <title>${title}</title>
-              <link href="https://gautier.dev/articles/${slug}" />
-              <id>https://gautier.dev/articles/${slug}</id>
-              <updated>${date.toISOString()}</updated>
-              <summary>${description}</summary>
-            </entry>`,
+        ${articles.map(({ slug, title, date, description }) =>
+          date
+            ? /* HTML */ `<entry>
+                <title>${title}</title>
+                <link href="https://gautier.dev/articles/${slug}" />
+                <id>https://gautier.dev/articles/${slug}</id>
+                <updated>${date.toISOString()}</updated>
+                <summary>${description}</summary>
+              </entry>`
+            : "",
         )}
       </feed>`,
     {

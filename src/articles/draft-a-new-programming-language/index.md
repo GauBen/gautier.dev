@@ -1,5 +1,4 @@
 ---
-draft: true
 title: Meet Piña, a new programming language
 ---
 

@@ -1,5 +1,4 @@
 ---
-draft: true
 title: Releasing svelte-tenor 1.0
 ---
 

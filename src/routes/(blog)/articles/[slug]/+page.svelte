@@ -5,8 +5,7 @@
   import { formatDate } from "$lib/articles";
 
   const { data } = $props();
-  const { title, date, draft, snippet, slug, banner, component } =
-    $derived(data);
+  const { title, date, snippet, slug, banner, component } = $derived(data);
 
   let loaded = $state(false);
   $effect(() => {
@@ -33,11 +32,13 @@
 
 <article>
   <header>
-    <h1 class:draft>{title}</h1>
+    <h1 class:draft={!date}>{title}</h1>
     {#if date}
       <p class="date">
         <time datetime={date.toISOString()}>{formatDate(date)}</time>
       </p>
+    {:else}
+      <p class="date">Unpublished draft</p>
     {/if}
   </header>
   <div class="markdown-content">

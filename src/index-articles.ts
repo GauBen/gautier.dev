@@ -250,11 +250,11 @@ console.time("Index articles");
 
 // Index all articles
 const indexedArticles = await Promise.all(
-  [...articles].map(async ([slug, { raw, load }]) => {
+  [...articles].map(async ([slug, { raw, load, date }]) => {
     const { metadata } = await load();
     const nodes = tokenizeMarkdown(await raw());
 
-    if (metadata.draft) return null;
+    if (!date) return null;
 
     // Add the title and description to the index
     if (metadata.description)

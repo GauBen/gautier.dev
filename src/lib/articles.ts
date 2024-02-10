@@ -3,7 +3,6 @@ import type { SvelteComponent } from "svelte";
 export type Article = {
   metadata: {
     title: string;
-    draft?: boolean;
     description?: string;
     snippet?: { code: string; lang: string };
   };
@@ -15,14 +14,14 @@ export const articles = new Map(
   Object.entries(import.meta.glob<Article>("../articles/*/index.md")).map(
     ([file, load]) => {
       const match = file.match(
-        /^..\/articles\/(?<date>\d\d\d\d-\d\d-\d\d)-(?<slug>.+)\/index.md$/,
+        /^..\/articles\/(?<date>\d\d\d\d-\d\d-\d\d|draft)-(?<slug>.+)\/index.md$/,
       );
       if (!match?.groups) throw new Error(`Invalid article file name: ${file}`);
       const { date, slug } = match.groups;
       return [
         slug,
         {
-          date: new Date(date),
+          date: date === "draft" ? null : new Date(date),
           load,
           raw: () =>
             import(`../articles/${date}-${slug}/index.md?raw`).then(
