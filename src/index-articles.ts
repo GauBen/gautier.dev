@@ -195,7 +195,7 @@ const extract = (nodes: Token[][]) =>
   ]);
 
 /** Transforms a map of articles to keywords into a map of keywords to articles. */
-const reverseKeywordMapping = (
+const reverseKeywordMap = (
   indexedArticles: Array<{
     slug: string;
     keywords: Map<string, { weight: number; nodes: Set<number> }>;
@@ -266,7 +266,7 @@ const indexedArticles = await Promise.all(
 ).then((articles) => articles.filter(Boolean));
 
 // Parse all tokens into keyword maps
-const weightedKeywords = reverseKeywordMapping(indexedArticles);
+const weightedKeywords = reverseKeywordMap(indexedArticles);
 
 // Compress and save the weighted keywords
 const compressedWeightedKeywords = stringify(

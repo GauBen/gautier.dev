@@ -8,6 +8,10 @@ description: I built a search engine in a day for the very website you are readi
   import Measure from './Measure.svelte'
   import Mermaid from '$lib/Mermaid.svelte'
 
+  import autocomplete from './autocomplete.png?enhanced&w=800';
+  import searchRanking from './search-ranking.png?enhanced&w=800';
+  import searchFormula from './search-formula.png?enhanced&w=800';
+
   const search = import('$lib/search')
 </script>
 
@@ -25,7 +29,7 @@ Here is how small and fast it is to load the whole search engine and associated 
 
 <Measure />
 
-In this article I will describe how I built an Algolia-like search engine in a day, with a naive yet effective ranking algorithm. **There are two parts to this search engine: the indexing and the searching.** The indexing is done at build time, and the searching is done at run time, client-side. The heavy lifting should be done at build time, so that the client-side search is fast.
+In this article I will explain how I built an Algolia-like search engine in a day, with a naive yet effective ranking algorithm. **There are two parts to this search engine: the indexing and the searching.** The indexing is done at build time, and the searching is done at run time, client-side. The heavy lifting should be done at build time, so that the client-side search is fast.
 
 These two steps work roughly as follows:
 
@@ -139,7 +143,7 @@ The resulting index is a map of maps:
 }
 ```
 
-With this index, searching for _javascript_ will return the article `state-of-js` first, but _javascript state_ will return `finite-state-automatons` first.
+With this index, searching for "javascript" will return the article `state-of-js` first, but "javascript state" will return `finite-state-automatons` first.
 
 This concludes this first part on how the index is built. The whole indexer [can be found on GitHub](https://github.com/GauBen/gautier.dev/blob/main/src/index-articles.ts).
 
@@ -147,9 +151,9 @@ This concludes this first part on how the index is built. The whole indexer [can
 
 Searching the index really is the easy part. It's done in two steps: matching individual keywords against the index to get a list of matching articles, and then keeping only the articles that match all keywords.
 
-Searching _search engine_ in the following index:
+Searching "search engine" in the following index:
 
-```
+```json
 {
   "search": {
     "search-engine-in-a-day": 25,
@@ -177,3 +181,27 @@ The following table allows you to explore the index of this very website, as cre
     <Explorer {...search} />
   {/await}
 </div>
+
+## Additional features
+
+While indexing and searching are the core features of a search engine, there are a few additional features that all users expect from a search engine:
+
+- The search input should have auto-completion, helping the user to find relevant keywords.
+
+  <figure>
+  <enhanced:img src={autocomplete} alt="Screenshot of the autocompletion feature" />
+  <figcaption>The input field should suggest a coherent search query</figcaption>
+  </figure>
+
+- The search results should contain a relevant extract of the article, with the matching keywords highlighted.
+
+  <figure>
+  <enhanced:img src={searchRanking} alt="Screenshot of the extract feature" />
+  <figcaption>The search result should contain a relevant extract of the article</figcaption>
+  </figure>
+  <figure>
+  <enhanced:img src={searchFormula} alt="Another screenshot of the extract feature" />
+  <figcaption><em>search</em> appears many time in the article, but the closest highlights are picked</figcaption>
+  </figure>
+
+I won't go into the details of these features, as they were built past the one-day mark. If you read [the source code](https://github.com/GauBen/gautier.dev/tree/main/src/lib/search.ts), you'll find that these two features account for most of the complexity of the search engine.

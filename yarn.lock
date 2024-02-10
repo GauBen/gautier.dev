@@ -997,13 +997,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/katex@npm:^0":
-  version: 0.16.7
-  resolution: "@types/katex@npm:0.16.7"
-  checksum: 10c0/68dcb9f68a90513ec78ca0196a142e15c2a2c270b1520d752bafd47a99207115085a64087b50140359017d7e9c870b3c68e7e4d36668c9e348a9ef0c48919b5a
-  languageName: node
-  linkType: hard
-
 "@types/mdast@npm:^3.0.0":
   version: 3.0.15
   resolution: "@types/mdast@npm:3.0.15"
@@ -3032,7 +3025,6 @@ __metadata:
     "@sveltejs/kit": "npm:^2.5.0"
     "@sveltejs/vite-plugin-svelte": "npm:^3.0.2"
     "@total-typescript/ts-reset": "npm:^0.5.1"
-    "@types/katex": "npm:^0"
     "@types/node": "npm:^20.11.17"
     "@types/prismjs": "npm:^1.26.3"
     "@typescript-eslint/eslint-plugin": "npm:^6.21.0"
@@ -3062,21 +3054,21 @@ __metadata:
     rehype-slug: "npm:^6.0.0"
     remark-frontmatter: "npm:^5.0.0"
     remark-gfm: "npm:^4.0.0"
-    remark-math: "npm:^3.0.0"
+    remark-math: "npm:^3.0.1"
     remark-parse: "npm:^11.0.0"
     sass: "npm:^1.70.0"
     stylelint: "npm:^16.2.1"
     stylelint-config-html: "npm:^1.1.0"
     stylelint-config-recess-order: "npm:^4.6.0"
     stylelint-config-standard-scss: "npm:^13.0.0"
-    svelte: "npm:5.0.0-next.51"
+    svelte: "npm:5.0.0-next.52"
     svelte-check: "npm:^3.6.4"
     tiny-glob: "npm:^0.2.9"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.3.3"
     unified: "npm:^11.0.4"
     unplugin-icons: "npm:^0.18.5"
-    vite: "npm:^5.1.0"
+    vite: "npm:^5.1.1"
     vite-node: "npm:^1.2.2"
   languageName: unknown
   linkType: soft
@@ -5673,7 +5665,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remark-math@npm:^3.0.0":
+"remark-math@npm:^3.0.1":
   version: 3.0.1
   resolution: "remark-math@npm:3.0.1"
   checksum: 10c0/5f2d08d0b8a4eb8926ef25107b00d781d504954fee7e404080907e38e5afa7f6f7a8f1ddb9b554d012130a51125a38751bea80a3313732c36eac82cb0328d4f3
@@ -6535,9 +6527,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:5.0.0-next.51":
-  version: 5.0.0-next.51
-  resolution: "svelte@npm:5.0.0-next.51"
+"svelte@npm:5.0.0-next.52":
+  version: 5.0.0-next.52
+  resolution: "svelte@npm:5.0.0-next.52"
   dependencies:
     "@ampproject/remapping": "npm:^2.2.1"
     "@jridgewell/sourcemap-codec": "npm:^1.4.15"
@@ -6552,7 +6544,7 @@ __metadata:
     locate-character: "npm:^3.0.0"
     magic-string: "npm:^0.30.5"
     zimmerframe: "npm:^1.1.2"
-  checksum: 10c0/2d5105078e6f974fdf6a4a0126ec96a1fdcdfb873d279b3be61960c306472975e1c0bf61e4b4998f50e1e9a9bceb9d27bc0cf97af8778aee02f797e2d2656834
+  checksum: 10c0/83ee88a49be585c6401ed3ed863854f1f4279d35968b3666525b2e7c2d9babf33bc0812af304e02dbc599f64b73c5f327843ef920e04b9082a2b496ee230cbd2
   languageName: node
   linkType: hard
 
@@ -6979,9 +6971,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.0, vite@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "vite@npm:5.1.0"
+"vite@npm:^5.0.0, vite@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "vite@npm:5.1.1"
   dependencies:
     esbuild: "npm:^0.19.3"
     fsevents: "npm:~2.3.3"
@@ -7015,7 +7007,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10c0/62aa632b6f30cfca39db534b5b461b1e73dc4f4a3093088c1140a1e1b0c4c8f4eacc0e472a0d96d765ad6976b00e202da20a647865886df692240a2b06b62c6f
+  checksum: 10c0/d7c23284aeb3a8333e0ea208fab7da4dd4f69134f22ff959d865f56d48c3afd04fbc548368c15a5fbc0c6453ee950db42bd3532aa0dd50b85464eabefaa51396
   languageName: node
   linkType: hard
 

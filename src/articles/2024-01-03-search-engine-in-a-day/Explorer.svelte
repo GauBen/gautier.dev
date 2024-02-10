@@ -20,10 +20,11 @@
   let orderBy = $state<"sum" | "highest" | "matches">("sum");
   const pageLength = 25;
 
-  const filtered = $derived(
-    keywords.filter(({ keyword }) => keyword.startsWith(value)),
+  const sorted = $derived(
+    keywords
+      .filter(({ keyword }) => keyword.startsWith(value))
+      .sort((a, b) => b[orderBy] - a[orderBy]),
   );
-  const sorted = $derived(filtered.sort((a, b) => b[orderBy] - a[orderBy]));
   const page = $derived(
     sorted.slice(pageNumber * pageLength, (pageNumber + 1) * pageLength),
   );
@@ -98,7 +99,7 @@
     <div style="text-align: center"><em>0 matches</em></div>
   {/each}
 
-  {#if filtered.length > pageLength}
+  {#if sorted.length > pageLength}
     <p class="row" style="justify-content: center">
       <button
         type="button"
@@ -110,15 +111,15 @@
       <label class="row">
         Page:
         <select bind:value={pageNumber}>
-          {#each Array.from({ length: Math.ceil(filtered.length / pageLength) }, (_, i) => i) as i}
+          {#each Array.from({ length: Math.ceil(sorted.length / pageLength) }, (_, i) => i) as i}
             <option value={i}>{i + 1}</option>
           {/each}
         </select>
-        / {Math.ceil(filtered.length / pageLength)}
+        / {Math.ceil(sorted.length / pageLength)}
       </label>
       <button
         type="button"
-        disabled={pageNumber === Math.floor(filtered.length / pageLength)}
+        disabled={pageNumber === Math.floor(sorted.length / pageLength)}
         on:click={() => (pageNumber += 1)}
       >
         Next

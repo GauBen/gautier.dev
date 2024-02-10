@@ -45,6 +45,14 @@
   </div>
   {#if loaded}
     <section>
+      <h2 id="comments">
+        <a
+          aria-hidden="true"
+          tabindex="-1"
+          href="#comments"
+          style="margin-right: 0.5rem">#</a
+        >Comments
+      </h2>
       <div>
         <giscus-widget
           id="comments"

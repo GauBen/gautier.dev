@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import { slide } from "svelte/transition";
   import MagnifyingGlass from "~icons/ph/magnifying-glass-bold";
   import X from "~icons/ph/x-bold";
 
@@ -102,10 +103,11 @@
         maxlength="100"
         bind:this={input}
         autocomplete="off"
+        transition:slide={{ duration: 150 }}
         oninput={({ currentTarget }) => set(currentTarget.value)}
       />
       {#if autocomplete.length > 0 && focus}
-        <ul class="autocomplete">
+        <ul class="autocomplete" transition:slide={{ duration: 150 }}>
           {#each autocomplete as suggestion, i (suggestion)}
             <li>
               <button
@@ -149,6 +151,10 @@
       border: 0;
       border-radius: 0.5em;
       box-shadow: 0 0 0.5em #0002;
+
+      &:focus {
+        outline: none;
+      }
     }
 
     ul {
