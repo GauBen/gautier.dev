@@ -1,8 +1,8 @@
 <section>
   <h2>Summary</h2>
   <div>
-    <h3>Full-Stack Lead Engineer</h3>
-    I am a lead engineer with 3+ years of experience in the IT industry. I am passionate
+    <h3>Full-Stack Senior Engineer</h3>
+    I am a senior engineer with 4+ years of experience in the IT industry. I am passionate
     about security and have a proven ability to architect, develop, and maintain
     secure and scalable software applications. I have a proven track record of successfully
     leading migrations that have resulted in increased productivity and satisfaction

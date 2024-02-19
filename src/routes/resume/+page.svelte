@@ -15,7 +15,7 @@
     <h2><Suitcase /> Work Experience</h2>
     <div class="xp">
       <h3>
-        Full-Stack Lead Engineer & Cybersecurity Researcher
+        Full-Stack Senior Engineer & Cybersecurity Researcher
         <mark>
           <a href="https://www.linkedin.com/company/escapetech/">
             Escape (YC W23)
@@ -23,7 +23,7 @@
         </mark>
       </h3>
       <Timeline>
-        <p><strong>Lead Engineer</strong></p>
+        <p><strong>Senior Engineer</strong></p>
         <ul>
           <li>
             <strong>Manage and train a team of 3 developers,</strong> ensuring communication,
@@ -31,13 +31,21 @@
             team dynamics.
           </li>
           <li>
+            <strong>Design clear technical guidelines,</strong> promoting consistent
+            code structure and streamlined feature development, ensuring all team
+            members are aligned and productive.
+          </li>
+          <li>
             Head
             <strong>several open source side-projects,</strong>
             including the
-            <a href="https://escape.tech/academy/">API Security Academy,</a> a
-            learning platform for GraphQL security, and
-            <a href="https://github.com/GauBen/svelte-emails">svelte-emails,</a>
-            a modern way to build complex transactional emails.
+            <a href="https://escape.tech/academy/">
+              API Security Academy, a learning platform for GraphQL security,
+            </a>
+            and
+            <a href="https://github.com/GauBen/svelte-emails">
+              svelte-emails, a modern way to build complex transactional emails.
+            </a>
           </li>
           <li>
             <a
@@ -95,7 +103,7 @@
 
       <div class="stuff">
         <span class="tags">
-          <span>Lead Dev</span>
+          <span>Senior Dev</span>
           <span>Management</span>
           <span>Cybersec</span>
           <span>Research</span>

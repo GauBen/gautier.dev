@@ -14,4 +14,5 @@
 /.vercel
 /build
 /package
+/vite.config.js.*
 node_modules
