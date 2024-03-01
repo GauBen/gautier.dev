@@ -69,7 +69,7 @@ a {
     150ms color,
     150ms background-size;
 
-  &:hover {
+  &:where(:hover) {
     background-position:
       bottom left,
       bottom left;
@@ -78,8 +78,8 @@ a {
       100% 0.125em;
   }
 
-  &:active,
-  &:focus {
+  &:where(:active),
+  &:where(:focus) {
     color: var(--bg, #fff);
     background-position:
       bottom left,

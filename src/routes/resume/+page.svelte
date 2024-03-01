@@ -406,23 +406,6 @@
 </div>
 
 <style lang="scss">
-  :root {
-    @media print {
-      font-size: 14px;
-      scrollbar-gutter: auto !important;
-    }
-  }
-
-  .page :global(a) {
-    all: revert;
-    color: inherit;
-    text-decoration: inherit;
-  }
-
-  .page :global(svg) {
-    color: #0d3c77;
-  }
-
   h2 {
     display: flex;
     flex-direction: row-reverse;
@@ -494,7 +477,7 @@
     }
   }
 
-  .page {
+  :where(.page) {
     padding: 0 2rem;
     text-align: justify;
 
@@ -502,10 +485,27 @@
       margin: 2rem auto;
     }
 
+    :global(a) {
+      all: revert;
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    :global(svg) {
+      color: #0d3c77;
+    }
+
     @media screen {
       > :global(*) {
         max-width: 52rem;
       }
+    }
+  }
+
+  @media print {
+    :root {
+      font-size: 14px;
+      scrollbar-gutter: auto !important;
     }
   }
 </style>
