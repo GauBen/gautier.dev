@@ -4,10 +4,8 @@
   import MagnifyingGlass from "~icons/ph/magnifying-glass-bold";
   import X from "~icons/ph/x-bold";
 
-  const { q, autocomplete = [] } = $props<{
-    q?: string;
-    autocomplete?: string[];
-  }>();
+  const { q, autocomplete = [] }: { q?: string; autocomplete?: string[] } =
+    $props();
 
   let input = $state<HTMLInputElement>();
   let focus = $state(false);

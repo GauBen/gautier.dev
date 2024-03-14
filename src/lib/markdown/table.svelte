@@ -1,15 +1,12 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
   import type { SvelteHTMLElements } from "svelte/elements";
 
-  const { children, ...props } = $props<
-    { children: Snippet } & SvelteHTMLElements["div"]
-  >();
+  const { children, ...props }: SvelteHTMLElements["div"] = $props();
 </script>
 
 <div {...props}>
   <table>
-    {@render children()}
+    {#if children}{@render children()}{/if}
   </table>
 </div>
 

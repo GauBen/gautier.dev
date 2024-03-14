@@ -1,5 +1,5 @@
 <script lang="ts">
-  let { open, style } = $props<{ open: boolean; style?: string }>();
+  let { open, style }: { open: boolean; style?: string } = $props();
   let dropdown = $state<HTMLElement>();
 
   const preventDefault = (event: Event) => {

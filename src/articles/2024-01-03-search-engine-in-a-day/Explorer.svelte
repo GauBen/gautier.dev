@@ -1,8 +1,8 @@
 <script lang="ts">
   import Table from "$lib/markdown/table.svelte";
 
-  const { weightedKeywords, metadata } =
-    $props<typeof import("$lib/search.js")>();
+  const { weightedKeywords, metadata }: typeof import("$lib/search.js") =
+    $props();
 
   const keywords = $derived(
     [...weightedKeywords].map(([keyword, articles], index) => ({

@@ -3,7 +3,7 @@
   import type { Snippet } from "svelte";
   import type { Action } from "svelte/action";
 
-  const { children } = $props<{ children: Snippet }>();
+  const { children }: { children: Snippet } = $props();
 
   const mermaidify: Action = (node) => {
     // Remove SSR landmarks

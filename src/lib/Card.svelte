@@ -1,10 +1,8 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
 
-  const { header, children } = $props<{
-    header?: Snippet;
-    children: Snippet;
-  }>();
+  const { header, children }: { header?: Snippet; children: Snippet } =
+    $props();
 </script>
 
 <div class="card">

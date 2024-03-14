@@ -2,7 +2,7 @@
   type State = Promise<Transition>;
   type Transition = () => State;
 
-  const { words } = $props<{ words: string[] }>();
+  const { words }: { words: string[] } = $props();
 
   const sleep = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));

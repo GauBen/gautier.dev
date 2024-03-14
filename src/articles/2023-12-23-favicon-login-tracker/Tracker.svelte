@@ -1,5 +1,5 @@
 <script lang="ts">
-  const { src } = $props<{ src: string }>();
+  const { src }: { src: string } = $props();
 
   const check = async (src: string) =>
     new Promise<void>((resolve, reject) => {
