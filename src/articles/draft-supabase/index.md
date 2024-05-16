@@ -24,3 +24,7 @@ pg_dump -h [host].pooler.supabase.com -p 5432 -d postgres -U postgres.[project] 
 </p>
 
 - https://github.com/supabase/auth-helpers/blob/main/packages/sveltekit/README.md
+
+```
+Using the user object as returned from supabase.auth.getSession() or from some supabase.auth.onAuthStateChange() events could be insecure! This value comes directly from the storage medium (usually cookies on the server) and many not be authentic. Use supabase.auth.getUser() instead which authenticates the data by contacting the Supabase Auth server.
+```
