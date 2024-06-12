@@ -59,7 +59,7 @@
   <title>{status} {error?.message} – gautier.dev</title>
 </svelte:head>
 
-<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
 <h1
   use:bounce
   onclick={() => {
@@ -72,10 +72,10 @@
 
 <article>
   <Header />
-  <div style="flex: 4" />
+  <div style="flex: 4"></div>
   <p style="font-size: 2em">{error?.message}</p>
   <p><a href="/">Go back to homepage</a></p>
-  <div style="flex: 5" />
+  <div style="flex: 5"></div>
 </article>
 
 <style lang="scss">

@@ -7,6 +7,7 @@
 
   inject({ mode: dev ? "development" : "production" });
 
+  const { children } = $props();
   const { title, description } = $derived($page.data);
 
   onNavigate((navigation) => {
@@ -32,4 +33,4 @@
   {/if}
 </svelte:head>
 
-<slot />
+{@render children()}

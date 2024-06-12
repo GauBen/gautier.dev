@@ -1,5 +1,5 @@
 <slot />
-<div class="separator" aria-hidden="true" />
+<div class="separator" aria-hidden="true"></div>
 
 <style lang="scss">
   .separator {

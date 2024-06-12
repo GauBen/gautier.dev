@@ -22,7 +22,7 @@
       alt=""
       style="width: 100%; max-height: 10rem; object-fit: cover"
       style:view-transition-name={slug}
-    />
+    ></enhanced:img>
   {:else if snippet}
     <div class="snippet" style:view-transition-name={slug}>
       <Prism {...snippet} />
@@ -69,7 +69,7 @@
           theme="preferred_color_scheme"
           lang="en"
           loading="lazy"
-        />
+        ></giscus-widget>
       </div>
     </section>
   {/if}

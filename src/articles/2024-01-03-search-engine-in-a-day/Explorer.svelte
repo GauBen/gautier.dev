@@ -31,7 +31,7 @@
 
   $effect(() => {
     // Bring to the first page when value changes
-    value;
+    void value;
     pageNumber = 0;
   });
 </script>
@@ -58,8 +58,8 @@
   </p>
 
   <header>
-    <span />
-    <span />
+    <span></span>
+    <span></span>
     <span style="text-align: start">Keyword</span>
     <span style:font-weight={orderBy == "matches" ? "bold" : "inherit"}
       >Matches</span
@@ -104,7 +104,7 @@
       <button
         type="button"
         disabled={pageNumber === 0}
-        on:click={() => (pageNumber -= 1)}
+        onclick={() => (pageNumber -= 1)}
       >
         Previous
       </button>
@@ -120,7 +120,7 @@
       <button
         type="button"
         disabled={pageNumber === Math.floor(sorted.length / pageLength)}
-        on:click={() => (pageNumber += 1)}
+        onclick={() => (pageNumber += 1)}
       >
         Next
       </button>

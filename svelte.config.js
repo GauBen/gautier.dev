@@ -14,7 +14,7 @@ export default {
   preprocess: [
     vitePreprocess(),
     mdsvex({
-      extensions: [".md"],
+      extension: ".md",
       layout: "./src/lib/markdown/layout.svelte",
       highlight: {
         highlighter: (code, lang) => {

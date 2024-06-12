@@ -71,7 +71,7 @@ I'm using a Svelte/React/Vue-like syntax here, but we'd write it `<div class="ca
 
 <Example>
   <div class="card">
-    <div class="img" />
+    <div class="img"></div>
     <div class="card-body" style:justify-content="right">
       <a href="?" on:click|preventDefault>Book now!</a>
     </div>
@@ -98,7 +98,7 @@ We'll create a pseudo element on our card link, and since it'll be a child of th
 
 <Example>
   <div class="card">
-    <div class="img" />
+    <div class="img"></div>
     <div class="card-body" style:justify-content="right">
       <a href="?" class="p1" on:click|preventDefault>Book now!</a>
     </div>
@@ -125,7 +125,7 @@ Now, let's try positioning it.
 
 <Example>
   <div class="card" style="position:relative">
-    <div class="img" />
+    <div class="img"></div>
     <div class="card-body" style:justify-content="right">
       <a href="?" class="p2" on:click|preventDefault>Book now!</a>
     </div>
@@ -154,7 +154,7 @@ There is a shorthand property that means the same as `top/bottom/left/right: 0`:
 
 <Example>
   <div class="card" style="position:relative">
-    <div class="img" />
+    <div class="img"></div>
     <div class="card-body" style:justify-content="right">
       <a href="?" class="p3" on:click|preventDefault>Book now!</a>
     </div>

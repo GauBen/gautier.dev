@@ -36,7 +36,7 @@
             alt=""
             class="banner"
             style:view-transition-name={slug}
-          />
+          ></enhanced:img>
         {:else if snippet}
           <div class="banner" style:view-transition-name={slug}>
             <Prism {...snippet} />
