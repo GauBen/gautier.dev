@@ -26,9 +26,8 @@
         <p><strong>Senior Engineer</strong></p>
         <ul>
           <li>
-            <strong>Manage and train a team of 3 developers,</strong> ensuring communication,
-            code quality and deadlines. Foster innovation, independence and healthy
-            team dynamics.
+            <strong>Train newcomers,</strong> ensuring communication and deadlines.
+            Foster innovation, independence and healthy team dynamics.
           </li>
           <li>
             <strong>Design clear technical guidelines,</strong> promoting consistent
@@ -36,8 +35,7 @@
             members are aligned and productive.
           </li>
           <li>
-            Head
-            <strong>several open source side-projects,</strong>
+            <strong>Head several open source side-projects,</strong>
             including the
             <a href="https://escape.tech/academy/">
               API Security Academy, a learning platform for GraphQL security,
@@ -72,7 +70,7 @@
           <li>
             <a href="https://escape.tech/blog/author/gautier/">
               <strong>Published technical articles</strong> on the corporate blog,
-              ensuring high-quality, informative, and engaging content.
+              ensuring high-quality and engaging content.
             </a>
           </li>
           <li>

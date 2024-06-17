@@ -203,7 +203,6 @@
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    padding: 0;
     padding: 0.25rem;
     list-style: none;
 
