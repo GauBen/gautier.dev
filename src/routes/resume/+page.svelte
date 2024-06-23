@@ -26,13 +26,18 @@
         <p><strong>Senior Engineer</strong></p>
         <ul>
           <li>
-            <strong>Train newcomers,</strong> ensuring communication and deadlines.
-            Foster innovation, independence and healthy team dynamics.
+            <strong>
+              Understand business requirements and feature requests,
+            </strong> turn them into technical problems, and find pragmatic solutions.
           </li>
           <li>
             <strong>Design clear technical guidelines,</strong> promoting consistent
             code structure and streamlined feature development, ensuring all team
             members are aligned and productive.
+          </li>
+          <li>
+            <strong>Train new hires,</strong> ensuring communication and deadlines.
+            Foster innovation, independence and healthy team dynamics.
           </li>
           <li>
             <strong>Head several open source side-projects,</strong>
@@ -46,17 +51,8 @@
             </a>
           </li>
           <li>
-            <a
-              href="https://bsidesoslo.no/talks/StateofGraphQLSecurity2023.html"
-            >
-              Gave a conference talk at <strong>BSides Oslo</strong>
-              on the <strong>State of GraphQL Security 2023,</strong> highlighting
-              the company’s year of research.
-            </a>
-          </li>
-          <li>
             <strong>Pioneer the adoption of new technologies</strong> such as SvelteKit,
-            Temporal and Turbo to enhance developer productivity and product stability.
+            Temporal and Turbo to improve developer productivity and product stability.
           </li>
         </ul>
 
@@ -66,6 +62,15 @@
             Demonstrated resilience and perseverance in the
             <strong>Y Combinator accelerator program,</strong>
             shipping several sophisticated products that exceeded customer expectations.
+          </li>
+          <li>
+            <a
+              href="https://bsidesoslo.no/talks/StateofGraphQLSecurity2023.html"
+            >
+              Gave a conference talk at <strong>BSides Oslo</strong>
+              on the <strong>State of GraphQL Security 2023,</strong> highlighting
+              the company’s year of research.
+            </a>
           </li>
           <li>
             <a href="https://escape.tech/blog/author/gautier/">
@@ -102,7 +107,7 @@
       <div class="stuff">
         <span class="tags">
           <span>Senior Dev</span>
-          <span>Management</span>
+          <span>Leadership</span>
           <span>Cybersec</span>
           <span>Research</span>
         </span>
@@ -234,7 +239,7 @@
       </ul>
       <div class="stuff">
         <span class="tags">
-          <span>Management</span>
+          <span>Leadership</span>
           <span>Cybersec</span>
           <span>Design</span>
         </span>
@@ -312,6 +317,25 @@
     <h2><Medal /> Skills</h2>
     <div class="grid">
       <div class="xp">
+        <strong>Cross-functional skills</strong>
+        <span class="tags">
+          <span>Architecture</span>
+          <span>Technical Writing</span>
+          <span>Digital Security</span>
+          <span>Database Tuning</span>
+        </span>
+      </div>
+      <div class="xp">
+        <strong>Soft skills</strong>
+        <span class="tags">
+          <span>Leadership</span>
+          <span>Communication</span>
+          <span>Teamwork</span>
+          <span>Creativity</span>
+          <span>Customer Centric</span>
+        </span>
+      </div>
+      <div class="xp">
         <strong>Backend</strong>
         <span class="tags">
           <span>JavaScript</span>
@@ -344,23 +368,6 @@
           <span>Kubernetes</span>
           <span>GitHub Actions</span>
           <span>GitLab CI</span>
-        </span>
-      </div>
-      <div class="xp">
-        <strong>Cross-functional skills</strong>
-        <span class="tags">
-          <span>Architecture</span>
-          <span>Technical Writing</span>
-          <span>Digital Security</span>
-          <span>Database Tuning</span>
-        </span>
-      </div>
-      <div class="xp">
-        <strong>Soft skills</strong>
-        <span class="tags">
-          <span>Management</span>
-          <span>Communication</span>
-          <span>Teamwork</span>
         </span>
       </div>
     </div>
