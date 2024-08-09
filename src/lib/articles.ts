@@ -34,6 +34,4 @@ export const articles = new Map(
 );
 
 export const formatDate = (date: Date) =>
-  Intl.DateTimeFormat("en-US", {
-    dateStyle: "medium",
-  }).format(date);
+  Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(date);

@@ -3374,6 +3374,7 @@ __metadata:
     prettier-plugin-svelte: "npm:^3.2.4"
     prism-svelte: "npm:^0.5.0"
     prismjs: "npm:^1.29.0"
+    prismjs-gleam: "npm:^1.0.1"
     rehype-autolink-headings: "npm:^7.1.0"
     rehype-katex-svelte: "npm:^1.2.0"
     rehype-slug: "npm:^6.0.0"
@@ -5806,6 +5807,13 @@ __metadata:
   version: 0.5.0
   resolution: "prism-svelte@npm:0.5.0"
   checksum: 10c0/9bc6aab817651d7673c2c0daf1569ee783939f6f667b0a538baeaf3f12b3ed011f8d4ee0694761e076ea877f13e7173f7c070da405c06239742c51581ee2d69f
+  languageName: node
+  linkType: hard
+
+"prismjs-gleam@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "prismjs-gleam@npm:1.0.1"
+  checksum: 10c0/f44b33cabb0c6fead051761f913c46363dbe357bc84ace54869c3380feb4b1b24e9cdc5840dd324ff4b5c40f4e28675e9f8e52a16a6e95626e976b51795513fc
   languageName: node
   linkType: hard
 

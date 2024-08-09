@@ -61,7 +61,8 @@
           repoid="R_kgDOHTUX9A"
           category="Comments"
           categoryid="DIC_kwDOHTUX9M4CXmQB"
-          mapping="og:title"
+          mapping="specific"
+          term={title}
           strict="0"
           reactionsenabled="1"
           emitmetadata="0"

@@ -1,8 +1,12 @@
 pre,
 code {
-  font-size: 1em;
+  font-family: "0xProto", monospace;
   color: var(--prism-color);
   background: var(--prism-bg);
+}
+
+code {
+  font-size: calc(14em / 16);
 }
 
 pre {

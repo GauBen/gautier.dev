@@ -1,8 +1,10 @@
 import Prism from "prismjs";
 
 import "prism-svelte";
+import "prismjs-gleam";
 import "prismjs/components/prism-bash.js";
 import "prismjs/components/prism-diff.js";
+import "prismjs/components/prism-erlang.js";
 import "prismjs/components/prism-json.js";
 import "prismjs/components/prism-markdown.js";
 import "prismjs/components/prism-scss.js";
