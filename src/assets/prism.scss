@@ -70,10 +70,11 @@ pre {
 
 .token.bold,
 .token.important {
-  font-weight: 700;
+  font-weight: 700; // Does probably not work
 }
 
-.token.italic {
+.token.italic,
+.token.comment {
   font-style: italic;
 }
 
