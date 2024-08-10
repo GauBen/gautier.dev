@@ -4,15 +4,8 @@
   const { children, ...props }: SvelteHTMLElements["div"] = $props();
 </script>
 
-<div {...props}>
+<div {...props} style="max-width: 100%; overflow: auto">
   <table>
-    {#if children}{@render children()}{/if}
+    {@render children?.()}
   </table>
 </div>
-
-<style>
-  div {
-    max-width: 100%;
-    overflow: auto;
-  }
-</style>

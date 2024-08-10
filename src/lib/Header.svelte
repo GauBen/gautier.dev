@@ -13,9 +13,7 @@
       </a>
     </h1>
   </header>
-  {#if children}
-    {@render children()}
-  {/if}
+  {@render children?.()}
 </div>
 
 <style lang="scss">

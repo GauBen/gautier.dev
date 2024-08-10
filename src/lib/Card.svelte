@@ -6,9 +6,7 @@
 </script>
 
 <div class="card">
-  {#if header}
-    {@render header()}
-  {/if}
+  {@render header?.()}
   <div class="body">
     {@render children()}
   </div>
