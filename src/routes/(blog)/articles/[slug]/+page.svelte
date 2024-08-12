@@ -125,13 +125,14 @@
   }
 
   .draft {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     max-width: 100%;
     overflow: hidden;
 
     &::before {
       position: absolute;
-      right: 2em;
-      left: 2em;
       font-size: 2em;
       line-height: 0.5;
       color: #8888;
