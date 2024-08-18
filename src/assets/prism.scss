@@ -76,7 +76,8 @@ pre {
 }
 
 .token.italic,
-.token.comment {
+.token.comment,
+.token.doc {
   font-style: italic;
 }
 
