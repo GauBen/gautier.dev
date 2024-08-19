@@ -3158,7 +3158,7 @@ __metadata:
     stylelint-config-html: "npm:^1.1.0"
     stylelint-config-recess-order: "npm:^5.0.1"
     stylelint-config-standard-scss: "npm:^13.1.0"
-    svelte: "npm:5.0.0-next.224"
+    svelte: "npm:^5.0.0-next.225"
     svelte-check: "npm:^3.8.5"
     tiny-glob: "npm:^0.2.9"
     tslib: "npm:^2.6.3"
@@ -6575,9 +6575,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:5.0.0-next.224":
-  version: 5.0.0-next.224
-  resolution: "svelte@npm:5.0.0-next.224"
+"svelte@npm:^5.0.0-next.225":
+  version: 5.0.0-next.225
+  resolution: "svelte@npm:5.0.0-next.225"
   dependencies:
     "@ampproject/remapping": "npm:^2.2.1"
     "@jridgewell/sourcemap-codec": "npm:^1.4.15"
@@ -6592,7 +6592,7 @@ __metadata:
     locate-character: "npm:^3.0.0"
     magic-string: "npm:^0.30.5"
     zimmerframe: "npm:^1.1.2"
-  checksum: 10c0/435ad433dc5f82fb2c107639aacc66d60db1baf87a65057095575068d21b24b4dccbe2531ba8d48076984d9cb847b5312b6f99a58c2194ee22903086a31c5871
+  checksum: 10c0/45252bd869f56ed17e5c7f7f1a38cc218ec316aeb5b4405bfb62dd5f8c549c202dc21bed28764091cdd2dfc6cb10cb93660c3111f213ff1cbeadfe4697e7e06c
   languageName: node
   linkType: hard
 

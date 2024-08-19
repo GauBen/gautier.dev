@@ -46,8 +46,4 @@ export default {
       $search: "./src/search",
     },
   },
-
-  compilerOptions: {
-    preserveWhitespace: true,
-  },
 };
