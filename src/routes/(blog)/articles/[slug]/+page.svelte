@@ -5,7 +5,7 @@
   import { formatDate } from "$lib/articles";
 
   const { data } = $props();
-  const { title, date, snippet, slug, banner, component } = $derived(data);
+  const { title, date, snippet, slug, banner, Article } = $derived(data);
 
   let loaded = $state(false);
   $effect(() => {
@@ -42,7 +42,7 @@
     {/if}
   </header>
   <div class="markdown-content">
-    <svelte:component this={component} />
+    <Article />
   </div>
   {#if loaded}
     <section>

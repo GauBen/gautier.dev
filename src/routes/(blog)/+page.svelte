@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { formatDate } from "$lib/articles.js";
   import Card from "$lib/Card.svelte";
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
-  import { formatDate } from "$lib/articles.js";
   import SearchBar from "./SearchBar.svelte";
 
   const escape = (s: string) =>
@@ -36,7 +36,7 @@
             alt=""
             class="banner"
             style:view-transition-name={slug}
-          ></enhanced:img>
+          />
         {:else if snippet}
           <div class="banner" style:view-transition-name={slug}>
             <Prism {...snippet} />
