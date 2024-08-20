@@ -1,4 +1,4 @@
-import type { SvelteComponent } from "svelte";
+import type { Component } from "svelte";
 
 export type Article = {
   metadata: {
@@ -7,7 +7,7 @@ export type Article = {
     snippet?: { code: string; lang: string };
   };
   banner?: string;
-  default: new (...args: unknown[]) => SvelteComponent;
+  default: Component;
 };
 
 export const articles = new Map(

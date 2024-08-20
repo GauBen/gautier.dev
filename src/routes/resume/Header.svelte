@@ -4,7 +4,7 @@
   import Link from "~icons/ph/link-duotone";
   import Linkedin from "~icons/ph/linkedin-logo-duotone";
   import Pin from "~icons/ph/map-pin-duotone";
-  import me from "./me.jpg?url";
+  import me from "./me.jpg";
 </script>
 
 <header>

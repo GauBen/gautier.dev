@@ -1,18 +1,12 @@
 <script lang="ts">
   import "$assets/markdown-content.scss";
+  import { formatDate } from "$lib/articles";
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
-  import { formatDate } from "$lib/articles";
+  import "giscus";
 
   const { data } = $props();
   const { title, date, snippet, slug, banner, Article } = $derived(data);
-
-  let loaded = $state(false);
-  $effect(() => {
-    import("giscus").then(() => {
-      loaded = true;
-    });
-  });
 </script>
 
 <Header>
@@ -22,7 +16,7 @@
       alt=""
       style="width: 100%; max-height: 10rem; object-fit: cover"
       style:view-transition-name={slug}
-    ></enhanced:img>
+    />
   {:else if snippet}
     <div class="snippet" style:view-transition-name={slug}>
       <Prism {...snippet} />
@@ -44,36 +38,48 @@
   <div class="markdown-content">
     <Article />
   </div>
-  {#if loaded}
-    <section>
-      <h2 id="comments">
-        <a
-          aria-hidden="true"
-          tabindex="-1"
-          href="#comments"
-          style="margin-right: 0.5rem">#</a
-        >Comments
-      </h2>
-      <div>
-        <giscus-widget
-          id="comments"
-          repo="gauben/gautier.dev"
-          repoid="R_kgDOHTUX9A"
-          category="Comments"
-          categoryid="DIC_kwDOHTUX9M4CXmQB"
-          mapping="specific"
-          term={title}
-          strict="0"
-          reactionsenabled="1"
-          emitmetadata="0"
-          inputposition="top"
-          theme="preferred_color_scheme"
-          lang="en"
-          loading="lazy"
-        ></giscus-widget>
-      </div>
-    </section>
-  {/if}
+  <section>
+    <h2 id="comments">
+      <a
+        aria-hidden="true"
+        tabindex="-1"
+        href="#comments"
+        style="margin-right: 0.5rem">#</a
+      >Comments
+    </h2>
+    <div>
+      <giscus-widget
+        id="comments"
+        repo="gauben/gautier.dev"
+        repoid="R_kgDOHTUX9A"
+        category="Comments"
+        categoryid="DIC_kwDOHTUX9M4CXmQB"
+        mapping="specific"
+        term={title}
+        strict="0"
+        reactionsenabled="1"
+        emitmetadata="0"
+        inputposition="top"
+        theme="preferred_color_scheme"
+        lang="en"
+        loading="lazy"
+      >
+        <!-- Loading placeholder, for server-side rendering -->
+        <div
+          style="display: flex; flex-flow: column; gap: 1em; align-items: center; margin-bottom: 6.5em"
+        >
+          <div
+            style="width: 3em; height: 3em; background: url('https://github.githubassets.com/images/mona-loading-default.gif') no-repeat center/contain"
+          ></div>
+          <span
+            style="font-size: .875rem; line-height: 1.25rem; color: #656d76"
+          >
+            Loading comments...
+          </span>
+        </div>
+      </giscus-widget>
+    </div>
+  </section>
   <footer>
     <p><a href="/">Back to the article list</a></p>
   </footer>
