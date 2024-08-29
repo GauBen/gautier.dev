@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "vite-node src/index-articles.ts && vite build",
+    "build": "vite build",
     "check": "svelte-check --tsconfig ./tsconfig.json & eslint . & stylelint --ignore-pattern .gitignore '**/*.{css,scss,svelte}' &",
     "dev": "vite dev",
     "format": "prettier --write --ignore-unknown '**/*'",
