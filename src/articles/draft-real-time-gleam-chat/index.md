@@ -1,5 +1,5 @@
 ---
-title: Building a real-time chat  in Gleam
+title: Building a real-time chat in Gleam
 snippet:
   lang: gleam
   code: |
@@ -15,7 +15,7 @@ snippet:
 
 <Tldr>
 
-[Gleam](https://gleam.run/) is a an awesome language that makes you productive in no time. The complete absence of mutable state requires thinking a bit differently, but it's a small price to pay for the benefits it brings.
+[Gleam](https://gleam.run/) is a an awesome language that makes you productive in no time. The complete absence of mutable state requires thinking a bit differently, but it's a small price to pay for the benefits it brings. [View the result on GitHub.](https://github.com/GauBen/real-time-gleam-chat)
 
 </Tldr>
 
