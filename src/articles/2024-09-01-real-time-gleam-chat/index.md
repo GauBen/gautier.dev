@@ -3,9 +3,13 @@ title: Building a real-time chat in Gleam
 snippet:
   lang: gleam
   code: |
-    pub fn main() {
-      "Hello World!"
-      |> io.println
+    http.Post, "/post" -> {
+      // Read the request body
+      let message = request.body
+      // Send the message to the pubsub
+      process.send(pubsub, Publish(message))
+      // Respond with a success message
+      new_response(200, "Submitted: " <> message)
     }
 ---
 
@@ -251,7 +255,7 @@ Here is what posting a message to `/post` roughly looks like:
 
 ```gleam
 http.Post, "/post" -> {
-  // Read the body of the request
+  // Read the request body
   let message = request.body
 
   // Send the message to the pubsub
