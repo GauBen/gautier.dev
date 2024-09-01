@@ -79,8 +79,7 @@ a {
       100% 0.125em;
   }
 
-  &:where(:active),
-  &:where(:focus) {
+  &:where(:active, :focus) {
     color: var(--bg, #fff);
     background-position:
       bottom left,
