@@ -114,9 +114,9 @@ pub fn main() {
   let assert Ok(_) =
     mist.new(
       // Handler function: takes a request and produces a response
-      fn(req) {
+      fn(request) {
         let body =
-          { "Hello, " <> req.path <> "!" }
+          { "Hello, " <> request.path <> "!" }
           |> bytes_builder.from_string
           |> mist.Bytes
         response.new(200) |> response.set_body(body)
@@ -315,7 +315,7 @@ Said HTML page looks roughly like this:
 
 ```html
 <div id="messages">
-  <!-- Messages goes here -->
+  <!-- Messages go here -->
 </div>
 
 <form action="/post" method="post">
