@@ -1,5 +1,6 @@
 ---
 title: Building a real-time chat in Gleam
+description: "Elegant, safe and pragmatic, I have found my favorite language: Gleam. Let's build a real-time chat application with it!"
 snippet:
   lang: gleam
   code: |
