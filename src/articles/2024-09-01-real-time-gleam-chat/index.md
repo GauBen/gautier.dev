@@ -16,6 +16,7 @@ snippet:
 
 <script>
   import Tldr from '$lib/Tldr.svelte'
+  import screenshot from './screenshot.png?enhanced&w=800'
 </script>
 
 <Tldr>
@@ -344,5 +345,10 @@ Said HTML page looks roughly like this:
 ```
 
 SSE are natively supported by all browsers through the [`EventSource`](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) object: a decent client can be implemented in literally a single line of JavaScript. The `onmessage` event is fired every time the server sends a message, and the `append` method adds it to the DOM. Sending a message is done by sending a POST request to the `/post` endpoint, and that's it! Since Gleam compiles to JavaScript, we could have tried to write the client in Gleam as well, but this article is already long enough. 👀
+
+<figure>
+<enhanced:img src={screenshot} alt="Screenshot of the resulting application: title bar, two messages and an input field" />
+<figcaption>I made a frontend in the Gleam colors to go with our server.</figcaption>
+</figure>
 
 And that, dear reader who made it this far, is how you build a real-time chat application in Gleam! You can find [the full code on GitHub](https://github.com/GauBen/real-time-gleam-chat), with a few additional features I did not cover in this article. I hope you enjoyed this journey as much as I did. Gleam is a beautiful language that I will definitely be using in the future. I hope you will too!
