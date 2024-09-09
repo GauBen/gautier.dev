@@ -214,6 +214,20 @@
   <article>
     <h2><User /> Personal Journey</h2>
     <div class="xp">
+      <h3>Self-Taught Developer</h3>
+      <p>
+        My programming journey began at the tender age of ten, when I began a
+        self-taught exploration of the C language. This early exposure ignited a
+        lifelong passion for technology.
+        <strong>
+          Over the years, I've maintained a commitment to learning
+        </strong>
+        and staying ahead of industry trends through diligent tech-watching. As a
+        way to give back to the community, I write technical articles, sharing my
+        knowledge and experience to help others on their programming journey.
+      </p>
+    </div>
+    <div class="xp">
       <h3>
         <a href="https://thcon.party/">
           Toulouse Hacking Convention Organizer
