@@ -5,11 +5,8 @@ snippet:
   lang: gleam
   code: |
     http.Post, "/post" -> {
-      // Read the request body
       let message = request.body
-      // Send the message to the pubsub
       process.send(pubsub, Publish(message))
-      // Respond with a success message
       new_response(200, "Submitted: " <> message)
     }
 ---
