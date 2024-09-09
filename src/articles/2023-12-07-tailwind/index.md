@@ -4,8 +4,8 @@ description: I gave Tailwind a fair chance, and I now hate every second of it.
 ---
 
 <script context="module">
-  import banner from './banner.png?enhanced&w=1568;784';
-  import overTime from './over-time.png?enhanced&w=1568;784';
+  import banner from './banner.png?enhanced&w=1600;800';
+  import overTime from './over-time.png?enhanced&w=1600;800';
   import Tldr from '$lib/Tldr.svelte';
   export { banner };
 </script>

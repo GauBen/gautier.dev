@@ -69,14 +69,18 @@
 
 <style lang="scss">
   main {
-    max-width: var(--main-width);
     padding: 0 0.5em;
     margin: 0 auto;
     overflow: hidden;
+
+    > :global(*) {
+      max-width: var(--main-width);
+      margin-inline: auto;
+    }
   }
 
   h1 {
-    margin: 2rem 0 1rem;
+    margin: 2rem auto 1rem;
   }
 
   .banner {

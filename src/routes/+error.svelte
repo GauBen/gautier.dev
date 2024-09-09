@@ -11,7 +11,7 @@
   let vx = $state(Math.cos(angle) * velocity);
   let vy = $state(Math.sin(angle) * velocity);
 
-  const bounce: Action<HTMLElement> = (title) => {
+  const bounce: Action = (title) => {
     let t = performance.now() / 1000;
     let frame: number;
 

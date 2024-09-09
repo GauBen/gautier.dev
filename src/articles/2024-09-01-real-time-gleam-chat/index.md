@@ -13,7 +13,7 @@ snippet:
 
 <script>
   import Tldr from '$lib/Tldr.svelte'
-  import screenshot from './screenshot.png?enhanced&w=800'
+  import screenshot from './screenshot.png?enhanced&w=1600;800'
 </script>
 
 <Tldr>
