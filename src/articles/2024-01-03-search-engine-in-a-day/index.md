@@ -8,10 +8,6 @@ description: I built a search engine in a day for the very website you are readi
   import Measure from './Measure.svelte'
   import Mermaid from '$lib/Mermaid.svelte'
 
-  import autocomplete from './autocomplete.png?enhanced&w=800';
-  import searchRanking from './search-ranking.png?enhanced&w=800';
-  import searchFormula from './search-formula.png?enhanced&w=800';
-
   const search = import('$lib/search')
 </script>
 
@@ -189,18 +185,18 @@ While indexing and searching are the core features of a search engine, there are
 - The search input should have auto-completion, helping the user to find relevant keywords.
 
   <figure>
-  <enhanced:img src={autocomplete} alt="Screenshot of the autocompletion feature" />
+  <enhanced:img src="./autocomplete.png?enhanced&w=800" alt="Screenshot of the autocompletion feature" />
   <figcaption>The input field should suggest a coherent search query</figcaption>
   </figure>
 
 - The search results should contain a relevant extract of the article, with the matching keywords highlighted.
 
   <figure>
-  <enhanced:img src={searchRanking} alt="Screenshot of the extract feature" />
+  <enhanced:img src="./search-ranking.png?enhanced&w=800" alt="Screenshot of the extract feature" />
   <figcaption>The search result should contain a relevant extract of the article</figcaption>
   </figure>
   <figure>
-  <enhanced:img src={searchFormula} alt="Another screenshot of the extract feature" />
+  <enhanced:img src="./search-formula.png?enhanced&w=800" alt="Another screenshot of the extract feature" />
   <figcaption><em>search</em> appears many time in the article, but the closest highlights are picked</figcaption>
   </figure>
 

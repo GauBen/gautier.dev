@@ -4,11 +4,10 @@
   import Link from "~icons/ph/link-duotone";
   import Linkedin from "~icons/ph/linkedin-logo-duotone";
   import Pin from "~icons/ph/map-pin-duotone";
-  import me from "./me.jpg";
 </script>
 
 <header>
-  <img src={me} alt="Me" />
+  <enhanced:img src="./me.jpg?enhanced&w=288;144" alt="Me" />
   <h1>Gautier<br />Ben Aïm</h1>
   <div class="contact">
     <ul>
@@ -51,7 +50,7 @@
     align-items: center;
     justify-content: center;
 
-    img {
+    :global(img) {
       width: 9rem;
       height: 9rem;
       border-radius: 50%;
