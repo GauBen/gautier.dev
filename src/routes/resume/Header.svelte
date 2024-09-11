@@ -7,7 +7,7 @@
 </script>
 
 <header>
-  <enhanced:img src="./me.jpg?enhanced&w=288;144" alt="Me" />
+  <enhanced:img src="./me.jpg?w=288;144" alt="Me" class="img" />
   <h1>Gautier<br />Ben Aïm</h1>
   <div class="contact">
     <ul>
@@ -50,7 +50,7 @@
     align-items: center;
     justify-content: center;
 
-    :global(img) {
+    .img {
       width: 9rem;
       height: 9rem;
       border-radius: 50%;

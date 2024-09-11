@@ -43,7 +43,7 @@ The banner of this article, [the cover image of the official Tailwind VS Code ex
 Please enjoy this humorous graph by [Lea Verou](https://twitter.com/LeaVerou/status/1306001020636540934), member of the W3C CSS Working Group:
 
 <figure>
-<enhanced:img src="./over-time.png?enhanced&w=1600;800" alt="Code readability becomes the most important developer concern over time" />
+<enhanced:img src="./over-time.png?w=1600;800" alt="Code readability becomes the most important developer concern over time" />
 </figure>
 
 I view Tailwind as the lowest point of this graph. I can't imagine a more unreadable way to write styles.

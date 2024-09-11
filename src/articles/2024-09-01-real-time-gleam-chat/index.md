@@ -13,7 +13,6 @@ snippet:
 
 <script>
   import Tldr from '$lib/Tldr.svelte'
-  import screenshot from './screenshot.png?enhanced&w=1600;800'
 </script>
 
 <Tldr>
@@ -344,7 +343,7 @@ Said HTML page looks roughly like this:
 SSE are natively supported by all browsers through the [`EventSource`](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) object: a decent client can be implemented in literally a single line of JavaScript. The `onmessage` event is fired every time the server sends a message, and the `append` method adds it to the DOM. Sending a message is done by sending a POST request to the `/post` endpoint, and that's it! Since Gleam compiles to JavaScript, we could have tried to write the client in Gleam as well, but this article is already long enough. 👀
 
 <figure>
-<enhanced:img src={screenshot} alt="Screenshot of the resulting frontend: title bar, two messages and an input field" />
+<enhanced:img src="./screenshot.png?w=1600;800" alt="Screenshot of the resulting frontend: title bar, two messages and an input field" />
 <figcaption>I made a frontend in Gleam colors to go with our server.</figcaption>
 </figure>
 

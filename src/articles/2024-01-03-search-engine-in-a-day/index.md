@@ -185,18 +185,18 @@ While indexing and searching are the core features of a search engine, there are
 - The search input should have auto-completion, helping the user to find relevant keywords.
 
   <figure>
-  <enhanced:img src="./autocomplete.png?enhanced&w=800" alt="Screenshot of the autocompletion feature" />
+  <enhanced:img src="./autocomplete.png?w=800" alt="Screenshot of the autocompletion feature" />
   <figcaption>The input field should suggest a coherent search query</figcaption>
   </figure>
 
 - The search results should contain a relevant extract of the article, with the matching keywords highlighted.
 
   <figure>
-  <enhanced:img src="./search-ranking.png?enhanced&w=800" alt="Screenshot of the extract feature" />
+  <enhanced:img src="./search-ranking.png?w=800" alt="Screenshot of the extract feature" />
   <figcaption>The search result should contain a relevant extract of the article</figcaption>
   </figure>
   <figure>
-  <enhanced:img src="./search-formula.png?enhanced&w=800" alt="Another screenshot of the extract feature" />
+  <enhanced:img src="./search-formula.png?w=800" alt="Another screenshot of the extract feature" />
   <figcaption><em>search</em> appears many time in the article, but the closest highlights are picked</figcaption>
   </figure>
 
