@@ -42,7 +42,7 @@ Some vulnerable websites allow arbitrary URLs, and **it can be exploited to know
 
 <Mermaid>
   flowchart TD
-    Start(User opens https://example.com/login?next=/favicon.ico)
+    Start(User opens example.com/login?next=/favicon.ico)
     LoggedIn(Redirect to /favicon.ico)
     LoggedOut(Show a login form)
     Start -->|"The user is logged in"| LoggedIn
