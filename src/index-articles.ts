@@ -251,10 +251,10 @@ console.time("Index articles");
 // Index all articles
 const indexedArticles = await Promise.all(
   [...articles].map(async ([slug, { raw, load, date }]) => {
+    if (!date) return null;
+
     const { metadata } = await load();
     const nodes = tokenizeMarkdown(await raw());
-
-    if (!date) return null;
 
     // Add the title and description to the index
     if (metadata.description)
@@ -263,7 +263,7 @@ const indexedArticles = await Promise.all(
 
     return { slug, metadata, keywords: parse(nodes), extracts: extract(nodes) };
   }),
-).then((articles) => articles.filter(Boolean));
+).then((articles) => articles.filter((article) => article !== null));
 
 // Parse all tokens into keyword maps
 const weightedKeywords = reverseKeywordMap(indexedArticles);

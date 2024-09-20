@@ -1,4 +1,3 @@
-import "@total-typescript/ts-reset";
 import "unplugin-icons/types/svelte";
 
 declare global {
