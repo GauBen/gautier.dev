@@ -2,13 +2,13 @@
 title: Using images to track third-party logins
 description: A simple trick to know if a user is logged in to a third-party website.
 snippet:
+  lang: html
   code: |
     <img
       src="https://example.com/login?next=/favicon.ico"
       onload="alert('Logged in')"
       onerror="alert('Logged out')"
     />
-  lang: html
 ---
 
 <script>
