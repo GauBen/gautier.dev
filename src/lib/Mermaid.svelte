@@ -1,18 +1,15 @@
 <script lang="ts">
-  import mermaid from "mermaid";
-  import type { Snippet } from "svelte";
   import type { Action } from "svelte/action";
-
-  const { children }: { children: Snippet } = $props();
 
   const mermaidify: Action = (node) => {
     // Remove SSR landmarks
     node.innerHTML = node.textContent!;
-    void mermaid.run({ nodes: [node] });
+    // Import mermaid client-side only
+    import("mermaid").then((mermaid) => mermaid.default.run({ nodes: [node] }));
   };
 </script>
 
-<div use:mermaidify>{@render children()}</div>
+<div use:mermaidify><slot /></div>
 
 <style lang="scss">
   div {
@@ -23,7 +20,7 @@
     width: auto;
 
     // Mermaid sets data-processed=true when the diagram is ready
-    &:not([data-processed]) {
+    &:not(:global([data-processed])) {
       padding: 0.5em;
       white-space: pre;
       opacity: 0.75;

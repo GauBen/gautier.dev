@@ -1,9 +1,3 @@
-<script lang="ts">
-  import type { Snippet } from "svelte";
-
-  const { children }: { children?: Snippet } = $props();
-</script>
-
 <div class="wrapper">
   <header>
     <h1>
@@ -13,7 +7,7 @@
       </a>
     </h1>
   </header>
-  {@render children?.()}
+  <slot />
 </div>
 
 <style lang="scss">
@@ -70,7 +64,7 @@
   }
 
   header,
-  .wrapper:has(header + *) {
+  .wrapper:has(header + :global(*)) {
     box-shadow: 0 0 0.5em #0002;
   }
 </style>

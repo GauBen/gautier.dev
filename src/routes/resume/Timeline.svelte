@@ -1,12 +1,4 @@
-<script lang="ts">
-  import type { Snippet } from "svelte";
-
-  const { children }: { children: Snippet } = $props();
-</script>
-
-<div>
-  {@render children()}
-</div>
+<div><slot /></div>
 
 <style lang="scss">
   div :global(p) {
