@@ -1,7 +1,7 @@
-@import "modern-normalize/modern-normalize.css";
-@import "./assets/prism";
-@import "./assets/techna-sans";
-@import "./assets/0xproto";
+@forward "modern-normalize/modern-normalize.css";
+@forward "./assets/prism";
+@forward "./assets/techna-sans";
+@forward "./assets/0xproto";
 
 :root {
   --prism-color: #1c1b1d;
