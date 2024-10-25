@@ -31,14 +31,9 @@
     <Card>
       {#snippet header()}
         {#if banner}
-          <enhanced:img
-            src={banner}
-            alt=""
-            class="banner"
-            style:view-transition-name={slug}
-          />
+          <enhanced:img src={banner} alt="" class="banner" />
         {:else if snippet}
-          <div class="banner" style:view-transition-name={slug}>
+          <div class="banner">
             <Prism {...snippet} />
           </div>
         {/if}

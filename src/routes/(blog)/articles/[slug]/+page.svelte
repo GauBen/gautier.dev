@@ -6,7 +6,7 @@
   import "giscus";
 
   const { data } = $props();
-  const { title, date, snippet, slug, banner, Article } = $derived(data);
+  const { title, date, snippet, banner, Article } = $derived(data);
 </script>
 
 <Header>
@@ -15,10 +15,9 @@
       src={banner}
       alt=""
       style="width: 100%; max-height: 10rem; object-fit: cover"
-      style:view-transition-name={slug}
     />
   {:else if snippet}
-    <div class="snippet" style:view-transition-name={slug}>
+    <div class="snippet">
       <Prism {...snippet} />
     </div>
   {/if}
