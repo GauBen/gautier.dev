@@ -36,7 +36,7 @@ It might not work if you have enhanced tracking protection enabled in your brows
 
 ## How does it work?
 
-Many websites use an "authwall" for logged out users who try to access a private page, with a `?redirect_to` (or similar) parameter to keep track of said page to redirect to it after login. If the user is already logged in, the authwill will be skipped and the user will be redirected to the page directly.
+Many websites use an "authwall" for logged out users who try to access a private page, with a `?redirect_to` (or similar) parameter to keep track of said page to redirect to it after login. If the user is already logged in, the authwall will be skipped and the user will be redirected to the page directly.
 
 Some vulnerable websites allow arbitrary URLs, and **it can be exploited to know if the user is logged in** to the third-party website. They usually follow this very naive implementation:
 

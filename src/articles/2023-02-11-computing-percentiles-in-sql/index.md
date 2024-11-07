@@ -110,7 +110,7 @@ GROUP BY id
 
 </Example>
 
-And then we can `LEFT JOIN` the _websites_ table to retreive other details:
+And then we can `LEFT JOIN` the _websites_ table to retrieve other details:
 
 ```sql
 SELECT websites.id, name, p50

@@ -48,28 +48,19 @@
       keepFocus: true,
       noScroll: true,
     });
-    if (input) input.focus();
+    input?.focus();
     index = undefined;
   };
   const set = async (value: string) => {
     await goto(`?q=${encodeURIComponent(value)}`, {
-      keepFocus: focus,
+      keepFocus: true,
       noScroll: true,
       replaceState: true,
     });
-    if (!focus) input?.focus();
+    input?.focus();
     index = undefined;
   };
 </script>
-
-<svelte:window
-  onfocusin={({ target }) => {
-    focus = target === input;
-  }}
-  onfocusout={({ relatedTarget }) => {
-    focus = relatedTarget === input;
-  }}
-/>
 
 <div>
   <h2>
@@ -91,7 +82,13 @@
     {/if}
   </button>
   {#if q !== undefined}
-    <form class:focus>
+    <form
+      class:focus
+      onfocusin={() => (focus = true)}
+      onfocusout={({ relatedTarget, currentTarget }) => {
+        focus = currentTarget.contains(relatedTarget as Node);
+      }}
+    >
       <input
         name="q"
         value={q}
