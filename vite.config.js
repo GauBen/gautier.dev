@@ -17,4 +17,7 @@ export default defineConfig({
       },
     },
   },
+  // Create an empty "client" environment for
+  // https://github.com/vitejs/vite/blob/3400a5e258a597499c0f0808c8fca4d92eeabc17/packages/vite/src/node/plugins/css.ts#L1581
+  environments: { client: {} },
 });
