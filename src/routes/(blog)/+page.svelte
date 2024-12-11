@@ -4,11 +4,19 @@
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
   import SearchBar from "./SearchBar.svelte";
+  import ChatsCircle from "~icons/ph/chats-circle-duotone";
 
   const escape = (s: string) =>
     s.replaceAll("&", "&amp;").replaceAll("<", "&lt;");
 
   const { data } = $props();
+
+  let commentCounts = $state<Map<string, number>>();
+  $effect(() => {
+    data.commentCounts.then((c) => {
+      commentCounts = c;
+    });
+  });
 </script>
 
 <Header />
@@ -28,6 +36,7 @@
   <SearchBar {...data} />
 
   {#each data.articles as { slug, banner, title, description, date, snippet }}
+    {@const comments = commentCounts?.get(title) ?? 0}
     <Card>
       {#snippet header()}
         {#if banner}
@@ -52,7 +61,12 @@
         <p>{description}</p>
       {/if}
       {#if date}
-        <p><time datetime={date.toISOString()}>{formatDate(date)}</time></p>
+        <p style="display: flex; justify-content: space-between">
+          <time datetime={date.toISOString()}>{formatDate(date)}</time>
+          {#if comments > 0}
+            <span>{comments} <ChatsCircle aria-label="comments" /></span>
+          {/if}
+        </p>
       {:else}
         <p>Unpublished draft</p>
       {/if}
