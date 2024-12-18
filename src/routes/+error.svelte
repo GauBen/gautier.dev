@@ -65,7 +65,7 @@
     vy *= 2;
   }}
 >
-  {status}
+  {page.status}
 </h1>
 
 <article>
