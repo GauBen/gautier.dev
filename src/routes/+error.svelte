@@ -1,9 +1,7 @@
 <script lang="ts">
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import Header from "$lib/Header.svelte";
   import type { Action } from "svelte/action";
-
-  const { status, error } = $derived($page);
 
   const velocity = 200;
   const angle = Math.random() * Math.PI * 2;
@@ -56,7 +54,7 @@
 </script>
 
 <svelte:head>
-  <title>{status} {error?.message} – gautier.dev</title>
+  <title>{page.status} {page.error?.message} – gautier.dev</title>
 </svelte:head>
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
@@ -73,7 +71,7 @@
 <article>
   <Header />
   <div style="flex: 4"></div>
-  <p style="font-size: 2em">{error?.message}</p>
+  <p style="font-size: 2em">{page.error?.message}</p>
   <p><a href="/">Go back to homepage</a></p>
   <div style="flex: 5"></div>
 </article>

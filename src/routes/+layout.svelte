@@ -1,13 +1,13 @@
 <script lang="ts">
   import { dev } from "$app/environment";
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import { inject } from "@vercel/analytics";
   import "../app.scss";
 
   inject({ mode: dev ? "development" : "production" });
 
   const { children } = $props();
-  const { title, description } = $derived($page.data);
+  const { title, description } = $derived(page.data);
 </script>
 
 <svelte:head>
