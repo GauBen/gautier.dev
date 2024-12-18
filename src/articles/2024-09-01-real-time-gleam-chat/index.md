@@ -103,7 +103,7 @@ The `gleam` binary contains the package manager: `gleam add mist` is (almost) al
 A Hello World HTTP server in Gleam looks like this:
 
 ```gleam
-import gleam/bytes_builder
+import gleam/bytes_tree
 import gleam/erlang/process
 import gleam/http/response
 import mist
@@ -115,7 +115,7 @@ pub fn main() {
       fn(request) {
         let body =
           { "Hello, " <> request.path <> "!" }
-          |> bytes_builder.from_string
+          |> bytes_tree.from_string
           |> mist.Bytes
         response.new(200) |> response.set_body(body)
       },
@@ -292,7 +292,7 @@ http.Get, "/sse" ->
       // Forward the message to the web client
       mist.send_event(
         connection,
-        message |> string_builder.from_string |> mist.event,
+        message |> string_tree.from_string |> mist.event,
       )
 
       // ... a pinch of error handling code
