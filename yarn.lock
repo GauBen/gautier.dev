@@ -1321,9 +1321,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^2.12.1":
-  version: 2.12.1
-  resolution: "@sveltejs/kit@npm:2.12.1"
+"@sveltejs/kit@npm:^2.12.2":
+  version: 2.12.2
+  resolution: "@sveltejs/kit@npm:2.12.2"
   dependencies:
     "@types/cookie": "npm:^0.6.0"
     cookie: "npm:^0.6.0"
@@ -1343,7 +1343,7 @@ __metadata:
     vite: ^5.0.3 || ^6.0.0
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 10c0/2acb6ca6a219cade5f1030c4e779c1573575f4b97274534822570fa2c001dde9232c864429ae67bd5d6477fd492605008171d8e6e2acbb0aa4143ebc6e3088d0
+  checksum: 10c0/159c4a271208bde97ebd0b5534384071654bc21ef0e2146102dcb3d1e35fb3e752b6adb75192fe4321b74f322d7000ce5c4974a71f667ddf10bbf012b3ca36ec
   languageName: node
   linkType: hard
 
@@ -3713,7 +3713,7 @@ __metadata:
     "@iconify-json/ph": "npm:^1.2.2"
     "@sveltejs/adapter-vercel": "npm:^5.5.2"
     "@sveltejs/enhanced-img": "npm:^0.4.4"
-    "@sveltejs/kit": "npm:^2.12.1"
+    "@sveltejs/kit": "npm:^2.12.2"
     "@sveltejs/vite-plugin-svelte": "npm:^5.0.3"
     "@types/node": "npm:^22.10.2"
     "@types/prismjs": "npm:^1.26.5"
@@ -3724,8 +3724,8 @@ __metadata:
     eslint-plugin-command: "npm:^0.2.7"
     eslint-plugin-svelte: "npm:^2.46.1"
     giscus: "npm:^1.5.0"
-    globals: "npm:^15.13.0"
-    katex: "npm:^0.16.17"
+    globals: "npm:^15.14.0"
+    katex: "npm:^0.16.18"
     mdsvex: "npm:^0.12.3"
     mermaid: "npm:^11.4.1"
     modern-normalize: "npm:^3.0.1"
@@ -3758,7 +3758,7 @@ __metadata:
     typescript-eslint: "npm:^8.18.1"
     unified: "npm:^11.0.5"
     unplugin-icons: "npm:^0.22.0"
-    vite: "npm:^6.0.3"
+    vite: "npm:^6.0.4"
     vite-node: "npm:^2.1.8"
   languageName: unknown
   linkType: soft
@@ -3868,10 +3868,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^15.13.0":
-  version: 15.13.0
-  resolution: "globals@npm:15.13.0"
-  checksum: 10c0/640365115ca5f81d91e6a7667f4935021705e61a1a5a76a6ec5c3a5cdf6e53f165af7f9db59b7deb65cf2e1f83d03ac8d6660d0b14c569c831a9b6483eeef585
+"globals@npm:^15.13.0, globals@npm:^15.14.0":
+  version: 15.14.0
+  resolution: "globals@npm:15.14.0"
+  checksum: 10c0/039deb8648bd373b7940c15df9f96ab7508fe92b31bbd39cbd1c1a740bd26db12457aa3e5d211553b234f30e9b1db2fee3683012f543a01a6942c9062857facb
   languageName: node
   linkType: hard
 
@@ -4357,14 +4357,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"katex@npm:^0.16.17, katex@npm:^0.16.7, katex@npm:^0.16.9":
-  version: 0.16.17
-  resolution: "katex@npm:0.16.17"
+"katex@npm:^0.16.18, katex@npm:^0.16.7, katex@npm:^0.16.9":
+  version: 0.16.18
+  resolution: "katex@npm:0.16.18"
   dependencies:
     commander: "npm:^8.3.0"
   bin:
     katex: cli.js
-  checksum: 10c0/2f5025ae6051b000f78000de8578d6f641755270ba948f3a39892bb0beb502e0a7e716837c3b1402abd695b22b52958ccf8c33de82b16b68649ebe1b3dcb03b2
+  checksum: 10c0/f80844710ae28d435395df522cf2439ce1be240cb5e7196e569e16459f705c232cd1335ff96bb6a76a3a87962ddebeb7e212e25271f11ad8f80a30dec575ba53
   languageName: node
   linkType: hard
 
@@ -7200,9 +7200,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.0.3":
-  version: 6.0.3
-  resolution: "vite@npm:6.0.3"
+"vite@npm:^6.0.4":
+  version: 6.0.4
+  resolution: "vite@npm:6.0.4"
   dependencies:
     esbuild: "npm:^0.24.0"
     fsevents: "npm:~2.3.3"
@@ -7248,7 +7248,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10c0/764ebed14770426a638575b23a51127c630ace873999ab896b0184484d8107e7255cdf64cfb36c65c1ef1d583e44b70a1d14c0f05b89612e834a5806e3964475
+  checksum: 10c0/b1808f99250980bb1dc7805897ecfced4913adc7b4fd1cf7912e034f3e24e3e97a751ca3410620428bf073070f0b46071b94c4241cf9fc88b12f2d9dcafd7619
   languageName: node
   linkType: hard
 
