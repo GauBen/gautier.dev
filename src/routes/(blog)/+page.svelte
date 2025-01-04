@@ -3,8 +3,8 @@
   import Card from "$lib/Card.svelte";
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
-  import SearchBar from "./SearchBar.svelte";
   import ChatsCircle from "~icons/ph/chats-circle-duotone";
+  import SearchBar from "./SearchBar.svelte";
 
   const escape = (s: string) =>
     s.replaceAll("&", "&amp;").replaceAll("<", "&lt;");
@@ -24,12 +24,15 @@
 <main>
   <h1>Hey!</h1>
   <p>
-    My name is Gautier, I'm a French full stack web engineer, cybersecurity
-    engineer, design enthusiast and hackathon organizer. I work full-time at
-    <a href="https://escape.tech/">Escape</a>
-    as a full stack web engineer. I graduated from
+    My name is Gautier, I'm a developer advocate, full-stack engineer,
+    cybersecurity specialist, design enthusiast and hackathon organizer. I work
+    full-time at
+    <a href="https://www.jahia.com/">Jahia</a>
+    as Developer Advocate. I used to work at
+    <a href="https://escape.tech/">Escape (YC W23)</a>
+    as Full-Stack Engineer. I graduated from
     <a href="https://en.wikipedia.org/wiki/ENSEEIHT">ENSEEIHT</a>
-    in 2022 with a dual degree in computer science and cybersecurity.
+    with a dual degree in computer science and cybersecurity.
   </p>
   <p>I sometimes write articles, you'll find them below.</p>
 

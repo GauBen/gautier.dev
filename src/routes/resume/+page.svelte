@@ -13,6 +13,47 @@
   <Summary />
   <article>
     <h2><Suitcase /> Work Experience</h2>
+
+    <div class="xp">
+      <h3>
+        Developer Advocate
+        <mark>
+          <a href="https://www.linkedin.com/company/jahia-solutions/">
+            Jahia
+          </a>
+        </mark>
+      </h3>
+      <ul>
+        <li>
+          Create tickets to define the future improvements of our developer
+          experience in collaboration with the development team dedicated to the
+          developer's experience.
+        </li>
+        <li>
+          Write blog articles, webinars, and YouTube videos to promote the
+          company's tech and reach the developer audience on different channels.
+          In charge of creating and managing code samples & demo websites.
+        </li>
+        <li>
+          Code new features, fix bugs, and review pull requests to help the
+          delivery team.
+        </li>
+        <li>
+          Write reference documentation and tutorials to ensure that developers
+          using the company's products have all the information they need to be
+          successful with their projects.
+        </li>
+      </ul>
+      <div class="stuff">
+        <span class="tags">
+          <span>Cybersec</span>
+          <span>Development</span>
+          <span>Cryptography</span>
+        </span>
+        <em>June to August 2021</em>
+      </div>
+    </div>
+
     <div class="xp">
       <h3>
         Full-Stack Senior Engineer & Cybersecurity Researcher
