@@ -66,5 +66,5 @@
     "vite": "^6.0.7",
     "vite-node": "^2.1.8"
   },
-  "packageManager": "yarn@4.5.3"
+  "packageManager": "yarn@4.6.0"
 }

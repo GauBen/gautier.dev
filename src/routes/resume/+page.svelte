@@ -27,11 +27,11 @@
         <li>
           Create tickets to define the future improvements of our developer
           experience in collaboration with the development team dedicated to the
-          developer's experience.
+          developer’s experience.
         </li>
         <li>
           Write blog articles, webinars, and YouTube videos to promote the
-          company's tech and reach the developer audience on different channels.
+          company’s tech and reach the developer audience on different channels.
           In charge of creating and managing code samples & demo websites.
         </li>
         <li>
@@ -40,17 +40,17 @@
         </li>
         <li>
           Write reference documentation and tutorials to ensure that developers
-          using the company's products have all the information they need to be
+          using the company’s products have all the information they need to be
           successful with their projects.
         </li>
       </ul>
       <div class="stuff">
         <span class="tags">
-          <span>Cybersec</span>
+          <span>Advocacy</span>
+          <span>Ownership</span>
           <span>Development</span>
-          <span>Cryptography</span>
         </span>
-        <em>June to August 2021</em>
+        <em>Started in January 2025</em>
       </div>
     </div>
 
@@ -152,7 +152,7 @@
           <span>Cybersec</span>
           <span>Research</span>
         </span>
-        <em>Started in March 2022</em>
+        <em>March 2022 to December 2024</em>
       </div>
     </div>
 
@@ -211,7 +211,7 @@
       </h3>
       <ul>
         <li>
-          Reimagined the Junior Enterprise's website to
+          Reimagined the Junior Enterprise’s website to
           <strong>create a modern and professional appearance,</strong> while highlighting
           their expertise and services.
         </li>
@@ -261,7 +261,7 @@
         self-taught exploration of the C language. This early exposure ignited a
         lifelong passion for technology.
         <strong>
-          Over the years, I've maintained a commitment to learning
+          Over the years, I’ve maintained a commitment to learning
         </strong>
         and staying ahead of industry trends through diligent tech-watching. As a
         way to give back to the community, I write technical articles, sharing my
