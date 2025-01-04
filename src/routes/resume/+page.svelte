@@ -106,7 +106,7 @@
           </li>
           <li>
             <a
-              href="https://bsidesoslo.no/talks/StateofGraphQLSecurity2023.html"
+              href="https://2023.bsidesoslo.no/talks/StateofGraphQLSecurity2023.html"
             >
               Gave a conference talk at <strong>BSides Oslo</strong>
               on the <strong>State of GraphQL Security 2023,</strong> highlighting
