@@ -12,7 +12,7 @@ snippet:
 ---
 
 <script>
-  import Tldr from '$lib/Tldr.svelte'
+  import {Tldr} from '$lib/markdown'
 </script>
 
 <Tldr>

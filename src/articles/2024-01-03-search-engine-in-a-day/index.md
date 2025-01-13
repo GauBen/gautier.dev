@@ -6,7 +6,7 @@ description: I built a search engine in a day for the very website you are readi
 <script>
   import Explorer from './Explorer.svelte'
   import Measure from './Measure.svelte'
-  import Mermaid from '$lib/Mermaid.svelte'
+  import {Mermaid} from '$lib/markdown'
 
   const search = import('$lib/search')
 </script>

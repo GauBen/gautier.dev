@@ -1,5 +1,5 @@
 <script>
-  import Mermaid from "$lib/Mermaid.svelte";
+  import { Mermaid } from "$lib/markdown";
 </script>
 
 <main style="text-align: center">

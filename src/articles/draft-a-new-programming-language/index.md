@@ -3,7 +3,7 @@ title: Meet Piña, a new programming language
 ---
 
 <script>
-  import Tldr from '$lib/Tldr.svelte'
+  import {Tldr} from '$lib/markdown'
 </script>
 
 <Tldr>I often complain how the programming languages I develop with are badly designed (mostly JavaScript and PHP). Will I be terrible at designing a new language? Yes?</Tldr>

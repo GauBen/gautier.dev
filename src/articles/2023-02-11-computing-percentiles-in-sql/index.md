@@ -10,8 +10,7 @@ snippet:
 ---
 
 <script>
-  import Example from '$lib/Example.svelte';
-  import Tldr from '$lib/Tldr.svelte';
+  import {Example, Tldr} from '$lib/markdown';
 </script>
 
 <Tldr>

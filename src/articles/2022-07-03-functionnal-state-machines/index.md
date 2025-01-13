@@ -16,7 +16,7 @@ snippet:
 <script>
   import Automaton from './Automaton.svelte';
   import Tamagotchi from './Tamagotchi.svelte';
-  import Mermaid from '$lib/Mermaid.svelte';
+  import {Mermaid} from '$lib/markdown';
 </script>
 
 Finite state machines, sometimes simply automatons, are a mathematical model of computation. They are used to describe the behavior of systems, and are often used in computer science to model programs.

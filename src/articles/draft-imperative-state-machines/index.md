@@ -9,8 +9,7 @@ snippet:
 ---
 
 <script>
-  import Example from '$lib/Example.svelte'
-  import Mermaid from '$lib/Mermaid.svelte'
+  import {Example, Mermaid} from '$lib/markdown'
   import TypeWriter from './TypeWriter.svelte'
 </script>
 

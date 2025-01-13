@@ -15,7 +15,7 @@ export default {
     vitePreprocess(),
     mdsvex({
       extension: ".md",
-      layout: "./src/lib/markdown/layout.svelte",
+      layout: "./src/lib/markdown/Layout.svelte",
       highlight: {
         highlighter: (code, lang) => {
           if (!lang) return `<pre>{@html ${JSON.stringify(code)}}</pre>`;

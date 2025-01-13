@@ -15,8 +15,7 @@ snippet:
 ---
 
 <script>
-  import Example from '$lib/Example.svelte'
-  import Table from '$lib/markdown/table.svelte'
+  import {Example, Table} from '$lib/markdown'
 </script>
 
 <style>

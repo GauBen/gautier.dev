@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Table from "$lib/markdown/table.svelte";
+  import { Table } from "$lib/markdown";
 
   const { weightedKeywords, metadata }: typeof import("$lib/search.js") =
     $props();

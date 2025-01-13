@@ -14,9 +14,7 @@ snippet:
   import Breadcrumbs from './Breadcrumbs.svelte';
   import Dropdown from './Dropdown.svelte';
   import Item from './Item.svelte';
-  import Output from '$lib/Example.svelte';
-  import Table from '$lib/markdown/table.svelte';
-  import Tldr from '$lib/Tldr.svelte';
+  import {Example, Table, Tldr} from '$lib/markdown';
 </script>
 
 <Tldr>
@@ -52,13 +50,13 @@ I'm using a Svelte/React/Vue syntax here, but you might consider for instance th
 
 Here's what it looks like:
 
-<Output>
+<Example>
   <Breadcrumbs>
     <Item><a href="?" on:click|preventDefault>Inbox</a></Item>
     <Item><Dropdown /></Item>
     <Item>Latest messages</Item>
   </Breadcrumbs>
-</Output>
+</Example>
 
 While it looks ugly, it behaves exactly as I want it to behave: it's a keyboard accessible button -- you may <kbd>tab</kbd> <kbd>tab</kbd> <kbd>return</kbd> your way into it.
 
@@ -80,10 +78,10 @@ This property can take four different values, let's try them all!
     <th><code>inherit</code></th>
   </tr>
   <tr>
-    <td><Output><button style="all: revert">Button</button></Output></td>
-    <td><Output><button style="all: initial">Button</button></Output></td>
-    <td><Output><button style="all: unset">Button</button></Output></td>
-    <td><Output><button style="all: inherit">Button</button></Output></td>
+    <td><Example><button style="all: revert">Button</button></Example></td>
+    <td><Example><button style="all: initial">Button</button></Example></td>
+    <td><Example><button style="all: unset">Button</button></Example></td>
+    <td><Example><button style="all: inherit">Button</button></Example></td>
   </tr>
   <tr>
     <td>❌ Brings back the default browser button.</td>
@@ -95,13 +93,13 @@ This property can take four different values, let's try them all!
 
 Okay, this looks quite chaotic, but we have found what we wanted: `unset` make our button look like is surrounding text, with the correct font and all. Let's try it on our dropdown activator:
 
-<Output>
+<Example>
   <Breadcrumbs>
     <Item><a href="?" on:click|preventDefault>Inbox</a></Item>
     <Item><Dropdown css="all: unset" /></Item>
     <Item>Latest messages</Item>
   </Breadcrumbs>
-</Output>
+</Example>
 
 It looks great now! There is however an issue that is hard to notice: it is not keyboard accessible anymore. When <kbd>tab</kbd>bing to it, the focus ring is not visible anymore. From there, two possibilities:
 
@@ -124,8 +122,8 @@ Indeed, I quite like the default focus ring, and it creates a sense of unity wit
     <th><code>initial</code></th>
   </tr>
   <tr>
-    <td><Output><button style="all: unset; outline: revert">Button</button></Output></td>
-    <td><Output><button style="all: unset; outline: initial">Button</button></Output></td>
+    <td><Example><button style="all: unset; outline: revert">Button</button></Example></td>
+    <td><Example><button style="all: unset; outline: initial">Button</button></Example></td>
   </tr>
   <tr>
     <td>✅ Brings back the default focus ring.</td>
@@ -144,12 +142,12 @@ button {
 }
 ```
 
-<Output>
+<Example>
   <Breadcrumbs>
     <Item><a href="?" on:click|preventDefault>Inbox</a></Item>
     <Item><Dropdown css="all: unset; outline: revert" /></Item>
     <Item>Latest messages</Item>
   </Breadcrumbs>
-</Output>
+</Example>
 
 We now have a _beautiful_ and accessible dropdown button!

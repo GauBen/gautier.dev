@@ -5,7 +5,7 @@ description: I gave Tailwind a fair chance, and I now hate every second of it.
 
 <script context="module">
   import banner from './banner.png?enhanced&w=1600;800';
-  import Tldr from '$lib/Tldr.svelte';
+  import { Tldr } from '$lib/markdown';
   export { banner };
 </script>
 
