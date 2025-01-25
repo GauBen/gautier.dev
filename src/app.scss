@@ -18,9 +18,9 @@
   --bg: #fff;
   --link: #3a3a99;
 
+  scrollbar-gutter: stable;
   line-height: 1.5;
   color: var(--color);
-  scrollbar-gutter: stable;
   scrollbar-width: thin;
   background-color: var(--bg);
 }
@@ -74,13 +74,13 @@ a {
 
   &:where(:active, :focus) {
     color: var(--bg, #fff);
+    outline: none;
     background-position:
       bottom left,
       bottom left;
     background-size:
       100% 100%,
       0% 0.125em;
-    outline: none;
   }
 }
 

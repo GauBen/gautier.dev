@@ -167,9 +167,9 @@
     align-items: center;
     padding: 0.25rem;
     line-height: 1;
+    vertical-align: bottom;
     color: inherit;
     text-decoration: none;
-    vertical-align: bottom;
     background-image: linear-gradient(#000, #000);
     background-repeat: no-repeat;
     background-position: right;
@@ -183,9 +183,9 @@
     &:active,
     &:focus-visible {
       color: var(--bg, #fff);
+      outline: none;
       background-position: left;
       background-size: 100% 100%;
-      outline: none;
     }
 
     // Give the button a bigger hitbox for mobile users

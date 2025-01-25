@@ -564,8 +564,8 @@
 
   @media print {
     :root {
-      font-size: 14px;
       scrollbar-gutter: auto !important;
+      font-size: 14px;
     }
   }
 </style>

@@ -143,8 +143,8 @@
       color: #8888;
       pointer-events: none;
       content: "Draft";
-      transition: 0.2s ease-in-out;
       transform: rotate(-10deg);
+      transition: 0.2s ease-in-out;
     }
 
     &:hover::before {
