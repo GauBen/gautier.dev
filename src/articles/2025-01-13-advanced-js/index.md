@@ -8,7 +8,7 @@ snippet:
       fetch("https://example.com").then((response) => {
         console.log(response.ok);
       });
-    } catch {
+    } catch (error) {
       console.error(error); // Never called!
     }
 ---
