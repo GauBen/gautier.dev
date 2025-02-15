@@ -1,6 +1,6 @@
 ---
 title: All possible JavaScript imports
-description: There are so many of them, it's definitely a confusing mess. Let's list them all, and see what they do.
+description: There are so many of them, it's definitely confusing. Let's list them all, and see what they do.
 snippet:
   lang: js
   code: |
@@ -16,7 +16,7 @@ snippet:
 
 <Tldr>
 
-There are so many ways to import JavaScript modules, I can't just give you a simple answer. Let's list them all, and see what they do.
+Here is the story of JavaScript imports. It may not be 100% accurate but it should give you an idea of what is going on.
 
 </Tldr>
 
@@ -27,12 +27,12 @@ import { type JSX } from "react";
 import * as React from "react";
 import React = require("react");
 const React = await import("react");
-// ...
+// ...!
 ```
 
 And the list can go on longer. If it confuses you, rest assured, you are far from alone. In this article, I'll try to explain both the why and the how of all these import statements.
 
-Take a drink, it _may_ be a long road.
+Take a drink, it _will_ be a long road.
 
 ## Why the mess?
 
@@ -60,7 +60,7 @@ There was a time when JavaScript was a simple, browser-bound, scripting language
 </form>
 ```
 
-I should have added a `<table>` layout for nostalgia, but I digress.
+I should have added a [`<table>` layout](https://thehistoryoftheweb.com/tables-layout-absurd/) for nostalgia, but I digress.
 
 Somehow, people were bored of doing the same thing over and over again<sup>[_citation needed_]</sup> and started turning themselves to reusable bits of JavaScript, usually called **libraries**. The most famous one is probably jQuery, born in 2006, but there were a lot of them. ([JS fatigue](https://news.ycombinator.com/item?id=10796567) ain't new, folks.)
 
@@ -81,13 +81,9 @@ This `$` variable comes from `jquery.min.js`, but how does it work exactly? It l
 <script>
   // jquery.min.js
   (function (window) {
-    var internalObject = {
-      // ...
-    };
-
-    function internalFunction() {
-      // ...
-    }
+    // Internal utilities
+    var internalObject = {};
+    function internalFunction() {}
 
     // Register the `$` variable in the global scope
     window.$ = function (selector) {
@@ -106,10 +102,66 @@ This `$` variable comes from `jquery.min.js`, but how does it work exactly? It l
 </script>
 ```
 
+While this works for basic cases, this mechanism---registering libraries to the global scope---will break down in bigger projects, where you might have several libraries or even several versions of the same library, as some names are reused.
+
 ### The rise of modules: Node.js
 
 In 2009, a guy named [Ryan Dahl](https://github.com/ry) thought it was a great idea to run JavaScript outside of the browser and make it a general-purpose programming language. Let's not discuss the sanity of this decision, but it gave birth to Node.js. And no programming language is complete without a package manager (looking at you C 👀), so npm was born a year later, in 2010.
 
-Since there is no `<script>` tag in Node.js---you run JS directly, not HTML---you need a way to include other files. This is where the `require` function comes in.
+Since there are no `<script>` tags in Node.js---you run JS directly, not HTML---you need a way to include other files. **This is where the `require` function comes in.**
 
-`require` is a global Node.js function that has the power to import a relative JS file if it starts with `./` or import from a `node_modules` folder if it doesn't.
+`require` is a global Node.js function that has the power to import a relative JS file if it starts with `./` or import from a `node_modules` folder if it doesn't. To abide by the [principle of encapsulation](<https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)>), Node.js offers a file-scoped `module` variable to declare the exposed API.
+
+Here an example using both `require` and `module.exports`, with both relative and `node_modules` imports:
+
+```js
+// ./node_modules/pad-right/index.js
+// Expose a function that pads a string with whitespaces
+module.exports = function pad(str, len) {
+  while (str.length < len) {
+    str = str + " ";
+  }
+  return str;
+};
+
+// ./books.js
+// Expose an array of books
+module.exports = [
+  { title: "Journey to the Center of the Earth", year: 1864 },
+  { name: "Gilded Needles", year: 1980 },
+  { name: "The Housemaid", year: 2022 },
+];
+
+// ./index.js
+var pad = require("pad-right"); // Import from node_modules
+var books = require("./books"); // Relative import
+
+console.log("*** My favorite books ***");
+for (var i = 0; i < books.length; i++) {
+  console.log(pad(books[i].title, 34), "|", books[i].year);
+}
+```
+
+This code will print:
+
+```
+*** My favorite books ***
+Journey to the Center of the Earth | 1864
+Gilded Needles                     | 1980
+The Housemaid                      | 2022
+```
+
+In this example, the `module.exports` variable is set to a function and an array, and that's what is retrieved when `require` is called. While it can be anything, **usage turned to objects to expose multiple functions and values:**
+
+```js
+// ./greet.js
+// `module.exports` is `{}` by default, properties can be added to it
+module.exports.name = "World";
+module.exports.sayHello = function (name) {
+  console.log("Hello " + name);
+};
+
+// ./index.js
+var greet = require("./greet"); // `greet` is an object with methods and properties
+greet.sayHello(greet.name);
+```
