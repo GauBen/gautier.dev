@@ -1,15 +1,17 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
 
-  const { title = "Example", children }: { title?: string; children: Snippet } =
-    $props();
+  const {
+    title = "Example",
+    children,
+  }: { title?: string; children?: Snippet } = $props();
 </script>
 
 <div>
   {#if title}
     <span>{title}</span>
   {/if}
-  {@render children()}
+  {@render children?.()}
 </div>
 
 <style lang="scss">

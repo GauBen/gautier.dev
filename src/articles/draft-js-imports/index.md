@@ -11,7 +11,7 @@ snippet:
 ---
 
 <script>
-  import {Tldr} from '$lib/markdown';
+  import {Tldr, Callout} from '$lib/markdown';
 </script>
 
 <Tldr>
@@ -33,6 +33,12 @@ const React = await import("react");
 And the list can go on longer. If it confuses you, rest assured, you are far from alone. In this article, I'll try to explain both the why and the how of all these import statements.
 
 Take a drink, it _will_ be a long road.
+
+<Callout>
+
+Code samples in this article do not reflect best practices, but are meant to give you an idea of what was done in the past. Please don't take them as gospel.
+
+</Callout>
 
 ## Why the mess?
 
@@ -165,3 +171,7 @@ module.exports.sayHello = function (name) {
 var greet = require("./greet"); // `greet` is an object with methods and properties
 greet.sayHello(greet.name);
 ```
+
+This type of modules is called **[CommonJS](https://nodejs.org/api/modules.html#modules-commonjs-modules), or CJS for short.** It's the extension that can be used in Node.js to enforce the evaluation of JavaScript file as a CommonJS module.
+
+If you take a second look at the snippets above, you'll notice that the argument of the `require` function does not need an extension. Instead, Node.js uses [a resolution algorithm](https://nodejs.org/api/modules.html#all-together) that can be summed up as follows: if the extension-less file cannot be found, try concatenating `.js` and `/index.js`.
