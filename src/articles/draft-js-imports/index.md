@@ -175,3 +175,72 @@ greet.sayHello(greet.name);
 This type of modules is called **[CommonJS](https://nodejs.org/api/modules.html#modules-commonjs-modules), or CJS for short.** It's the extension that can be used in Node.js to enforce the evaluation of JavaScript file as a CommonJS module.
 
 If you take a second look at the snippets above, you'll notice that the argument of the `require` function does not need an extension. Instead, Node.js uses [a resolution algorithm](https://nodejs.org/api/modules.html#all-together) that can be summed up as follows: if the extension-less file cannot be found, try concatenating `.js` and `/index.js`.
+
+### More mess: TypeScript
+
+JavaScript's more popular flavor, TypeScript, was created in 2012. It adds static typing to the language, and with it, new ways to import and export modules.
+
+Because types do not exist at runtime, TypeScript had to come up with a way to import and export types only. This syntax is completely erased during the transpilation process. There's no reason to use it nowadays, but it's mentioned in this article for the sake of completeness.
+
+```ts
+// ./book.ts
+interface Book {
+  title: string;
+  year: number;
+}
+export = Book;
+
+// ./index.ts
+import Book = require("./book");
+const book: Book = { title: "The Priory of the Orange Tree", year: 2019 };
+```
+
+Do not use that, it's a relic of the past.
+
+In case `export =` is used with a value, it will be transpiled to `module.exports =`.
+
+## Standard modules: ES6
+
+In 2015, the 6th version of the ECMAScript specification was released. (It's ECMAScript and not JavaScript [because JavaScript is trademark](https://tinyclouds.org/trademark), but both languages are one and the same.) With it comes an official, standardized way to declare modules, called **ECMAScript modules, or ESM for short**.
+
+This is the `import` and `export` syntax you know and love! Because this standard was meant to supersede all others, it was made powerful enough to handle all cases, especially the ones from CommonJS.
+
+Also, because it is a standard, it is supported by all modern runtimes: browsers, Node.js, Deno, Bun... ESM puts an end to platform-specific module systems.
+
+### Exporting a single value with `export default`
+
+Let's start exploring the `export` syntax with its simplest form: exporting a single value.
+
+```js
+// ./greet.js
+export default function greet(name) {
+  console.log("Hello " + name);
+}
+
+// ./index.js
+import greet from "./greet.js"; // Notice the `.js` extension!
+greet("World");
+```
+
+This is the modern version of `module.exports =`. The only thing worth mentioning is that Node's resolution algorithm does not apply to ESM. You need to specify the extension of the file you're importing.
+
+It works with any value, functions, arrays, primitives, and objects. For instance, you can export an object:
+
+<!-- prettier-ignore -->
+```js
+// ./config.js
+export default {
+  host: "localhost",
+  port: 3000,
+};
+
+// ./index.js
+import config from "./config.js";
+console.log("Server running on", config.host + ":" + config.port);
+```
+
+It is tempting to write `import { host, port } from "./config.js"`, but it won't work; **you cannot destructure a default export**. While it works to export an object as a default export, ESM offers a better, more explicit way to export multiple values.
+
+### Exporting multiple values with `export`
+
+TBC
