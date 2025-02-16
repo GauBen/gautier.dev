@@ -39,11 +39,8 @@
   </div>
   <section>
     <h2 id="comments">
-      <a
-        aria-hidden="true"
-        tabindex="-1"
-        href="#comments"
-        style="margin-right: 0.5rem">#</a
+      <a href="#comments" style="margin-right: 0.5rem" title="Link to comments"
+        >#</a
       >Comments
     </h2>
     <div>

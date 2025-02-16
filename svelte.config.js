@@ -32,6 +32,7 @@ export default {
           rehypeAutolinkHeadings,
           /** @type {import("rehype-autolink-headings").Options} */ ({
             content: { type: "text", value: "#" },
+            properties: { title: "Link to this heading" },
           }),
         ],
       ],

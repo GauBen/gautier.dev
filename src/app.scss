@@ -61,7 +61,8 @@ a {
     0% 0.125em;
   transition:
     150ms color,
-    150ms background-size;
+    150ms background-size,
+    150ms border-radius;
 
   &:where(:hover) {
     background-position:
@@ -81,6 +82,7 @@ a {
     background-size:
       100% 100%,
       0% 0.125em;
+    border-radius: 2px;
   }
 }
 

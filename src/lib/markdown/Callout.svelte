@@ -3,10 +3,7 @@
   import WarningDiamond from "~icons/ph/warning-diamond-duotone";
   import ArrowFatRight from "~icons/ph/arrow-fat-right-duotone";
 
-  const icons = {
-    warning: WarningDiamond,
-    arrow: ArrowFatRight,
-  };
+  const icons = { warning: WarningDiamond, arrow: ArrowFatRight };
 
   const {
     icon = "warning",

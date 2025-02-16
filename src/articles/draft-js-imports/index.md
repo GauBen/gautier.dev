@@ -16,7 +16,7 @@ snippet:
 
 <Tldr>
 
-Here is the story of JavaScript imports. It may not be 100% accurate but it should give you an idea of what is going on.
+Here is everything about JavaScript imports. And even more. It's definitely not meant to be read like my other articles, but more as a reference.
 
 </Tldr>
 
@@ -467,7 +467,7 @@ I'm a side effect!
 I'm the main module!
 ```
 
-An import statement used only for its side effects is called a **bare import**. It will not import any value, but execute the module's code.
+An import statement used only for its side effects is called a **bare import**. It will not import any value, but execute the module's code. A bare import can also be written as `import {} from "./side-effects.js"`.
 
 <Callout>
 
@@ -477,13 +477,318 @@ A module should be either pure or have side effects, but not both. Mixing the tw
 
 ## TypeScript imports
 
+We should be done for all possible JavaScript imports, but TypeScript adds some more that we will cover in this section. The first thing to note is that they can only be found in TypeScript files, as they are erased during the transpilation process---the transformation of TypeScript to JavaScript.
+
+### Exporting types
+
+When you want your types to be accessible from other files, you can use the `export` keyword when declaring the type, just as you would with values:
+
+```ts
+// ./book.ts
+export interface Book {
+  title: string;
+  year: number;
+}
+export type Input = string | Book;
+export function getTitle(input: Input): string {
+  return typeof input === "string" ? input : input.title;
+}
+```
+
+When transpiled to JavaScript, the resulting code would be:
+
+```js
+// ./book.js
+export function getTitle(input) {
+  return typeof input === "string" ? input : input.title;
+}
+// interfaces and types are erased
+```
+
+As with common exports, TypeScript supports renaming exports, as well as exporting a type as a default export. The only nuance is that the statement starts with `export type`:
+
+```ts
+interface InternalBook {
+  title: string;
+  year: number;
+}
+export type { InternalBook as Book };
+```
+
+This is called a **type-only export**, and it gets erased during the transpilation process. You may also mix type and value exports in the same statement:
+
+```ts
+const name = "World";
+type Name = string;
+export { name, type Name }; // name is a value, Name is a type
+```
+
+You might be wondering what the difference is between `export type { ... }` and `export { type ... }`... There's one, small, subtle difference:
+
+```ts
+// Type-only export:
+export type { Book };
+// is removed during transpilation
+
+// Mixed export:
+export { type Book };
+// get transpiled to:
+export {};
+```
+
+This is especially important when it comes to imports, which, happy coincidence, is the next section.
+
+<Callout>
+
+You may find `export { Thing }` where `Thing` is a type in some codebases. This is a bad practice, as not all tools will understand it. Always use `export type { Thing }` for type-only exports.
+
+</Callout>
+
+### Importing types
+
+This is works in pure symmetry with exporting types. You can import a type from another file with the `import` keyword:
+
+```ts
+// ./book.ts
+export interface Book {
+  title: string;
+  year: number;
+}
+export const books: Book[] = [
+  { title: "Journey to the Center of the Earth", year: 1864 },
+  { title: "Gilded Needles", year: 1980 },
+  { title: "The Housemaid", year: 2022 },
+];
+
+// ./index.ts
+import { books, type Book } from "./book.ts";
+// value ^^^^^  ^^^^^^^^^ type
+
+function printBook({ title, year }: Book) {
+  console.log(title, "|", year);
+}
+
+for (const book of books) {
+  printBook(book);
+}
+```
+
+You also have the possibility to do a type-only import, with the `import type` syntax. Let's explore the nuance between a type-only import and a mixed import:
+
+```ts
+// ./book.ts
+export interface Book {
+  title: string;
+  year: number;
+}
+console.log("I am a side effect!");
+
+// ./index1.ts
+import type { Book } from "./book.ts";
+//     ^^^^ Type-only import
+const book: Book = { title: "Empire of the Ants", year: 1991 };
+// No side effect is executed
+
+// ./index2.ts
+import { type Book } from "./book.ts";
+//       ^^^^ Mixed import
+const book: Book = { title: "Empire of the Ants", year: 1991 };
+// Prints "I am a side effect!"
+```
+
+If you're not sure to understand what's happening, here is the resulting JavaScript code after transpilation:
+
+```js
+// ./book.js
+console.log("I am a side effect!");
+
+// ./index1.js
+const book = { title: "Empire of the Ants", year: 1991 };
+
+// ./index2.js
+import {} from "./book.js";
+//     ^^ The type import is erased, the import statement is kept,
+//        making it a bare import
+const book = { title: "Empire of the Ants", year: 1991 };
+```
+
+I hope this was clear, but if it was not, please [write a comment](#comments) below and I'll do my best to clarify.
+
+#### Importing JSDoc types
+
+One last thing about type imports: when using JSDoc to type your JavaScript code, you can import types in JSDoc annotations using an `import()` expression:
+
+```js
+// ./book.js
+/**
+ * @typedef {Object} Book
+ * @property {string} title
+ * @property {number} year
+ */
+
+// ./index.js
+/** @type {import("./book.js").Book} */
+const book = { title: "The Priory of the Orange Tree", year: 2019 };
+```
+
+As it can get quite verbose for long paths, TypeScript supports an `@import` JSDoc statement to import types:
+
+```js
+// ./index.js
+/** @import {Book} from "./book.js" */
+/** @type {Book} */
+const book = { title: "The Priory of the Orange Tree", year: 2019 };
+```
+
+I'd recommend writing TypeScript over JSDoc for most projects, but I mention it here for the sake of completeness---once again.
+
+### Importing values as types
+
+This is about to get a bit more confusing, sorry in advance, but bear with me. You can import a value as a type, if it is meant to be used as a type only:
+
+```ts
+// ./book.ts
+export class Book {
+  title: string;
+  year: number;
+}
+
+// ./index.ts
+import type { Book } from "./book.ts";
+//            ^^^^ Never instantiated, only used as a type
+function printBook(book: Book) {
+  console.log(book.title, "|", book.year);
+}
+```
+
+In this example, `Book` is a class, not a type. However, in `index.ts`, it's never instantiated, only used for type-checking. This is a common pattern in TypeScript, especially when dealing with classes.
+
+### Overlapping types and values
+
+This might be more advanced than what you ever need to build, but TypeScript allows you to have a type and a value with the same name in the same file:
+
+```ts
+// ./compass.ts
+export const Compass = {
+  North: "n",
+  South: "s",
+  East: "e",
+  West: "w",
+} as const;
+export type Compass = (typeof Compass)[keyof typeof Compass]; // "n" | "s" | "e" | "w"
+
+// ./index.ts
+import { Compass } from "./compass.ts"; // Import both the type and the value
+
+const direction: Compass = Compass.North;
+// used as a type ^^^^^^   ^^^^^^^ used as a value
+console.log(direction); // Prints "n"
+```
+
+I won't elaborate on this, but what's worth remembering is that TypeScript will use the context to determine if `Compass` is a type or a value.
+
 ## Dynamic imports
+
+There's one key difference between `import` statements and `require` calls: the former is static, the latter is dynamic. Practically, it means that you cannot use a variable as an argument to an `import` statement:
+
+```js
+const file = './config.js';
+const config = require(file); // This works
+import config from file;      // This does not
+```
+
+If you ever need to import a module that is determined at runtime, you can use the `import()` function. It returns a promise containing the module's exports:
+
+```js
+// ./config.js
+export const host = "localhost";
+export const port = 8080; // Custom port!
+
+// ./cli.js
+const defaultConfig = { host: "localhost", port: 3000 };
+
+/**
+ * Loads the config from a file if specified, falls back to `defaultConfig`
+ * otherwise.
+ */
+function loadConfig() {
+  if (process.argv.length >= 3) {
+    // If the command line has an argument, import the file
+    return import(process.argv[2]);
+  }
+
+  return defaultConfig;
+}
+
+const config = await loadConfig();
+//             ^^^^^ loadConfig returns a promise
+console.log("Server running on", config.host + ":" + config.port);
+```
+
+When you run `cli.js` with `node cli.js ./config.js`, it will print `Server running on localhost:8080`, dynamically importing the `config.js` file.
+
+Behavior-wise, `const thing = import(...)` is equivalent to `import * as thing from ...`. This means that the default export is available under the `default` property and named exports are available under their respective names:
+
+```js
+// ./config.js
+export const host = "localhost";
+export const port = 3000;
+export default `${host}:${port}`;
+
+// ./index.js
+const config = await import("./config.js");
+console.log(config);
+```
+
+This would print:
+
+```jsonc
+{
+  // The default export is available under the `default` property:
+  "default": "localhost:3000",
+  "host": "localhost",
+  "port": 3000,
+}
+```
+
+If this rings a bell, it's because I used the same example as [Renaming imports](#renaming-imports). If it does not, you might need to read this article a second time... 👀
+
+### `import.meta`
+
+Another runtime feature of ESM is the `import.meta` object. It contains metadata about the current module, as well as resolution primitives:
+
+```js
+import.meta.url; // The URL of the current module
+// It will look like `file:///path/to/module.js` locally,
+// or `https://example.com/module.js` in a browser.
+
+import.meta.resolve("./file.js");
+// Resolves the path to `file.js`, relative to the current module,
+// as `import('./file.js')` would do, but returns the path as a string
+// instead of importing the module.
+```
+
+Your runtime might provide additional properties on `import.meta`, you should check the documentation of your runtime for more information.
 
 ## Altering the import resolution
 
+If you thought we were done here, oh boy, there's more. We will now explore platform-specific ways to alter the import resolution, starting with Node.js.
+
+### `package.json` definitions
+
 - package.json imports
 - package.json exports
+
+### `<script type="importmap">`
+
 - importmap
-- assertions
+
+### Import attributes
+
+<Callout icon="arrow">
+
+You might know this feature under its former name, "import assertions". It is now named import attributes, and the syntax changed `assert` to `with`.
+
+</Callout>
 
 ## Good practices
