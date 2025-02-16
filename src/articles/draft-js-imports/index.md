@@ -68,7 +68,7 @@ There was a time when JavaScript was a simple, browser-bound, scripting language
 
 I should have added a [`<table>` layout](https://thehistoryoftheweb.com/tables-layout-absurd/) for nostalgia, but I digress.
 
-Somehow, people were bored of doing the same thing over and over again<sup>[_citation needed_]</sup> and started turning themselves to reusable bits of JavaScript, usually called **libraries**. The most famous one is probably jQuery, born in 2006, but there were a lot of them. ([JS fatigue](https://news.ycombinator.com/item?id=10796567) ain't new, folks.)
+Somehow, people got bored of doing the same thing over and over again<sup>[_citation needed_]</sup> and started turning themselves to reusable bits of JavaScript, usually called **libraries**. The most famous one is probably jQuery, born in 2006, but there were a lot of them. ([JS fatigue](https://news.ycombinator.com/item?id=10796567) ain't new, folks.)
 
 How do you include a library in your page? You add a `<script>` tag, and you're done.
 
@@ -180,7 +180,7 @@ If you take a second look at the snippets above, you'll notice that the argument
 
 JavaScript's more popular flavor, TypeScript, was created in 2012. It adds static typing to the language, and with it, new ways to import and export modules.
 
-Because types do not exist at runtime, TypeScript had to come up with a way to import and export types only. This syntax is completely erased during the transpilation process. There's no reason to use it nowadays, but it's mentioned in this article for the sake of completeness.
+Because types do not exist at runtime, TypeScript had to come up with a way to import and export types only. This syntax is completely erased during the transpilation process. There's no reason to use it nowadays, but I mention it for the sake of completeness.
 
 ```ts
 // ./book.ts
@@ -243,4 +243,247 @@ It is tempting to write `import { host, port } from "./config.js"`, but it won't
 
 ### Exporting multiple values with `export`
 
-TBC
+Let's get back to the config example and export the `host` and `port` values separately:
+
+```js
+// ./config.js
+export const host = "localhost";
+export const port = 3000;
+
+// ./index.js
+import { host, port } from "./config.js";
+console.log("Server running on", host + ":" + port);
+```
+
+`host` and `port` are called **named exports**. The `config.js` file no longer has a default export, but two named exports. The `export` keyword can be used in front of any declaration, or as a standalone statement:
+
+```js
+// These two samples are equivalent:
+// 1. Prefixing the declaration with `export`
+export function greet(name) {
+  console.log("Hello " + name);
+}
+
+// 2. Using `export` as a standalone statement
+function greet(name) {
+  console.log("Hello " + name);
+}
+export { greet };
+```
+
+In the same fashion, `export default <value>` can be used as a standalone statement.
+
+The default and named import syntax are not interchangeable. For instance the following code will not work:
+
+```js
+// ./config.js
+export const host = "localhost";
+export const port = 3000;
+
+// ./index.js
+import config from "./config.js";
+// The requested module './config.js' does not provide an export named 'default'
+```
+
+To import all named exports under a single object, you can use the `* as` syntax instead:
+
+```js
+// ./index.js
+import * as config from "./config.js";
+console.log("Server running on", config.host + ":" + config.port);
+```
+
+The `import * as` form is called a **namespace import**.
+
+### Mixing default and named exports
+
+So far we only studied default and named exports separately. But what if we want to export both a default value and named values?
+
+```js
+// ./config.js
+export const host = "localhost";
+export const port = 3000;
+export default `${host}:${port}`;
+
+// ./index.js
+import server, { host, port } from "./config.js";
+// You can import the default export and named exports in the same statement
+```
+
+It works, **the import statement can import both the default export and the named exports at the same time**; the default export must come first.
+
+It you take a second look at the error that was thrown when trying to import a default export when none was defined, `The requested module does not provide an export named 'default'`, you'll notice that it does not mention a default export, but a named export named `default`.
+
+The `import default` syntax is syntactic sugar for importing an export named `default`! How can we name an export `default` then?
+
+### Exports can be named and renamed
+
+So far we only explored exporting values with their original name. It's a good practice to keep a name consistent across files, for debugging and refactoring purposes, but the standard allows you to rename exports.
+
+```js
+// ./jquery.js
+// `selectElements` is an internal name
+function selectElements(selector) {
+  // jQuery magic here 🪄✨
+}
+export { selectElements as $ }; // It's exported as `$`
+
+// ./index.js
+import { $ } from "./jquery.js";
+$("article").toggle();
+```
+
+In this example, the library renames its internal function `selectElements` to `$` when exporting it. This is a common practice in libraries to keep the API consistent across versions, or prepare deprecations:
+
+```js
+function newFunction() {
+  // I'm a new function!
+}
+
+// Allow newFunction to be imported as oldFunction during the transition
+export { newFunction, newFunction as oldFunction };
+```
+
+The `export { ... as ... }` syntax can be used to export the same symbol several times, under different names, as seen above. To answer the question from the previous section, you can export a value as `default`:
+
+```js
+// These two samples are equivalent:
+// 1. Prefixing the declaration with `export default`
+export default function greet(name) {
+  console.log("Hello " + name);
+}
+
+// 2. Using a named export
+function greet(name) {
+  console.log("Hello " + name);
+}
+export { greet as default };
+```
+
+### Renaming imports
+
+Imports can be renamed as well, with a perfectly symmetrical syntax: `import { ... as ... }`.
+
+```js
+// ./jquery.js
+export function jQuery(selector) {
+  // jQuery magic here 🪄✨
+}
+
+// ./index.js
+import { jQuery as $ } from "./jquery.js";
+$("article").toggle();
+// `jQuery` is not defined, but `$` is
+```
+
+This is useful to avoid conflicts when importing a symbol with the same name as a local variable:
+
+```js
+// Rename as `nativeFetch` not to conflict with the local `fetch`
+import { fetch as nativeFetch } from "node-fetch";
+
+export function fetch(...options) {
+  // Custom fetch implementation wrapping nativeFetch
+  return nativeFetch(...options);
+}
+```
+
+In the same fashion as `export { ... as default }`, we can use `import { default as ... }` to import a default export under a different name:
+
+```js
+// These two samples are equivalent:
+// 1. Using the import default syntax
+import greet from "./greet.js";
+
+// 2. Using a named import
+import { default as greet } from "./greet.js";
+```
+
+If you are wondering what happens when you import a module with a default export with a namespace import, here is the answer:
+
+```js
+// ./config.js
+export const host = "localhost";
+export const port = 3000;
+export default `${host}:${port}`;
+
+// ./index.js
+import * as config from "./config.js";
+console.log(config);
+```
+
+This would print:
+
+```jsonc
+{
+  // The default export is available under the `default` property:
+  "default": "localhost:3000",
+  "host": "localhost",
+  "port": 3000,
+}
+```
+
+I hope this clears up the confusion a bit, but just in case here is a quick summary:
+
+<Callout icon="arrow">
+
+`export default <name>` and `import <name>` is syntactic sugar for `export { <name> as default }` and `import { default as <name> }`. They are (mostly) interchangeable.
+
+</Callout>
+
+As `default` is a reserved keyword, you cannot use it to name a variable or a function.
+
+```js
+// Does not work
+export function default() {
+  console.log("Hello");
+}
+// SyntaxError: function statement requires a name
+
+// Works
+function greet() {
+  console.log("Hello");
+}
+export default greet;
+```
+
+### Bare imports and side effects
+
+When a module is imported, its code is executed. When a module only exports values, it is called a **pure module**. Otherwise, it is a **module with side-effects**.
+
+```js
+// ./side-effects.js
+console.log("I'm a side effect!");
+
+// ./index.js
+import "./side-effects.js";
+console.log("I'm the main module!");
+```
+
+When you run `index.js`, you'll see:
+
+```
+I'm a side effect!
+I'm the main module!
+```
+
+An import statement used only for its side effects is called a **bare import**. It will not import any value, but execute the module's code.
+
+<Callout>
+
+A module should be either pure or have side effects, but not both. Mixing the two is a bad practice, as it makes the module harder to reason about.
+
+</Callout>
+
+## TypeScript imports
+
+## Dynamic imports
+
+## Altering the import resolution
+
+- package.json imports
+- package.json exports
+- importmap
+- assertions
+
+## Good practices

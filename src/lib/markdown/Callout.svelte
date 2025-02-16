@@ -1,11 +1,18 @@
 <script lang="ts">
-  import type { Component, Snippet } from "svelte";
+  import type { Snippet } from "svelte";
   import WarningDiamond from "~icons/ph/warning-diamond-duotone";
+  import ArrowFatRight from "~icons/ph/arrow-fat-right-duotone";
+
+  const icons = {
+    warning: WarningDiamond,
+    arrow: ArrowFatRight,
+  };
 
   const {
-    Icon = WarningDiamond,
+    icon = "warning",
     children,
-  }: { Icon?: Component; children?: Snippet } = $props();
+  }: { icon: keyof typeof icons; children?: Snippet } = $props();
+  const Icon = $derived(icons[icon]);
 </script>
 
 <div
