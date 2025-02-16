@@ -1,9 +1,3 @@
-<script lang="ts">
-  import Github from "~icons/ph/github-logo";
-  import Linkedin from "~icons/ph/linkedin-logo";
-  import Rss from "~icons/ph/rss";
-</script>
-
 <slot />
 
 <footer>
@@ -14,17 +8,14 @@
     </a>
   </p>
   <p class="icons">
-    <a
-      href="https://www.linkedin.com/in/gautier-ben-aim/"
-      title="My LinkedIn Profile"
-    >
-      <Linkedin aria-label="LinkedIn" />
+    <a href="https://www.linkedin.com/in/gautier-ben-aim/">
+      <span class="i-ph:linkedin-logo-duotone">My LinkedIn Profile</span>
     </a>
-    <a href="https://github.com/GauBen/" title="My GitHub Profile">
-      <Github aria-label="GitHub" />
+    <a href="https://github.com/GauBen/">
+      <span class="i-ph:github-logo-duotone">My GitHub Profile</span>
     </a>
-    <a href="/feed" title="Atom feed">
-      <Rss aria-label="Atom" />
+    <a href="/feed">
+      <span class="i-ph:rss-duotone">Atom feed</span>
     </a>
   </p>
 </footer>
@@ -34,7 +25,7 @@
     max-width: var(--main-width);
     padding: 0 0.5em;
     margin: 0 auto;
-    overflow: hidden;
+    contain: paint;
     text-align: center;
     text-wrap: balance;
   }
@@ -49,11 +40,8 @@
 
     a {
       all: revert;
-      align-items: center;
       padding: 0.25rem;
-      vertical-align: bottom;
       color: inherit;
-      text-decoration: none;
       background-image: linear-gradient(#000, #000);
       background-repeat: no-repeat;
       background-position: right;

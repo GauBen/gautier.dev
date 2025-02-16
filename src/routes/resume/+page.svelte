@@ -1,8 +1,4 @@
 <script lang="ts">
-  import GraduationCap from "~icons/ph/graduation-cap-duotone";
-  import Medal from "~icons/ph/medal-duotone";
-  import Suitcase from "~icons/ph/suitcase-simple-duotone";
-  import User from "~icons/ph/user-duotone";
   import Header from "./Header.svelte";
   import Summary from "./Summary.svelte";
   import Timeline from "./Timeline.svelte";
@@ -12,7 +8,7 @@
   <Header />
   <Summary />
   <article>
-    <h2><Suitcase /> Work Experience</h2>
+    <h2><span class="i-ph:briefcase-duotone"></span> Work Experience</h2>
 
     <div class="xp">
       <h3>
@@ -253,7 +249,7 @@
   </article>
 
   <article>
-    <h2><User /> Personal Journey</h2>
+    <h2><span class="i-ph:user-duotone"></span> Personal Journey</h2>
     <div class="xp">
       <h3>Self-Taught Developer</h3>
       <p>
@@ -369,7 +365,7 @@
     </div>
   </article>
   <article>
-    <h2><Medal /> Skills</h2>
+    <h2><span class="i-ph:medal-duotone"></span> Skills</h2>
     <div class="grid">
       <div class="xp">
         <strong>Cross-functional skills</strong>
@@ -436,7 +432,7 @@
     </div>
   </article>
   <article>
-    <h2><GraduationCap /> Education</h2>
+    <h2><span class="i-ph:graduation-cap-duotone"></span> Education</h2>
     <div class="xp">
       <h3>
         <a href="https://tls-sec.github.io/">
@@ -551,7 +547,7 @@
       text-decoration: inherit;
     }
 
-    :global(svg) {
+    :global([class^="i-"]) {
       color: #0d3c77;
     }
 

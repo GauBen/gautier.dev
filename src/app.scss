@@ -50,7 +50,8 @@ a {
   padding: 0.125em 0;
   color: var(--link);
   text-decoration: none;
-  background-image: linear-gradient(var(--link), var(--link)),
+  background-image:
+    linear-gradient(var(--link), var(--link)),
     linear-gradient(var(--link), var(--link));
   background-repeat: no-repeat, no-repeat;
   background-position:
@@ -88,8 +89,4 @@ a {
 
 table {
   border-collapse: collapse;
-}
-
-.icon {
-  vertical-align: text-bottom;
 }

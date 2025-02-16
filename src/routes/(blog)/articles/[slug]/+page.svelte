@@ -84,7 +84,7 @@
 <style lang="scss">
   header {
     padding: 0 1em;
-    overflow: hidden;
+    contain: paint;
 
     > :global(*) {
       max-width: var(--main-width);

@@ -3,7 +3,6 @@
   import Card from "$lib/Card.svelte";
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
-  import ChatsCircle from "~icons/ph/chats-circle-duotone";
   import SearchBar from "./SearchBar.svelte";
 
   const escape = (s: string) =>
@@ -67,7 +66,10 @@
         <p style="display: flex; justify-content: space-between">
           <time datetime={date.toISOString()}>{formatDate(date)}</time>
           {#if comments > 0}
-            <span>{comments} <ChatsCircle aria-label="comments" /></span>
+            <span>
+              {comments}
+              <span class="i-ph:chats-circle-duotone">comments</span>
+            </span>
           {/if}
         </p>
       {:else}
@@ -83,7 +85,7 @@
   main {
     padding: 0 0.5em;
     margin: 0 auto;
-    overflow: hidden;
+    contain: paint;
 
     > :global(*) {
       max-width: var(--main-width);

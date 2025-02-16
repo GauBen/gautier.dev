@@ -23,7 +23,7 @@ snippet:
     max-width: 300px;
     box-shadow: 0 .25em .5em #0002;
     border-radius: .5em;
-    overflow: hidden;
+    contain: paint;
   }
 
   .img {

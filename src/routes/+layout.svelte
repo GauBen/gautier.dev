@@ -3,6 +3,7 @@
   import { page } from "$app/state";
   import { inject } from "@vercel/analytics";
   import "../app.scss";
+  import "virtual:uno.css";
 
   inject({ mode: dev ? "development" : "production" });
 

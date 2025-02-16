@@ -1,40 +1,32 @@
-<script lang="ts">
-  import Email from "~icons/ph/envelope-simple-duotone";
-  import Github from "~icons/ph/github-logo-duotone";
-  import Link from "~icons/ph/link-duotone";
-  import Linkedin from "~icons/ph/linkedin-logo-duotone";
-  import Pin from "~icons/ph/map-pin-duotone";
-</script>
-
 <header>
   <enhanced:img src="./me.jpg?w=288;144" alt="Me" class="img" />
   <h1>Gautier<br />Ben Aïm</h1>
   <div class="contact">
     <ul>
       <li>
-        <Pin /> France
+        <span class="i-ph:map-pin-duotone"></span> France
       </li>
       <li>
         <a href="https://gautier.dev">
-          <Link />
+          <span class="i-ph:link-duotone"></span>
           gautier.dev
         </a>
       </li>
       <li>
         <a href="https://github.com/GauBen">
-          <Github />
+          <span class="i-ph:github-logo-duotone"></span>
           github.com/GauBen
         </a>
       </li>
       <li>
         <a href="mailto:benaim.gautier@gmail.com">
-          <Email />
+          <span class="i-ph:envelope-simple-duotone"></span>
           benaim.gautier@gmail.com
         </a>
       </li>
       <li>
         <a href="https://www.linkedin.com/in/gautier-ben-aim/">
-          <Linkedin />
+          <span class="i-ph:linkedin-logo-duotone"></span>
           linkedin.com/in/gautier-ben-aim
         </a>
       </li>

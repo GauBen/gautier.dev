@@ -15,7 +15,7 @@
     position: relative;
     z-index: 1;
     padding: 0 0.5em;
-    overflow: hidden;
+    contain: paint;
   }
 
   h1 {
