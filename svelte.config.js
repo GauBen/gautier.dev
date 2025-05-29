@@ -1,6 +1,7 @@
 import adapter from "@sveltejs/adapter-vercel";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import { mdsvex } from "mdsvex";
+import { resolve } from "node:path";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatexSvelte from "rehype-katex-svelte";
 import rehypeSlug from "rehype-slug";
@@ -15,7 +16,7 @@ export default {
     vitePreprocess(),
     mdsvex({
       extension: ".md",
-      layout: "./src/lib/markdown/Layout.svelte",
+      layout: resolve("./src/lib/markdown/Layout.svelte"),
       highlight: {
         highlighter: (code, lang) => {
           if (!lang) return `<pre>{@html ${JSON.stringify(code)}}</pre>`;

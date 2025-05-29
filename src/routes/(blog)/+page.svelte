@@ -37,7 +37,7 @@
 
   <SearchBar {...data} />
 
-  {#each data.articles as { slug, banner, title, description, date, snippet }}
+  {#each data.articles as { slug, banner, title, description, date, snippet } (slug)}
     {@const comments = commentCounts?.get(title) ?? 0}
     <Card>
       {#snippet header()}
@@ -53,7 +53,7 @@
         <a href="/articles/{slug}">{title}</a>
       </h2>
       {#if Array.isArray(description)}
-        {#each description as line}
+        {#each description as line (line)}
           {@const rendered = escape(line)
             .replaceAll(/\[hl\](.+?)\[\/hl\]/g, "<mark>$1</mark>")
             .replaceAll("\n", "<br />")}

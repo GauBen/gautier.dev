@@ -79,7 +79,7 @@
         <span>{sum}</span>
       </summary>
       <Table style="padding: 0 0 .5em">
-        {#each articles as { slug, score }}
+        {#each articles as { slug, score } (slug)}
           <tr>
             <td>
               <a href="/articles/{slug}">
@@ -111,7 +111,7 @@
       <label class="row">
         Page:
         <select bind:value={pageNumber}>
-          {#each Array.from({ length: Math.ceil(sorted.length / pageLength) }, (_, i) => i) as i}
+          {#each { length: Math.ceil(sorted.length / pageLength) }, i}
             <option value={i}>{i + 1}</option>
           {/each}
         </select>
