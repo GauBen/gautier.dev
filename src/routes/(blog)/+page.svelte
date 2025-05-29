@@ -37,12 +37,14 @@
 
   <SearchBar {...data} />
 
-  {#each data.articles as { slug, banner, title, description, date, snippet } (slug)}
+  {#each data.articles as { external, slug, banner, title, description, date, snippet } (slug)}
     {@const comments = commentCounts?.get(title) ?? 0}
     <Card>
       {#snippet header()}
-        {#if banner}
-          <enhanced:img src={banner} alt="" class="banner" />
+        {#if banner && external}
+            <img src={banner} alt="" class="banner" />
+        {:else if banner}
+            <enhanced:img src={banner} alt="" class="banner" />
         {:else if snippet}
           <div class="banner">
             <Prism {...snippet} />
@@ -50,7 +52,7 @@
         {/if}
       {/snippet}
       <h2>
-        <a href="/articles/{slug}">{title}</a>
+        <a href={external ?? `/articles/${slug}`}>{title}</a>
       </h2>
       {#if Array.isArray(description)}
         {#each description as line (line)}
