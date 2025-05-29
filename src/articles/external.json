@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Leveraging Temporal for resilient remote procedure calls (RPC)",
+    "url": "https://escape.tech/blog/leveraging-temporal-for-resilient-remote-procedure-calls/",
+    "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2023/10/temporal-rpc-escape-2.png",
+    "date": "2023-10-18",
+    "description": "Temporal is not the first technology that comes to mind when discussing RPC technologies, but its broad feature set makes it a notable contender in this space."
+  },
+  {
+    "title": "Using Protobuf with TypeScript",
+    "url": "https://escape.tech/blog/using-protobuf-typescript/",
+    "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2023/09/protobuf-escape.png",
+    "date": "2023-09-26",
+    "description": "We recently moved to Protobuf to enforce consistency. Discover the pros and cons of migration to Protobuf and follow the step-by-step guide to create a tiny TypeScript-Protobuf prototype."
+  },
+  {
+    "title": "How to set up a TypeScript Monorepo",
+    "url": "https://escape.tech/blog/setup-typescript-monorepo/",
+    "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2023/09/typescript-monorepo.png",
+    "date": "2023-09-18",
+    "description": "We write our software in TypeScript because it allows us to iterate quickly without compromising on safety. Discover our setup, how to put it in place and the developer experience it offers."
+  },
+  {
+    "title": "GraphQL errors: the Good, the Bad and the Ugly",
+    "url": "https://escape.tech/blog/graphql-errors-the-good-the-bad-and-the-ugly/",
+    "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2023/09/graphql-errors.png",
+    "date": "2023-01-05",
+    "description": "Managing GraphQL errors can be quite a challenging task, and we tried a lot of different approaches over time. Keep reading to know what we've learned along the way."
+  },
+  {
+    "title": "Rendering emails with Svelte",
+    "url": "https://escape.tech/blog/sveltemails/",
+    "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2022/12/Blog-Banners--1-.png",
+    "date": "2022-12-15",
+    "description": "We recently rebuilt our whole email stack from scratch to improve the developer experience: we now have an instant feedback loop, leveraging a SvelteKit-powered dev server."
+  },
+  {
+    "title": "Forging GraphQL Bombs, the modern version of Zip Bombs",
+    "url": "https://escape.tech/blog/forging-graphql-bombs-the-2022-version-of-zip-bombs/",
+    "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2022/08/--Landscape---GraphQL.Security--3-.png",
+    "date": "2022-08-12",
+    "description": "Zip Bombs are a thing of the past, but the concept behind them is still relevant nowadays. Indeed, your GraphQL application might be vulnerable to what we'll call GraphQL Bombs in this article."
+  }
+]
