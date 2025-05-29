@@ -1,7 +1,6 @@
 import { dev } from "$app/environment";
 import { env } from "$env/dynamic/private";
 import { articles } from "$lib/articles.js";
-import external from "../../articles/external.json" assert { type: "json" };
 
 export const load = async () => ({
   title: "Hey!",
@@ -11,33 +10,18 @@ export const load = async () => ({
     [...articles.entries()].map(async ([slug, { date, load }]) =>
       load().then(({ metadata, banner }) => ({
         ...metadata,
-        external: undefined,
         slug,
         date,
         banner,
       })),
     ),
-  )
-    .then((articles) => [
-      ...articles,
-      // Merge external articles
-      ...external.map(({ title, url, banner, date, description }) => ({
-        external: url,
-        title,
-        banner,
-        date: new Date(date),
-        description,
-        slug: url,
-        snippet: undefined,
-      })),
-    ])
-    .then((articles) =>
-      articles
-        .filter(({ date }) => dev || date)
-        .sort(({ date: a }, { date: z }) =>
-          a === null ? -1 : z === null ? 1 : z.getTime() - a.getTime(),
-        ),
-    ),
+  ).then((articles) =>
+    articles
+      .filter(({ date }) => dev || date)
+      .sort(({ date: a }, { date: z }) =>
+        a === null ? -1 : z === null ? 1 : z.getTime() - a.getTime(),
+      ),
+  ),
   commentCounts: fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: {

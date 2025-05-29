@@ -4,6 +4,7 @@
   import Header from "$lib/Header.svelte";
   import Prism from "$lib/Prism.svelte";
   import SearchBar from "./SearchBar.svelte";
+  import external from "../../articles/external.json" assert { type: "json" };
 
   const escape = (s: string) =>
     s.replaceAll("&", "&amp;").replaceAll("<", "&lt;");
@@ -37,14 +38,12 @@
 
   <SearchBar {...data} />
 
-  {#each data.articles as { external, slug, banner, title, description, date, snippet } (slug)}
+  {#each data.articles as { slug, banner, title, description, date, snippet } (slug)}
     {@const comments = commentCounts?.get(title) ?? 0}
     <Card>
       {#snippet header()}
-        {#if banner && external}
-            <img src={banner} alt="" class="banner" />
-        {:else if banner}
-            <enhanced:img src={banner} alt="" class="banner" />
+        {#if banner}
+          <enhanced:img src={banner} alt="" class="banner" />
         {:else if snippet}
           <div class="banner">
             <Prism {...snippet} />
@@ -52,7 +51,7 @@
         {/if}
       {/snippet}
       <h2>
-        <a href={external ?? `/articles/${slug}`}>{title}</a>
+        <a href="/articles/{slug}">{title}</a>
       </h2>
       {#if Array.isArray(description)}
         {#each description as line (line)}
@@ -81,6 +80,32 @@
   {:else}
     <p>No articles match <strong>{data.q}</strong></p>
   {/each}
+
+  {#if data.q === undefined}
+    <h2 style="margin-block-start: 2rem">Corporate articles</h2>
+    <p>
+      These are the articles I have written for corporate blogs. They contain sponsored content and should be regarded as such.
+    </p>
+
+    <div class="grid">
+      {#each external as { title, url, banner, date, description } (url)}
+        <Card>
+          {#snippet header()}
+            <img src={banner} alt="" class="banner" loading="lazy" />
+          {/snippet}
+          <h2>
+            <a href={url} rel="sponsored">{title}</a>
+          </h2>
+          <p>{description}</p>
+          <p>
+            <time datetime={new Date(date).toISOString()}>
+              {formatDate(new Date(date))}
+            </time> for Escape
+          </p>
+        </Card>
+      {/each}
+    </div>
+  {/if}
 </main>
 
 <style lang="scss">
@@ -103,6 +128,17 @@
     box-shadow: 0 0 0.25em #0002;
 
     :global(pre) {
+      margin: 0;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 1rem;
+    margin-block: 1rem;
+
+    > :global(*) {
       margin: 0;
     }
   }
