@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { Action } from "svelte/action";
   import squirrelSrc from "./squirrel.png";
   import zzzSrc from "./zzz.png";
 
@@ -116,11 +115,6 @@
     play();
     return () => cancelAnimationFrame(animationFrame);
   });
-
-  const scrollToBottom: Action<HTMLElement, unknown> = (node) => {
-    node.scrollTop = node.scrollHeight;
-    return { update: () => (node.scrollTop = node.scrollHeight) };
-  };
 </script>
 
 <section>
@@ -132,7 +126,12 @@
   </div>
   <div class="logs">
     <h3>Logs</h3>
-    <pre use:scrollToBottom={logs.length}>{logs.slice(-10).join("\n")}</pre>
+    <pre
+      {@attach (node) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        logs.length; // Rerun when logs change
+        node.scrollTop = node.scrollHeight;
+      }}>{logs.slice(-10).join("\n")}</pre>
   </div>
 </section>
 

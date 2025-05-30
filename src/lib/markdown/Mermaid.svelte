@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Action } from "svelte/action";
+  import type { Attachment } from "svelte/attachments";
 
-  const mermaidify: Action = (node) => {
+  const mermaidify: Attachment<HTMLElement> = (node) => {
     // Remove SSR landmarks
     node.innerHTML = node.textContent!;
     // Import mermaid client-side only
@@ -9,7 +9,7 @@
   };
 </script>
 
-<div use:mermaidify><slot /></div>
+<div {@attach mermaidify}><slot /></div>
 
 <style lang="scss">
   div {

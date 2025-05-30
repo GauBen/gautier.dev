@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import Header from "$lib/Header.svelte";
-  import type { Action } from "svelte/action";
+  import type { Attachment } from "svelte/attachments";
 
   const velocity = 200;
   const angle = Math.random() * Math.PI * 2;
@@ -9,7 +9,7 @@
   let vx = $state(Math.cos(angle) * velocity);
   let vy = $state(Math.sin(angle) * velocity);
 
-  const bounce: Action = (title) => {
+  const bounce: Attachment<HTMLElement> = (title) => {
     let t = performance.now() / 1000;
     let frame: number;
 
@@ -45,11 +45,7 @@
 
     play();
 
-    return {
-      destroy() {
-        cancelAnimationFrame(frame);
-      },
-    };
+    return () => cancelAnimationFrame(frame);
   };
 </script>
 
@@ -59,7 +55,7 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
 <h1
-  use:bounce
+  {@attach bounce}
   onclick={() => {
     vx *= 2;
     vy *= 2;
