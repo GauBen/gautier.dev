@@ -6,6 +6,8 @@
 
 <div {...props} style="max-width: 100%; overflow: auto">
   <table>
-    {@render children?.()}
+    <tbody>
+      {@render children?.()}
+    </tbody>
   </table>
 </div>
