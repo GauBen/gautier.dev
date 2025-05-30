@@ -96,7 +96,7 @@ Okay, this looks quite chaotic, but we have found what we wanted: `unset` make o
 <Example>
   <Breadcrumbs>
     <Item><a href="?" on:click|preventDefault>Inbox</a></Item>
-    <Item><Dropdown css="all: unset" /></Item>
+    <Item><Dropdown style="all: unset" /></Item>
     <Item>Latest messages</Item>
   </Breadcrumbs>
 </Example>
@@ -145,7 +145,7 @@ button {
 <Example>
   <Breadcrumbs>
     <Item><a href="?" on:click|preventDefault>Inbox</a></Item>
-    <Item><Dropdown css="all: unset; outline: revert" /></Item>
+    <Item><Dropdown style="all: unset; outline: revert" /></Item>
     <Item>Latest messages</Item>
   </Breadcrumbs>
 </Example>
