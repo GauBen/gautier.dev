@@ -8,8 +8,12 @@
     </a>
   </p>
   <p class="icons">
-    <a href="https://n7webring.neocities.org/gautier/prev" rel="ugc">
-      <span class="i-ph:caret-left">Previous website in the webring</span>
+    <a
+      href="https://n7webring.neocities.org/gautier/prev"
+      rel="ugc"
+      title="Previous website in the n7 webring"
+    >
+      <span class="i-ph:caret-left">Previous website in the n7 webring</span>
     </a>
     <a href="https://www.linkedin.com/in/gautier-ben-aim/" rel="author">
       <span class="i-ph:linkedin-logo-duotone">My LinkedIn Profile</span>
@@ -20,8 +24,12 @@
     <a href="/feed" rel="feed">
       <span class="i-ph:rss-duotone">Atom feed</span>
     </a>
-    <a href="https://n7webring.neocities.org/gautier/next" rel="ugc">
-      <span class="i-ph:caret-right">Next website in the webring</span>
+    <a
+      href="https://n7webring.neocities.org/gautier/next"
+      rel="ugc"
+      title="Next website in the n7 webring"
+    >
+      <span class="i-ph:caret-right">Next website in the n7 webring</span>
     </a>
   </p>
 </footer>
