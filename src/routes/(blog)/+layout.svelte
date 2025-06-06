@@ -3,19 +3,33 @@
 <footer>
   <p>
     Gautier Ben Aïm — {new Date().getFullYear()} —
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">
       CC BY-NC-SA 4.0
     </a>
   </p>
   <p class="icons">
-    <a href="https://www.linkedin.com/in/gautier-ben-aim/">
+    <a
+      href="https://n7webring.neocities.org/gautier/prev"
+      rel="ugc"
+      title="Previous website in the n7 webring"
+    >
+      <span class="i-ph:caret-left">Previous website in the n7 webring</span>
+    </a>
+    <a href="https://www.linkedin.com/in/gautier-ben-aim/" rel="author">
       <span class="i-ph:linkedin-logo-duotone">My LinkedIn Profile</span>
     </a>
-    <a href="https://github.com/GauBen/">
+    <a href="https://github.com/GauBen/" rel="author">
       <span class="i-ph:github-logo-duotone">My GitHub Profile</span>
     </a>
-    <a href="/feed">
+    <a href="/feed" rel="feed">
       <span class="i-ph:rss-duotone">Atom feed</span>
+    </a>
+    <a
+      href="https://n7webring.neocities.org/gautier/next"
+      rel="ugc"
+      title="Next website in the n7 webring"
+    >
+      <span class="i-ph:caret-right">Next website in the n7 webring</span>
     </a>
   </p>
 </footer>
