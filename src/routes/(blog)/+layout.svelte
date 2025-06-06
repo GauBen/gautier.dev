@@ -8,13 +8,6 @@
     </a>
   </p>
   <p class="icons">
-    <a
-      href="https://n7webring.neocities.org/gautier/prev"
-      rel="ugc"
-      title="Previous website in the n7 webring"
-    >
-      <span class="i-ph:caret-left">Previous website in the n7 webring</span>
-    </a>
     <a href="https://www.linkedin.com/in/gautier-ben-aim/" rel="author">
       <span class="i-ph:linkedin-logo-duotone">My LinkedIn Profile</span>
     </a>
@@ -24,11 +17,13 @@
     <a href="/feed" rel="feed">
       <span class="i-ph:rss-duotone">Atom feed</span>
     </a>
-    <a
-      href="https://n7webring.neocities.org/gautier/next"
-      rel="ugc"
-      title="Next website in the n7 webring"
-    >
+  </p>
+  <p id="webring">
+    <a href="https://n7webring.neocities.org/gautier/prev" rel="ugc">
+      <span class="i-ph:caret-left">Previous website in the n7 webring</span>
+    </a>
+    <a href="https://n7webring.neocities.org/" rel="ugc"> n7 webring </a>
+    <a href="https://n7webring.neocities.org/gautier/next" rel="ugc">
       <span class="i-ph:caret-right">Next website in the n7 webring</span>
     </a>
   </p>
@@ -72,6 +67,30 @@
         outline: none;
         background-position: left;
         background-size: 100% 100%;
+      }
+    }
+  }
+
+  #webring {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+
+    a {
+      all: revert;
+      font-size: 0.75rem;
+      color: #666;
+      text-decoration: none;
+      transition: 150ms color;
+
+      &:hover,
+      &:active,
+      &:focus-visible {
+        color: #000;
+      }
+
+      &:focus-visible {
+        outline: 0;
       }
     }
   }
