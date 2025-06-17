@@ -22,7 +22,7 @@ export const load = async () => ({
         a === null ? -1 : z === null ? 1 : z.getTime() - a.getTime(),
       ),
   ),
-  commentCounts: fetch("https://api.github.com/graphql", {
+  interactions: fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: {
       "Authorization": `Token ${env.GITHUB_TOKEN}`,
@@ -36,6 +36,9 @@ export const load = async () => ({
               nodes {
                 title
                 comments {
+                  totalCount
+                }
+                reactions {
                   totalCount
                 }
               }
@@ -55,8 +58,12 @@ export const load = async () => ({
             data.repository.discussions.nodes as Array<{
               title: string;
               comments: { totalCount: number };
+              reactions: { totalCount: number };
             }>
-          ).map(({ title, comments }) => [title, comments.totalCount]),
+          ).map(({ title, comments, reactions }) => [
+            title,
+            { comments: comments.totalCount, reactions: reactions.totalCount },
+          ]),
         ),
       (error) => {
         console.log(error);

@@ -11,10 +11,11 @@
 
   const { data } = $props();
 
-  let commentCounts = $state<Map<string, number>>();
+  let interactions =
+    $state<Map<string, { comments: number; reactions: number }>>();
   $effect(() => {
-    data.commentCounts.then((c) => {
-      commentCounts = c;
+    data.interactions.then((i) => {
+      interactions = new Map(i);
     });
   });
 </script>
@@ -39,7 +40,7 @@
   <SearchBar {...data} />
 
   {#each data.articles as { slug, banner, title, description, date, snippet } (slug)}
-    {@const comments = commentCounts?.get(title) ?? 0}
+    {@const { comments = 0, reactions = 0 } = interactions?.get(title) ?? {}}
     <Card>
       {#snippet header()}
         {#if banner}
@@ -66,10 +67,16 @@
       {#if date}
         <p style="display: flex; justify-content: space-between">
           <time datetime={date.toISOString()}>{formatDate(date)}</time>
-          {#if comments > 0}
+          {#if comments + reactions > 0}
             <span>
-              {comments}
-              <span class="i-ph:chats-circle-duotone">comments</span>
+              {#if reactions > 0}
+                {reactions}
+                <span class="i-ph:heart-duotone">reactions</span>
+              {/if}
+              {#if comments > 0}
+                {comments}
+                <span class="i-ph:chats-circle-duotone">comments</span>
+              {/if}
             </span>
           {/if}
         </p>
@@ -84,7 +91,8 @@
   {#if data.q === undefined}
     <h2 style="margin-block-start: 2rem">Corporate articles</h2>
     <p>
-      These are the articles I have written for corporate blogs. They contain sponsored content and should be regarded as such.
+      These are the articles I have written for corporate blogs. They contain
+      sponsored content and should be regarded as such.
     </p>
 
     <div class="grid">
