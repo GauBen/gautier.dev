@@ -35,11 +35,15 @@ export const load = async () => ({
             discussions(categoryId: "DIC_kwDOHTUX9M4CXmQB", first: 100) {
               nodes {
                 title
-                comments {
-                  totalCount
-                }
                 reactions {
                   totalCount
+                }
+                comments(first: 100) {
+                  nodes {
+                    replies {
+                      totalCount
+                    }
+                  }
                 }
               }
             }
@@ -57,12 +61,18 @@ export const load = async () => ({
           (
             data.repository.discussions.nodes as Array<{
               title: string;
-              comments: { totalCount: number };
               reactions: { totalCount: number };
+              comments: { nodes: Array<{ replies: { totalCount: number } }> };
             }>
           ).map(({ title, comments, reactions }) => [
             title,
-            { comments: comments.totalCount, reactions: reactions.totalCount },
+            {
+              comments: comments.nodes.reduce(
+                (total, { replies }) => total + replies.totalCount,
+                comments.nodes.length, // Count top-level comments as well
+              ),
+              reactions: reactions.totalCount,
+            },
           ]),
         ),
       (error) => {
