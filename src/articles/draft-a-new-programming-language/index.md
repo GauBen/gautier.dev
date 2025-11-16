@@ -331,3 +331,162 @@ if P1.isAlive() {
   print("{P2.name} wins!")
 }
 ```
+
+---
+
+Another idea: a functional language but with all functions bound to their first argument.
+
+- All operators can be overloaded
+- The default function operator is `x.f` for calling function `f` with argument `x`.
+- For side effects, we can have `x!f` to call function `f` with argument `x` that has side effects
+- Comments can be attached to any node, all comments are multi-line: the whole language is whitespace insenstive
+
+Auto-import?
+
+```pina
+/* 99 bottles */
+u8!bottles = match this (
+  0: "No more bottles of beer on the wall, no more bottles of beer."!print
+  1: "1 bottle of beer on the wall, 1 bottle of beer."!print; 0!bottles
+  n: "$(bottles) bottles of beer on the wall, $(bottles) bottles of beer."!print; (n - 1)!bottles
+)
+
+99!bottles
+```
+
+```pina
+/* Hello World */
+"Hello, World!"!print
+
+!helloWorld =
+  "Hello, World!"!print
+
+!helloWorld
+
+/* FizzBuzz */
+u8!fizzbuzz =
+  match this % 15 (
+    0: "FizzBuzz"!print
+    3 | 6 | 9 | 12: "Fizz"!print
+    5 | 10 : "Buzz"!print
+    n: "$(this)"!print
+  );
+  match (
+    this < 100: (this + 1)!fizzbuzz
+  )
+  /* this < 100 && (this + 1)!fizzbuzz */
+
+1!fizzbuzz
+
+/* Factorial */
+u64.factorial =
+  match this (
+    0: 1
+    n: n * (n - 1).factorial
+  )
+
+"$(10.factorial)"!print
+
+/* Fibonacci */
+u64.fib =
+  match this (
+    0: 0
+    1: 1
+    n: (n - 1).fib + (n - 2).fib
+  )
+
+"$(10.fib)"!print
+
+/* Reverse a string */
+string.reverse =
+  match this (
+    "" | [s]: this
+    [s ...rest]: rest.reverse + s
+  )
+
+/* Palindrome check */
+string.isPalindrome = this == this.reverse
+
+"$("racecar".isPalindrome)"!print /* true */
+"$("hello".isPalindrome)"!print   /* false */
+```
+
+```pina
+/* Guess the number game */
+u8 numberToGuess = 100!rand:u8
+
+u8!guess =
+  "Guess a number between 1 and 100:"!print;
+  u8 input = stdin!readu8;
+  match (
+    input == this: "You won!"!print
+    input < this: "Too low."!print; this.guess
+    input > this: "Too high."!print; this.guess
+  )
+
+numberToGuess.guess
+```
+
+Specification (tentative):
+
+```pina
+/* There are two match syntax: with object and without object */
+/* With object */
+match thing (
+  pattern1: expr1
+  pattern2: expr2
+)
+
+/* Without object */
+match (
+  booleanExpr1: expr1
+  booleanExpr2: expr2
+)
+
+MATCH :: "match" MATCH_NEXT
+MATCH_NEXT :: OPT_WS "(" CONDITIONS ")" | WS EXPR "(" PATTERNS ")"
+CONDITIONS :: EXPR ":" EXPR (WS EXPR ":" EXPR)*
+PATTERNS :: PATTERN ":" EXPR (WS PATTERN ":" EXPR)*
+PATTERN :: number | string | identifier | "_" | "[" PATTERN_LIST "]"
+PATTERN_LIST :: PATTERN | "..." identifier (PATTERN)*
+```
+
+Pattern matching needs to be exhaustive in with object mode, but not in without object mode.
+
+Strings are utf8 aware (i.e. in pattern matching, slicing, length, etc). They are also immutable.
+
+Arrays are just a special case of generic:
+
+```pina
+type Array<T> = Empty | Item ( head T tail Array<T> )
+type Point<T> = Point ( x T y T )
+
+TYPE :: "type" TYPE_IDENT "=" TYPE_DEF
+TYPE_IDENT :: identifier ("<" TYPE_IDENT ">")?
+TYPE_DEF :: CONSTRUCTOR ("|" CONSTRUCTOR)*
+CONSTRUCTOR :: TYPE_IDENT ("{" FIELD_LIST "}")?
+FIELD_LIST :: FIELD (WS FIELD)*
+FIELD :: identifier TYPE_IDENT
+```
+
+```pina
+type Color = RGB { r u8 g u8 b u8 } | HSL { h u16 s u8 l u8 }
+
+Color.toRGB = match this (
+  RGB { r g b }: this
+  HSL { h s l }:
+    // Convert HSL to RGB
+    c = (1 - abs(2 * l - 1)) * s / 255
+    x = c * (1 - abs((h / 60) % 2 - 1))
+    m = l - c / 2
+    (r1 g1 b1) = match (
+      h < 60: (c x 0)
+      h < 120: (x c 0)
+      h < 180: (0 c x)
+      h < 240: (0 x c)
+      h < 300: (x 0 c)
+      _: (c 0 x)
+    )
+    RGB (r1 + m g1 + m b1 + m)
+)
+```
