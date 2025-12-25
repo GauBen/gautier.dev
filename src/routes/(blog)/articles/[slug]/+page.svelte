@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
   import "$assets/markdown-content.scss";
   import { formatDate } from "$lib/articles";
   import Header from "$lib/Header.svelte";
@@ -77,7 +78,7 @@
     </div>
   </section>
   <footer>
-    <p><a href="/">Back to the article list</a></p>
+    <p><a href={resolve("/")}>Back to the article list</a></p>
   </footer>
 </article>
 

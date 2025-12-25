@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
+
   let { open, style }: { open: boolean; style?: string } = $props();
-  let dropdown = $state<HTMLElement>();
+  let dropdown = $state();
 
   const preventDefault = (event: Event) => {
     event.preventDefault();
@@ -37,9 +39,9 @@
       event.stopPropagation();
     }}
   >
-    <a href="/" onclick={preventDefault}>Gautier</a>
-    <a href="/" onclick={preventDefault}>Antoine</a>
-    <a href="/" onclick={preventDefault}>Simon</a>
+    <a href={resolve("/")} onclick={preventDefault}>Gautier</a>
+    <a href={resolve("/")} onclick={preventDefault}>Antoine</a>
+    <a href={resolve("/")} onclick={preventDefault}>Simon</a>
   </div>
 </div>
 

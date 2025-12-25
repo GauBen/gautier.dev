@@ -1,3 +1,7 @@
+<script>
+  import { resolve } from "$app/paths";
+</script>
+
 <slot />
 
 <footer>
@@ -14,7 +18,7 @@
     <a href="https://github.com/GauBen/" rel="author">
       <span class="i-ph:github-logo-duotone">My GitHub Profile</span>
     </a>
-    <a href="/feed" rel="feed">
+    <a href={resolve("/feed")} rel="feed">
       <span class="i-ph:rss-duotone">Atom feed</span>
     </a>
   </p>

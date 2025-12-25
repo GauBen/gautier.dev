@@ -41,7 +41,7 @@ const rodent = (strings: TemplateStringsArray, ...values: unknown[]) => {
 export const GET = async () => {
   const { articles } = await load();
   return new Response(
-    rodent/* HTML */ `<?xml version="1.0" encoding="utf-8"?>
+    rodent /* HTML */ `<?xml version="1.0" encoding="utf-8"?>
       <feed xmlns="http://www.w3.org/2005/Atom">
         <title>gautier.dev articles</title>
         <link href="https://gautier.dev/" />

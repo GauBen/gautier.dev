@@ -135,8 +135,8 @@
             </a>
           </li>
           <li>
-            Initiated the <strong>creation of a design system</strong> to create
-            a single source of truth for all design elements.
+            Initiated the <strong>creation of a design system</strong> to create a
+            single source of truth for all design elements.
           </li>
         </ul>
       </Timeline>
@@ -470,7 +470,7 @@
     color: #0d3c77;
     background-color: #fff;
     border-bottom: 2px solid #0d3c77;
-    page-break-after: avoid;
+    break-after: avoid;
   }
 
   h3 {
@@ -497,7 +497,7 @@
     flex-direction: column;
     gap: 0.25em;
     margin: 1rem 0;
-    page-break-inside: avoid;
+    break-inside: avoid;
 
     > * {
       margin: 0;

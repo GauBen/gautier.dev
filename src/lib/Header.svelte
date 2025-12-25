@@ -1,7 +1,11 @@
+<script>
+  import { resolve } from "$app/paths";
+</script>
+
 <div class="wrapper">
   <header>
     <h1>
-      <a href="/" data-sveltekit-preload-code="eager">
+      <a href={resolve("/")} data-sveltekit-preload-code="eager">
         <img src="/favicon.svg" alt="🧔🏻‍♂️" width="72" height="72" />
         gautier.dev
       </a>

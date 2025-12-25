@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
   import { Table } from "$lib/markdown";
 
   const { weightedKeywords, metadata }: typeof import("$lib/search.js") =
@@ -82,7 +83,7 @@
         {#each articles as { slug, score } (slug)}
           <tr>
             <td>
-              <a href="/articles/{slug}">
+              <a href={resolve(`/articles/${slug}`)}>
                 {metadata[slug].title}
               </a>
             </td>

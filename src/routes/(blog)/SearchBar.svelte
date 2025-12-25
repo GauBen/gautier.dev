@@ -42,6 +42,7 @@
   };
 
   const toggle = async () => {
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
     await goto(q === undefined ? "?q=" : ".", {
       keepFocus: true,
       noScroll: true,
@@ -50,6 +51,7 @@
     index = undefined;
   };
   const set = async (value: string) => {
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
     await goto(`?q=${encodeURIComponent(value)}`, {
       keepFocus: true,
       noScroll: true,

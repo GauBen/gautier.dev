@@ -5,6 +5,7 @@
   import Prism from "$lib/Prism.svelte";
   import SearchBar from "./SearchBar.svelte";
   import external from "../../articles/external.json" assert { type: "json" };
+  import { resolve } from "$app/paths";
 
   const escape = (s: string) =>
     s.replaceAll("&", "&amp;").replaceAll("<", "&lt;");
@@ -52,7 +53,7 @@
         {/if}
       {/snippet}
       <h2>
-        <a href="/articles/{slug}">{title}</a>
+        <a href={resolve(`/articles/${slug}`)}>{title}</a>
       </h2>
       {#if Array.isArray(description)}
         {#each description as line (line)}
@@ -102,6 +103,7 @@
             <img src={banner} alt="" class="banner" loading="lazy" />
           {/snippet}
           <h2>
+            <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
             <a href={url} rel="sponsored">{title}</a>
           </h2>
           <p>{description}</p>
