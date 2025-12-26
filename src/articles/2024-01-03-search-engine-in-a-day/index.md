@@ -141,7 +141,7 @@ The resulting index is a map of maps:
 
 With this index, searching for "javascript" will return the article `state-of-js` first, but "javascript state" will return `finite-state-automatons` first.
 
-This concludes this first part on how the index is built. The whole indexer [can be found on GitHub](https://github.com/GauBen/gautier.dev/blob/main/src/index-articles.ts).
+This concludes this first part on how the index is built. The whole indexer [can be found on GitHub](https://github.com/GauBen/gautier.dev/blob/main/src/build-search-index.ts).
 
 ## Searching the index
 
@@ -168,7 +168,7 @@ The whole search algorithm [can be found on GitHub](https://github.com/GauBen/ga
 
 ## Explore the index
 
-The following table allows you to explore the index of this very website, as created by [the indexer](https://github.com/GauBen/gautier.dev/blob/main/src/index-articles.ts). It is a list of keywords, with the articles they match and their score. It will be updated as I add more articles to the website.
+The following table allows you to explore the index of this very website, as created by [the indexer](https://github.com/GauBen/gautier.dev/blob/main/src/build-search-index.ts). It is a list of keywords, with the articles they match and their score. It will be updated as I add more articles to the website.
 
 <div>
   {#await search}

@@ -23,10 +23,6 @@ export const articles = new Map(
         {
           date: date === "draft" ? null : new Date(date),
           load,
-          raw: () =>
-            import(`../articles/${date}-${slug}/index.md?raw`).then(
-              (m) => m.default,
-            ),
         },
       ];
     },

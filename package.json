@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "vite-node src/index-articles.ts && vite build",
+    "build": "node src/build-search-index.ts && vite build",
     "check": "svelte-check --tsconfig ./tsconfig.json & eslint . & stylelint --ignore-pattern .gitignore '**/*.{css,scss,svelte}' &",
     "dev": "vite dev",
     "format": "prettier --write --ignore-unknown '**/*'",
@@ -48,6 +48,7 @@
     "rehype-autolink-headings": "^7.1.0",
     "rehype-katex-svelte": "^1.2.0",
     "rehype-slug": "^6.0.0",
+    "remark": "^15.0.1",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^3.0.1",
@@ -64,8 +65,8 @@
     "typescript-eslint": "^8.50.1",
     "unified": "^11.0.5",
     "unocss": "^66.5.10",
-    "vite": "^7.3.0",
-    "vite-node": "^5.2.0"
+    "vfile-matter": "^5.0.1",
+    "vite": "^7.3.0"
   },
   "packageManager": "yarn@4.9.1"
 }

@@ -1,17 +1,29 @@
-import { articles } from "$lib/articles.js";
 import { stringify } from "devalue";
-import type { RootContent } from "mdast";
-import { writeFileSync } from "node:fs";
+import type { Root, RootContent } from "mdast";
+import { globSync, writeFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import { remark } from "remark";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
-import { unified } from "unified";
+import { matter } from "vfile-matter";
+
+declare module "vfile" {
+  interface DataMap {
+    matter: { title: string; description?: string };
+    tree: Root;
+  }
+}
 
 /** Markdown processor. */
-const processor = unified()
+const processor = remark()
   .use(remarkParse)
   .use(remarkGfm)
-  .use(remarkFrontmatter);
+  .use(remarkFrontmatter)
+  .use(() => (tree, file) => {
+    matter(file);
+    file.data.tree = tree as Root;
+  });
 
 /**
  * A markdown block can be transformed into a list of tokens:
@@ -92,7 +104,7 @@ const tokenizeAst = (child: RootContent, weight = 1): Token[] => {
 };
 
 /**
- * Transforms a markdown string into a list of tokens.
+ * Transforms a markdown AST into a list of tokens.
  *
  * The list keeps the order of the markdown blocks, named nodes.
  *
@@ -119,10 +131,9 @@ const tokenizeAst = (child: RootContent, weight = 1): Token[] => {
  *
  * Nodes with only whitespace are thrown away.
  */
-const tokenizeMarkdown = (raw: string): Token[][] =>
-  processor
-    .parse(raw)
-    .children.map((child) => tokenizeAst(child))
+const tokenizeMarkdown = (tree: Root): Token[][] =>
+  tree.children
+    .map((child) => tokenizeAst(child))
     .filter((node) => node.some(({ normalized }) => normalized.trim() !== ""));
 
 /**
@@ -250,19 +261,33 @@ console.time("Index articles");
 
 // Index all articles
 const indexedArticles = await Promise.all(
-  [...articles].map(async ([slug, { raw, load, date }]) => {
-    if (!date) return null;
+  globSync("articles/*/index.md", { cwd: import.meta.dirname }).map(
+    async (file) => {
+      const match = file.match(
+        /^articles\/(?<date>\d\d\d\d-\d\d-\d\d|draft)-(?<slug>.+)\/index.md$/,
+      );
+      if (!match?.groups) throw new Error(`Invalid article file name: ${file}`);
+      const { date, slug } = match.groups;
 
-    const { metadata } = await load();
-    const nodes = tokenizeMarkdown(await raw());
+      if (!date) return null;
 
-    // Add the title and description to the index
-    if (metadata.description)
-      nodes.unshift([createToken(metadata.description, 2)]);
-    nodes.unshift([createToken(metadata.title, 4)]);
+      const raw = await readFile(new URL(file, import.meta.url), "utf-8");
+      const { data } = await processor.process(raw);
+      const nodes = tokenizeMarkdown(data.tree!);
 
-    return { slug, metadata, keywords: parse(nodes), extracts: extract(nodes) };
-  }),
+      // Add the title and description to the index
+      if (data.matter!.description)
+        nodes.unshift([createToken(data.matter!.description, 2)]);
+      nodes.unshift([createToken(data.matter!.title, 4)]);
+
+      return {
+        slug,
+        metadata: data.matter!,
+        keywords: parse(nodes),
+        extracts: extract(nodes),
+      };
+    },
+  ),
 ).then((articles) => articles.filter((article) => article !== null));
 
 // Parse all tokens into keyword maps
