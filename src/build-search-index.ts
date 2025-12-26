@@ -269,7 +269,7 @@ const indexedArticles = await Promise.all(
       if (!match?.groups) throw new Error(`Invalid article file name: ${file}`);
       const { date, slug } = match.groups;
 
-      if (!date) return null;
+      if (!date || date === "draft") return null;
 
       const raw = await readFile(new URL(file, import.meta.url), "utf-8");
       const { data } = await processor.process(raw);
