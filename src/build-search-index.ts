@@ -257,7 +257,7 @@ const reverseKeywordMap = (
 };
 
 // Use all these functions to create a search index for the articles
-console.time("Index articles");
+console.time("Build search index");
 
 // Index all articles
 const indexedArticles = await Promise.all(
@@ -334,4 +334,4 @@ writeFileSync(
   ),
 );
 
-console.timeEnd("Index articles");
+console.timeEnd("Build search index");
