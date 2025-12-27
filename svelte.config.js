@@ -1,4 +1,4 @@
-import adapter from "@sveltejs/adapter-vercel";
+// import adapter from "@sveltejs/adapter-node";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import { mdsvex } from "mdsvex";
 import { resolve } from "node:path";
@@ -6,6 +6,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatexSvelte from "rehype-katex-svelte";
 import rehypeSlug from "rehype-slug";
 import remarkMath from "remark-math";
+import adapter from "./adapter.ts";
 import { highlight } from "./src/lib/prism.js";
 
 /** @type {import("@sveltejs/kit").Config} */
