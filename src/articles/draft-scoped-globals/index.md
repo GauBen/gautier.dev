@@ -2,11 +2,6 @@
 title: "Scoped globals"
 ---
 
-<script>
-  import Prism from '$lib/Prism.svelte';
-  import script from './scoped-globals.js?raw';
-</script>
-
 I've always wondered how some loggers were able to add traces next to the logs despite being imported as globals and not scoped to the function.
 
 ```ts
@@ -107,5 +102,3 @@ const scope = (suffix, callback) => {
 ```
 
 There is also a native Node.js package named `async_hooks`.
-
-<Prism code={script} />

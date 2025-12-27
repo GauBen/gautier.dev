@@ -1,11 +1,11 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
   import { formatDate } from "$lib/articles.js";
   import Card from "$lib/Card.svelte";
   import Header from "$lib/Header.svelte";
-  import Prism from "$lib/Prism.svelte";
-  import SearchBar from "./SearchBar.svelte";
   import external from "../../articles/external.json" assert { type: "json" };
-  import { resolve } from "$app/paths";
+  import SearchBar from "./SearchBar.svelte";
+  import { getSnippet } from "./snippet.remote.js";
 
   const escape = (s: string) =>
     s.replaceAll("&", "&amp;").replaceAll("<", "&lt;");
@@ -48,7 +48,9 @@
           <enhanced:img src={banner} alt="" class="banner" />
         {:else if snippet}
           <div class="banner">
-            <Prism {...snippet} />
+            <pre class="language-{snippet.lang}">{@html await getSnippet(
+                slug,
+              )}</pre>
           </div>
         {/if}
       {/snippet}

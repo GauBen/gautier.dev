@@ -25,8 +25,10 @@ Prism.languages.jsonc = Prism.languages.json;
  * @param {string} lang
  */
 export const highlight = (code, lang) =>
-  `<code class="language-${lang}">${Prism.highlight(
+  `<code class='language-${lang}'>${Prism.highlight(
     code,
     Prism.languages[lang],
     lang,
-  )}</code>`;
+  )
+    // Shrink JSON serialization with single quotes
+    .replaceAll(/class="([^"]*)"/g, "class='$1'")}</code>`;

@@ -41,11 +41,20 @@ export default {
     }),
   ],
 
+  compilerOptions: {
+    experimental: {
+      async: true,
+    },
+  },
+
   kit: {
     adapter: adapter(),
     alias: {
       $assets: "./src/assets",
       $search: "./src/search",
+    },
+    experimental: {
+      remoteFunctions: true,
     },
   },
 };
