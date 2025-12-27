@@ -1,6 +1,15 @@
 ---
 title: Bundling a SvelteKit app into a single binary
 description: The odyssey of packaging a SvelteKit application using the upcoming Single Executable Application (SEA) Node feature through a custom adapter.
+snippet:
+  lang: js
+  code: >
+    await postject.inject(
+      "node",
+      "NODE_SEA_BLOB",
+      readFileSync("./bundle.blob"),
+      { sentinelFuse: "NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2" },
+    );
 ---
 
 <script>
