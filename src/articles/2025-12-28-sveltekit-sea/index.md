@@ -1,6 +1,6 @@
 ---
 title: Bundling a SvelteKit app into a single binary
-description: The odyssey of packaging a SvelteKit application using the upcoming Single Application Executable (SAE) Node feature.
+description: The odyssey of packaging a SvelteKit application using the upcoming Single Executable Application (SEA) Node feature through a custom adapter.
 ---
 
 <script>
