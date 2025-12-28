@@ -193,7 +193,7 @@ With real code, it looks like this:
 
 ```ts
 writeFileSync(
-  `${tmp}/sea-manifest.json`,
+  `${tmp}/sea-config.json`,
   JSON.stringify({ main: `${tmp}/bundle.js`, output: `${tmp}/bundle.blob` }),
 );
 
@@ -201,7 +201,7 @@ builder.copy(process.execPath, `${tmp}/node`);
 
 execFileSync(`${tmp}/node`, [
   "--experimental-sea-config",
-  `${tmp}/sea-manifest.json`,
+  `${tmp}/sea-config.json`,
 ]);
 
 // API version of `npx postject`
@@ -249,7 +249,7 @@ The `client` variable is an array of all files written by the builder, that we t
 
 ```ts
 writeFileSync(
-  `${tmp}/sea-manifest.json`,
+  `${tmp}/sea-config.json`,
   JSON.stringify({
     main: `${tmp}/bundle.js`,
     output: `${tmp}/bundle.blob`,
