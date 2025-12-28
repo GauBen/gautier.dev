@@ -52,7 +52,7 @@ npx postject hello NODE_SEA_BLOB sea-prep.blob \
 
 The `sea-config.json` file is where we list all resources we want to bundle into the final executable. In this case, it's just the `hello.js` file, but we can also include assets like CSS and images.
 
-The most important constraint is that **the `main` program must be a single CommonJS file, with no external dependencies.** This means that we will need to bundle our SvelteKit application into a single CommonJS file before we can package it as a SEA binary.
+The most binding constraint is that **the `main` program must be a single CommonJS file, with no external dependencies nor top-level `await`s.** Since SvelteKit applications are made of multiple ESM modules, we'll have to bundle our dummy application (this website) into a single CommonJS file before we can package it as a SEA binary.
 
 ## SvelteKit Adapters
 
@@ -60,11 +60,11 @@ When building a SvelteKit application for production, we use an [adapter](https:
 
 The build process of a SvelteKit application is in two steps:
 
-1. Vite builds all source files into JS, CSS and assets into the `.svelte-kit/output` directory. The code is runtime-agnostic at this point.
+1. Vite transpiles all source files into JS, CSS and assets into the `.svelte-kit/output` directory. The code is runtime-agnostic at this point.
 
 2. The adapter takes the output of Vite and produces the production files in the `build` directory, compatible with the target runtime.
 
-We will create an `adapter-node-sea` adapter that will take, as input, the output of Vite and produce a single binary SEA executable as output.
+We will create an `adapter-node-sea` adapter that will take, as input, the output of Vite and produce a SEA binary as output.
 
 Let's start with a Proof of Concept: serving server-side rendered (SSR) pages, ignoring static assets and prerendered pages for now. Here is what an empty adapter looks like:
 
@@ -173,7 +173,7 @@ app.init({ env: process.env }).then(() => {
 
 This code could be improved, but it does the job---we give Rolldown a virtual entry point that does the following:
 
-- Import the SvelteKit runtime-agnostic `Server` and create an instance of it. This class is not application-specific, it requires a manifest (`builder.generateManifest()`) to inject the application routes and logic.
+- Import the SvelteKit runtime-agnostic `Server` and create an instance of it. This class is not application-specific, we inject the application routes and logic through a manifest (`builder.generateManifest()`).
 
 - Create a [Polka](https://www.npmjs.com/package/polka) HTTP server that listens on port 3000 and forwards all requests to the SvelteKit server instance. The SSR logic is handled by SvelteKit's `app.respond()` method.
 
@@ -262,7 +262,7 @@ writeFileSync(
 );
 ```
 
-Last but not least, we need to serve these assets in our Polka server:
+Last but not least, we need to serve these assets with our Polka server:
 
 ```ts
 import { getRawAsset, getAssetKeys } from "node:sea";
@@ -288,7 +288,7 @@ const server = polka()
   .use(ssr);
 ```
 
-This is a very naive asset server---`@sveltejs/adapter-node` uses [`sirv`](https://www.npmjs.com/package/sirv) under-the-hood to serve assets with proper caching headers and compression. This is not an option here as `sirv` relies on the filesystem, but it's a proof of concept, let's move on.
+This is a very naive asset server---`@sveltejs/adapter-node` uses [`sirv`](https://www.npmjs.com/package/sirv) under the hood to serve assets with proper caching headers and compression. This is not an option here as `sirv` relies on the filesystem, but it's a proof of concept, let's move on.
 
 Let's try that out by rebuilding (`vite build`) and reruning (`./build/app`) the application:
 
@@ -382,6 +382,6 @@ Apart from the ease of distribution, I'm curious about the performance implicati
 
 ## Conclusion
 
-The SEA feature of Node.js is very promising, enabling self-contained applications with minimal setup. Even a naive implementation suggests significant performance gains compared to a standard Node.js application---for small SvelteKit apps like this website at least.
+The SEA feature of Node.js is very promising, enabling self-contained applications with minimal ceremony. Even my naive implementation suggests significant performance gains compared to a Node.js build---for small SvelteKit apps like this website at least.
 
 I created a [SvelteKit issue](https://github.com/sveltejs/kit/issues/15101) to discuss adding an official `@sveltejs/adapter-node-sea` adapter to the SvelteKit ecosystem. If you are interested, please upvote!
