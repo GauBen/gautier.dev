@@ -1,6 +1,16 @@
 ---
 title: Building a search engine in a day
 description: I built a search engine in a day for the very website you are reading this on.
+snippet:
+  lang: json
+  code: |
+    [
+      {
+        "original": "This is a heading",
+        "normalized": "this is a heading",
+        "weight": 2
+      }
+    ]
 ---
 
 <script>
@@ -114,7 +124,7 @@ The final step is to favor rare keywords and remove too common ones. To do so, I
 - If a keyword is present in more than half of the articles, it is removed.
 - Divide the score of a keyword by the number of articles it can be found in (written as $\# \text{matches}$).
 
-I actually use the logarithm of the sum of the weights, for this evens out the scores and makes the search results more relevant. The formula is as follows:
+I developed the following formula to make the scoring as useful as possible:
 
 $$
 \text{score} = 5 \cdot \frac{\displaystyle \sum_{\text{article}} \text{weight}}{\cosh\left(\text{\# matches} - 1.5\right)}
