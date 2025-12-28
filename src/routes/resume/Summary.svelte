@@ -1,12 +1,13 @@
 <section>
   <h2>Summary</h2>
   <div>
-    <h3>Full-Stack Senior Engineer</h3>
-    I architect, develop, and maintain secure and scalable software applications for
-    4+ years in the IT industry, with a strong commitment to pragmatic solutions and
-    security best practices. I have a proven track record of leading successful migrations,
-    resulting in increased productivity and satisfaction for my teams.
-    <strong>
+    <h3>Developer Advocate</h3>
+    I architect and promote products tailored for developers, with a strong commitment
+    to modern standards, pragmatic solutions and security best practices. I have a
+    4+ years IT industry background developing and maintaining software applications
+    at scale, with a proven track record of leading successful migrations, increasing
+    productivity and satisfaction for my teams.
+    <strong hidden>
       I am seeking a challenging role in a fast-paced environment where I can
       leverage my technical and leadership skills to make a significant impact.
     </strong>

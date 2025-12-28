@@ -17,3 +17,11 @@ So, if you're looking for a senior developer who's not just technically skilled 
 <aside style="font-style: italic; opacity: 0.5; margin-top: 3rem">
   I observed that the initial stages of recruitment processes are often automated, so I apologize that this cover letter is not as targeted as it could be. I am eager to discuss my qualifications in more depth with a real person and demonstrate my enthusiasm for joining your team.
 </aside>
+
+<style>
+  @media not print {
+    aside {
+      display: none;
+    }
+  }
+</style>

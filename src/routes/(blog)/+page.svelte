@@ -26,9 +26,9 @@
 <main>
   <h1>Hey!</h1>
   <p>
-    My name is Gautier, I'm a developer advocate, full-stack engineer,
-    cybersecurity specialist, design enthusiast and hackathon organizer. I work
-    full-time at
+    My name is Gautier, I'm a <a href={resolve("/resume")}>developer advocate</a
+    >, full-stack engineer, cybersecurity specialist, design enthusiast and
+    hackathon organizer. I work full-time at
     <a href="https://www.jahia.com/">Jahia</a>
     as Developer Advocate. I used to work at
     <a href="https://escape.tech/">Escape (YC W23)</a>

@@ -19,32 +19,45 @@
           </a>
         </mark>
       </h3>
+      <p>
+        As first and sole Developer Advocate at Jahia, I have the opportunity to
+        shape my role and I'll be forever grateful for the trust placed in me.
+        My main focus is <strong
+          >being the voice of the company to the developer community</strong
+        > and vice versa.
+      </p>
       <ul>
         <li>
-          Create tickets to define the future improvements of our developer
-          experience in collaboration with the development team dedicated to the
-          developer’s experience.
+          <strong>
+            Bring the Jahia JavaScript Modules ecosystem to its first stable
+            release,
+          </strong>
+          after half a year of technical refinements to reach state-of-the-art Developer
+          Experience.
         </li>
         <li>
-          Write blog articles, webinars, and YouTube videos to promote the
-          company’s tech and reach the developer audience on different channels.
-          In charge of creating and managing code samples & demo websites.
+          <strong>
+            Shape the future customer-facing and internal Developer Experience
+          </strong>
+          with proof-of-concepts to full technology migrations (<em>e.g.</em> migrating
+          from webpack to Vite).
         </li>
         <li>
-          Code new features, fix bugs, and review pull requests to help the
-          delivery team.
+          <strong>Produce training and product marketing materials</strong> to promote
+          and teach the company’s technologies to the developer audience: blog posts,
+          tutorials, documentation pages, short- and long-form trainings, webinars,
+          code samples and demo websites, etc.
         </li>
         <li>
-          Write reference documentation and tutorials to ensure that developers
-          using the company’s products have all the information they need to be
-          successful with their projects.
+          <strong>Contribute to internal developments</strong> with a special focus
+          on new technologies and best practices.
         </li>
       </ul>
       <div class="stuff">
         <span class="tags">
           <span>Advocacy</span>
+          <span>Developer Experience</span>
           <span>Ownership</span>
-          <span>Development</span>
         </span>
         <em>Started in January 2025</em>
       </div>
@@ -533,7 +546,7 @@
     }
   }
 
-  :where(.page) {
+  .page {
     padding: 0 2rem;
     text-align: justify;
 
