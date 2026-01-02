@@ -1,0 +1,24 @@
+{
+  "name": "adapter-node-sea",
+  "private": true,
+  "type": "module",
+  "main": "src/index.js",
+  "dependencies": {
+    "@polka/url": "^1.0.0-next.29",
+    "@rollup/plugin-virtual": "^3.0.2",
+    "mrmime": "^2.0.1",
+    "polka": "^1.0.0-next.28",
+    "postject": "^1.0.0-alpha.6",
+    "rolldown": "^1.0.0-beta.57"
+  },
+  "devDependencies": {
+    "@sveltejs/kit": "^2.49.2",
+    "@sveltejs/vite-plugin-svelte": "*",
+    "@types/node": "^24.10.4",
+    "svelte": "*",
+    "vite": "*"
+  },
+  "peerDependencies": {
+    "@sveltejs/kit": "^2.0.0"
+  }
+}
