@@ -1,12 +1,35 @@
 import virtual from "@rollup/plugin-virtual";
+import { uneval } from "devalue";
 import { execFileSync } from "node:child_process";
-import { readFileSync, writeFileSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import { inject } from "postject";
 import * as rolldown from "rolldown";
 
+/**
+ * Adapted from https://github.com/lukeed/totalist under MIT License
+ *
+ * @param {string} root
+ * @param {string} [subdir]
+ * @returns {string[]}
+ */
+export function totalist(root, subdir = "") {
+  const out = [];
+  for (const entry of readdirSync(join(root, subdir))) {
+    if (statSync(join(root, subdir, entry)).isDirectory())
+      out.push(...totalist(root, join(subdir, entry)));
+    else out.push(join(subdir, entry));
+  }
+  return out;
+}
+
+// console.log(JSON.stringify(totalist(".svelte-kit/sea/assets"), null, 2));
+
 /** @returns {import("@sveltejs/kit").Adapter} */
 export default function adapter() {
+  const precompress = true;
+  const envPrefix = "";
+
   return {
     name: "adapter-node-sea",
 
@@ -15,17 +38,19 @@ export default function adapter() {
       builder.rimraf(tmp);
       builder.mkdirp(tmp);
 
-      const client = builder.writeClient(
-        `${tmp}/client${builder.config.kit.paths.base}`,
+      builder.writeClient(
+        `${tmp}/assets/client${builder.config.kit.paths.base}`,
       );
-      const prerendered = builder.writePrerendered(
-        `${tmp}/prerendered${builder.config.kit.paths.base}`,
+      builder.writePrerendered(
+        `${tmp}/assets/prerendered${builder.config.kit.paths.base}`,
       );
-      builder.writeServer(`${tmp}/server`);
 
+      if (precompress) await builder.compress(`${tmp}/assets`);
+
+      builder.writeServer(`${tmp}/server`);
       await rolldown.build({
         input: join(import.meta.dirname, "..", "runtime", "index.ts"),
-        cwd: resolve(tmp),
+        cwd: tmp,
         platform: "node",
         output: {
           format: "cjs",
@@ -33,13 +58,13 @@ export default function adapter() {
           file: "bundle.js",
         },
         define: {
-          ENV_PREFIX: '""',
+          ENV_PREFIX: JSON.stringify(envPrefix),
         },
         plugins: [
           virtual({
             "virtual:manifest": [
               `export const manifest = ${builder.generateManifest({ relativePath: "./server" })};`,
-              `export const prerendered = new Set(${JSON.stringify(builder.prerendered.paths)});`,
+              `export const prerendered = ${uneval(builder.prerendered)};`,
               `export const base = ${JSON.stringify(builder.config.kit.paths.base)};`,
               `export const buildDate = new Date(${Date.now()});`,
             ].join("\n\n"),
@@ -50,17 +75,20 @@ export default function adapter() {
 
       writeFileSync(
         `${tmp}/sea-manifest.json`,
-        JSON.stringify({
-          main: `${tmp}/bundle.js`,
-          output: `${tmp}/bundle.blob`,
-          assets: Object.fromEntries([
-            ...client.map((file) => [`/${file}`, `${tmp}/client/${file}`]),
-            ...prerendered.map((file) => [
-              `/${file}`,
-              `${tmp}/prerendered/${file}`,
-            ]),
-          ]),
-        }),
+        JSON.stringify(
+          {
+            main: `${tmp}/bundle.js`,
+            output: `${tmp}/bundle.blob`,
+            assets: Object.fromEntries(
+              totalist(`${tmp}/assets`).map((file) => [
+                `/${file}`,
+                `${tmp}/assets/${file}`,
+              ]),
+            ),
+          },
+          null,
+          2,
+        ),
       );
 
       builder.copy(process.execPath, `${tmp}/node`);

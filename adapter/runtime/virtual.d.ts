@@ -1,6 +1,6 @@
 declare module "virtual:manifest" {
   export const manifest: import("@sveltejs/kit").SSRManifest;
-  export const prerendered: Set<string>;
+  export const prerendered: import("@sveltejs/kit").Builder["prerendered"];
   export const base: string;
   export const buildDate: Date;
 }

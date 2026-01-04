@@ -13,13 +13,33 @@ import { getAssetKeys, getRawAsset } from "node:sea";
 import { Middleware } from "polka";
 import { buildDate } from "virtual:manifest";
 
-const noop = () => {};
+const ENCODING = new Map([
+  [".br", "br"],
+  [".gz", "gzip"],
+]);
+function toHeaders(name: string, asset: ArrayBuffer) {
+  const enc = ENCODING.get(name.slice(-3));
+
+  const ctype = mrmime.lookup(enc ? name.slice(0, -3) : name) || "";
+
+  const headers: Record<string, string | number | string[]> = {
+    "Content-Length": asset.byteLength,
+    "Content-Type": ctype + (ctype === "text/html" ? ";charset=utf-8" : ""),
+    "Last-Modified": buildDate.toUTCString(),
+    "Cache-Control": "no-cache",
+    "ETag": `W/"${asset.byteLength}-${buildDate.getTime()}"`,
+  };
+
+  if (enc) headers["Content-Encoding"] = enc;
+
+  return headers;
+}
 
 const assetKeys = new Set(getAssetKeys());
-
 function lookup(pathname: string, extns: string[]) {
   for (const ext of extns) {
     const name = pathname + ext;
+    console.log("looking up asset:", name);
     if (assetKeys.has(name)) {
       const asset = getRawAsset(name);
       const headers = toHeaders(name, asset);
@@ -74,58 +94,30 @@ function send(
   );
 }
 
-const ENCODING = {
-  ".br": "br",
-  ".gz": "gzip",
-};
-
-function toHeaders(name: string, asset: ArrayBuffer) {
-  const enc = ENCODING[name.slice(-3) as keyof typeof ENCODING];
-
-  const ctype = mrmime.lookup(enc ? name.slice(0, -3) : name) || "";
-
-  const headers: Record<string, string | number | string[]> = {
-    "Content-Length": asset.byteLength,
-    "Content-Type": ctype + (ctype === "text/html" ? ";charset=utf-8" : ""),
-    "Last-Modified": buildDate.toUTCString(),
-    "Cache-Control": "no-cache",
-    "ETag": `W/"${asset.byteLength}-${buildDate.getTime()}"`,
-  };
-
-  if (enc) headers["Content-Encoding"] = enc;
-
-  return headers;
-}
-
 export default function (
+  keyPrefix: string,
   opts: {
     setHeaders?: (res: ServerResponse, pathname: string) => void;
   } = {},
 ): Middleware {
-  let setHeaders = opts.setHeaders || noop;
-
-  return function (req, res, next) {
-    const extensions = ["", "html"];
+  return (req, res, next) => {
+    const extensions = ["", ".html"];
     const acceptEncoding = req.headers["accept-encoding"]?.toLowerCase() || "";
-    if (acceptEncoding.includes("gzip")) extensions.unshift("gz", "html.gz");
-    if (acceptEncoding.includes("br")) extensions.unshift("br", "html.br");
+    if (acceptEncoding.includes("gzip")) extensions.unshift(".gz", ".html.gz");
+    if (acceptEncoding.includes("br")) extensions.unshift(".br", ".html.br");
 
     let { pathname } = parse(req);
     if (pathname.indexOf("%") !== -1) {
       try {
         pathname = decodeURI(pathname);
       } catch (err) {
-        /* malform uri */
+        /* malformed uri */
       }
     }
 
-    let data =
-      pathname.charCodeAt(pathname.length - 1) === 47
-        ? lookup(
-            pathname,
-            extensions.map((ext) => (ext ? `index.${ext}` : "index")),
-          )
-        : lookup(pathname, extensions);
+    if (pathname.at(-1) === "/") pathname += "index";
+
+    const data = lookup(keyPrefix + pathname, extensions);
 
     if (!data) return next();
 
@@ -137,7 +129,7 @@ export default function (
 
     res.setHeader("Vary", "Accept-Encoding");
 
-    setHeaders(res, pathname);
+    opts.setHeaders?.(res, pathname);
     send(req, res, data.asset, data.headers);
   };
 }

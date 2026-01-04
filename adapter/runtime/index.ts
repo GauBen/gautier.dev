@@ -1,11 +1,10 @@
 import { IncomingMessage } from "node:http";
-import polka from "polka";
 import { env } from "./env.js";
-import { handler, init } from "./handler.js";
+import { init, app as server } from "./handler.js";
 
-export const path = env("SOCKET_PATH", false);
-export const host = env("HOST", "0.0.0.0");
-export const port = env("PORT", !path && "3000");
+const path = env("SOCKET_PATH", false);
+const host = env("HOST", "0.0.0.0");
+const port = env("PORT", !path && "3000");
 
 const shutdown_timeout = parseInt(env("SHUTDOWN_TIMEOUT", "30"));
 const idle_timeout = parseInt(env("IDLE_TIMEOUT", "0"));
@@ -30,8 +29,6 @@ const socket_activation = listen_pid === process.pid && listen_fds === 1;
 let requests = 0;
 let shutdown_timeout_id: NodeJS.Timeout | void;
 let idle_timeout_id: NodeJS.Timeout | void;
-
-const server = polka().use(handler);
 
 function graceful_shutdown(reason: "SIGINT" | "SIGTERM" | "IDLE") {
   if (shutdown_timeout_id) return;

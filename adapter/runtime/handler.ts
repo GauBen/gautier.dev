@@ -1,15 +1,9 @@
 import { parse as polka_url_parser } from "@polka/url";
-import {
-  createReadableStream,
-  getRequest,
-  setResponse,
-} from "@sveltejs/kit/node";
+import { getRequest, setResponse } from "@sveltejs/kit/node";
 import { IncomingHttpHeaders } from "node:http";
-import path from "node:path";
 import process from "node:process";
-import { fileURLToPath } from "node:url";
-import { Middleware } from "polka";
-import { base, manifest, prerendered } from "virtual:manifest";
+import polka, { Middleware } from "polka";
+import { manifest, prerendered } from "virtual:manifest";
 import { Server } from "virtual:server";
 import { env } from "./env.js";
 import sirv from "./sirv.js";
@@ -34,29 +28,16 @@ if (isNaN(body_size_limit)) {
   );
 }
 
-const dir = path.dirname(fileURLToPath(import.meta.url));
-
-const asset_dir = `${dir}/client${base}`;
-
-function serve(path: string, client = false) {
-  return sirv({
-    setHeaders: client
-      ? (res, pathname) => {
-          // only apply to build directory, not e.g. version.json
-          if (
-            pathname.startsWith(`/${manifest.appPath}/immutable/`) &&
-            res.statusCode === 200
-          ) {
-            res.setHeader("cache-control", "public,max-age=31536000,immutable");
-          }
-        }
-      : undefined,
-  });
-}
-
 // required because the static file server ignores trailing slashes
 function serve_prerendered(): Middleware {
-  const handler = serve(path.join(dir, "prerendered"));
+  const handler = sirv("prerendered/", {
+    setHeaders(res, pathname) {
+      if (prerendered.assets.has(pathname))
+        res.setHeader("Content-Type", prerendered.assets.get(pathname)!.type);
+    },
+  });
+
+  const prerenderedPaths = new Set(prerendered.paths);
 
   return (req, res, next) => {
     let { pathname, search, query } = polka_url_parser(req);
@@ -67,18 +48,18 @@ function serve_prerendered(): Middleware {
       // ignore invalid URI
     }
 
-    if (prerendered.has(pathname)) {
-      return handler?.(req, res, next);
+    if (prerenderedPaths.has(pathname)) {
+      return handler(req, res, next);
     }
 
     // remove or add trailing slash as appropriate
     let location =
       pathname.at(-1) === "/" ? pathname.slice(0, -1) : pathname + "/";
-    if (prerendered.has(location)) {
+    if (prerenderedPaths.has(location)) {
       if (query) location += search;
       res.writeHead(308, { location }).end();
     } else {
-      void next();
+      return next();
     }
   };
 }
@@ -149,20 +130,6 @@ const ssr: Middleware = async (req, res) => {
   );
 };
 
-function sequence(handlers: Middleware[]): Middleware {
-  return (req, res, next) => {
-    function handle(i: number): ReturnType<Middleware> {
-      if (i < handlers.length) {
-        return handlers[i](req, res, () => handle(i + 1));
-      } else {
-        return next();
-      }
-    }
-
-    return handle(0);
-  };
-}
-
 function get_origin(headers: IncomingHttpHeaders) {
   const protocol = (protocol_header && headers[protocol_header]) || "https";
   const host = (host_header && headers[host_header]) || headers["host"];
@@ -174,11 +141,21 @@ function get_origin(headers: IncomingHttpHeaders) {
 export const init = () =>
   server.init({
     env: process.env as Record<string, string>,
-    read: (file) => createReadableStream(`${asset_dir}/${file}`),
   });
 
-export const handler = sequence(
-  [serve(path.join(dir, "client"), true), serve_prerendered(), ssr].filter(
-    Boolean,
-  ) as Middleware[],
-);
+export const app = polka()
+  .use(
+    sirv("client/", {
+      setHeaders: (res, pathname) => {
+        // only apply to build directory, not e.g. version.json
+        if (
+          res.statusCode === 200 &&
+          pathname.startsWith(`/${manifest.appPath}/immutable/`)
+        ) {
+          res.setHeader("cache-control", "public,max-age=31536000,immutable");
+        }
+      },
+    }),
+  )
+  .use(serve_prerendered())
+  .use(ssr);

@@ -3,6 +3,8 @@
     "esModuleInterop": true,
     "moduleResolution": "nodenext",
     "module": "nodenext",
-    "strict": true
+    "strict": true,
+    "checkJs": true,
+    "noEmit": true
   }
 }
