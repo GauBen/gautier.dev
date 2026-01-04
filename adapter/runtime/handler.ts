@@ -30,7 +30,7 @@ if (isNaN(body_size_limit)) {
 
 // required because the static file server ignores trailing slashes
 function serve_prerendered(): Middleware {
-  const handler = sirv("prerendered/", {
+  const handler = sirv("/prerendered", {
     setHeaders(res, pathname) {
       if (prerendered.assets.has(pathname))
         res.setHeader("Content-Type", prerendered.assets.get(pathname)!.type);
@@ -145,7 +145,7 @@ export const init = () =>
 
 export const app = polka()
   .use(
-    sirv("client/", {
+    sirv("/client", {
       setHeaders: (res, pathname) => {
         // only apply to build directory, not e.g. version.json
         if (
