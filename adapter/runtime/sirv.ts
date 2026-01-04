@@ -39,7 +39,6 @@ const assetKeys = new Set(getAssetKeys());
 function lookup(pathname: string, extns: string[]) {
   for (const ext of extns) {
     const name = pathname + ext;
-    console.log("looking up asset:", name);
     if (assetKeys.has(name)) {
       const asset = getRawAsset(name);
       const headers = toHeaders(name, asset);
