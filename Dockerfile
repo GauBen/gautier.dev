@@ -11,13 +11,13 @@ ENV MISE_CACHE_DIR="/mise/cache"
 ENV MISE_INSTALL_PATH="/usr/local/bin/mise"
 RUN curl https://mise.run | sh
 
-WORKDIR /build
+WORKDIR /workdir
 
-ENV MISE_TRUSTED_CONFIG_PATHS="/build/mise.toml"
+ENV MISE_TRUSTED_CONFIG_PATHS="/workdir/mise.toml"
 COPY mise.toml ./
 RUN mise install
 
-COPY package.json yarn.lock .yarnrc.yml ./
+COPY --exclude=* --exclude=!**/package.json --exclude=!yarn.lock --exclude=!.yarnrc.yml . .
 RUN mise exec -- yarn install
 
 COPY . .
@@ -26,7 +26,8 @@ RUN mise exec -- yarn build
 FROM gcr.io/distroless/cc-debian13:nonroot
 
 EXPOSE 3000
+ENV ORIGIN="http://localhost:3000"
 
 # Distroless `:nonroot` uses uid/gid 65532.
-COPY --from=build --chown=65532:65532 /build/build/app /app
-ENTRYPOINT ["/app"]
+COPY --from=build --chown=65532:65532 /workdir/node /app/node
+ENTRYPOINT ["/app/node"]

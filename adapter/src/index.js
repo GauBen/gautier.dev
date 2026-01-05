@@ -35,23 +35,23 @@ export default function adapter() {
     name: "adapter-node-sea",
 
     async adapt(builder) {
-      const tmp = builder.getBuildDirectory("sea");
-      builder.rimraf(tmp);
-      builder.mkdirp(tmp);
+      const cwd = builder.getBuildDirectory("sea");
+      builder.rimraf(cwd);
+      builder.mkdirp(cwd);
 
       builder.writeClient(
-        `${tmp}/assets/client${builder.config.kit.paths.base}`,
+        `${cwd}/assets/client${builder.config.kit.paths.base}`,
       );
       builder.writePrerendered(
-        `${tmp}/assets/prerendered${builder.config.kit.paths.base}`,
+        `${cwd}/assets/prerendered${builder.config.kit.paths.base}`,
       );
 
-      if (precompress) await builder.compress(`${tmp}/assets`);
+      if (precompress) await builder.compress(`${cwd}/assets`);
 
-      builder.writeServer(`${tmp}/server`);
+      builder.writeServer(`${cwd}/server`);
       await rolldown.build({
         input: join(import.meta.dirname, "..", "runtime", "index.ts"),
-        cwd: tmp,
+        cwd,
         platform: "node",
         output: {
           format: "cjs",
@@ -77,19 +77,19 @@ export default function adapter() {
       });
 
       console.info(
-        `bundle.js: ${prettyBytes(statSync(`${tmp}/bundle.js`).size)}`,
+        `bundle.js: ${prettyBytes(statSync(`${cwd}/bundle.js`).size)}`,
       );
 
       writeFileSync(
-        `${tmp}/sea-manifest.json`,
+        `${cwd}/sea-manifest.json`,
         JSON.stringify(
           {
-            main: `${tmp}/bundle.js`,
-            output: `${tmp}/bundle.blob`,
+            main: `${cwd}/bundle.js`,
+            output: `${cwd}/bundle.blob`,
             assets: Object.fromEntries(
-              totalist(`${tmp}/assets`).map((file) => [
+              totalist(`${cwd}/assets`).map((file) => [
                 `/${file}`,
-                `${tmp}/assets/${file}`,
+                `${cwd}/assets/${file}`,
               ]),
             ),
           },
@@ -98,32 +98,32 @@ export default function adapter() {
         ),
       );
 
-      builder.copy(process.execPath, `${tmp}/node`);
-      execFileSync(`${tmp}/node`, [
+      builder.copy(process.execPath, `${cwd}/node`);
+      execFileSync(`${cwd}/node`, [
         "--experimental-sea-config",
-        `${tmp}/sea-manifest.json`,
+        `${cwd}/sea-manifest.json`,
       ]);
 
       console.info(
-        `bundle.blob: ${prettyBytes(statSync(`${tmp}/bundle.blob`).size)}`,
+        `bundle.blob: ${prettyBytes(statSync(`${cwd}/bundle.blob`).size)}`,
       );
 
-      console.info(`node: ${prettyBytes(statSync(`${tmp}/node`).size)}`);
+      console.info(`node: ${prettyBytes(statSync(`${cwd}/node`).size)}`);
 
       await inject(
-        `${tmp}/node`,
+        `${cwd}/node`,
         "NODE_SEA_BLOB",
-        readFileSync(`${tmp}/bundle.blob`),
+        readFileSync(`${cwd}/bundle.blob`),
         { sentinelFuse: "NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2" },
       );
 
-      console.info(`app: ${prettyBytes(statSync(`${tmp}/node`).size)}`);
+      console.info(`app: ${prettyBytes(statSync(`${cwd}/node`).size)}`);
 
       const out = "build";
       builder.rimraf(out);
       builder.mkdirp(out);
 
-      builder.copy(`${tmp}/node`, `${out}/app`);
+      builder.copy(`${cwd}/node`, `${out}/node`);
     },
   };
 }
