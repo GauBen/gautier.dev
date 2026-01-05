@@ -1,5 +1,5 @@
 /**
- * This module a port of sirv for Node SEA mode, trimmed for SvelteKit's use
+ * This code is a port of sirv for Node SEA mode, trimmed for SvelteKit's use
  * case.
  *
  * Original code under MIT License from
@@ -11,23 +11,23 @@ import * as mrmime from "mrmime";
 import { IncomingMessage, ServerResponse } from "node:http";
 import { getAssetKeys, getRawAsset } from "node:sea";
 import { Middleware } from "polka";
-import { buildDate } from "virtual:manifest";
+import { options } from "virtual:server";
 
-const ENCODING = new Map([
+const encodings = new Map([
   [".br", "br"],
   [".gz", "gzip"],
 ]);
 function toHeaders(name: string, asset: ArrayBuffer) {
-  const enc = ENCODING.get(name.slice(-3));
+  const enc = encodings.get(name.slice(-3));
 
   const ctype = mrmime.lookup(enc ? name.slice(0, -3) : name) || "";
 
   const headers: Record<string, string | number | string[]> = {
     "Content-Length": asset.byteLength,
     "Content-Type": ctype + (ctype === "text/html" ? ";charset=utf-8" : ""),
-    "Last-Modified": buildDate.toUTCString(),
+    "Last-Modified": BUILD_ISO_DATE,
     "Cache-Control": "no-cache",
-    "ETag": `W/"${asset.byteLength}-${buildDate.getTime()}"`,
+    "ETag": `W/"${asset.byteLength}-${options.version_hash}"`,
   };
 
   if (enc) headers["Content-Encoding"] = enc;
@@ -54,8 +54,9 @@ function send(
   headers: Record<string, string | number | string[]>,
 ) {
   let code = 200;
-  const opts: { start?: number; end?: number } = {};
   const size = asset.byteLength;
+  let start = 0;
+  let end = size - 1;
 
   let value;
   for (const key in headers) {
@@ -65,12 +66,8 @@ function send(
   if (req.headers.range) {
     code = 206;
     let [x, y] = req.headers.range.replace("bytes=", "").split("-");
-    let end = (opts.end = parseInt(y, 10) || size - 1);
-    let start = (opts.start = parseInt(x, 10) || 0);
-
-    if (end >= size) {
-      end = size - 1;
-    }
+    end = parseInt(y, 10) || size - 1;
+    start = parseInt(x, 10) || 0;
 
     if (start >= size) {
       res.setHeader("Content-Range", `bytes */${size}`);
@@ -78,22 +75,18 @@ function send(
       return res.end();
     }
 
+    if (end >= size) end = size - 1;
+
     headers["Content-Range"] = `bytes ${start}-${end}/${size}`;
     headers["Content-Length"] = end - start + 1;
     headers["Accept-Ranges"] = "bytes";
   }
 
   res.writeHead(code, headers);
-  res.end(
-    Buffer.from(
-      asset,
-      opts.start,
-      (opts.end ?? size - 1) - (opts.start ?? 0) + 1,
-    ),
-  );
+  res.end(Buffer.from(asset, start, end - start + 1));
 }
 
-export default function (
+export default function sirv(
   keyPrefix: string,
   opts: {
     setHeaders?: (res: ServerResponse, pathname: string) => void;

@@ -4,9 +4,12 @@ import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { inject } from "postject";
+import prettyBytes from "pretty-bytes";
 import * as rolldown from "rolldown";
 
 /**
+ * Returns all files under a directory recursively.
+ *
  * Adapted from https://github.com/lukeed/totalist under MIT License
  *
  * @param {string} root
@@ -22,8 +25,6 @@ export function totalist(root, subdir = "") {
   }
   return out;
 }
-
-// console.log(JSON.stringify(totalist(".svelte-kit/sea/assets"), null, 2));
 
 /** @returns {import("@sveltejs/kit").Adapter} */
 export default function adapter() {
@@ -58,6 +59,7 @@ export default function adapter() {
           file: "bundle.js",
         },
         define: {
+          BUILD_ISO_DATE: JSON.stringify(new Date().toISOString()),
           ENV_PREFIX: JSON.stringify(envPrefix),
         },
         plugins: [
@@ -65,13 +67,18 @@ export default function adapter() {
             "virtual:manifest": [
               `export const manifest = ${builder.generateManifest({ relativePath: "./server" })};`,
               `export const prerendered = ${uneval(builder.prerendered)};`,
-              `export const base = ${JSON.stringify(builder.config.kit.paths.base)};`,
-              `export const buildDate = new Date(${Date.now()});`,
-            ].join("\n\n"),
-            "virtual:server": `export { Server } from "./server/index.js";`,
+            ].join("\n"),
+            "virtual:server": [
+              `export { Server } from "./server/index.js";`,
+              `export { options } from "./server/internal.js";`,
+            ].join("\n"),
           }),
         ],
       });
+
+      console.info(
+        `bundle.js: ${prettyBytes(statSync(`${tmp}/bundle.js`).size)}`,
+      );
 
       writeFileSync(
         `${tmp}/sea-manifest.json`,
@@ -97,12 +104,20 @@ export default function adapter() {
         `${tmp}/sea-manifest.json`,
       ]);
 
+      console.info(
+        `bundle.blob: ${prettyBytes(statSync(`${tmp}/bundle.blob`).size)}`,
+      );
+
+      console.info(`node: ${prettyBytes(statSync(`${tmp}/node`).size)}`);
+
       await inject(
         `${tmp}/node`,
         "NODE_SEA_BLOB",
         readFileSync(`${tmp}/bundle.blob`),
         { sentinelFuse: "NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2" },
       );
+
+      console.info(`app: ${prettyBytes(statSync(`${tmp}/node`).size)}`);
 
       const out = "build";
       builder.rimraf(out);

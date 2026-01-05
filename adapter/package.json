@@ -9,6 +9,7 @@
     "mrmime": "^2.0.1",
     "polka": "^1.0.0-next.28",
     "postject": "^1.0.0-alpha.6",
+    "pretty-bytes": "^7.1.0",
     "rolldown": "^1.0.0-beta.57"
   },
   "devDependencies": {

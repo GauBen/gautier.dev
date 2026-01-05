@@ -2908,6 +2908,7 @@ __metadata:
     mrmime: "npm:^2.0.1"
     polka: "npm:^1.0.0-next.28"
     postject: "npm:^1.0.0-alpha.6"
+    pretty-bytes: "npm:^7.1.0"
     rolldown: "npm:^1.0.0-beta.57"
     svelte: "npm:*"
     vite: "npm:*"
@@ -6893,6 +6894,13 @@ __metadata:
   bin:
     prettier: bin/prettier.cjs
   checksum: 10c0/9675d2cd08eacb1faf1d1a2dbfe24bfab6a912b059fc9defdb380a408893d88213e794a40a2700bd29b140eb3172e0b07c852853f6e22f16f3374659a1a13389
+  languageName: node
+  linkType: hard
+
+"pretty-bytes@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "pretty-bytes@npm:7.1.0"
+  checksum: 10c0/9458f17007bbf8b61d11ef82091bfe7f87bb2f3fd7e6aa917744eb6dc709346995f698ecbf6597ac353b0d44bb7982054f7a2325f3260c9909d09aaafbdab5ca
   languageName: node
   linkType: hard
 
