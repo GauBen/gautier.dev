@@ -58,14 +58,14 @@ function send(
   let start = 0;
   let end = size - 1;
 
-  let value;
   for (const key in headers) {
-    if ((value = res.getHeader(key))) headers[key] = value;
+    const value = res.getHeader(key);
+    if (value) headers[key] = value;
   }
 
   if (req.headers.range) {
     code = 206;
-    let [x, y] = req.headers.range.replace("bytes=", "").split("-");
+    const [x, y] = req.headers.range.replace("bytes=", "").split("-");
     end = parseInt(y, 10) || size - 1;
     start = parseInt(x, 10) || 0;
 
@@ -102,7 +102,7 @@ export default function sirv(
     if (pathname.indexOf("%") !== -1) {
       try {
         pathname = decodeURI(pathname);
-      } catch (err) {
+      } catch {
         /* malformed uri */
       }
     }

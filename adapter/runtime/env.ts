@@ -32,7 +32,7 @@ if (ENV_PREFIX) {
 
 export function env(name: string): string | undefined;
 export function env<T>(name: string, fallback: T): string | T;
-export function env(name: string, fallback?: any): any {
+export function env(name: string, fallback?: unknown): unknown {
   const prefix = expected_unprefixed.has(name) ? "" : ENV_PREFIX;
   const prefixed = prefix + name;
   return prefixed in process.env ? process.env[prefixed] : fallback;

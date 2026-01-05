@@ -1,5 +1,9 @@
 .git
 .svelte-kit
-Dockerfile
+.yarn
 build
 node_modules
+
+.dockerignore
+.env*
+Dockerfile
