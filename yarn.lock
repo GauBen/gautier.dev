@@ -2905,6 +2905,7 @@ __metadata:
     "@sveltejs/kit": "npm:^2.49.2"
     "@sveltejs/vite-plugin-svelte": "npm:*"
     "@types/node": "npm:^24.10.4"
+    devalue: "npm:^5.6.1"
     mrmime: "npm:^2.0.1"
     polka: "npm:^1.0.0-next.28"
     postject: "npm:^1.0.0-alpha.6"

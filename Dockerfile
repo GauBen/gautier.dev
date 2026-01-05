@@ -14,7 +14,7 @@ RUN curl https://mise.run | sh
 WORKDIR /workdir
 
 ENV MISE_TRUSTED_CONFIG_PATHS="/workdir/mise.toml"
-COPY mise.toml ./
+COPY mise.toml .
 RUN mise install
 
 COPY --exclude=* --exclude=!**/package.json --exclude=!yarn.lock --exclude=!.yarnrc.yml . .
@@ -29,5 +29,5 @@ EXPOSE 3000
 ENV ORIGIN="http://localhost:3000"
 
 # Distroless `:nonroot` uses uid/gid 65532.
-COPY --from=build --chown=65532:65532 /workdir/node /app/node
+COPY --from=build --chown=65532:65532 /workdir/build/node /app/node
 ENTRYPOINT ["/app/node"]

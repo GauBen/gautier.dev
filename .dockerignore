@@ -1,2 +1,5 @@
+.git
+.svelte-kit
 Dockerfile
+build
 node_modules
