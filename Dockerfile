@@ -11,13 +11,13 @@ ENV PATH="/mise/shims:$PATH"
 RUN apt-get update && apt-get -y --no-install-recommends install curl ca-certificates gnupg \
   && rm -rf /var/lib/apt/lists/* \
   && gpg --keyserver hkps://keys.openpgp.org --recv-keys 24853EC9F655CE80B48E6C3A8B81C9D17413A06D \
-  && curl https://mise.jdx.dev/install.sh.sig | gpg --decrypt > install.sh \
-  && sh ./install.sh && rm ./install.sh
+  && curl https://mise.jdx.dev/install.sh.sig | gpg | sh
 
 # Install dev tools via mise
+ENV MISE_ALWAYS_KEEP_DOWNLOAD="true"
 ENV MISE_TRUSTED_CONFIG_PATHS="/workdir/mise.toml"
 COPY mise.toml .
-RUN mise install
+RUN --mount=type=cache,target=/mise/downloads mise install
 
 # Install js dependencies
 COPY --exclude=* --exclude=!**/package.json --exclude=!yarn.lock --exclude=!.yarnrc.yml . .
