@@ -82,8 +82,7 @@ export async function createNodeServer() {
           // only apply to build directory, not e.g. version.json
           if (
             res.statusCode === 200 &&
-            pathname.startsWith(`/
-            ${manifest.appPath}/immutable/`)
+            pathname.startsWith(`/${manifest.appPath}/immutable/`)
           ) {
             res.setHeader("cache-control", "public,max-age=31536000,immutable");
           }
