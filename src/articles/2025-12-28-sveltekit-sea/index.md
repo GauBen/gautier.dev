@@ -8,7 +8,7 @@ snippet:
       "node",
       "NODE_SEA_BLOB",
       readFileSync("./bundle.blob"),
-      { sentinelFuse: "NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2" },
+      { sentinelFuse: "NODE_SEA_FUSE​_fce680ab2cc467b6e072b8b5df1996b2" },
     );
 ---
 
@@ -43,7 +43,7 @@ cp $(command -v node) hello
 
 # Embed the blob into the node binary copy
 npx postject hello NODE_SEA_BLOB sea-prep.blob \
-  --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2
+  --sentinel-fuse NODE_SEA_FUSE​_fce680ab2cc467b6e072b8b5df1996b2
 
 # Run the resulting single executable application
 ./hello world
@@ -209,7 +209,7 @@ await postject.inject(
   `${tmp}/node`,
   "NODE_SEA_BLOB",
   readFileSync(`${tmp}/bundle.blob`),
-  { sentinelFuse: "NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2" },
+  { sentinelFuse: "NODE_SEA_FUSE​_fce680ab2cc467b6e072b8b5df1996b2" },
 );
 
 const out = "build";

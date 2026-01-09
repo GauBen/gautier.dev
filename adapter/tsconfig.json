@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
+    "strict": true,
+    "checkJs": true,
+    "noEmit": true
+  }
+}

@@ -1,0 +1,9 @@
+.git
+.svelte-kit
+.yarn
+build
+node_modules
+
+.dockerignore
+.env*
+Dockerfile

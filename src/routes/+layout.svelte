@@ -1,11 +1,7 @@
 <script lang="ts">
-  import { dev } from "$app/environment";
   import { page } from "$app/state";
-  import { inject } from "@vercel/analytics";
   import "../app.scss";
   import "virtual:uno.css";
-
-  inject({ mode: dev ? "development" : "production" });
 
   const { children } = $props();
   const { title, description } = $derived(page.data);

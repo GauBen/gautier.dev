@@ -38,7 +38,6 @@ export default ts.config(
   {
     ignores: [
       "**/.svelte-kit",
-      "**/.vercel",
       "**/.yarn",
       "**/build",
       "**/dist",
