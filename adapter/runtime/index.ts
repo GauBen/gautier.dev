@@ -54,7 +54,6 @@ createNodeServer().then((server) => {
       if (shutdown_timeout_id) clearTimeout(shutdown_timeout_id);
       if (idle_timeout_id) clearTimeout(idle_timeout_id);
 
-      // @ts-expect-error custom events cannot be typed
       process.emit("sveltekit:shutdown", reason);
     });
 

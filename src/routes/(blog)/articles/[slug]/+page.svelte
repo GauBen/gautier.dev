@@ -3,11 +3,14 @@
   import "$assets/markdown-content.scss";
   import { formatDate } from "$lib/articles";
   import Header from "$lib/Header.svelte";
-  import "giscus";
   import { getSnippet } from "../../snippet.remote.js";
 
   const { data } = $props();
   const { slug, title, date, snippet, banner, Article } = $derived(data);
+
+  $effect(() => {
+    import("giscus");
+  });
 </script>
 
 <Header>
@@ -19,9 +22,7 @@
     />
   {:else if snippet}
     <div class="snippet">
-      <!-- svelte-ignore hydration_html_changed Workaround for TypeError: can't access property "nodeType", node is null -->
-      <pre class="language-{snippet.lang}">{@html "<!--]-->" +
-          (await getSnippet(slug))}</pre>
+      <pre class="language-{snippet.lang}">{@html await getSnippet(slug)}</pre>
     </div>
   {/if}
 </Header>

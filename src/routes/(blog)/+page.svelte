@@ -48,9 +48,9 @@
           <enhanced:img src={banner} alt="" class="banner" />
         {:else if snippet}
           <div class="banner">
-            <!-- svelte-ignore hydration_html_changed Workaround for TypeError: can't access property "nodeType", node is null -->
-            <pre class="language-{snippet.lang}">{@html "<!--]-->" +
-                (await getSnippet(slug))}</pre>
+            <pre class="language-{snippet.lang}">{@html await getSnippet(
+                slug,
+              )}</pre>
           </div>
         {/if}
       {/snippet}

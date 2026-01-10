@@ -1433,9 +1433,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@npm:^2.49.2":
-  version: 2.49.2
-  resolution: "@sveltejs/kit@npm:2.49.2"
+"@sveltejs/kit@npm:^2.49.4":
+  version: 2.49.4
+  resolution: "@sveltejs/kit@npm:2.49.4"
   dependencies:
     "@standard-schema/spec": "npm:^1.0.0"
     "@sveltejs/acorn-typescript": "npm:^1.0.5"
@@ -1454,13 +1454,16 @@ __metadata:
     "@opentelemetry/api": ^1.0.0
     "@sveltejs/vite-plugin-svelte": ^3.0.0 || ^4.0.0-next.1 || ^5.0.0 || ^6.0.0-next.0
     svelte: ^4.0.0 || ^5.0.0-next.0
+    typescript: ^5.3.3
     vite: ^5.0.3 || ^6.0.0 || ^7.0.0-beta.0
   peerDependenciesMeta:
     "@opentelemetry/api":
       optional: true
+    typescript:
+      optional: true
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 10c0/05bf6d0d9fb87d894d1a5667f0473d8e83a4584f5c80850ed9eef1d1c8982236ea0d703bbd83befdff30c729d102fc67f2839014d900edb15f6b449ee059b9aa
+  checksum: 10c0/748233730f586d6b5b6a46c18e4d74a7de9182bb53c8ede3f0b48383c02344eb3fb966aadf56ea3cf1d8dafa660d28c1919aeb89afedbb4cff0f406b3d3c2a1d
   languageName: node
   linkType: hard
 
@@ -1477,9 +1480,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/vite-plugin-svelte@npm:^6.2.3":
-  version: 6.2.3
-  resolution: "@sveltejs/vite-plugin-svelte@npm:6.2.3"
+"@sveltejs/vite-plugin-svelte@npm:^6.2.4":
+  version: 6.2.4
+  resolution: "@sveltejs/vite-plugin-svelte@npm:6.2.4"
   dependencies:
     "@sveltejs/vite-plugin-svelte-inspector": "npm:^5.0.0"
     deepmerge: "npm:^4.3.1"
@@ -1489,7 +1492,7 @@ __metadata:
   peerDependencies:
     svelte: ^5.0.0
     vite: ^6.3.0 || ^7.0.0
-  checksum: 10c0/c6ca2f5e1b5da3054f81660a0470dd26b3ae4960b4b6576ec83f40070b1ffc5441261e4890f640bcd98916cd1ebfce8aa61b45a1c67dcc85904f5c298b1613a5
+  checksum: 10c0/db50e79dc3ce635b92287e1b1cdee46a5f97ed17df514f59d08a27431f673336fe357901c17710b311e5e75b7d982cd17eedbaa3117a73ae2a328fa1d1ac9eb3
   languageName: node
   linkType: hard
 
@@ -1845,12 +1848,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^25.0.3":
-  version: 25.0.3
-  resolution: "@types/node@npm:25.0.3"
+"@types/node@npm:^25.0.5":
+  version: 25.0.5
+  resolution: "@types/node@npm:25.0.5"
   dependencies:
     undici-types: "npm:~7.16.0"
-  checksum: 10c0/b7568f0d765d9469621615e2bb257c7fd1953d95e9acbdb58dffb6627a2c4150d405a4600aa1ad8a40182a94fe5f903cafd3c0a2f5132814debd0e3bfd61f835
+  checksum: 10c0/e92f8e29e17ff2d75f774233cad5b96bf7b253d24979162e1fff85993509a3511afe15a456217881f8e59fd5ff0b0d86067e33f57d599d1939a6d73c4f4806c7
   languageName: node
   linkType: hard
 
@@ -2328,9 +2331,9 @@ __metadata:
   dependencies:
     "@polka/url": "npm:^1.0.0-next.29"
     "@rollup/plugin-virtual": "npm:^3.0.2"
-    "@sveltejs/kit": "npm:^2.49.2"
-    "@sveltejs/vite-plugin-svelte": "npm:^6.2.3"
-    "@types/node": "npm:^25.0.3"
+    "@sveltejs/kit": "npm:^2.49.4"
+    "@sveltejs/vite-plugin-svelte": "npm:^6.2.4"
+    "@types/node": "npm:^25.0.5"
     devalue: "npm:^5.6.1"
     mrmime: "npm:^2.0.1"
     polka: "npm:^1.0.0-next.28"
@@ -3904,9 +3907,9 @@ __metadata:
     "@eslint/js": "npm:^9.39.2"
     "@iconify-json/ph": "npm:^1.2.2"
     "@sveltejs/enhanced-img": "npm:~0.4.4"
-    "@sveltejs/kit": "npm:^2.49.2"
-    "@sveltejs/vite-plugin-svelte": "npm:^6.2.3"
-    "@types/node": "npm:^25.0.3"
+    "@sveltejs/kit": "npm:^2.49.4"
+    "@sveltejs/vite-plugin-svelte": "npm:^6.2.4"
+    "@types/node": "npm:^25.0.5"
     "@types/prismjs": "npm:^1.26.5"
     adapter-node-sea: "workspace:*"
     devalue: "npm:^5.6.1"
