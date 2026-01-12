@@ -1,23 +1,24 @@
 import js from "@eslint/js";
-import eslintConfigPrettier from "eslint-config-prettier";
+import prettier from "eslint-config-prettier";
 import command from "eslint-plugin-command/config";
-import eslintPluginSvelte from "eslint-plugin-svelte";
+import svelte from "eslint-plugin-svelte";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 import ts from "typescript-eslint";
 import svelteConfig from "./svelte.config.js";
 
-export default ts.config(
+export default defineConfig(
   command(),
   js.configs.recommended,
-  ...ts.configs.recommended,
-  ...eslintPluginSvelte.configs["flat/recommended"],
-  eslintConfigPrettier,
-  ...eslintPluginSvelte.configs["flat/prettier"],
+  ts.configs.recommended,
+  svelte.configs.recommended,
+  prettier,
+  svelte.configs.prettier,
   {
     languageOptions: {
       globals: {
         ...globals.browser,
-        ...globals.node, // Add this if you are using SvelteKit in non-SPA mode
+        ...globals.node,
       },
     },
   },
@@ -25,7 +26,6 @@ export default ts.config(
     files: ["**/*.svelte", "**/*.svelte.ts", "**/*.svelte.js"],
     languageOptions: {
       parserOptions: {
-        projectService: true,
         extraFileExtensions: [".svelte"],
         parser: ts.parser,
         svelteConfig,

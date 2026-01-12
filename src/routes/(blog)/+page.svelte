@@ -12,13 +12,17 @@
 
   const { data } = $props();
 
-  let interactions =
-    $state<Map<string, { comments: number; reactions: number }>>();
-  $effect(() => {
-    data.interactions.then((i) => {
-      interactions = new Map(i);
-    });
-  });
+  // data.interactions can be a Promise or the actual data (from the cache)
+  const getInteractions = (() => {
+    let interactions = $state<Awaited<typeof data.interactions>>();
+
+    if (data.interactions && "then" in data.interactions)
+      data.interactions.then((i) => (interactions = i));
+    else interactions = data.interactions;
+
+    return (title: string) =>
+      interactions?.get(title) ?? { comments: 0, reactions: 0 };
+  })();
 </script>
 
 <Header />
@@ -41,7 +45,7 @@
   <SearchBar {...data} />
 
   {#each data.articles as { slug, banner, title, description, date, snippet } (slug)}
-    {@const { comments = 0, reactions = 0 } = interactions?.get(title) ?? {}}
+    {@const { comments, reactions } = getInteractions(title)}
     <Card>
       {#snippet header()}
         {#if banner}
