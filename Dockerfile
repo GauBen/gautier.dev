@@ -1,4 +1,4 @@
-FROM debian:13-slim@sha256:4bcb9db66237237d03b55b969271728dd3d955eaaa254b9db8a3db94550b1885 AS build
+FROM debian:13-slim@sha256:77ba0164de17b88dd0bf6cdc8f65569e6e5fa6cd256562998b62553134a00ef0 AS build
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 WORKDIR /workdir
 
@@ -27,11 +27,14 @@ RUN --mount=type=cache,target=/root/.yarn/berry/cache yarn install --immutable
 COPY . .
 RUN yarn build
 
-FROM gcr.io/distroless/cc-debian13:nonroot@sha256:6ecf048c4622b32291b92266c6618c9ca34989bbfa8ae6dcb82216dce082aabe
+FROM gcr.io/distroless/cc-debian13:nonroot@sha256:580333af04e2a47e2578007066678939d06ff9c5c6bcbed07f7d9bb46b90b9d4
 WORKDIR /app
 
 EXPOSE 3000
 ENV ORIGIN="http://localhost:3000"
+
+# Node 25 requires libatomic, which is not included in distroless images
+COPY --from=build /lib/x86_64-linux-gnu/libatomic.so.1 /lib/x86_64-linux-gnu/libatomic.so.1
 
 # Distroless `:nonroot` uses uid/gid 65532.
 COPY --from=build --chown=65532:65532 /workdir/build/node .
