@@ -5,22 +5,23 @@
   "main": "src/index.js",
   "dependencies": {
     "@polka/url": "^1.0.0-next.29",
-    "@rollup/plugin-virtual": "^3.0.2",
-    "devalue": "^5.6.1",
+    "devalue": "^5.6.2",
     "mrmime": "^2.0.1",
     "polka": "^1.0.0-next.28",
-    "postject": "^1.0.0-alpha.6",
     "pretty-bytes": "^7.1.0",
     "rolldown": "^1.0.0-beta.59"
   },
   "devDependencies": {
-    "@sveltejs/kit": "^2.49.4",
+    "@sveltejs/kit": "^2.50.1",
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
-    "@types/node": "^25.0.6",
-    "svelte": "^5.46.3",
+    "@types/node": "^25.0.10",
+    "svelte": "^5.48.4",
     "vite": "^8.0.0-beta.7"
   },
   "peerDependencies": {
     "@sveltejs/kit": "^2.0.0"
+  },
+  "engines": {
+    "node": "^25.5"
   }
 }

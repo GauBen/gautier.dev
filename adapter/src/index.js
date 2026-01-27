@@ -1,11 +1,23 @@
-import virtual from "@rollup/plugin-virtual";
 import { uneval } from "devalue";
 import { execFileSync } from "node:child_process";
-import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
-import { inject } from "postject";
+import { readdirSync, statSync, writeFileSync } from "node:fs";
+import { basename, join } from "node:path";
 import prettyBytes from "pretty-bytes";
 import * as rolldown from "rolldown";
+
+/** Adapted from @rollup/plugin-virtual under MIT License */
+const PREFIX = `\0virtual:`;
+function virtual(/** @type {Record<string, string>} */ modules) {
+  return {
+    name: "virtual",
+    resolveId(/** @type {string} */ id) {
+      if (id in modules) return PREFIX + id;
+    },
+    load(/** @type {string} */ id) {
+      if (id.startsWith(PREFIX)) return modules[id.slice(PREFIX.length)];
+    },
+  };
+}
 
 /**
  * Returns all files under a directory recursively.
@@ -80,12 +92,14 @@ export default function adapter() {
         `bundle.js: ${prettyBytes(statSync(`${cwd}/bundle.js`).size)}`,
       );
 
+      const exe = basename(process.execPath);
+
       writeFileSync(
-        `${cwd}/sea-manifest.json`,
+        `${cwd}/sea-config.json`,
         JSON.stringify(
           {
             main: `${cwd}/bundle.js`,
-            output: `${cwd}/bundle.blob`,
+            output: `${cwd}/${exe}`,
             assets: Object.fromEntries(
               totalist(`${cwd}/assets`).map((file) => [
                 `/${file}`,
@@ -98,39 +112,18 @@ export default function adapter() {
         ),
       );
 
-      builder.copy(process.execPath, `${cwd}/node`);
-      execFileSync(`${cwd}/node`, [
-        "--experimental-sea-config",
-        `${cwd}/sea-manifest.json`,
-      ]);
+      execFileSync(process.execPath, ["--build-sea", `${cwd}/sea-config.json`]);
 
-      console.info(
-        `bundle.blob: ${prettyBytes(statSync(`${cwd}/bundle.blob`).size)}`,
-      );
+      if (process.platform === "darwin")
+        execFileSync("codesign", ["--sign", "-", `${cwd}/${exe}`]);
 
-      console.info(`node: ${prettyBytes(statSync(`${cwd}/node`).size)}`);
-
-      if (process.platform === "darwin") execFileSync("codesign", ["--remove-signature", `${cwd}/node`]);
-
-      await inject(
-        `${cwd}/node`,
-        "NODE_SEA_BLOB",
-        readFileSync(`${cwd}/bundle.blob`),
-        {
-          sentinelFuse: "NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2",
-          machoSegmentName: "NODE_SEA",
-        },
-      );
-
-      if (process.platform === "darwin") execFileSync("codesign", ["--sign", "-", `${cwd}/node`]);
-
-      console.info(`app: ${prettyBytes(statSync(`${cwd}/node`).size)}`);
+      console.info(`node: ${prettyBytes(statSync(`${cwd}/${exe}`).size)}`);
 
       const out = "build";
       builder.rimraf(out);
       builder.mkdirp(out);
 
-      builder.copy(`${cwd}/node`, `${out}/node`);
+      builder.copy(`${cwd}/${exe}`, `${out}/${exe}`);
     },
   };
 }
