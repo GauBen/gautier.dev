@@ -1,7 +1,7 @@
 <script lang="ts">
   const measure = async () => {
     const matches = String(() => import("$lib/search.js")).match(
-      /import\((["']).+?\1\)/,
+      /import\((["'`]).+?\1\)/,
     );
     if (!matches) throw new Error("No import found");
     const url = matches[0].slice(8, -2);

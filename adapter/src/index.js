@@ -68,7 +68,7 @@ export default function adapter() {
         platform: "node",
         output: {
           format: "cjs",
-          inlineDynamicImports: true,
+          codeSplitting: false,
           file: "bundle.js",
         },
         plugins: [

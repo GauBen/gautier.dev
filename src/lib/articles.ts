@@ -1,7 +1,7 @@
 import type { Component } from "svelte";
 
 export type Article = {
-  metadata: {
+  frontmatter: {
     title: string;
     description?: string;
     snippet?: { code: string; lang: string };

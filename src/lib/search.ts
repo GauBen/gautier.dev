@@ -32,7 +32,7 @@ export const extracts = new Map(
 
 export const metadata = JSON.parse(metadataRaw) as Record<
   string,
-  Article["metadata"]
+  Article["frontmatter"]
 >;
 
 /** Lowercases and removes non alphanumeric characters from input. */

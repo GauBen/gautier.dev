@@ -19,6 +19,7 @@
     position: relative;
     min-height: 100%;
     padding: 2em;
+    overflow: auto;
     border: 2px solid #666;
     border-radius: 2px;
   }

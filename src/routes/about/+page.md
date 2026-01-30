@@ -1,3 +1,7 @@
+<script>
+  import "$assets/markdown-content.scss";
+</script>
+
 <h1>About Me</h1>
 
 My journey with code began at the tender age of 10, driven by pure curiosity. Fast forward 15 years of relentless tinkering and exploration, and you'll find me where I belong: immersed in the ever-evolving world of web development. Now, over 4 years strong as a professional developer, I've channeled that early passion into **leading talented teams and building exceptional user experiences.**

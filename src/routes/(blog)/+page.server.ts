@@ -77,8 +77,8 @@ export const load = async () => ({
     "Fullstack web engineer, security specialist & design enthusiast.",
   articles: await Promise.all(
     [...articles.entries()].map(async ([slug, { date, load }]) =>
-      load().then(({ metadata, banner }) => ({
-        ...metadata,
+      load().then(({ frontmatter, banner }) => ({
+        ...frontmatter,
         slug,
         date,
         banner,

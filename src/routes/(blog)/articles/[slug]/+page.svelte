@@ -38,9 +38,7 @@
       <p class="date">Unpublished draft</p>
     {/if}
   </header>
-  <div class="markdown-content">
-    <Article />
-  </div>
+  <Article />
   <section>
     <h2 id="comments">
       <a href="#comments" style="margin-right: 0.5rem" title="Link to comments"

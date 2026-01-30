@@ -1,15 +1,13 @@
-<script lang="ts">
-  import type { Attachment } from "svelte/attachments";
-
-  const mermaidify: Attachment<HTMLElement> = (node) => {
+<div
+  {@attach (node) => {
     // Remove SSR landmarks
-    node.innerHTML = node.textContent!;
+    node.innerHTML = node.textContent;
     // Import mermaid client-side only
     import("mermaid").then((mermaid) => mermaid.default.run({ nodes: [node] }));
-  };
-</script>
-
-<div {@attach mermaidify}><slot /></div>
+  }}
+>
+  <slot />
+</div>
 
 <style lang="scss">
   div {
