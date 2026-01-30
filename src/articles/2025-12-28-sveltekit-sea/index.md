@@ -13,8 +13,14 @@ snippet:
 ---
 
 <script>
-  import { Table, Tldr } from '$lib/markdown';
+  import { Table, Tldr, Callout } from '$lib/markdown';
 </script>
+
+<Callout icon="pencil">
+
+Node 25.5.0, released on January 26, 2026, introduced a `--build-sea` flag to simplify the build step. This article is slightly outdated, check out the [updated adapter code](https://github.com/GauBen/gautier.dev/tree/main/adapter) for the latest implementation!
+
+</Callout>
 
 <Tldr>
 

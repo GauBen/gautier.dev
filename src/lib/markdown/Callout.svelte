@@ -4,6 +4,7 @@
   const icons = {
     warning: "i-ph:warning-diamond-duotone",
     arrow: "i-ph:arrow-fat-right-duotone",
+    pencil: "i-ph:pencil-duotone",
   };
 
   const {
