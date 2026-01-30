@@ -308,7 +308,7 @@ Why would anyone want to bundle a SvelteKit application into a single binary?
 Apart from the ease of distribution, I'm curious about the performance implications of bundling everything into a single binary. I compared the runtime performance of the `@sveltejs/adapter-node` build versus our `adapter-node-sea` build using [oha](https://github.com/hatoo/oha):
 
 <Table>
-  <thead>
+  {#snippet thead()}
     <tr>
       <th></th>
       <th></th>
@@ -316,66 +316,64 @@ Apart from the ease of distribution, I'm curious about the performance implicati
       <th><code>adapter-node-sea</code></th>
       <th>Difference</th>
     </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="3">Homepage</td>
-      <td>p50</td>
-      <td align="right">171.6 ms</td>
-      <td align="right">105.7 ms</td>
-      <td align="right"><strong>-38%</strong></td>
-    </tr>
-    <tr>
-      <td>p90</td>
-      <td align="right">220.3 ms</td>
-      <td align="right">140.9 ms</td>
-      <td align="right"><strong>-36%</strong></td>
-    </tr>
-    <tr>
-      <td>p95</td>
-      <td align="right">254.5 ms</td>
-      <td align="right">460.1 ms</td>
-      <td align="right"><strong>+81%</strong></td>
-    </tr>
-    <tr>
-      <td rowspan="3">Largest asset (280 kB)</td>
-      <td>p50</td>
-      <td align="right">45.9 ms</td>
-      <td align="right">11.7 ms</td>
-      <td align="right"><strong>-75%</strong></td>
-    </tr>
-    <tr>
-      <td>p90</td>
-      <td align="right">51.3 ms</td>
-      <td align="right">17.5 ms</td>
-      <td align="right"><strong>-66%</strong></td>
-    </tr>
-    <tr>
-      <td>p95</td>
-      <td align="right">53.8 ms</td>
-      <td align="right">50.8 ms</td>
-      <td align="right"><strong>-6%</strong></td>
-    </tr>
-    <tr>
-      <td rowspan="3">Smallest asset (83 B)</td>
-      <td>p50</td>
-      <td align="right">17.3 ms</td>
-      <td align="right">7.1 ms</td>
-      <td align="right"><strong>-59%</strong></td>
-    </tr>
-    <tr>
-      <td>p90</td>
-      <td align="right">21.5 ms</td>
-      <td align="right">11.1 ms</td>
-      <td align="right"><strong>-48%</strong></td>
-    </tr>
-    <tr>
-      <td>p95</td>
-      <td align="right">22.9 ms</td>
-      <td align="right">13.6 ms</td>
-      <td align="right"><strong>-41%</strong></td>
-    </tr>
-  </tbody>
+  {/snippet}
+  <tr>
+    <td rowspan="3">Homepage</td>
+    <td>p50</td>
+    <td align="right">171.6 ms</td>
+    <td align="right">105.7 ms</td>
+    <td align="right"><strong>-38%</strong></td>
+  </tr>
+  <tr>
+    <td>p90</td>
+    <td align="right">220.3 ms</td>
+    <td align="right">140.9 ms</td>
+    <td align="right"><strong>-36%</strong></td>
+  </tr>
+  <tr>
+    <td>p95</td>
+    <td align="right">254.5 ms</td>
+    <td align="right">460.1 ms</td>
+    <td align="right"><strong>+81%</strong></td>
+  </tr>
+  <tr>
+    <td rowspan="3">Largest asset (280 kB)</td>
+    <td>p50</td>
+    <td align="right">45.9 ms</td>
+    <td align="right">11.7 ms</td>
+    <td align="right"><strong>-75%</strong></td>
+  </tr>
+  <tr>
+    <td>p90</td>
+    <td align="right">51.3 ms</td>
+    <td align="right">17.5 ms</td>
+    <td align="right"><strong>-66%</strong></td>
+  </tr>
+  <tr>
+    <td>p95</td>
+    <td align="right">53.8 ms</td>
+    <td align="right">50.8 ms</td>
+    <td align="right"><strong>-6%</strong></td>
+  </tr>
+  <tr>
+    <td rowspan="3">Smallest asset (83 B)</td>
+    <td>p50</td>
+    <td align="right">17.3 ms</td>
+    <td align="right">7.1 ms</td>
+    <td align="right"><strong>-59%</strong></td>
+  </tr>
+  <tr>
+    <td>p90</td>
+    <td align="right">21.5 ms</td>
+    <td align="right">11.1 ms</td>
+    <td align="right"><strong>-48%</strong></td>
+  </tr>
+  <tr>
+    <td>p95</td>
+    <td align="right">22.9 ms</td>
+    <td align="right">13.6 ms</td>
+    <td align="right"><strong>-41%</strong></td>
+  </tr>
 </Table>
 
 **The performance boost is quite significant!** We have this p95 outlier on the homepage that I can't explain (and don't intend to investigate further right now), but overall the SEA binary is consistently faster than the standard Node.js build.
