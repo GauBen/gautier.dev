@@ -20,7 +20,7 @@ COPY mise.toml .
 RUN --mount=type=cache,target=/mise/downloads mise install
 
 # Install js dependencies
-COPY --exclude=* --exclude=!**/package.json --exclude=!yarn.lock --exclude=!.yarnrc.yml . .
+COPY --exclude=* --exclude=!**/package.json --exclude=!yarn.lock --exclude=!.yarnrc.yml --exclude=!*.tgz . .
 RUN --mount=type=cache,target=/root/.yarn/berry/cache yarn install --immutable
 
 # Build the project
