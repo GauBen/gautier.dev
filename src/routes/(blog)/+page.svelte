@@ -3,6 +3,8 @@
   import { formatDate } from "$lib/articles.js";
   import Card from "$lib/Card.svelte";
   import Header from "$lib/Header.svelte";
+  import Chats from "@iconify-svelte/ph/chats-circle-duotone";
+  import Heart from "@iconify-svelte/ph/heart-duotone";
   import external from "../../articles/external.json" assert { type: "json" };
   import SearchBar from "./SearchBar.svelte";
   import { getSnippet } from "./snippet.remote.js";
@@ -78,11 +80,11 @@
             <span>
               {#if reactions > 0}
                 {reactions}
-                <span class="i-ph:heart-duotone">reactions</span>
+                <Heart class="icon" aria-label="reactions" />
               {/if}
               {#if comments > 0}
                 {comments}
-                <span class="i-ph:chats-circle-duotone">comments</span>
+                <Chats class="icon" aria-label="comments" />
               {/if}
             </span>
           {/if}

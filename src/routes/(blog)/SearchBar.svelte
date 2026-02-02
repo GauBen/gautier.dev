@@ -1,5 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import MagnifyingGlass from "@iconify-svelte/ph/magnifying-glass-bold";
+  import X from "@iconify-svelte/ph/x-bold";
   import { slide } from "svelte/transition";
 
   const { q, autocomplete = [] }: { q?: string; autocomplete?: string[] } =
@@ -76,9 +78,9 @@
     aria-label="{q === undefined ? 'Open' : 'Close'} search input"
   >
     {#if q === undefined}
-      <span class="i-ph:magnifying-glass-bold"></span>
+      <MagnifyingGlass class="icon" />
     {:else}
-      <span class="i-ph:x-bold"></span>
+      <X class="icon" />
     {/if}
   </button>
   {#if q !== undefined}

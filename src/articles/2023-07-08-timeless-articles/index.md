@@ -5,6 +5,7 @@ description: Personal collection of articles that I find myself referring to ove
 
 <script>
   import {Tldr} from '$lib/markdown';
+  import Comments from "@iconify-svelte/ph/chat-dots-duotone";
 </script>
 
 <Tldr>
@@ -19,17 +20,17 @@ Don't forget to **take these reads with a grain of salt**. Your job as a develop
 
 ## The Grug Brained Developer
 
-[grugbrain.dev](https://grugbrain.dev/) [<span class="i-ph:chat-dots-duotone">Hacker News Comments</span>](https://news.ycombinator.com/item?id=31840331)
+[grugbrain.dev](https://grugbrain.dev/) [<Comments class="icon" aria-label="Hacker News Comments" />](https://news.ycombinator.com/item?id=31840331)
 
 A humbling article about how we, developers, are not as smart as we think we are, written with a great sense of humor. Despite its intentionally provocative grammar, it is a goldmine of great career and architecture advice.
 
 ## Imaginary Problems Are the Root of Bad Software
 
-[cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software](https://cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software) [<span class="i-ph:chat-dots-duotone">Hacker News Comments</span>](https://news.ycombinator.com/item?id=36380711)
+[cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software](https://cerebralab.com/Imaginary_Problems_Are_the_Root_of_Bad_Software) [<Comments class="icon" aria-label="Hacker News Comments" />](https://news.ycombinator.com/item?id=36380711)
 
 We need to solve hard problems to keep being entertained. If these problems don't exist, we will create them. This article is a great reminder that we should not try to solve problems that don't exist.
 
-And it has a sequel! [cerebralab.com/Stop_future_proofing_software](https://cerebralab.com/Stop_future_proofing_software) [<span class="i-ph:chat-dots-duotone">Hacker News Comments</span>](https://news.ycombinator.com/item?id=17897727)
+And it has a sequel! [cerebralab.com/Stop_future_proofing_software](https://cerebralab.com/Stop_future_proofing_software) [<Comments class="icon" aria-label="Hacker News Comments" />](https://news.ycombinator.com/item?id=17897727)
 
 In this sequel, the author writes about the "we should do things this way in case _Z_ happens" bias being a trap, and usually the most common "imaginary problem" we developers create.
 

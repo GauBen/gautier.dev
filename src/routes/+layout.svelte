@@ -1,7 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
   import "../app.scss";
-  import "virtual:uno.css";
 
   const { children } = $props();
   const { title, description } = $derived(page.data);

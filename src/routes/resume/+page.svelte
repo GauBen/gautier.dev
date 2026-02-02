@@ -1,4 +1,8 @@
 <script lang="ts">
+  import Briefcase from "@iconify-svelte/ph/briefcase-duotone";
+  import GraduationCap from "@iconify-svelte/ph/graduation-cap-duotone";
+  import Medal from "@iconify-svelte/ph/medal-duotone";
+  import User from "@iconify-svelte/ph/user-duotone";
   import Header from "./Header.svelte";
   import Summary from "./Summary.svelte";
   import Timeline from "./Timeline.svelte";
@@ -8,7 +12,7 @@
   <Header />
   <Summary />
   <article>
-    <h2><span class="i-ph:briefcase-duotone"></span> Work Experience</h2>
+    <h2><Briefcase class="icon" /> Work Experience</h2>
 
     <div class="xp">
       <h3>
@@ -262,7 +266,7 @@
   </article>
 
   <article>
-    <h2><span class="i-ph:user-duotone"></span> Personal Journey</h2>
+    <h2><User class="icon" /> Personal Journey</h2>
     <div class="xp">
       <h3>Self-Taught Developer</h3>
       <p>
@@ -378,7 +382,7 @@
     </div>
   </article>
   <article>
-    <h2><span class="i-ph:medal-duotone"></span> Skills</h2>
+    <h2><Medal class="icon" /> Skills</h2>
     <div class="grid">
       <div class="xp">
         <strong>Cross-functional skills</strong>
@@ -445,7 +449,7 @@
     </div>
   </article>
   <article>
-    <h2><span class="i-ph:graduation-cap-duotone"></span> Education</h2>
+    <h2><GraduationCap class="icon" /> Education</h2>
     <div class="xp">
       <h3>
         <a href="https://tls-sec.github.io/">
@@ -560,7 +564,7 @@
       text-decoration: inherit;
     }
 
-    :global([class^="i-"]) {
+    :global(.icon) {
       color: #0d3c77;
     }
 

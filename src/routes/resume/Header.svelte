@@ -1,33 +1,37 @@
+<script>
+  import Envelope from "@iconify-svelte/ph/envelope-simple-duotone";
+  import Github from "@iconify-svelte/ph/github-logo-duotone";
+  import Link from "@iconify-svelte/ph/link-duotone";
+  import Linkedin from "@iconify-svelte/ph/linkedin-logo-duotone";
+  import MapPin from "@iconify-svelte/ph/map-pin-duotone";
+</script>
+
 <header>
   <enhanced:img src="./me.jpg?w=288;144" alt="Me" class="img" />
   <h1>Gautier<br />Ben Aïm</h1>
   <div class="contact">
     <ul>
       <li>
-        <span class="i-ph:map-pin-duotone"></span> France
+        <MapPin class="icon" /> France
       </li>
       <li>
         <a href="https://gautier.dev">
-          <span class="i-ph:link-duotone"></span>
-          gautier.dev
+          <Link class="icon" /> gautier.dev
         </a>
       </li>
       <li>
         <a href="https://github.com/GauBen">
-          <span class="i-ph:github-logo-duotone"></span>
-          github.com/GauBen
+          <Github class="icon" /> github.com/GauBen
         </a>
       </li>
       <li>
         <a href="mailto:benaim.gautier@gmail.com">
-          <span class="i-ph:envelope-simple-duotone"></span>
-          benaim.gautier@gmail.com
+          <Envelope class="icon" /> benaim.gautier@gmail.com
         </a>
       </li>
       <li>
         <a href="https://www.linkedin.com/in/gautier-ben-aim/">
-          <span class="i-ph:linkedin-logo-duotone"></span>
-          linkedin.com/in/gautier-ben-aim
+          <Linkedin class="icon" /> linkedin.com/in/gautier-ben-aim
         </a>
       </li>
     </ul>

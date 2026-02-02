@@ -1,5 +1,10 @@
 <script>
   import { resolve } from "$app/paths";
+  import CaretLeft from "@iconify-svelte/ph/caret-left";
+  import CaretRight from "@iconify-svelte/ph/caret-right";
+  import Github from "@iconify-svelte/ph/github-logo-duotone";
+  import Linkedin from "@iconify-svelte/ph/linkedin-logo-duotone";
+  import Rss from "@iconify-svelte/ph/rss-duotone";
 </script>
 
 <slot />
@@ -14,22 +19,22 @@
   </p>
   <p class="icons">
     <a href="https://www.linkedin.com/in/gautier-ben-aim/" rel="author">
-      <span class="i-ph:linkedin-logo-duotone">My LinkedIn Profile</span>
+      <Linkedin class="icon" aria-label="My LinkedIn Profile" />
     </a>
     <a href="https://github.com/GauBen/" rel="author">
-      <span class="i-ph:github-logo-duotone">My GitHub Profile</span>
+      <Github class="icon" aria-label="My GitHub Profile" />
     </a>
     <a href={resolve("/feed")} rel="feed">
-      <span class="i-ph:rss-duotone">Atom feed</span>
+      <Rss class="icon" aria-label="Atom feed" />
     </a>
   </p>
   <p id="webring">
     <a href="https://n7webring.neocities.org/gautier/prev" rel="ugc">
-      <span class="i-ph:caret-left">Previous website in the n7 webring</span>
+      <CaretLeft class="icon" aria-label="Previous website in the n7 webring" />
     </a>
     <a href="https://n7webring.neocities.org/" rel="ugc"> n7 webring </a>
     <a href="https://n7webring.neocities.org/gautier/next" rel="ugc">
-      <span class="i-ph:caret-right">Next website in the n7 webring</span>
+      <CaretRight class="icon" aria-label="Next website in the n7 webring" />
     </a>
   </p>
 </footer>

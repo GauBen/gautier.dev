@@ -3,7 +3,6 @@ import { sveltekit } from "@sveltejs/kit/vite";
 import mdKatex, { type MarkdownKatexOptions } from "@vscode/markdown-it-katex";
 import katex from "katex";
 import mdAnchor from "markdown-it-anchor";
-import unocss from "unocss/vite";
 import { defineConfig } from "vite";
 import svelteMd from "vite-plugin-svelte-md";
 import { highlight } from "./src/lib/prism.js";
@@ -46,6 +45,5 @@ export default defineConfig({
     }),
     enhancedImages(),
     sveltekit(),
-    unocss(),
   ],
 });
