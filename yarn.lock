@@ -1073,9 +1073,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/enhanced-img@npm:^0.9.3":
-  version: 0.9.3
-  resolution: "@sveltejs/enhanced-img@npm:0.9.3"
+"@sveltejs/enhanced-img@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "@sveltejs/enhanced-img@npm:0.10.0"
   dependencies:
     magic-string: "npm:^0.30.5"
     sharp: "npm:^0.34.1"
@@ -1086,13 +1086,13 @@ __metadata:
     "@sveltejs/vite-plugin-svelte": ^6.0.0
     svelte: ^5.0.0
     vite: ^6.3.0 || >=7.0.0
-  checksum: 10c0/6bcb0689317eb9cf4077a920b0432a5b58f9726222d363565b4b96be64657f5cee4576827c681bed2c059c9a0221518f658729947865c9928f2cceeee1369994
+  checksum: 10c0/536f2d739823f16aaa71c799ea5be38b7286f92a43a6289f896d07039d7ed237a5400104262c681912f6fb72e7d6701aaab95be7908a2f1e0dd09a31d4507ae8
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@https://pkg.pr.new/sveltejs/kit/@sveltejs/kit@1d90dc0":
-  version: 2.50.1
-  resolution: "@sveltejs/kit@https://pkg.pr.new/sveltejs/kit/@sveltejs/kit@1d90dc0"
+"@sveltejs/kit@npm:^2.50.2":
+  version: 2.50.2
+  resolution: "@sveltejs/kit@npm:2.50.2"
   dependencies:
     "@standard-schema/spec": "npm:^1.0.0"
     "@sveltejs/acorn-typescript": "npm:^1.0.5"
@@ -1120,7 +1120,7 @@ __metadata:
       optional: true
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 10c0/93914cce50ff9cb575c030ce5045c5060da25018fce9227d70ca45f483251785b361c6ec1668e8532fafa57991ba11792e081e5edf0d5893c7160777ef44142e
+  checksum: 10c0/a5e6c7781ae180bc35c5cdac8f17cc5795a3c50bd6b1ef422db11dafc0c52e95f3ab6f8fe2d08a90141d3541d60f4067deaff362d6da0022243263eee32d9205
   languageName: node
   linkType: hard
 
@@ -1701,7 +1701,7 @@ __metadata:
   resolution: "adapter-node-sea@workspace:adapter"
   dependencies:
     "@polka/url": "npm:^1.0.0-next.29"
-    "@sveltejs/kit": "npm:^2.50.1"
+    "@sveltejs/kit": "npm:^2.50.2"
     "@sveltejs/vite-plugin-svelte": "npm:^7.0.0-next.0"
     "@types/node": "npm:^25.2.0"
     devalue: "npm:^5.6.2"
@@ -1710,7 +1710,7 @@ __metadata:
     pretty-bytes: "npm:^7.1.0"
     rolldown: "npm:^1.0.0-rc.2"
     svelte: "npm:^5.49.1"
-    vite: "npm:^8.0.0-beta.11"
+    vite: "npm:^8.0.0-beta.12"
   peerDependencies:
     "@sveltejs/kit": ^2.0.0
   languageName: unknown
@@ -3125,8 +3125,8 @@ __metadata:
     "@eslint/js": "npm:^9.39.2"
     "@iconify-json/ph": "npm:^1.2.2"
     "@iconify-svelte/ph": "npm:^1.0.1"
-    "@sveltejs/enhanced-img": "npm:^0.9.3"
-    "@sveltejs/kit": "npm:^2.50.1"
+    "@sveltejs/enhanced-img": "npm:^0.10.0"
+    "@sveltejs/kit": "npm:^2.50.2"
     "@sveltejs/vite-plugin-svelte": "npm:^7.0.0-next.0"
     "@types/markdown-it": "npm:^14.1.2"
     "@types/node": "npm:^25.2.0"
@@ -3160,7 +3160,7 @@ __metadata:
     remark-gfm: "npm:^4.0.1"
     remark-parse: "npm:^11.0.0"
     sass-embedded: "npm:^1.97.3"
-    stylelint: "npm:^17.1.0"
+    stylelint: "npm:^17.1.1"
     stylelint-config-html: "npm:^1.1.0"
     stylelint-config-recess-order: "npm:^7.6.0"
     stylelint-config-standard-scss: "npm:^17.0.0"
@@ -3171,7 +3171,7 @@ __metadata:
     typescript-eslint: "npm:^8.54.0"
     unified: "npm:^11.0.5"
     vfile-matter: "npm:^5.0.1"
-    vite: "npm:^8.0.0-beta.11"
+    vite: "npm:^8.0.0-beta.12"
     vite-plugin-svelte-md: "npm:^0.2.0"
   languageName: unknown
   linkType: soft
@@ -6085,9 +6085,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:^17.1.0":
-  version: 17.1.0
-  resolution: "stylelint@npm:17.1.0"
+"stylelint@npm:^17.1.1":
+  version: 17.1.1
+  resolution: "stylelint@npm:17.1.1"
   dependencies:
     "@csstools/css-parser-algorithms": "npm:^4.0.0"
     "@csstools/css-syntax-patches-for-csstree": "npm:^1.0.25"
@@ -6129,7 +6129,7 @@ __metadata:
     write-file-atomic: "npm:^7.0.0"
   bin:
     stylelint: bin/stylelint.mjs
-  checksum: 10c0/c7f468122d1ccdebba6012963faa27320dcd48a9eeac389afed94a4adb4c9fce1d447eee996194523cb23ca81ff3fcc2a54ae94bcd3486dec205ede097917e25
+  checksum: 10c0/641d02449cfd8c3abd356cb38a9c7499a934015d7905fb78ef5af454f742527fb30c14e4084bebfb0b03ec0107659cc59020b0aebace2342604dade6b9a0a510
   languageName: node
   linkType: hard
 
@@ -6594,9 +6594,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^8.0.0-beta.11":
-  version: 8.0.0-beta.11
-  resolution: "vite@npm:8.0.0-beta.11"
+"vite@npm:^8.0.0-beta.12":
+  version: 8.0.0-beta.12
+  resolution: "vite@npm:8.0.0-beta.12"
   dependencies:
     "@oxc-project/runtime": "npm:0.111.0"
     fdir: "npm:^6.5.0"
@@ -6646,7 +6646,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10c0/26290592aba7f9caf0476e1194683504787aaab5ffcc6c1d02276ae0e7d03fc2ed59dfb9279528b0780542761ed3a7ce0007688fc6b942f44b11abf55c39400b
+  checksum: 10c0/aa005e267d4b9c4773137cb16ed1c5f25ced5542d267758e18e712415ead30676b7c361ee26d3dee1ff78c71214649563be0777d14605ded4e0eb31389e3fede
   languageName: node
   linkType: hard
 

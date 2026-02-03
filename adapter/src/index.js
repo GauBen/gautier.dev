@@ -4,7 +4,6 @@ import { readdirSync, statSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import prettyBytes from "pretty-bytes";
 import * as rolldown from "rolldown";
-import { replacePlugin } from "rolldown/plugins";
 
 /** Adapted from @rollup/plugin-virtual under MIT License */
 const PREFIX = `\0virtual:`;
@@ -40,10 +39,7 @@ export function totalist(root, subdir = "") {
 }
 
 /** @returns {import("@sveltejs/kit").Adapter} */
-export default function adapter() {
-  const precompress = true;
-  const envPrefix = "";
-
+export default function adapter({ precompress = true, envPrefix = "" } = {}) {
   return {
     name: "adapter-node-sea",
 
@@ -72,14 +68,13 @@ export default function adapter() {
           file: "bundle.js",
         },
         plugins: [
-          replacePlugin({
-            BUILD_ISO_DATE: JSON.stringify(new Date().toISOString()),
-            ENV_PREFIX: JSON.stringify(envPrefix),
-          }),
           virtual({
             "virtual:manifest": [
               `export const manifest = ${builder.generateManifest({ relativePath: "./server" })};`,
               `export const prerendered = ${uneval(builder.prerendered)};`,
+              `export const last_modified = ${uneval(new Date().toISOString())};`,
+              `export const env_prefix = ${uneval(envPrefix)};`,
+              `export const precompress = ${uneval(precompress)};`,
             ].join("\n"),
             "virtual:server": [
               `export { Server } from "./server/index.js";`,

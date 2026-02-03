@@ -11,6 +11,7 @@ import * as mrmime from "mrmime";
 import { IncomingMessage, ServerResponse } from "node:http";
 import { getAssetKeys, getRawAsset } from "node:sea";
 import { Middleware } from "polka";
+import { last_modified, precompress } from "virtual:manifest";
 import { options } from "virtual:server";
 
 const encodings = new Map([
@@ -25,7 +26,7 @@ function toHeaders(name: string, asset: ArrayBuffer) {
   const headers: Record<string, string | number | string[]> = {
     "Content-Length": asset.byteLength,
     "Content-Type": ctype + (ctype === "text/html" ? ";charset=utf-8" : ""),
-    "Last-Modified": BUILD_ISO_DATE,
+    "Last-Modified": last_modified,
     "Cache-Control": "no-cache",
     "ETag": `W/"${asset.byteLength}-${options.version_hash}"`,
   };
@@ -95,8 +96,10 @@ export default function sirv(
   return (req, res, next) => {
     const extensions = ["", ".html"];
     const acceptEncoding = req.headers["accept-encoding"]?.toLowerCase() || "";
-    if (acceptEncoding.includes("gzip")) extensions.unshift(".gz", ".html.gz");
-    if (acceptEncoding.includes("br")) extensions.unshift(".br", ".html.br");
+    if (precompress && acceptEncoding.includes("gzip"))
+      extensions.unshift(".gz", ".html.gz");
+    if (precompress && acceptEncoding.includes("br"))
+      extensions.unshift(".br", ".html.br");
 
     let { pathname } = parse(req);
     if (pathname.indexOf("%") !== -1) {
@@ -119,7 +122,7 @@ export default function sirv(
       return;
     }
 
-    res.setHeader("Vary", "Accept-Encoding");
+    if (precompress) res.setHeader("Vary", "Accept-Encoding");
 
     opts.setHeaders?.(res, pathname);
     send(req, res, data.asset, data.headers);
