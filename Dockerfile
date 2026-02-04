@@ -20,7 +20,7 @@ COPY mise.toml .
 RUN --mount=type=cache,target=/mise/downloads mise install
 
 # Install js dependencies
-COPY --exclude=* --exclude=!**/package.json --exclude=!yarn.lock --exclude=!.yarnrc.yml --exclude=!*.tgz . .
+COPY --exclude=* --exclude=!**/package.json --exclude=!yarn.lock --exclude=!.yarnrc.yml . .
 RUN --mount=type=cache,target=/root/.yarn/berry/cache yarn install --immutable
 
 # Build the project
@@ -44,5 +44,5 @@ COPY --from=build \
 # Use a non-root user to run the application
 USER 65532:65532
 COPY --from=build --chown=65532:65532 /workdir/build/node .
-HEALTHCHECK --start-interval=2s --start-period=1s CMD [ "./node", "--healthcheck", "http://localhost:3000"]
+HEALTHCHECK --start-interval=2s --start-period=2s CMD [ "./node", "--healthcheck", "http://localhost:3000"]
 ENTRYPOINT ["./node"]
