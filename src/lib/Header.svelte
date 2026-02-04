@@ -5,7 +5,7 @@
 <div class="wrapper">
   <header>
     <h1>
-      <a href={resolve("/")} data-sveltekit-preload-code="eager">
+      <a href={resolve("/")}>
         <img src="/favicon.svg" alt="🧔🏻‍♂️" width="72" height="72" />
         gautier.dev
       </a>
