@@ -44,5 +44,5 @@ COPY --from=build \
 # Use a non-root user to run the application
 USER 65532:65532
 COPY --from=build --chown=65532:65532 /workdir/build/node .
-HEALTHCHECK --start-interval=2s CMD [ "./node", "--healthcheck", "http://localhost:3000"]
+HEALTHCHECK --start-interval=2s --start-period=1s CMD [ "./node", "--healthcheck", "http://localhost:3000"]
 ENTRYPOINT ["./node"]
