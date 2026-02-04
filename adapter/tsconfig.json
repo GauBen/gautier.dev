@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "checkJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "erasableSyntaxOnly": true,
     "esModuleInterop": true,
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "noEmit": true,
+    "outDir": "build",
+    "skipLibCheck": true,
     "strict": true
   }
 }

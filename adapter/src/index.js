@@ -28,7 +28,7 @@ function virtual(/** @type {Record<string, string>} */ modules) {
  * @param {string} [subdir]
  * @returns {string[]}
  */
-export function totalist(root, subdir = "") {
+function totalist(root, subdir = "") {
   const out = [];
   for (const entry of readdirSync(join(root, subdir))) {
     if (statSync(join(root, subdir, entry)).isDirectory())

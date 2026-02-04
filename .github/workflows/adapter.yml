@@ -1,0 +1,11 @@
+name: Publish the adapter on pkg.pr.new
+
+on: [push, pull_request]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: jdx/mise-action@v3
+      - run: cd adapter && yarn && yarn build && npx pkg-pr-new publish
