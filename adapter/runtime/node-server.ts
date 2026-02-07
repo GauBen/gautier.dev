@@ -58,23 +58,24 @@ function serve_prerendered(): Middleware {
   const prerenderedPaths = new Set(prerendered.paths);
 
   return (req, res, next) => {
-    let { pathname, search, query } = polka_url_parser(req);
+    const url = polka_url_parser(req);
 
     try {
-      pathname = decodeURIComponent(pathname);
+      url.pathname = decodeURIComponent(url.pathname);
     } catch {
       // ignore invalid URI
     }
 
-    if (prerenderedPaths.has(pathname)) {
+    if (prerenderedPaths.has(url.pathname)) {
       return handler(req, res, next);
     }
 
     // remove or add trailing slash as appropriate
-    let location =
-      pathname.at(-1) === "/" ? pathname.slice(0, -1) : pathname + "/";
+    let location = url.pathname.endsWith("/")
+      ? url.pathname.slice(0, -1)
+      : url.pathname + "/";
     if (prerenderedPaths.has(location)) {
-      if (query) location += search;
+      if (url.query) location += url.search;
       res.writeHead(308, { location }).end();
     } else {
       return next();
@@ -167,7 +168,7 @@ async function createNodeServer() {
       }),
     )
     .use(serve_prerendered())
-    .use(async function ssr(req, res) {
+    .use(async (req, res) => {
       let request: Request;
 
       try {
@@ -220,14 +221,7 @@ async function createNodeServer() {
               return value;
             }
 
-            return (
-              req.connection?.remoteAddress ||
-              // @ts-expect-error
-              req.connection?.socket?.remoteAddress ||
-              req.socket?.remoteAddress ||
-              // @ts-expect-error
-              req.info?.remoteAddress
-            );
+            return req.socket.remoteAddress ?? "";
           },
         }),
       );
