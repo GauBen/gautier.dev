@@ -18,13 +18,7 @@ export const articles = new Map(
       );
       if (!match?.groups) throw new Error(`Invalid article file name: ${file}`);
       const { date, slug } = match.groups;
-      return [
-        slug,
-        {
-          date: date === "draft" ? null : new Date(date),
-          load,
-        },
-      ];
+      return [slug, { date: date === "draft" ? null : new Date(date), load }];
     },
   ),
 );
