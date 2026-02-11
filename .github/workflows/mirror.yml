@@ -1,0 +1,14 @@
+name: Push to git.gautier.dev
+
+on: push
+
+jobs:
+  mirror:
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - run: git remote add mirror ${{ secrets.MIRROR_REPO_URL }} # URL with HTTPS crendentials
+      - run: git push --mirror mirror
