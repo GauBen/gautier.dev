@@ -22,15 +22,15 @@
     "mrmime": "^2.0.1",
     "polka": "^1.0.0-next.28",
     "pretty-bytes": "^7.1.0",
-    "rolldown": "^1.0.0-rc.3"
+    "rolldown": "^1.0.0-rc.4"
   },
   "devDependencies": {
-    "@sveltejs/kit": "^2.50.2",
+    "@sveltejs/kit": "^2.52.0",
     "@sveltejs/vite-plugin-svelte": "^7.0.0-next.0",
-    "@types/node": "^25.2.1",
-    "svelte": "^5.50.0",
+    "@types/node": "^25.2.3",
+    "svelte": "^5.51.2",
     "typescript": "^5.9.3",
-    "vite": "^8.0.0-beta.13"
+    "vite": "^8.0.0-beta.14"
   },
   "peerDependencies": {
     "@sveltejs/kit": "^2.0.0"

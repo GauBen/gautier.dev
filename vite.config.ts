@@ -38,6 +38,7 @@ export default defineConfig({
               symbol: "#",
               placement: "before",
               class: "",
+              space: false,
             }),
           } satisfies mdAnchor.AnchorOptions,
         ],
