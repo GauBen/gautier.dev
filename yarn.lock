@@ -682,6 +682,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mdit/plugin-tasklist@npm:^0.22.3":
+  version: 0.22.3
+  resolution: "@mdit/plugin-tasklist@npm:0.22.3"
+  dependencies:
+    "@types/markdown-it": "npm:^14.1.2"
+  peerDependencies:
+    markdown-it: ^14.1.0
+  peerDependenciesMeta:
+    markdown-it:
+      optional: true
+  checksum: 10c0/cf5ebd62def1eead86fbfed623c76b8fdedd2589ef647cd4a45398db8a67a3e96d00e9aa061babdda8dfded1fb31005c25dd2ccc811a0334795c6e12efdb6470
+  languageName: node
+  linkType: hard
+
+"@mdit/plugin-tex@npm:^0.23.1":
+  version: 0.23.1
+  resolution: "@mdit/plugin-tex@npm:0.23.1"
+  dependencies:
+    "@types/markdown-it": "npm:^14.1.2"
+  peerDependencies:
+    markdown-it: ^14.1.0
+  peerDependenciesMeta:
+    markdown-it:
+      optional: true
+  checksum: 10c0/5ec5c6cc41cb28d4e23a4845d4e4f3f6a936fea6a4f97fb53ce9b0add4ab56ddb652fd94ac03a31e9b259c7106e61f4514da4d5c7eac496e9ab08ce93733f737
+  languageName: node
+  linkType: hard
+
 "@mermaid-js/parser@npm:^1.0.0":
   version: 1.0.0
   resolution: "@mermaid-js/parser@npm:1.0.0"
@@ -1647,15 +1675,6 @@ __metadata:
     "@typescript-eslint/types": "npm:8.56.0"
     eslint-visitor-keys: "npm:^5.0.0"
   checksum: 10c0/4cb7668430042da70707ac5cad826348e808af94095aca1f3d07d39d566745a33991d3defccd1e687f1b1f8aeea52eeb47591933e962452eb51c4bcd88773c12
-  languageName: node
-  linkType: hard
-
-"@vscode/markdown-it-katex@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@vscode/markdown-it-katex@npm:1.1.2"
-  dependencies:
-    katex: "npm:^0.16.4"
-  checksum: 10c0/b6d6ff916af0a387e986598850b56735d01faac51de76e8ef7b2d3958269554f005f58c9b09a7d5fe6bfe9f08da4e50149c0e3cb0959243e405883ff83fc01ab
   languageName: node
   linkType: hard
 
@@ -3129,13 +3148,14 @@ __metadata:
     "@eslint/js": "npm:^10.0.1"
     "@iconify-json/ph": "npm:^1.2.2"
     "@iconify-svelte/ph": "npm:^1.0.1"
+    "@mdit/plugin-tasklist": "npm:^0.22.3"
+    "@mdit/plugin-tex": "npm:^0.23.1"
     "@sveltejs/enhanced-img": "npm:^0.10.3"
     "@sveltejs/kit": "npm:^2.53.0"
     "@sveltejs/vite-plugin-svelte": "npm:^7.0.0-next.0"
     "@types/markdown-it": "npm:^14.1.2"
     "@types/node": "npm:^25.3.0"
     "@types/prismjs": "npm:^1.26.6"
-    "@vscode/markdown-it-katex": "npm:^1.1.2"
     adapter-node-sea: "workspace:*"
     devalue: "npm:^5.6.3"
     eslint: "npm:^10.0.1"
@@ -3144,7 +3164,7 @@ __metadata:
     eslint-plugin-svelte: "npm:^3.15.0"
     giscus: "npm:^1.6.0"
     globals: "npm:^17.3.0"
-    katex: "npm:^0.16.29"
+    katex: "npm:^0.16.30"
     markdown-it-anchor: "npm:^9.2.0"
     markdown-it-task-lists: "npm:^2.1.1"
     mermaid: "npm:^11.12.3"
@@ -3646,14 +3666,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"katex@npm:^0.16.22, katex@npm:^0.16.29, katex@npm:^0.16.4":
-  version: 0.16.29
-  resolution: "katex@npm:0.16.29"
+"katex@npm:^0.16.22, katex@npm:^0.16.30":
+  version: 0.16.30
+  resolution: "katex@npm:0.16.30"
   dependencies:
     commander: "npm:^8.3.0"
   bin:
     katex: cli.js
-  checksum: 10c0/f49a6d0a791750c445d3cf5e4756fd0a5950506343470ded317a11fceb21734855f998b3629135cc19b9a2c9a4b40ce115ca2ee69114b823c70837ad633242c1
+  checksum: 10c0/255b8a267ea51c24495ce695be078f3a866a1d6ca254a6266d7e407d24c75b9cc85140173d23189724e647b822833a82a7379d50ac32f6b0587db18f852fdbb2
   languageName: node
   linkType: hard
 

@@ -1,9 +1,9 @@
+import { tasklist } from "@mdit/plugin-tasklist";
+import { tex, type MarkdownItTexOptions } from "@mdit/plugin-tex";
 import { enhancedImages } from "@sveltejs/enhanced-img";
 import { sveltekit } from "@sveltejs/kit/vite";
-import mdKatex, { type MarkdownKatexOptions } from "@vscode/markdown-it-katex";
 import katex from "katex";
 import mdAnchor from "markdown-it-anchor";
-import lists from "markdown-it-task-lists";
 import { defineConfig } from "vite";
 import svelteMd from "vite-plugin-svelte-md";
 import { highlight } from "./src/lib/prism.js";
@@ -21,15 +21,11 @@ export default defineConfig({
       },
       markdownItUses: [
         [
-          // @ts-expect-error average cjs package
-          mdKatex.default,
+          tex,
           {
-            katex: {
-              ...katex,
-              renderToString: (tex, options) =>
-                `{@html ${JSON.stringify(katex.renderToString(tex, options))}}`,
-            },
-          } satisfies MarkdownKatexOptions,
+            render: (content, displayMode) =>
+              `{@html ${JSON.stringify(katex.renderToString(content, { displayMode }))}}`,
+          } satisfies MarkdownItTexOptions,
         ],
         [
           mdAnchor,
@@ -43,7 +39,7 @@ export default defineConfig({
             }),
           } satisfies mdAnchor.AnchorOptions,
         ],
-        [lists],
+        [tasklist, { label: false }],
       ],
     }),
     enhancedImages(),
