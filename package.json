@@ -41,6 +41,7 @@
     "globals": "^17.3.0",
     "katex": "^0.16.29",
     "markdown-it-anchor": "^9.2.0",
+    "markdown-it-task-lists": "^2.1.1",
     "modern-normalize": "^3.0.1",
     "postcss": "^8.5.6",
     "postcss-html": "^1.8.1",

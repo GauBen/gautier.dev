@@ -44,6 +44,19 @@
   </p>
   <p>I sometimes write articles, you'll find them below.</p>
 
+  <nav>
+    On this site:
+    <div>
+      <a href={resolve("/about")}>/about</a>
+    </div>
+    <div>
+      <a href={resolve("/resume")}>/resume</a>
+    </div>
+    <div>
+      <a href={resolve("/self-hosted")}>/self-hosted</a>
+    </div>
+  </nav>
+
   <SearchBar {...data} />
 
   {#each data.articles as { slug, banner, title, description, date, snippet } (slug)}
@@ -111,8 +124,7 @@
             <img src={banner} alt="" class="banner" loading="lazy" />
           {/snippet}
           <h2>
-            <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-            <a href={url} rel="sponsored">{title}</a>
+            <a href={url} rel="external sponsored">{title}</a>
           </h2>
           <p>{description}</p>
           <p>
@@ -140,6 +152,15 @@
 
   h1 {
     margin: 2rem auto 1rem;
+  }
+
+  nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 6rem), 1fr));
+
+    a {
+      font-family: "0xProto", monospace;
+    }
   }
 
   .banner {

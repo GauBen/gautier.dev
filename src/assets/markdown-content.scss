@@ -86,4 +86,8 @@
     border-radius: 2px;
     box-shadow: 0 0 0.25em #0002;
   }
+
+  input[type="checkbox"] {
+    vertical-align: baseline;
+  }
 }

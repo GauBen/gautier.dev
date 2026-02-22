@@ -11,7 +11,7 @@
 
 <footer>
   <p>
-    Gautier Ben Aïm (<a href={resolve("/about")}>Who?</a>) — {new Date().getFullYear()}
+    Gautier Ben Aïm — {new Date().getFullYear()}
     —
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">
       CC BY-NC-SA 4.0
