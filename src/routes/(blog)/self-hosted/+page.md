@@ -11,12 +11,18 @@ Here is my progress so far:
   Deployment is fully automated: pushing to my [Forgejo](https://forgejo.org/) instance ([git.gautier.dev](https://git.gautier.dev/gautier/gautier.dev)) triggers a webhook on my [Coolify](https://coolify.io/) instance.
   I've set up a two-way mirror between Forgejo and GitHub for backup and convenience.
 
-  The site is served through a [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/) that takes care of HTTPS and caching. This also means that I don't need to expose my public IP address for now.
+  The site is served through a [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/) that takes care of HTTPS and caching.
+
+- [x] Google Drive → [Copyparty](https://github.com/9001/copyparty)
+
+  This is not a real replacement for Google Drive, but it does the job for now.
+
+- [x] Gmail → [Stalwart](https://stalw.art/)
+
+  Started as an experiment, but it works so I might as well keep it.
 
 - [ ] Bitwarden → Vaultwarden
 - [ ] Google Photos → Immich
-- [ ] Gmail → TBD
-- [ ] Google Drive → Copyparty
 - [ ] Google Keep → TBD
 - [ ] PDS ATProto (Bluesky)
 - [ ] Notion → TBD
