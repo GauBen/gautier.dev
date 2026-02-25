@@ -45,16 +45,11 @@
   <p>I sometimes write articles, you'll find them below.</p>
 
   <nav>
-    On this site:
-    <div>
-      <a href={resolve("/about")}>/about</a>
-    </div>
-    <div>
-      <a href={resolve("/resume")}>/resume</a>
-    </div>
-    <div>
-      <a href={resolve("/self-hosted")}>/self-hosted</a>
-    </div>
+    On this site:<code>
+      {" "}· <a href={resolve("/about")}>/about</a>
+      · <a href={resolve("/resume")}>/resume</a>
+      · <a href={resolve("/self-hosted")}>/self-hosted</a>
+    </code>
   </nav>
 
   <SearchBar {...data} />
@@ -152,15 +147,6 @@
 
   h1 {
     margin: 2rem auto 1rem;
-  }
-
-  nav {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 6rem), 1fr));
-
-    a {
-      font-family: "0xProto", monospace;
-    }
   }
 
   .banner {
