@@ -16,3 +16,38 @@ export function parse_as_bytes(value: string): number {
     multiplier
   );
 }
+
+/**
+ * Parses and validates an origin URL.
+ *
+ * @param value - Origin URL with http:// or https:// protocol
+ * @returns The validated origin, or undefined if value is undefined
+ * @throws {Error} If value is provided but invalid
+ */
+export function parse_origin(value: string | undefined): string | undefined {
+  if (value === undefined) return undefined;
+
+  const trimmed = value.trim();
+
+  let url;
+  try {
+    url = new URL(trimmed);
+  } catch (error) {
+    throw new Error(
+      `Invalid ORIGIN: '${trimmed}'. ` +
+        `ORIGIN must be a valid URL with http:// or https:// protocol. ` +
+        `For example: 'http://localhost:3000' or 'https://my.site'`,
+      { cause: error },
+    );
+  }
+
+  if (url.protocol !== "http:" && url.protocol !== "https:") {
+    throw new Error(
+      `Invalid ORIGIN: '${trimmed}'. ` +
+        `Only http:// and https:// protocols are supported. ` +
+        `Received protocol: ${url.protocol}`,
+    );
+  }
+
+  return url.origin;
+}

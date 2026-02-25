@@ -21,5 +21,5 @@ if (process.argv[2] === "--healthcheck") {
       process.exit(1);
     });
 } else {
-  import("./node-server.js");
+  await import("./node-server.js");
 }

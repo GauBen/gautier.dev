@@ -63,7 +63,6 @@ export default function adapter({ precompress = true, envPrefix = "" } = {}) {
         cwd,
         platform: "node",
         output: {
-          format: "cjs",
           codeSplitting: false,
           file: "bundle.js",
         },
@@ -96,6 +95,7 @@ export default function adapter({ precompress = true, envPrefix = "" } = {}) {
           {
             main: `${cwd}/bundle.js`,
             output: `${cwd}/${exe}`,
+            mainFormat: "module",
             assets: Object.fromEntries(
               totalist(`${cwd}/assets`).map((file) => [
                 `/${file}`,
