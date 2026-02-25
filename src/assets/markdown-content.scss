@@ -50,6 +50,8 @@
 
   pre,
   code {
+    color: var(--prism-color);
+    background: var(--prism-bg);
     border-radius: 2px;
   }
 

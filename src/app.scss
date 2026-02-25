@@ -58,8 +58,8 @@ a {
     bottom left,
     bottom right;
   background-size:
-    100% 0.0625em,
-    0% 0.125em;
+    100% max(1px, 0.0625em),
+    0% max(2px, 0.125em);
   transition:
     150ms color,
     150ms background-size,
@@ -70,8 +70,8 @@ a {
       bottom left,
       bottom left;
     background-size:
-      100% 0.0625em,
-      100% 0.125em;
+      100% max(1px, 0.0625em),
+      100% max(2px, 0.125em);
   }
 
   &:where(:active, :focus) {

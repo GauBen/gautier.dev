@@ -2,8 +2,6 @@ pre,
 code {
   font-family: "0xProto", monospace;
   font-size: calc(14rem / 16);
-  color: var(--prism-color);
-  background: var(--prism-bg);
 }
 
 a code {
@@ -18,8 +16,10 @@ pre {
   padding: 1em;
   overflow: auto;
   line-height: 1.5;
+  color: var(--prism-color);
   tab-size: 4;
   white-space: pre;
+  background: var(--prism-bg);
 
   > code {
     display: block;
