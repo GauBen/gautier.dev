@@ -22,12 +22,12 @@
     "mrmime": "^2.0.1",
     "polka": "^1.0.0-next.28",
     "pretty-bytes": "^7.1.0",
-    "rolldown": "^1.0.0-rc.5"
+    "rolldown": "^1.0.0-rc.6"
   },
   "devDependencies": {
-    "@sveltejs/kit": "^2.53.2",
+    "@sveltejs/kit": "^2.53.3",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
-    "@types/node": "^25.3.0",
+    "@types/node": "^25.3.2",
     "svelte": "^5.53.5",
     "typescript": "^5.9.3",
     "vite": "^8.0.0-beta.15"

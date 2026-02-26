@@ -14,7 +14,7 @@ export default {
   },
 
   kit: {
-    adapter: adapter(),
+    adapter: adapter({ precompress: false }),
     alias: {
       $assets: "./src/assets",
       $search: "./src/search",
