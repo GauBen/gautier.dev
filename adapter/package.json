@@ -25,15 +25,15 @@
     "rolldown": "^1.0.0-rc.6"
   },
   "devDependencies": {
-    "@sveltejs/kit": "^2.53.3",
+    "@sveltejs/kit": "https://pkg.pr.new/sveltejs/kit/@sveltejs/kit@5db014d",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
-    "@types/node": "^25.3.2",
-    "svelte": "^5.53.5",
+    "@types/node": "^25.3.3",
+    "svelte": "^5.53.6",
     "typescript": "^5.9.3",
-    "vite": "^8.0.0-beta.15"
+    "vite": "^8.0.0-beta.16"
   },
   "peerDependencies": {
-    "@sveltejs/kit": "^2.0.0"
+    "@sveltejs/kit": "*"
   },
   "engines": {
     "node": ">=25.7"

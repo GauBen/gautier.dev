@@ -1,5 +1,5 @@
 import { tasklist } from "@mdit/plugin-tasklist";
-import { tex, type MarkdownItTexOptions } from "@mdit/plugin-tex";
+import { tex } from "@mdit/plugin-tex";
 import { enhancedImages } from "@sveltejs/enhanced-img";
 import { sveltekit } from "@sveltejs/kit/vite";
 import katex from "katex";
@@ -19,17 +19,15 @@ export default defineConfig({
           return `<pre class="language-${lang}">${highlight(code, lang)}</pre>`;
         },
       },
-      markdownItUses: [
-        [
-          tex,
-          {
+      use: (md) =>
+        md
+          // @ts-expect-error markdown-it/markdown-exit type incompatibility
+          .use(tex, {
             render: (content, displayMode) =>
               `{@html ${JSON.stringify(katex.renderToString(content, { displayMode }))}}`,
-          } satisfies MarkdownItTexOptions,
-        ],
-        [
-          mdAnchor,
-          {
+          })
+          // @ts-expect-error markdown-it/markdown-exit type incompatibility
+          .use(mdAnchor, {
             tabIndex: false,
             permalink: mdAnchor.permalink.linkInsideHeader({
               symbol: "#",
@@ -37,10 +35,9 @@ export default defineConfig({
               class: "",
               space: false,
             }),
-          } satisfies mdAnchor.AnchorOptions,
-        ],
-        [tasklist, { label: false }],
-      ],
+          })
+          // @ts-expect-error markdown-it/markdown-exit type incompatibility
+          .use(tasklist, { label: false }),
     }),
     enhancedImages(),
     sveltekit(),
