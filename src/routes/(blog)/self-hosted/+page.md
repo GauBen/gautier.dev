@@ -21,7 +21,7 @@ Here is my progress so far:
 
   Started as an experiment, but it works so I might as well keep it.
 
-- [ ] Bitwarden → Vaultwarden
+- [x] Bitwarden → Vaultwarden
 - [ ] Google Photos → Immich
 - [ ] Google Keep → TBD
 - [ ] PDS ATProto (Bluesky)
