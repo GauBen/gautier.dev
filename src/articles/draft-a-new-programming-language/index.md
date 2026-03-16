@@ -6,7 +6,11 @@ title: Meet Piña, a new programming language
   import {Tldr} from '$lib/markdown'
 </script>
 
-<Tldr>I often complain how the programming languages I develop with are badly designed (mostly JavaScript and PHP). Will I be terrible at designing a new language? Yes?</Tldr>
+<Tldr>
+
+I often complain how the programming languages I develop with are badly designed (mostly JavaScript and PHP). Will I be terrible at designing a new language? Yes?
+
+</Tldr>
 
 Let's design a new programming language, with the features I want. I learnt a lot of various programming languages, with various features, and I want to create a new one, with the best features of all of them.
 
