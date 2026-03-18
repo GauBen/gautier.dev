@@ -7,24 +7,23 @@
   import Heart from "@iconify-svelte/ph/heart-duotone";
   import external from "../../articles/external.json" assert { type: "json" };
   import SearchBar from "./SearchBar.svelte";
-  import { getSnippet } from "./snippet.remote.js";
+  import {
+    getFreshInteractions,
+    getPrerenderedInteractions,
+    getSnippet,
+  } from "./blog.remote.js";
 
   const escape = (s: string) =>
     s.replaceAll("&", "&amp;").replaceAll("<", "&lt;");
 
   const { data } = $props();
 
-  // data.interactions can be a Promise or the actual data (from the cache)
-  const getInteractions = (() => {
-    let interactions = $state<Awaited<typeof data.interactions>>();
-
-    if (data.interactions && "then" in data.interactions)
-      data.interactions.then((i) => (interactions = i));
-    else interactions = data.interactions;
-
-    return (title: string) =>
-      interactions?.get(title) ?? { comments: 0, reactions: 0 };
-  })();
+  const getInteractions = async (title: string, fresh = false) => {
+    const interactions =
+      (fresh && (await getFreshInteractions())) ||
+      (await getPrerenderedInteractions());
+    return interactions?.get(title) ?? { comments: 0, reactions: 0 };
+  };
 </script>
 
 <Header />
@@ -55,7 +54,6 @@
   <SearchBar {...data} />
 
   {#each data.articles as { slug, banner, title, description, date, snippet } (slug)}
-    {@const { comments, reactions } = getInteractions(title)}
     <Card>
       {#snippet header()}
         {#if banner}
@@ -82,21 +80,35 @@
         <p>{description}</p>
       {/if}
       {#if date}
-        <p style="display: flex; justify-content: space-between">
-          <time datetime={date.toISOString()}>{formatDate(date)}</time>
-          {#if comments + reactions > 0}
-            <span>
-              {#if reactions > 0}
-                {reactions}
-                <Heart class="icon" aria-label="reactions" />
-              {/if}
-              {#if comments > 0}
-                {comments}
-                <Chats class="icon" aria-label="comments" />
-              {/if}
-            </span>
-          {/if}
-        </p>
+        {#snippet interactions({
+          comments,
+          reactions,
+        }: {
+          comments: number;
+          reactions: number;
+        })}
+          <p style="display: flex; justify-content: space-between">
+            <time datetime={date.toISOString()}>{formatDate(date)}</time>
+            {#if comments + reactions > 0}
+              <span>
+                {#if reactions > 0}
+                  {reactions}
+                  <Heart class="icon" aria-label="reactions" />
+                {/if}
+                {#if comments > 0}
+                  {comments}
+                  <Chats class="icon" aria-label="comments" />
+                {/if}
+              </span>
+            {/if}
+          </p>
+        {/snippet}
+        <svelte:boundary>
+          {@render interactions(await getInteractions(title, true))}
+          {#snippet pending()}
+            {@render interactions(await getInteractions(title))}
+          {/snippet}
+        </svelte:boundary>
       {:else}
         <p>Unpublished draft</p>
       {/if}

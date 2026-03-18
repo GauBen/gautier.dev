@@ -3,7 +3,7 @@
   import "$assets/markdown-content.scss";
   import { formatDate } from "$lib/articles";
   import Header from "$lib/Header.svelte";
-  import { getSnippet } from "../../snippet.remote.js";
+  import { getSnippet } from "../../blog.remote.js";
 
   const { data } = $props();
   const { slug, title, date, snippet, banner, Article } = $derived(data);
