@@ -1,4 +1,4 @@
-import { renderMermaidSVG } from "beautiful-mermaid";
+import { renderMermaidSVG, type RenderOptions } from "beautiful-mermaid";
 import Prism from "prismjs";
 
 import "prism-svelte";
@@ -21,6 +21,12 @@ for (const lang of Object.keys(Prism.languages))
 Prism.languages.pina = Prism.languages.typescript;
 Prism.languages.jsonc = Prism.languages.json;
 
+const options: RenderOptions = {
+  nodeSpacing: 16,
+  padding: 2,
+  componentSpacing: 16,
+  layerSpacing: 16,
+};
 const renderMermaid = (code: string) => {
   let title = "";
   if (code.startsWith("%%")) {
@@ -28,21 +34,15 @@ const renderMermaid = (code: string) => {
     title = code.slice(2, end).trim();
     code = code.slice(end + 1);
   }
-  let html = renderMermaidSVG(code, {
-    nodeSpacing: 16,
-    padding: 2,
-    componentSpacing: 16,
-    layerSpacing: 16,
-  });
+  let html = renderMermaidSVG(code, options);
   if (code.startsWith("flowchart LR")) {
     html =
-      html.replace("<svg", '<svg class="lr"') +
-      renderMermaidSVG(code.replace("flowchart LR", "flowchart TD"), {
-        nodeSpacing: 16,
-        padding: 2,
-        componentSpacing: 16,
-        layerSpacing: 16,
-      }).replace("<svg", '<svg class="td"');
+      html
+        .replace("<svg", '<svg class="lr"')
+        .replaceAll(/id="|url\(#/g, (match) => `${match}lr-`) +
+      renderMermaidSVG(code.replace("flowchart LR", "graph TD"), options)
+        .replace("<svg", '<svg class="td"')
+        .replaceAll(/id="|url\(#/g, (match) => `${match}td-`);
   }
   return `<figure class="mermaid">${html.replaceAll(
     /<style>.*?<\/style>/gs,

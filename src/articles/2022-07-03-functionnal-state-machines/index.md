@@ -118,7 +118,7 @@ We started with a simple automaton model that only allows for a single transitio
 Let's build a simple Tamagotchi! Because I am not very aware of what Tamagotchis do, I will make up a simple model: the Tamagotchi can be happy, hungry, or doing an activity (sleeping, running or eating). The user has three buttons to have the Tamagotchi start an activity, but the Tamagotchi might refuse to do the activity if it is not in the right state.
 
 ```mermaid
-graph LR
+flowchart LR
   happy([Happy])
   sleeping([Sleeping])
   running([Running])
