@@ -157,6 +157,10 @@
     margin: 2rem auto 1rem;
   }
 
+  nav a {
+    white-space: nowrap;
+  }
+
   .banner {
     box-shadow: 0 0 0.25em #0002;
 

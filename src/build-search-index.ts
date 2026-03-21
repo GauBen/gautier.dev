@@ -294,18 +294,17 @@ const indexedArticles = await Promise.all(
 const weightedKeywords = reverseKeywordMap(indexedArticles);
 
 // Compress and save the weighted keywords
+const sortedWeightedKeywords = [...weightedKeywords].sort(
+  (a, z) =>
+    z[1].reduce((acc, { score }) => acc + score, 0) -
+    a[1].reduce((acc, { score }) => acc + score, 0),
+);
 const compressedWeightedKeywords = stringify(
   Object.fromEntries(
-    [...weightedKeywords]
-      .sort(
-        (a, z) =>
-          z[1].reduce((acc, { score }) => acc + score, 0) -
-          a[1].reduce((acc, { score }) => acc + score, 0),
-      )
-      .map(([keyword, articles]) => [
-        keyword,
-        articles.flatMap(({ slug, score, nodes }) => [slug, score, [...nodes]]),
-      ]),
+    sortedWeightedKeywords.map(([keyword, articles]) => [
+      keyword,
+      articles.flatMap(({ slug, score, nodes }) => [slug, score, [...nodes]]),
+    ]),
   ),
 );
 writeFileSync(
@@ -332,6 +331,17 @@ writeFileSync(
       indexedArticles.map(({ slug, metadata }) => [slug, metadata]),
     ),
   ),
+);
+
+// Suggest the top 3 keywords that are used more than once
+const suggestions = [];
+for (const [keyword, { length }] of sortedWeightedKeywords) {
+  if (length >= 4) suggestions.push(keyword);
+  if (suggestions.length >= 3) break;
+}
+writeFileSync(
+  new URL("search/suggestions.json", import.meta.url),
+  JSON.stringify(suggestions),
 );
 
 console.timeEnd("Build search index");

@@ -1,8 +1,10 @@
 <script lang="ts">
+  /* eslint-disable svelte/no-navigation-without-resolve */
   import { goto } from "$app/navigation";
   import MagnifyingGlass from "@iconify-svelte/ph/magnifying-glass-bold";
   import X from "@iconify-svelte/ph/x-bold";
   import { slide } from "svelte/transition";
+  import suggestions from "$search/suggestions.json";
 
   const { q, autocomplete = [] }: { q?: string; autocomplete?: string[] } =
     $props();
@@ -44,7 +46,6 @@
   };
 
   const toggle = async () => {
-    // eslint-disable-next-line svelte/no-navigation-without-resolve
     await goto(q === undefined ? "?q=" : ".", {
       keepFocus: true,
       noScroll: true,
@@ -53,7 +54,6 @@
     index = undefined;
   };
   const set = async (value: string) => {
-    // eslint-disable-next-line svelte/no-navigation-without-resolve
     await goto(`?q=${encodeURIComponent(value)}`, {
       keepFocus: true,
       noScroll: true,
@@ -65,13 +65,18 @@
 </script>
 
 <div>
-  <h2>
+  <h2 style="white-space: nowrap">
     {#if q === undefined}
       Latest articles
     {:else}
       <label for="search">Search</label>
     {/if}
   </h2>
+  <p>
+    {#each suggestions as suggestion (suggestion)}
+      <a href="?q={encodeURIComponent(suggestion)}">#{suggestion}</a>
+    {/each}
+  </p>
   <button
     class="ghost"
     onclick={toggle}
@@ -128,12 +133,32 @@
 <style lang="scss">
   div {
     display: grid;
-    grid-template: auto auto / 1fr auto;
+    grid-template: auto auto / 1fr auto auto;
+    gap: 0 0.5rem;
     align-items: center;
     margin-block: 2rem 1rem;
 
     > * {
       margin: 0;
+    }
+  }
+
+  p {
+    display: flex;
+    gap: 0.5rem;
+    align-items: end;
+
+    a {
+      all: unset;
+      cursor: revert;
+      outline: revert;
+      opacity: 0.75;
+      transition: 150ms opacity;
+
+      &:hover,
+      &:focus-visible {
+        opacity: 1;
+      }
     }
   }
 
