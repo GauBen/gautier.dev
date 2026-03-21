@@ -21,17 +21,38 @@ for (const lang of Object.keys(Prism.languages))
 Prism.languages.pina = Prism.languages.typescript;
 Prism.languages.jsonc = Prism.languages.json;
 
-export const highlight = (code: string, lang: string) =>
-  lang === "mermaid"
-    ? `<figure class="mermaid">${renderMermaidSVG(code, {
+const renderMermaid = (code: string) => {
+  let title = "";
+  if (code.startsWith("%%")) {
+    const end = code.indexOf("\n");
+    title = code.slice(2, end).trim();
+    code = code.slice(end + 1);
+  }
+  let html = renderMermaidSVG(code, {
+    nodeSpacing: 16,
+    padding: 2,
+    componentSpacing: 16,
+    layerSpacing: 16,
+  });
+  if (code.startsWith("flowchart LR")) {
+    html =
+      html.replace("<svg", '<svg class="lr"') +
+      renderMermaidSVG(code.replace("flowchart LR", "flowchart TD"), {
         nodeSpacing: 16,
         padding: 2,
         componentSpacing: 16,
         layerSpacing: 16,
-      }).replace(
-        /<style>.*<\/style>/s,
-        "",
-      )}${code.startsWith("%%") ? `<figcaption>${code.slice(2).split("\n").shift()}</figcaption>` : ""}</figure>`
+      }).replace("<svg", '<svg class="td"');
+  }
+  return `<figure class="mermaid">${html.replaceAll(
+    /<style>.*?<\/style>/gs,
+    "",
+  )}${title && `<figcaption>${title}</figcaption>`}</figure>`;
+};
+
+export const highlight = (code: string, lang: string) =>
+  lang === "mermaid"
+    ? renderMermaid(code)
     : lang
       ? `<pre class="language-${lang}"><code class='language-${lang}'>${Prism.highlight(
           code,

@@ -93,6 +93,10 @@
     vertical-align: baseline;
   }
 
+  .math {
+    overflow: auto;
+  }
+
   .mermaid {
     width: auto;
   }
@@ -118,6 +122,18 @@
 
     text {
       font-family: system-ui, sans-serif;
+    }
+  }
+
+  @media (orientation: portrait) {
+    .mermaid .lr {
+      display: none;
+    }
+  }
+
+  @media (orientation: landscape) {
+    .mermaid .td {
+      display: none;
     }
   }
 }
