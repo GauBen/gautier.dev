@@ -12,7 +12,7 @@ snippet:
 ---
 
 <script>
-  import {Mermaid, Tldr} from '$lib/markdown';
+  import {Tldr} from '$lib/markdown';
   import Tracker from './Tracker.svelte';
 
   let src = 'https://accounts.google.com/ServiceLogin?passive=true&continue=https://google.com/favicon.ico'
@@ -39,14 +39,14 @@ Many websites use an "authwall" for logged out users who try to access a private
 
 Some vulnerable websites allow arbitrary URLs, and **it can be exploited to know if the user is logged in** to the third-party website. They usually follow this very naive implementation:
 
-<Mermaid>
-  flowchart TD
-    Start(User opens example.com/login?next=/favicon.ico)
-    LoggedIn(Redirect to /favicon.ico)
-    LoggedOut(Show a login form)
-    Start -->|"The user is logged in"| LoggedIn
-    Start -->|"The user is logged out"| LoggedOut
-</Mermaid>
+```mermaid
+flowchart TD
+  Start(User opens example.com/login?next=/favicon.ico)
+  LoggedIn(Redirect to /favicon.ico)
+  LoggedOut(Show a login form)
+  Start -->|"The user is logged in"| LoggedIn
+  Start -->|"The user is logged out"| LoggedOut
+```
 
 The real trick is to use `<img />`: if the image loads fine, the user is logged in, otherwise the user is logged out.
 

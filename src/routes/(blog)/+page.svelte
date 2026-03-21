@@ -59,11 +59,7 @@
         {#if banner}
           <enhanced:img src={banner} alt="" class="banner" />
         {:else if snippet}
-          <div class="banner">
-            <pre class="language-{snippet.lang}">{@html await getSnippet(
-                slug,
-              )}</pre>
-          </div>
+          <div class="banner">{@html await getSnippet(slug)}</div>
         {/if}
       {/snippet}
       <h2>

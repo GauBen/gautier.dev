@@ -13,12 +13,7 @@ export default defineConfig({
     svelteMd({
       headEnabled: false,
       wrapperClasses: "markdown-content",
-      markdownItOptions: {
-        highlight: (code, lang) => {
-          if (!lang) return `<pre>${code}</pre>`;
-          return `<pre class="language-${lang}">${highlight(code, lang)}</pre>`;
-        },
-      },
+      markdownItOptions: { highlight },
       use: (md) =>
         md
           // @ts-expect-error markdown-it/markdown-exit type incompatibility
@@ -37,7 +32,16 @@ export default defineConfig({
             }),
           })
           // @ts-expect-error markdown-it/markdown-exit type incompatibility
-          .use(tasklist, { label: false }),
+          .use(tasklist, { label: false })
+          .use((md) => {
+            const originalFence = md.renderer.rules.fence!;
+            md.renderer.rules.fence = async (tokens, idx, ...options) => {
+              const info = tokens[idx].info.trim();
+              if (info.startsWith("mermaid"))
+                return highlight(tokens[idx].content, info);
+              return originalFence(tokens, idx, ...options);
+            };
+          }),
     }),
     enhancedImages(),
     sveltekit(),

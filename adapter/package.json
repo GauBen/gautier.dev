@@ -22,7 +22,7 @@
     "mrmime": "^2.0.1",
     "polka": "^1.0.0-next.28",
     "pretty-bytes": "^7.1.0",
-    "rolldown": "^1.0.0-rc.9"
+    "rolldown": "^1.0.0-rc.10"
   },
   "devDependencies": {
     "@sveltejs/kit": "https://pkg.pr.new/@sveltejs/kit@8a0af32",
@@ -30,7 +30,7 @@
     "@types/node": "^25.5.0",
     "svelte": "^5.54.0",
     "typescript": "^5.9.3",
-    "vite": "^8.0.0"
+    "vite": "^8.0.1"
   },
   "peerDependencies": {
     "@sveltejs/kit": "*"

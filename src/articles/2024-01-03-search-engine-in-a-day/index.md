@@ -16,7 +16,6 @@ snippet:
 <script>
   import Explorer from './Explorer.svelte'
   import Measure from './Measure.svelte'
-  import {Mermaid} from '$lib/markdown'
 
   const search = import('$lib/search')
 </script>
@@ -39,22 +38,22 @@ In this article I will explain how I built an Algolia-like search engine in a da
 
 These two steps work roughly as follows:
 
-<Mermaid>
-  flowchart LR
-    Articles(Articles) -.-> Markdown
-    SQ(Search Query) -.-> K2[Keywords]
-    subgraph Indexing ["Indexing (build-time)"]
-      Markdown -- parsed --> AST
-      AST -- tokenized --> Tokens
-      Tokens -- normalized --> Keywords
-      Keywords -- weighted --> Index
-    end
-    Index --> Matching
-    Matching -.-> SR(Search Results)
-    subgraph Searching ["Searching (run-time)"]
-      K2[Keywords] --> Matching
-    end
-</Mermaid>
+```mermaid
+flowchart LR
+  subgraph Indexing ["Indexing (build-time)"]
+    Markdown -- parsed --> AST
+    AST -- tokenized --> Tokens
+    Tokens -- normalized --> Keywords
+    Keywords -- weighted --> Index
+  end
+  subgraph Searching ["Searching (run-time)"]
+    K2[Keywords] --> Matching
+  end
+  SQ(Search Query) -.-> K2[Keywords]
+  Articles(Articles) -.-> Markdown
+  Index --> Matching
+  Matching -.-> SR(Search Results)
+```
 
 ## Indexing articles
 

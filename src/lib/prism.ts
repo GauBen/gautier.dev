@@ -1,3 +1,4 @@
+import { renderMermaidSVG } from "beautiful-mermaid";
 import Prism from "prismjs";
 
 import "prism-svelte";
@@ -21,10 +22,17 @@ Prism.languages.pina = Prism.languages.typescript;
 Prism.languages.jsonc = Prism.languages.json;
 
 export const highlight = (code: string, lang: string) =>
-  `<code class='language-${lang}'>${Prism.highlight(
-    code,
-    Prism.languages[lang],
-    lang,
-  )
-    // Shrink JSON serialization with single quotes
-    .replaceAll(/class="([^"]*)"/g, "class='$1'")}</code>`;
+  lang.startsWith("mermaid")
+    ? `<figure class="mermaid">${renderMermaidSVG(code).replace(
+        /<style>.*<\/style>/s,
+        "",
+      )}${lang !== "mermaid" ? `<figcaption>${lang.slice(8)}</figcaption>` : ""}</figure>`
+    : lang
+      ? `<pre class="language-${lang}"><code class='language-${lang}'>${Prism.highlight(
+          code,
+          Prism.languages[lang],
+          lang,
+        )
+          // Shrink JSON serialization with single quotes
+          .replaceAll(/class="([^"]*)"/g, "class='$1'")}</code></pre>`
+      : `<pre>${code}</pre>`;

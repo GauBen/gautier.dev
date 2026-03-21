@@ -16,7 +16,6 @@ snippet:
 <script>
   import Automaton from './Automaton.svelte';
   import Tamagotchi from './Tamagotchi.svelte';
-  import {Mermaid} from '$lib/markdown';
 </script>
 
 Finite state machines, sometimes simply automatons, are a mathematical model of computation. They are used to describe the behavior of systems, and are often used in computer science to model programs.
@@ -27,16 +26,16 @@ I spent a lot of times thinking about automatons because they have an inherent e
 
 To begin with, let's try to create a simple application that follows this automaton:
 
-<Mermaid>
-  graph LR
-    A((1))
-    B((2))
-    C((3))
-    A --> B --> C --> A
-    style A fill:gold,stroke:black,color:black
-    style B fill:firebrick,stroke:black,color:white
-    style C fill:navy,stroke:black,color:white
-</Mermaid>
+```mermaid
+graph LR
+  A((1))
+  B((2))
+  C((3))
+  A --> B --> C --> A
+  style A fill:gold,stroke:black,color:black
+  style B fill:firebrick,stroke:black,color:white
+  style C fill:navy,stroke:black,color:white
+```
 
 There are three **states** (1, 2 and 3), and three **transitions** (1 → 2, 2 → 3, 3 → 1).
 
@@ -118,22 +117,25 @@ We started with a simple automaton model that only allows for a single transitio
 
 Let's build a simple Tamagotchi! Because I am not very aware of what Tamagotchis do, I will make up a simple model: the Tamagotchi can be happy, hungry, or doing an activity (sleeping, running or eating). The user has three buttons to have the Tamagotchi start an activity, but the Tamagotchi might refuse to do the activity if it is not in the right state.
 
-<Mermaid>
-  graph LR
-    happy([Happy])
-    sleeping([Sleeping])
-    running([Running])
-    hungry([Hungry])
-    eating([Eating])
-    happy --> |sleep| sleeping --> |<em>5 s</em>| hungry
-    happy --> |run| running --> |<em>3 s</em>| hungry
-    hungry --> |eat| eating --> |<em>2 s</em>| happy
-    style happy fill:yellow,stroke:black,color:black
-    style sleeping fill:skyblue,stroke:black,color:black
-    style running fill:purple,stroke:black,color:white
-    style hungry fill:crimson,stroke:black,color:white
-    style eating fill:pink,stroke:black,color:black
-</Mermaid>
+```mermaid
+graph LR
+  happy([Happy])
+  sleeping([Sleeping])
+  running([Running])
+  hungry([Hungry])
+  eating([Eating])
+  happy -->|sleep| sleeping
+  sleeping -->|<em>5 s</em>| hungry
+  happy -->|run| running
+  running -->|<em>3 s</em>| hungry
+  hungry -->|eat| eating
+  eating -->|<em>2 s</em>| happy
+  style happy fill:yellow,stroke:black,color:black
+  style sleeping fill:skyblue,stroke:black,color:black
+  style running fill:purple,stroke:black,color:white
+  style hungry fill:crimson,stroke:black,color:white
+  style eating fill:pink,stroke:black,color:black
+```
 
 This diagram is the automaton of our Tamagotchi: it features all the possible states, as well as the user actions that can trigger a transition. The activities automatically end after a certain amount of time.
 

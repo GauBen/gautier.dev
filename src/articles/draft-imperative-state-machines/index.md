@@ -9,21 +9,21 @@ snippet:
 ---
 
 <script>
-  import {Example, Mermaid} from '$lib/markdown'
+  import {Example} from '$lib/markdown'
   import TypeWriter from './TypeWriter.svelte'
 </script>
 
 Finite-state automatons (or state machines for short) are a mathematical construct commonly used to describe the behavior of a system. You probably already saw a few represented by diagrams like this one:
 
-<Mermaid>
-  graph LR
-    A(Start)
-    B(State A)
-    C(State B)
-    D(End)
-    A --> B --> C --> B
-    C --> D
-</Mermaid>
+```mermaid
+graph LR
+  A(Start)
+  B(State A)
+  C(State B)
+  D(End)
+  A --> B --> C --> B
+  C --> D
+```
 
 In this article, we'll see how to create a state machine in JavaScript, a new way to write expressive and explicit code.
 
@@ -46,15 +46,17 @@ I recently came across this problem: **how do I create a type-writer effect in S
 
 Here is the the state diagram of the system:
 
-<Mermaid>
-  graph TD
-    D(Pick a new word)
-    A(Typing)
-    B(Pause)
-    C(Erasing)
-    B --> C --> C --"If the word is erased"--> D
-    D --> A --> A --"If the word is complete"--> B
-</Mermaid>
+```mermaid
+graph TD
+  D(Pick a new word)
+  A(Typing)
+  B(Pause)
+  C(Erasing)
+  B --> C --> C
+  C -->|"If the word is erased"| D
+  D --> A --> A
+  A -->|"If the word is complete"| B
+```
 
 ## Make it interactive!
 

@@ -21,9 +21,7 @@
       style="width: 100%; max-height: 10rem; object-fit: cover"
     />
   {:else if snippet}
-    <div class="snippet">
-      <pre class="language-{snippet.lang}">{@html await getSnippet(slug)}</pre>
-    </div>
+    <div class="snippet">{@html await getSnippet(slug)}</div>
   {/if}
 </Header>
 

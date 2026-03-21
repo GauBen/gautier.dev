@@ -14,7 +14,7 @@ snippet:
 ---
 
 <script>
-  import {Tldr, Mermaid} from '$lib/markdown';
+  import {Tldr} from '$lib/markdown';
 </script>
 
 <Tldr>
@@ -81,17 +81,14 @@ try {
 
 In this sample, if an error is thrown by `fetch`, it will not be caught by the catch block. Why? **Because `fetch` does not throw an error, it returns a promise that can be rejected.** A rejected promise is turned into an exception when unwrapped (with the `await` keyword). If not, it's just a `Promise` object waiting to be handled.
 
-<figure>
-<Mermaid>
+```mermaid All three possible promise states
 graph TD
   pending(["Pending"]) --> resolved(["Resolved"])
   pending --> rejected(["Rejected"])
   style pending fill:lightgrey,stroke:black,color:black
   style resolved fill:lightgreen,stroke:black,color:black
   style rejected fill:firebrick,stroke:black,color:white
-</Mermaid>
-<figcaption>All three possible promise states</figcaption>
-</figure>
+```
 
 The same thing would happen if you do this:
 

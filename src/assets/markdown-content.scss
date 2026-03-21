@@ -92,4 +92,32 @@
   input[type="checkbox"] {
     vertical-align: baseline;
   }
+
+  .mermaid {
+    width: auto;
+  }
+
+  .mermaid > svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    /* stylelint-disable custom-property-pattern */
+    --_text: var(--fg);
+    --_text-sec: var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted: var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint: color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line: var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow: var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill: var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke: var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill: var(--bg);
+    --_group-hdr: color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke: color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge: color-mix(in srgb, var(--fg) 10%, var(--bg));
+
+    max-width: 100%;
+    height: auto;
+
+    text {
+      font-family: system-ui, sans-serif;
+    }
+  }
 }
