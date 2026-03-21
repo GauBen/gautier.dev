@@ -36,9 +36,8 @@ export default defineConfig({
           .use((md) => {
             const originalFence = md.renderer.rules.fence!;
             md.renderer.rules.fence = async (tokens, idx, ...options) => {
-              const info = tokens[idx].info.trim();
-              if (info.startsWith("mermaid"))
-                return highlight(tokens[idx].content, info);
+              if (tokens[idx].info.trim() === "mermaid")
+                return highlight(tokens[idx].content, "mermaid");
               return originalFence(tokens, idx, ...options);
             };
           }),

@@ -22,11 +22,16 @@ Prism.languages.pina = Prism.languages.typescript;
 Prism.languages.jsonc = Prism.languages.json;
 
 export const highlight = (code: string, lang: string) =>
-  lang.startsWith("mermaid")
-    ? `<figure class="mermaid">${renderMermaidSVG(code).replace(
+  lang === "mermaid"
+    ? `<figure class="mermaid">${renderMermaidSVG(code, {
+        nodeSpacing: 16,
+        padding: 2,
+        componentSpacing: 16,
+        layerSpacing: 16,
+      }).replace(
         /<style>.*<\/style>/s,
         "",
-      )}${lang !== "mermaid" ? `<figcaption>${lang.slice(8)}</figcaption>` : ""}</figure>`
+      )}${code.startsWith("%%") ? `<figcaption>${code.slice(2).split("\n").shift()}</figcaption>` : ""}</figure>`
     : lang
       ? `<pre class="language-${lang}"><code class='language-${lang}'>${Prism.highlight(
           code,

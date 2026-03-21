@@ -81,7 +81,8 @@ try {
 
 In this sample, if an error is thrown by `fetch`, it will not be caught by the catch block. Why? **Because `fetch` does not throw an error, it returns a promise that can be rejected.** A rejected promise is turned into an exception when unwrapped (with the `await` keyword). If not, it's just a `Promise` object waiting to be handled.
 
-```mermaid All three possible promise states
+```mermaid
+%% All three possible promise states
 graph TD
   pending(["Pending"]) --> resolved(["Resolved"])
   pending --> rejected(["Rejected"])
