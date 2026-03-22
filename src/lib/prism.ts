@@ -45,7 +45,7 @@ const renderMermaid = (code: string) => {
         .replaceAll(/id="|url\(#/g, (match) => `${match}td-`);
   }
   return `<figure class="mermaid">${html.replaceAll(
-    /<style>.*?<\/style>/gs,
+    /<style>.*?<\/style>|data-[\w-]+=".*?"\s*|(?<=\d\.\d\d)\d+/gs,
     "",
   )}${title && `<figcaption>${title}</figcaption>`}</figure>`;
 };
