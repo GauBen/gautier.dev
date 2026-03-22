@@ -1,5 +1,6 @@
 import { renderMermaidSVG, type RenderOptions } from "beautiful-mermaid";
 import Prism from "prismjs";
+import { optimize } from "svgo";
 
 import "prism-svelte";
 import "prismjs-gleam";
@@ -34,13 +35,15 @@ const renderMermaid = (code: string) => {
     title = code.slice(2, end).trim();
     code = code.slice(end + 1);
   }
-  let html = renderMermaidSVG(code, options);
+  let html = optimize(renderMermaidSVG(code, options)).data;
   if (code.startsWith("flowchart LR")) {
     html =
       html
         .replace("<svg", '<svg class="lr"')
         .replaceAll(/id="|url\(#/g, (match) => `${match}lr-`) +
-      renderMermaidSVG(code.replace("flowchart LR", "graph TD"), options)
+      optimize(
+        renderMermaidSVG(code.replace("flowchart LR", "graph TD"), options),
+      ).data
         .replace("<svg", '<svg class="td"')
         .replaceAll(/id="|url\(#/g, (match) => `${match}td-`);
   }
