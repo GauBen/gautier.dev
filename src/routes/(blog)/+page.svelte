@@ -5,7 +5,7 @@
   import Header from "$lib/Header.svelte";
   import Chats from "@iconify-svelte/ph/chats-circle-duotone";
   import Heart from "@iconify-svelte/ph/heart-duotone";
-  import external from "../../articles/external.json" assert { type: "json" };
+  import external from "../../articles/external.json" with { type: "json" };
   import SearchBar from "./SearchBar.svelte";
   import {
     getFreshInteractions,
