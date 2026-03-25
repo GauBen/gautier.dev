@@ -11,7 +11,7 @@
 .env.*
 .pnp.*
 /.svelte-kit
-/build
+**/build
 /package
 /vite.config.js.*
 node_modules
