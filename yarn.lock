@@ -1025,9 +1025,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/enhanced-img@https://pkg.pr.new/@sveltejs/enhanced-img@8a0af32":
-  version: 0.10.3
-  resolution: "@sveltejs/enhanced-img@https://pkg.pr.new/@sveltejs/enhanced-img@8a0af32"
+"@sveltejs/enhanced-img@https://pkg.pr.new/@sveltejs/enhanced-img@15497":
+  version: 0.10.4
+  resolution: "@sveltejs/enhanced-img@https://pkg.pr.new/@sveltejs/enhanced-img@15497"
   dependencies:
     magic-string: "npm:^0.30.5"
     sharp: "npm:^0.34.1"
@@ -1035,16 +1035,16 @@ __metadata:
     vite-imagetools: "npm:^10.0.0"
     zimmerframe: "npm:^1.1.2"
   peerDependencies:
-    "@sveltejs/vite-plugin-svelte": ^6.0.0
+    "@sveltejs/vite-plugin-svelte": ^6.0.0 || ^7.0.0
     svelte: ^5.0.0
     vite: ">=8.0.0"
-  checksum: 10c0/b994625a63d81c7e83a631b8eb93e9173cf2342bd49eaf8a8df190ead5913553d6efaa06f469c4ff785d97cae602312ccb27e3c1bebce6a84d16080a6e719da3
+  checksum: 10c0/abdac28bd26e4a1589b377a78c2999a34cafd89976e23a4acd066fdbce2c49494e4a1b5cfd344f088ef69c3d466d1078a54190ceb8a6ac81a797b2c808ec57cc
   languageName: node
   linkType: hard
 
-"@sveltejs/kit@https://pkg.pr.new/@sveltejs/kit@8a0af32":
-  version: 2.54.0
-  resolution: "@sveltejs/kit@https://pkg.pr.new/@sveltejs/kit@8a0af32"
+"@sveltejs/kit@https://pkg.pr.new/@sveltejs/kit@15497":
+  version: 2.55.0
+  resolution: "@sveltejs/kit@https://pkg.pr.new/@sveltejs/kit@15497"
   dependencies:
     "@standard-schema/spec": "npm:^1.0.0"
     "@sveltejs/acorn-typescript": "npm:^1.0.5"
@@ -1068,7 +1068,7 @@ __metadata:
       optional: true
   bin:
     svelte-kit: svelte-kit.js
-  checksum: 10c0/be62b62fd8509ff3b18bba10e90eda8aed8fa066b92189510d7168109c2f777fe5b05a03485bb1f07e4296b2c576eaab449ddef39de9f31d4c4f164fd1878263
+  checksum: 10c0/cc9797bc10f1842343a785d98c72c69c4c7c2033c47f3011e659e79a00daa0ef5384f40a1e30c9c9c98340437de9bf4d458213666b303175f1ffdcafe59cfd75
   languageName: node
   linkType: hard
 
@@ -1361,14 +1361,14 @@ __metadata:
   resolution: "adapter-node-sea@workspace:adapter"
   dependencies:
     "@polka/url": "npm:^1.0.0-next.29"
-    "@sveltejs/kit": "https://pkg.pr.new/@sveltejs/kit@8a0af32"
+    "@sveltejs/kit": "https://pkg.pr.new/@sveltejs/kit@15497"
     "@sveltejs/vite-plugin-svelte": "npm:^7.0.0"
     "@types/node": "npm:^25.5.0"
     devalue: "npm:^5.6.4"
     mrmime: "npm:^2.0.1"
     polka: "npm:^1.0.0-next.28"
     pretty-bytes: "npm:^7.1.0"
-    rolldown: "npm:^1.0.0-rc.11"
+    rolldown: "npm:1.0.0-rc.11"
     svelte: "npm:^5.55.0"
     typescript: "npm:^6.0.2"
     vite: "npm:^8.0.2"
@@ -1428,15 +1428,6 @@ __metadata:
   dependencies:
     color-convert: "npm:^2.0.1"
   checksum: 10c0/895a23929da416f2bd3de7e9cb4eabd340949328ab85ddd6e484a637d8f6820d485f53933446f5291c3b760cbc488beb8e88573dd0f9c7daf83dccc8fe81b041
-  languageName: node
-  linkType: hard
-
-"argparse@npm:^1.0.7":
-  version: 1.0.10
-  resolution: "argparse@npm:1.0.10"
-  dependencies:
-    sprintf-js: "npm:~1.0.2"
-  checksum: 10c0/b2972c5c23c63df66bca144dbc65d180efa74f25f8fd9b7d9a0a6c88ae839db32df3d54770dcb6460cf840d232b60695d1a6b1053f599d84e73f7437087712de
   languageName: node
   linkType: hard
 
@@ -2039,16 +2030,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esprima@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "esprima@npm:4.0.1"
-  bin:
-    esparse: ./bin/esparse.js
-    esvalidate: ./bin/esvalidate.js
-  checksum: 10c0/ad4bab9ead0808cf56501750fd9d3fb276f6b105f987707d059005d57e182d18a7c9ec7f3a01794ebddcca676773e42ca48a32d67a250c9d35e009ca613caba3
-  languageName: node
-  linkType: hard
-
 "esquery@npm:^1.7.0":
   version: 1.7.0
   resolution: "esquery@npm:1.7.0"
@@ -2101,15 +2082,6 @@ __metadata:
   version: 3.1.3
   resolution: "exponential-backoff@npm:3.1.3"
   checksum: 10c0/77e3ae682b7b1f4972f563c6dbcd2b0d54ac679e62d5d32f3e5085feba20483cf28bd505543f520e287a56d4d55a28d7874299941faf637e779a1aa5994d1267
-  languageName: node
-  linkType: hard
-
-"extend-shallow@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "extend-shallow@npm:2.0.1"
-  dependencies:
-    is-extendable: "npm:^0.1.0"
-  checksum: 10c0/ee1cb0a18c9faddb42d791b2d64867bd6cfd0f3affb711782eb6e894dd193e2934a7f529426aac7c8ddb31ac5d38000a00aa2caf08aa3dfc3e1c8ff6ba340bd9
   languageName: node
   linkType: hard
 
@@ -2307,8 +2279,8 @@ __metadata:
     "@iconify-svelte/ph": "npm:^1.0.1"
     "@mdit/plugin-tasklist": "npm:^0.23.1"
     "@mdit/plugin-tex": "npm:^0.24.1"
-    "@sveltejs/enhanced-img": "https://pkg.pr.new/@sveltejs/enhanced-img@8a0af32"
-    "@sveltejs/kit": "https://pkg.pr.new/@sveltejs/kit@8a0af32"
+    "@sveltejs/enhanced-img": "https://pkg.pr.new/@sveltejs/enhanced-img@15497"
+    "@sveltejs/kit": "https://pkg.pr.new/@sveltejs/kit@15497"
     "@sveltejs/vite-plugin-svelte": "npm:^7.0.0"
     "@types/node": "npm:^25.5.0"
     "@types/prismjs": "npm:^1.26.6"
@@ -2321,7 +2293,7 @@ __metadata:
     eslint-plugin-svelte: "npm:^3.16.0"
     giscus: "npm:^1.6.0"
     globals: "npm:^17.4.0"
-    katex: "npm:^0.16.40"
+    katex: "npm:^0.16.42"
     markdown-it-anchor: "npm:^9.2.0"
     markdown-it-task-lists: "npm:^2.1.1"
     modern-normalize: "npm:^3.0.1"
@@ -2353,7 +2325,7 @@ __metadata:
     unified: "npm:^11.0.5"
     vfile-matter: "npm:^5.0.1"
     vite: "npm:^8.0.2"
-    vite-plugin-svelte-md: "npm:^0.4.1"
+    vite-plugin-svelte-md: "npm:^0.5.0"
   languageName: unknown
   linkType: soft
 
@@ -2468,18 +2440,6 @@ __metadata:
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
   checksum: 10c0/386d011a553e02bc594ac2ca0bd6d9e4c22d7fa8cfbfc448a6d148c59ea881b092db9dbe3547ae4b88e55f1b01f7c4a2ecc53b310c042793e63aa44cf6c257f2
-  languageName: node
-  linkType: hard
-
-"gray-matter@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "gray-matter@npm:4.0.3"
-  dependencies:
-    js-yaml: "npm:^3.13.1"
-    kind-of: "npm:^6.0.2"
-    section-matter: "npm:^1.0.0"
-    strip-bom-string: "npm:^1.0.0"
-  checksum: 10c0/e38489906dad4f162ca01e0dcbdbed96d1a53740cef446b9bf76d80bec66fa799af07776a18077aee642346c5e1365ed95e4c91854a12bf40ba0d4fb43a625a6
   languageName: node
   linkType: hard
 
@@ -2641,13 +2601,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-extendable@npm:^0.1.0":
-  version: 0.1.1
-  resolution: "is-extendable@npm:0.1.1"
-  checksum: 10c0/dd5ca3994a28e1740d1e25192e66eed128e0b2ff161a7ea348e87ae4f616554b486854de423877a2a2c171d5f7cd6e8093b91f54533bc88a59ee1c9838c43879
-  languageName: node
-  linkType: hard
-
 "is-extglob@npm:^2.1.1":
   version: 2.1.1
   resolution: "is-extglob@npm:2.1.1"
@@ -2736,18 +2689,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^3.13.1":
-  version: 3.14.2
-  resolution: "js-yaml@npm:3.14.2"
-  dependencies:
-    argparse: "npm:^1.0.7"
-    esprima: "npm:^4.0.0"
-  bin:
-    js-yaml: bin/js-yaml.js
-  checksum: 10c0/3261f25912f5dd76605e5993d0a126c2b6c346311885d3c483706cd722efe34f697ea0331f654ce27c00a42b426e524518ec89d65ed02ea47df8ad26dcc8ce69
-  languageName: node
-  linkType: hard
-
 "js-yaml@npm:^4.1.0":
   version: 4.1.1
   resolution: "js-yaml@npm:4.1.1"
@@ -2801,14 +2742,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"katex@npm:^0.16.40":
-  version: 0.16.40
-  resolution: "katex@npm:0.16.40"
+"katex@npm:^0.16.42":
+  version: 0.16.42
+  resolution: "katex@npm:0.16.42"
   dependencies:
     commander: "npm:^8.3.0"
   bin:
     katex: cli.js
-  checksum: 10c0/9642164eed8b8b964937fb013106c823f8dd730e66cfc8b424094d593cbb9913004e365529fb81acafea1c9a70001a4bde5853bcec663ce2df06b617ed07fe07
+  checksum: 10c0/2c75ae7c3639ad2d6ff722f3af9359f6745cb4ed6f42c74f898198c643787d2e0774aa1cac8dbfa5a9890474b371ef00257f09b8e6df76da5ce02a823ed006b3
   languageName: node
   linkType: hard
 
@@ -2830,7 +2771,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kind-of@npm:^6.0.0, kind-of@npm:^6.0.2":
+"kind-of@npm:^6.0.2":
   version: 6.0.3
   resolution: "kind-of@npm:6.0.3"
   checksum: 10c0/61cdff9623dabf3568b6445e93e31376bee1cdb93f8ba7033d86022c2a9b1791a1d9510e026e6465ebd701a6dd2f7b0808483ad8838341ac52f003f512e0b4c4
@@ -3059,9 +3000,9 @@ __metadata:
   linkType: hard
 
 "lru-cache@npm:^11.0.0, lru-cache@npm:^11.1.0, lru-cache@npm:^11.2.1":
-  version: 11.2.6
-  resolution: "lru-cache@npm:11.2.6"
-  checksum: 10c0/73bbffb298760e71b2bfe8ebc16a311c6a60ceddbba919cfedfd8635c2d125fbfb5a39b71818200e67973b11f8d59c5a9e31d6f90722e340e90393663a66e5cd
+  version: 11.2.7
+  resolution: "lru-cache@npm:11.2.7"
+  checksum: 10c0/549cdb59488baa617135fc12159cafb1a97f91079f35093bb3bcad72e849fc64ace636d244212c181dfdf1a99bbfa90757ff303f98561958ee4d0f885d9bd5f7
   languageName: node
   linkType: hard
 
@@ -3959,9 +3900,9 @@ __metadata:
   linkType: hard
 
 "picomatch@npm:^2.3.1":
-  version: 2.3.1
-  resolution: "picomatch@npm:2.3.1"
-  checksum: 10c0/26c02b8d06f03206fc2ab8d16f19960f2ff9e81a658f831ecb656d8f17d9edc799e8364b1f4a7873e89d9702dff96204be0fa26fe4181f6843f040f819dac4be
+  version: 2.3.2
+  resolution: "picomatch@npm:2.3.2"
+  checksum: 10c0/a554d1709e59be97d1acb9eaedbbc700a5c03dbd4579807baed95100b00420bc729335440ef15004ae2378984e2487a7c1cebd743cfdb72b6fa9ab69223c0d61
   languageName: node
   linkType: hard
 
@@ -4325,7 +4266,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rolldown@npm:1.0.0-rc.11, rolldown@npm:^1.0.0-rc.11":
+"rolldown@npm:1.0.0-rc.11":
   version: 1.0.0-rc.11
   resolution: "rolldown@npm:1.0.0-rc.11"
   dependencies:
@@ -4636,16 +4577,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"section-matter@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "section-matter@npm:1.0.0"
-  dependencies:
-    extend-shallow: "npm:^2.0.1"
-    kind-of: "npm:^6.0.0"
-  checksum: 10c0/8007f91780adc5aaa781a848eaae50b0f680bbf4043b90cf8a96778195b8fab690c87fe7a989e02394ce69890e330811ec8dab22397d384673ce59f7d750641d
-  languageName: node
-  linkType: hard
-
 "semver@npm:^7.3.5, semver@npm:^7.6.3, semver@npm:^7.7.2, semver@npm:^7.7.3":
   version: 7.7.4
   resolution: "semver@npm:7.7.4"
@@ -4850,13 +4781,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sprintf-js@npm:~1.0.2":
-  version: 1.0.3
-  resolution: "sprintf-js@npm:1.0.3"
-  checksum: 10c0/ecadcfe4c771890140da5023d43e190b7566d9cf8b2d238600f31bec0fc653f328da4450eb04bd59a431771a8e9cc0e118f0aa3974b683a4981b4e07abc2a5bb
-  languageName: node
-  linkType: hard
-
 "ssri@npm:^13.0.0":
   version: 13.0.1
   resolution: "ssri@npm:13.0.1"
@@ -4902,13 +4826,6 @@ __metadata:
   dependencies:
     ansi-regex: "npm:^6.2.2"
   checksum: 10c0/544d13b7582f8254811ea97db202f519e189e59d35740c46095897e254e4f1aa9fe1524a83ad6bc5ad67d4dd6c0281d2e0219ed62b880a6238a16a17d375f221
-  languageName: node
-  linkType: hard
-
-"strip-bom-string@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "strip-bom-string@npm:1.0.0"
-  checksum: 10c0/5c5717e2643225aa6a6d659d34176ab2657037f1fe2423ac6fcdb488f135e14fef1022030e426d8b4d0989e09adbd5c3288d5d3b9c632abeefd2358dfc512bca
   languageName: node
   linkType: hard
 
@@ -5469,15 +5386,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-svelte-md@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "vite-plugin-svelte-md@npm:0.4.1"
+"vite-plugin-svelte-md@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "vite-plugin-svelte-md@npm:0.5.0"
   dependencies:
-    gray-matter: "npm:^4.0.3"
+    devalue: "npm:^5.6.4"
     markdown-exit: "npm:^1.0.0-beta.9"
+    yaml: "npm:^2.8.2 || ^3.0.0-0"
   peerDependencies:
     vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-beta.0
-  checksum: 10c0/87a84080c7b4c089f41e51dd3db290ee288a1fbce65033e3ca7d17ba7fc30972fbe8857932e5aef805742f73509d58fdc9029872250cc78ce12faa1c1e756caf
+  checksum: 10c0/9bb865abcdc5c80dcf428f85f8552f61c633d0159173bbee212054a21105cf344e432a4264daa9903d980acd2fb61a3daf51e86e5a80d1f9f7ffc4372f577e9c
   languageName: node
   linkType: hard
 
@@ -5626,6 +5544,15 @@ __metadata:
   bin:
     yaml: bin.mjs
   checksum: 10c0/703e4dc1e34b324aa66876d63618dcacb9ed49f7e7fe9b70f1e703645be8d640f68ab84f12b86df8ac960bac37acf5513e115de7c970940617ce0343c8c9cd96
+  languageName: node
+  linkType: hard
+
+"yaml@npm:^2.8.2 || ^3.0.0-0":
+  version: 3.0.0-0
+  resolution: "yaml@npm:3.0.0-0"
+  bin:
+    yaml: bin.js
+  checksum: 10c0/3c1cd172e444ed13479e4d4211665265e20483ad1df94b217993fa511c834602c65bafe3a6c80851d9dd736b25a79cafe2eeeb452be74cfce29b65708d681726
   languageName: node
   linkType: hard
 

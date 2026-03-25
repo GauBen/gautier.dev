@@ -28,8 +28,8 @@
     "@iconify-svelte/ph": "^1.0.1",
     "@mdit/plugin-tasklist": "^0.23.1",
     "@mdit/plugin-tex": "^0.24.1",
-    "@sveltejs/enhanced-img": "https://pkg.pr.new/@sveltejs/enhanced-img@8a0af32",
-    "@sveltejs/kit": "https://pkg.pr.new/@sveltejs/kit@8a0af32",
+    "@sveltejs/enhanced-img": "https://pkg.pr.new/@sveltejs/enhanced-img@15497",
+    "@sveltejs/kit": "https://pkg.pr.new/@sveltejs/kit@15497",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@types/node": "^25.5.0",
     "@types/prismjs": "^1.26.6",
@@ -39,7 +39,7 @@
     "eslint-plugin-command": "^3.5.2",
     "eslint-plugin-svelte": "^3.16.0",
     "globals": "^17.4.0",
-    "katex": "^0.16.40",
+    "katex": "^0.16.42",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-task-lists": "^2.1.1",
     "modern-normalize": "^3.0.1",
@@ -68,7 +68,7 @@
     "unified": "^11.0.5",
     "vfile-matter": "^5.0.1",
     "vite": "^8.0.2",
-    "vite-plugin-svelte-md": "^0.4.1"
+    "vite-plugin-svelte-md": "^0.5.0"
   },
   "packageManager": "yarn@4.12.0"
 }
