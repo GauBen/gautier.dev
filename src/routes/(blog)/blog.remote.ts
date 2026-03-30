@@ -1,9 +1,13 @@
 import { prerender, query } from "$app/server";
 import { env } from "$env/dynamic/private";
 import { articles } from "$lib/articles.js";
-import { highlight } from "$lib/prism.js";
+
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+process.env.IS_ADAPTER_BUILD || import("$lib/prism.js");
 
 export const getSnippet = prerender("unchecked", async (slug: string) => {
+  if (process.env.IS_ADAPTER_BUILD) throw new Error("not available at runtime");
+  const { highlight } = await import("$lib/prism.js");
   const article = await articles.get(slug)?.load();
   if (!article || !article.frontmatter.snippet) return "";
   const { code, lang } = article.frontmatter.snippet;

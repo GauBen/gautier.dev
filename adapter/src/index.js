@@ -4,6 +4,7 @@ import { readdirSync, statSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import prettyBytes from "pretty-bytes";
 import * as rolldown from "rolldown";
+import { replacePlugin } from "rolldown/plugins";
 
 /** Adapted from @rollup/plugin-virtual under MIT License */
 const PREFIX = `\0virtual:`;
@@ -67,6 +68,7 @@ export default function adapter({ precompress = true, envPrefix = "" } = {}) {
           file: "bundle.js",
         },
         plugins: [
+          replacePlugin({ "process.env.IS_ADAPTER_BUILD": "true" }),
           virtual({
             "virtual:manifest": [
               `export const manifest = ${builder.generateManifest({ relativePath: "./server" })};`,
