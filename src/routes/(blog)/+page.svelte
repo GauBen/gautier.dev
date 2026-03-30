@@ -18,12 +18,7 @@
 
   const { data } = $props();
 
-  const getInteractions = async (title: string, fresh = false) => {
-    const interactions =
-      (fresh && (await getFreshInteractions())) ||
-      (await getPrerenderedInteractions());
-    return interactions?.get(title) ?? { comments: 0, reactions: 0 };
-  };
+  const prerenderedInterations = await getPrerenderedInteractions();
 </script>
 
 <Header />
@@ -76,13 +71,10 @@
         <p>{description}</p>
       {/if}
       {#if date}
-        {#snippet interactions({
-          comments,
-          reactions,
-        }: {
-          comments: number;
-          reactions: number;
-        })}
+        {#snippet footer({
+          comments = 0,
+          reactions = 0,
+        }: { comments?: number; reactions?: number } = {})}
           <p style="display: flex; justify-content: space-between">
             <time datetime={date.toISOString()}>{formatDate(date)}</time>
             {#if comments + reactions > 0}
@@ -100,9 +92,9 @@
           </p>
         {/snippet}
         <svelte:boundary>
-          {@render interactions(await getInteractions(title, true))}
+          {@render footer((await getFreshInteractions())?.get(title))}
           {#snippet pending()}
-            {@render interactions(await getInteractions(title))}
+            {@render footer(prerenderedInterations?.get(title))}
           {/snippet}
         </svelte:boundary>
       {:else}

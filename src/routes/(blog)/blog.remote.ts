@@ -78,7 +78,8 @@ export const getFreshInteractions = query(async () => {
     return interactionsCache;
 
   try {
-    return (interactionsCache = await fetchInteractions());
+    interactionsCache = await fetchInteractions();
+    return interactionsCache || getPrerenderedInteractions();
   } catch {
     return undefined;
   } finally {
