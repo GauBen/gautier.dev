@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@sveltejs/kit': https://pkg.pr.new/@sveltejs/kit@2cdebca
+  '@sveltejs/kit': https://pkg.pr.new/@sveltejs/kit@872b2f3
 
 time:
   '@babel/code-frame@7.29.0': 2026-01-31T17:39:09.387Z
@@ -522,9 +522,6 @@ importers:
       markdown-it:
         specifier: ^14.1.0
         version: 14.1.1
-      modern-normalize:
-        specifier: ^3.0.1
-        version: 3.0.1
       picomatch:
         specifier: ^3 || ^4
         version: 4.0.4
@@ -563,8 +560,8 @@ importers:
         specifier: ^0.10.4
         version: 0.10.4(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.4)(vite@8.0.9(@types/node@25.6.0)(sass-embedded@1.99.0)(yaml@2.8.3)))(svelte@5.55.4)(vite@8.0.9(@types/node@25.6.0)(sass-embedded@1.99.0)(yaml@2.8.3))
       '@sveltejs/kit':
-        specifier: ^2.55.0
-        version: https://pkg.pr.new/@sveltejs/kit@2cdebca
+        specifier: ^2.57.1
+        version: https://pkg.pr.new/@sveltejs/kit@872b2f3
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.0.0
         version: 7.0.0(svelte@5.55.4)(vite@8.0.9(@types/node@25.6.0)(sass-embedded@1.99.0)(yaml@2.8.3))
@@ -601,6 +598,9 @@ importers:
       markdown-it-task-lists:
         specifier: ^2.1.1
         version: 2.1.1
+      modern-normalize:
+        specifier: ^3.0.1
+        version: 3.0.1
       postcss:
         specifier: ^8.5.8
         version: 8.5.10
@@ -717,8 +717,8 @@ importers:
         version: 2.8.3
     devDependencies:
       '@sveltejs/kit':
-        specifier: ^2.55.0
-        version: https://pkg.pr.new/@sveltejs/kit@2cdebca
+        specifier: ^2.57.1
+        version: https://pkg.pr.new/@sveltejs/kit@872b2f3
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.0.0
         version: 7.0.0(svelte@5.55.4)(vite@8.0.9(@types/node@25.6.0)(sass-embedded@1.99.0)(yaml@2.8.3))
@@ -1218,8 +1218,8 @@ packages:
       svelte: ^5.0.0
       vite: ^6.3.0 || >=7.0.0
 
-  '@sveltejs/kit@https://pkg.pr.new/@sveltejs/kit@2cdebca':
-    resolution: {integrity: sha512-w/f6Fjsn5hWaQYMHtabX68i15E2PA+imRPQqbL73IMD3f5GXthdhzgxI3gLFa8OboepZU+4DB1G3fGRcdAxtcQ==, tarball: https://pkg.pr.new/@sveltejs/kit@2cdebca}
+  '@sveltejs/kit@https://pkg.pr.new/@sveltejs/kit@872b2f3':
+    resolution: {integrity: sha512-HUOfwwqpsNy+4mkN5uU4gVblcV68V2haJ+NjBmZfo+KpTmOcwAb8Iwu+7AwJzjt0zbyFvFj+3/u02x1FnTYvLQ==, tarball: https://pkg.pr.new/@sveltejs/kit@872b2f3}
 
   '@sveltejs/vite-plugin-svelte@7.0.0':
     resolution: {integrity: sha512-ILXmxC7HAsnkK2eslgPetrqqW1BKSL7LktsFgqzNj83MaivMGZzluWq32m25j2mDOjmSKX7GGWahePhuEs7P/g==}
@@ -3130,7 +3130,7 @@ snapshots:
       vite-imagetools: 9.0.3
       zimmerframe: 1.1.4
 
-  '@sveltejs/kit@https://pkg.pr.new/@sveltejs/kit@2cdebca':
+  '@sveltejs/kit@https://pkg.pr.new/@sveltejs/kit@872b2f3':
     dependencies:
       '@standard-schema/spec': 1.1.0
       '@sveltejs/acorn-typescript': 1.0.9(acorn@8.16.0)
