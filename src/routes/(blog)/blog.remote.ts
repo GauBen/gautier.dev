@@ -71,7 +71,14 @@ const fetchInteractions = async () => {
   );
 };
 
-export const getPrerenderedInteractions = prerender(fetchInteractions);
+export const getPrerenderedInteractions = prerender(
+  env.GITHUB_TOKEN
+    ? fetchInteractions
+    : () => {
+        console.warn("GITHUB_TOKEN not set, fetching interactions skipped");
+        return new Map<string, { comments: number; reactions: number }>();
+      },
+);
 
 let interactionsCache:
   | Map<string, { comments: number; reactions: number }>

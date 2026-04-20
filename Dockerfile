@@ -1,5 +1,5 @@
 # MARK: build
-FROM debian:13-slim@sha256:26f98ccd92fd0a44d6928ce8ff8f4921b4d2f535bfa07555ee5d18f61429cf0c AS build
+FROM debian:13-slim@sha256:4ffb3a1511099754cddc70eb1b12e50ffdb67619aa0ab6c13fcd800a78ef7c7a AS build
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 WORKDIR /workdir
 
@@ -21,8 +21,8 @@ COPY mise.toml .
 RUN --mount=type=cache,target=/mise/downloads mise install
 
 # Install js dependencies
-COPY --parents **/package.json **/aube-lock.yaml ./
-RUN --mount=type=cache,target=/root/.cache/aube aube install --frozen-lockfile
+COPY --parents **/package.json aube-lock.yaml ./
+RUN --mount=type=cache,target=/root/.cache/aube aube ci
 
 # Build the project
 COPY . .
