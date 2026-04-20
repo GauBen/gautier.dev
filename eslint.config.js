@@ -38,7 +38,6 @@ export default defineConfig(
   {
     ignores: [
       "**/.svelte-kit",
-      "**/.yarn",
       "**/build",
       "**/dist",
       "**/node_modules",

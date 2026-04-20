@@ -21,12 +21,12 @@ COPY mise.toml .
 RUN --mount=type=cache,target=/mise/downloads mise install
 
 # Install js dependencies
-COPY --parents **/package.json yarn.lock .yarnrc.yml ./
-RUN --mount=type=cache,target=/root/.yarn/berry/cache yarn install --immutable
+COPY --parents **/package.json **/aube-lock.yaml ./
+RUN --mount=type=cache,target=/root/.cache/aube aube install --frozen-lockfile
 
 # Build the project
 COPY . .
-RUN yarn build && ldd build/node
+RUN aube build && ldd build/node
 
 # MARK: amd64
 FROM scratch AS amd64
