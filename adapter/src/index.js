@@ -94,14 +94,12 @@ export default function adapter({ precompress = true, envPrefix = "" } = {}) {
             name: "js-bindings-processor",
             transform: {
               filter: { id: /js-binding\.js$/ },
-              handler(code) {
-                return code.replace(
-                  "{ platform, arch } = process",
-                  `{ platform, arch } = ${JSON.stringify({
-                    platform: process.platform,
-                    arch: process.arch,
-                  })}`,
+              handler(_, id) {
+                const moduleName = id.slice(
+                  id.lastIndexOf("node_modules/") + "node_modules/".length,
+                  id.lastIndexOf("/js-binding.js"),
                 );
+                return `module.exports = require("${moduleName}-${process.platform}-${process.arch}${process.platform === "linux" ? "-gnu" : ""}");`;
               },
             },
           },
@@ -117,10 +115,10 @@ export default function adapter({ precompress = true, envPrefix = "" } = {}) {
                   source: readFileSync(id),
                 });
                 return `
-import * as fs from 'node:fs';
-import * as os from 'node:os';
-import * as path from 'node:path';
-import { getRawAsset } from 'node:sea';
+const fs = require("node:fs");
+const os = require("node:os");
+const path = require("node:path");
+const { getRawAsset } = require("node:sea");
 
 const name = ${uneval(this.getFileName(emitted).slice("assets".length))};
 const addonPath = path.join(os.tmpdir(), name);
@@ -128,7 +126,7 @@ fs.writeFileSync(addonPath, new Uint8Array(getRawAsset(name)));
 const myaddon = { exports: {} };
 process.dlopen(myaddon, addonPath);
 fs.rmSync(addonPath);
-export default myaddon.exports;`;
+module.exports = myaddon.exports;`;
               },
             },
           },
