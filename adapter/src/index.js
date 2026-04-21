@@ -1,6 +1,6 @@
 import { uneval } from "devalue";
 import { execFileSync } from "node:child_process";
-import { readdirSync, statSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import prettyBytes from "pretty-bytes";
 import * as rolldown from "rolldown";
@@ -90,6 +90,48 @@ export default function adapter({ precompress = true, envPrefix = "" } = {}) {
               ? `export * from "./server/instrumentation.server.js";`
               : `export {};`,
           }),
+          {
+            name: "js-bindings-processor",
+            transform: {
+              filter: { id: /js-binding\.js$/ },
+              handler(code) {
+                return code.replace(
+                  "{ platform, arch } = process",
+                  `{ platform, arch } = ${JSON.stringify({
+                    platform: process.platform,
+                    arch: process.arch,
+                  })}`,
+                );
+              },
+            },
+          },
+          {
+            name: "externalize-node-modules",
+            load: {
+              filter: { id: /\.node$/ },
+              handler(id) {
+                const emitted = this.emitFile({
+                  type: "asset",
+                  originalFileName: id,
+                  name: basename(id),
+                  source: readFileSync(id),
+                });
+                return `
+import * as fs from 'node:fs';
+import * as os from 'node:os';
+import * as path from 'node:path';
+import { getRawAsset } from 'node:sea';
+
+const name = ${uneval(this.getFileName(emitted).slice("assets".length))};
+const addonPath = path.join(os.tmpdir(), name);
+fs.writeFileSync(addonPath, new Uint8Array(getRawAsset(name)));
+const myaddon = { exports: {} };
+process.dlopen(myaddon, addonPath);
+fs.rmSync(addonPath);
+export default myaddon.exports;`;
+              },
+            },
+          },
         ],
       });
 
