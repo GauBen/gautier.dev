@@ -14,7 +14,7 @@
   {@render children?.()}
 </div>
 
-<style lang="scss">
+<style>
   div {
     position: relative;
     min-height: 100%;

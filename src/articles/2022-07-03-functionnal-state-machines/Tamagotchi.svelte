@@ -128,7 +128,6 @@
     <h3>Logs</h3>
     <pre
       {@attach (node) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         logs.length; // Rerun when logs change
         node.scrollTop = node.scrollHeight;
       }}>{logs.slice(-10).join("\n")}</pre>
@@ -141,7 +140,7 @@
   </a>
 </footer>
 
-<style lang="scss">
+<style>
   section {
     display: flex;
     flex-wrap: wrap;

@@ -2,7 +2,7 @@
   <slot />
 </div>
 
-<style lang="scss">
+<style>
   div {
     display: flex;
     flex-wrap: wrap;

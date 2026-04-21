@@ -478,7 +478,7 @@
   </article>
 </div>
 
-<style lang="scss">
+<style>
   h2 {
     display: flex;
     flex-direction: row-reverse;

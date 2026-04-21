@@ -39,7 +39,7 @@
   </p>
 </footer>
 
-<style lang="scss">
+<style>
   footer {
     max-width: var(--main-width);
     padding: 0 0.5em;

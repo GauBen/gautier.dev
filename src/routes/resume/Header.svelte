@@ -38,7 +38,7 @@
   </div>
 </header>
 
-<style lang="scss">
+<style>
   header {
     display: flex;
     flex-wrap: wrap;

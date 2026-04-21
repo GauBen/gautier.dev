@@ -1,7 +1,7 @@
 <slot />
 <div class="separator" aria-hidden="true"></div>
 
-<style lang="scss">
+<style>
   .separator {
     width: 0.1em;
     height: 1em;

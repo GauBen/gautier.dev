@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import "../app.scss";
+  import "../app.css";
 
   const { children } = $props();
   const { title, description } = $derived(page.data);

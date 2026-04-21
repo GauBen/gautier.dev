@@ -45,7 +45,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style>
   .wrapper {
     position: relative;
   }

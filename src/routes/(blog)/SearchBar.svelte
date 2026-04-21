@@ -1,5 +1,4 @@
 <script lang="ts">
-  /* eslint-disable svelte/no-navigation-without-resolve */
   import { goto } from "$app/navigation";
   import MagnifyingGlass from "@iconify-svelte/ph/magnifying-glass-bold";
   import X from "@iconify-svelte/ph/x-bold";
@@ -130,7 +129,7 @@
   {/if}
 </div>
 
-<style lang="scss">
+<style>
   div {
     display: grid;
     grid-template: auto auto / 1fr auto auto;
@@ -215,7 +214,7 @@
       background-size: 100% 100%;
     }
 
-    // Give the button a bigger hitbox for mobile users
+    /* Give the button a bigger hitbox for mobile users */
     &::before {
       position: absolute;
       inset: 0 -0.5em;

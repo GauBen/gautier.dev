@@ -14,7 +14,7 @@
   <slot />
 </div>
 
-<style lang="scss">
+<style>
   header {
     position: relative;
     z-index: 1;

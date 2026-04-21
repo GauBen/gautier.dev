@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style>
   .card {
     position: relative;
     margin-block: 1rem;

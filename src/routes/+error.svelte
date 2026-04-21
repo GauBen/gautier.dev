@@ -73,7 +73,7 @@
   <div style="flex: 5"></div>
 </article>
 
-<style lang="scss">
+<style>
   h1 {
     position: absolute;
     z-index: 10;

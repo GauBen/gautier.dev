@@ -1,6 +1,6 @@
 <div><slot /></div>
 
-<style lang="scss">
+<style>
   div :global(p) {
     display: flex;
     gap: 0.5em;

@@ -129,7 +129,7 @@
   {/if}
 </form>
 
-<style lang="scss">
+<style>
   summary {
     cursor: pointer;
   }

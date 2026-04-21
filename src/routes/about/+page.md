@@ -1,5 +1,5 @@
 <script>
-  import "$assets/markdown-content.scss";
+  import "$assets/markdown-content.css";
 </script>
 
 <h1>About Me</h1>

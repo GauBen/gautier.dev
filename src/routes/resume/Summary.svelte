@@ -14,7 +14,7 @@
   </div>
 </section>
 
-<style lang="scss">
+<style>
   section {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -33,7 +33,7 @@
       writing-mode: sideways-lr;
     }
 
-    // Write the other way and rotate it
+    /* Write the other way and rotate it */
     @supports not (writing-mode: sideways-lr) {
       padding-left: 0.5rem;
       border-left: 2px solid #0d3c77;

@@ -2,7 +2,6 @@ import { prerender, query } from "$app/server";
 import { env } from "$env/dynamic/private";
 import { articles } from "$lib/articles.js";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 process.env.IS_ADAPTER_BUILD || import("$lib/prism.js");
 
 export const getSnippet = prerender("unchecked", async (slug: string) => {

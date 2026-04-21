@@ -133,7 +133,7 @@
   {/if}
 </main>
 
-<style lang="scss">
+<style>
   main {
     padding: 0 0.5em;
     margin: 0 auto;
