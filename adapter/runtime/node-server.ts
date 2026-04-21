@@ -2,6 +2,7 @@ import { parse as polka_url_parser } from "@polka/url";
 import { getRequest, setResponse } from "@sveltejs/kit/node";
 import { createServer, IncomingHttpHeaders, IncomingMessage } from "node:http";
 import process from "node:process";
+import { getRawAsset } from "node:sea";
 import polka, { Middleware } from "polka";
 import { env_prefix, manifest, prerendered } from "virtual:manifest";
 import { Server } from "virtual:server";
@@ -151,7 +152,16 @@ async function createNodeServer() {
   }
 
   const app = new Server(manifest);
-  await app.init({ env: process.env as Record<string, string> });
+  await app.init({
+    env: process.env as Record<string, string>,
+    read: (file) =>
+      new ReadableStream({
+        start: (controller) => {
+          controller.enqueue(getRawAsset(`/client${file}`));
+          controller.close();
+        },
+      }),
+  });
 
   return polka({ server })
     .use(

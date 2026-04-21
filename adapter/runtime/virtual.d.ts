@@ -10,3 +10,5 @@ declare module "virtual:server" {
   export const Server: typeof import("@sveltejs/kit").Server;
   export const options: { version_hash: string };
 }
+
+declare module "virtual:instrumentation" {}

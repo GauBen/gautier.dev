@@ -22,6 +22,7 @@ if (process.argv[2] === "--healthcheck") {
     console.error(`Health check error: ${(error as Error).message}`);
     process.exit(1);
   }
-} else {
-  await import("./node-server.js");
 }
+
+await import("virtual:instrumentation"); // Empty if instrumentation is not enabled
+await import("./node-server.js");

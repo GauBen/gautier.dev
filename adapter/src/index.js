@@ -44,6 +44,11 @@ export default function adapter({ precompress = true, envPrefix = "" } = {}) {
   return {
     name: "adapter-node-sea",
 
+    supports: {
+      read: () => true,
+      instrumentation: () => true,
+    },
+
     async adapt(builder) {
       const cwd = builder.getBuildDirectory("sea");
       builder.rimraf(cwd);
@@ -81,6 +86,9 @@ export default function adapter({ precompress = true, envPrefix = "" } = {}) {
               `export { Server } from "./server/index.js";`,
               `export { options } from "./server/internal.js";`,
             ].join("\n"),
+            "virtual:instrumentation": builder.hasServerInstrumentationFile()
+              ? `export * from "./server/instrumentation.server.js";`
+              : `export {};`,
           }),
         ],
       });
