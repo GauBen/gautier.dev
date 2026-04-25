@@ -39,8 +39,21 @@ function totalist(root, subdir = "") {
   return out;
 }
 
-/** @returns {import("@sveltejs/kit").Adapter} */
-export default function adapter({ precompress = true, envPrefix = "" } = {}) {
+/**
+ * @param {Object} [opt={}] Default is `{}`
+ * @param {boolean} [opt.precompress=true] Default is `true`
+ * @param {string} [opt.envPrefix=""] Default is `""`
+ * @param {boolean | import("rolldown").OutputOptions["minify"]} [opt.minify="dce-only"]
+ *   See [Rolldown
+ *   documentation](https://rolldown.rs/reference/OutputOptions.minify#minify).
+ *   Default is `"dce-only"`
+ * @returns {import("@sveltejs/kit").Adapter}
+ */
+export default function adapter({
+  precompress = true,
+  envPrefix = "",
+  minify = "dce-only",
+} = {}) {
   return {
     name: "adapter-node-sea",
 
@@ -71,6 +84,7 @@ export default function adapter({ precompress = true, envPrefix = "" } = {}) {
         output: {
           codeSplitting: false,
           file: "bundle.js",
+          minify,
         },
         plugins: [
           replacePlugin({ "process.env.IS_ADAPTER_BUILD": "true" }),
