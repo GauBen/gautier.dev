@@ -157,7 +157,7 @@ async function createNodeServer() {
     read: (file) =>
       new ReadableStream({
         start: (controller) => {
-          controller.enqueue(getRawAsset(`/client${file}`));
+          controller.enqueue(getRawAsset(`/client/${file}`));
           controller.close();
         },
       }),
