@@ -7,18 +7,40 @@
   import Heart from "@iconify-svelte/ph/heart-duotone";
   import external from "../../articles/external.json" with { type: "json" };
   import SearchBar from "./SearchBar.svelte";
-  import {
-    getFreshInteractions,
-    getPrerenderedInteractions,
-    getSnippet,
-  } from "./blog.remote.js";
+  import { getFreshInteractions, getSnippet } from "./blog.remote.js";
+  import { page } from "$app/state";
 
   const escape = (s: string) =>
     s.replaceAll("&", "&amp;").replaceAll("<", "&lt;");
 
   const { data } = $props();
 
-  const prerenderedInterations = await getPrerenderedInteractions();
+  let articles = $derived(data.articles);
+  let q = $state<string>();
+  let autocomplete = $state<string[]>();
+  $effect(() => {
+    q = page.url.searchParams.get("q")?.slice(0, 100);
+    if (q === undefined) {
+      articles = data.articles;
+      return;
+    }
+
+    import("$lib/search.js").then(({ search }) => {
+      if (q === undefined) return;
+      const searchResults = search(q);
+      const map = new Map(
+        data.articles.map((article) => [article.slug, article]),
+      );
+
+      autocomplete = searchResults.autocomplete;
+      articles = q
+        ? searchResults.results.map(({ slug, highlightedExtracts }) => ({
+            ...map.get(slug)!,
+            description: highlightedExtracts,
+          }))
+        : data.articles;
+    });
+  });
 </script>
 
 <Header />
@@ -46,9 +68,9 @@
     </code>
   </nav>
 
-  <SearchBar {...data} />
+  <SearchBar {q} {autocomplete} />
 
-  {#each data.articles as { slug, banner, title, description, date, snippet } (slug)}
+  {#each articles as { slug, banner, title, description, date, snippet } (slug)}
     <Card>
       {#snippet header()}
         {#if banner}
@@ -94,7 +116,7 @@
         <svelte:boundary>
           {@render footer((await getFreshInteractions())?.get(title))}
           {#snippet pending()}
-            {@render footer(prerenderedInterations?.get(title))}
+            {@render footer(data.prerenderedInterations.get(title))}
           {/snippet}
         </svelte:boundary>
       {:else}
@@ -102,10 +124,10 @@
       {/if}
     </Card>
   {:else}
-    <p>No articles match <strong>{data.q}</strong></p>
+    <p>No articles match <strong>{q}</strong></p>
   {/each}
 
-  {#if data.q === undefined}
+  {#if q === undefined}
     <h2 style="margin-block-start: 2rem">Corporate articles</h2>
     <p>
       These are the articles I have written for corporate blogs. They contain

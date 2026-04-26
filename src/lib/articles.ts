@@ -3,7 +3,7 @@ import type { Component } from "svelte";
 export type Article = {
   frontmatter: {
     title: string;
-    description?: string;
+    description?: string | string[];
     snippet?: { code: string; lang: string };
   };
   banner?: string;
