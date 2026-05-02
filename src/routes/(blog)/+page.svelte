@@ -7,7 +7,11 @@
   import Heart from "@iconify-svelte/ph/heart-duotone";
   import external from "../../articles/external.json" with { type: "json" };
   import SearchBar from "./SearchBar.svelte";
-  import { getFreshInteractions, getSnippet } from "./blog.remote.js";
+  import {
+    getFreshInteractions,
+    getPrerenderedInteractions,
+    getSnippet,
+  } from "./blog.remote.js";
   import { page } from "$app/state";
 
   const escape = (s: string) =>
@@ -41,6 +45,8 @@
         : data.articles;
     });
   });
+
+  const prerenderedInterations = $derived(await getPrerenderedInteractions());
 </script>
 
 <Header />
@@ -116,7 +122,7 @@
         <svelte:boundary>
           {@render footer((await getFreshInteractions())?.get(title))}
           {#snippet pending()}
-            {@render footer(data.prerenderedInterations.get(title))}
+            {@render footer(prerenderedInterations.get(title))}
           {/snippet}
         </svelte:boundary>
       {:else}

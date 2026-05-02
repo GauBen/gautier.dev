@@ -1,6 +1,6 @@
 import { prerender, query } from "$app/server";
+import { env } from "$env/dynamic/private";
 import { articles } from "$lib/articles.js";
-import { _fetchInteractions } from "./+page.server.js";
 
 process.env.IS_ADAPTER_BUILD || import("$lib/prism.js");
 
@@ -13,6 +13,66 @@ export const getSnippet = prerender("unchecked", async (slug: string) => {
   return highlight(code, lang);
 });
 
+const fetchInteractions = async () => {
+  const response = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: {
+      "Authorization": `Token ${env.GITHUB_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: /* GraphQL */ `
+        {
+          repository(owner: "gauben", name: "gautier.dev") {
+            discussions(categoryId: "DIC_kwDOHTUX9M4CXmQB", first: 100) {
+              nodes {
+                title
+                reactions {
+                  totalCount
+                }
+                comments(first: 100) {
+                  nodes {
+                    replies {
+                      totalCount
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+    }),
+  }).catch((error) => {
+    console.error("Failed to fetch interactions from GitHub:", error);
+    throw new Error("Failed to fetch interactions from GitHub");
+  });
+  if (!response.ok) {
+    throw new Error(
+      `GitHub API error: ${response.status} ${response.statusText}`,
+    );
+  }
+  const { data } = await response.json();
+  return new Map(
+    (
+      data.repository.discussions.nodes as Array<{
+        title: string;
+        reactions: { totalCount: number };
+        comments: { nodes: Array<{ replies: { totalCount: number } }> };
+      }>
+    ).map(({ title, comments, reactions }) => [
+      title,
+      {
+        comments: comments.nodes.reduce(
+          (total, { replies }) => total + replies.totalCount,
+          comments.nodes.length, // Count top-level comments as well
+        ),
+        reactions: reactions.totalCount,
+      },
+    ]),
+  );
+};
+
 let interactionsCache:
   | Map<string, { comments: number; reactions: number }>
   | undefined;
@@ -22,7 +82,7 @@ export const getFreshInteractions = query(async () => {
     return interactionsCache;
 
   try {
-    interactionsCache = await _fetchInteractions();
+    interactionsCache = await fetchInteractions();
     return interactionsCache;
   } catch {
     return undefined;
@@ -30,3 +90,10 @@ export const getFreshInteractions = query(async () => {
     interactionsCacheTimestamp = Date.now();
   }
 });
+
+export const getPrerenderedInteractions = prerender(
+  env.GITHUB_TOKEN
+    ? fetchInteractions
+    : (console.warn("GITHUB_TOKEN not set, fetching interactions skipped"),
+      () => new Map<string, { comments: number; reactions: number }>()),
+);
