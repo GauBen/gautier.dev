@@ -49,12 +49,7 @@ if (isNaN(body_size_limit)) {
 
 // required because the static file server ignores trailing slashes
 function serve_prerendered(): Middleware {
-  const handler = sirv("/prerendered", {
-    setHeaders(res, pathname) {
-      if (prerendered.assets.has(pathname))
-        res.setHeader("Content-Type", prerendered.assets.get(pathname)!.type);
-    },
-  });
+  const handler = sirv("/prerendered");
 
   const prerenderedPaths = new Set(prerendered.paths);
 
