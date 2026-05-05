@@ -18,10 +18,13 @@ export const articles = new Map(
       );
       if (!match?.groups) throw new Error(`Invalid article file name: ${file}`);
       const { date, slug } = match.groups;
-      return [slug, { date: date === "draft" ? null : new Date(date), load }];
+      return [
+        slug,
+        { date: date === "draft" ? null : Temporal.PlainDate.from(date), load },
+      ];
     },
   ),
 );
 
-export const formatDate = (date: Date) =>
+export const formatDate = (date: Temporal.PlainDate) =>
   Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(date);

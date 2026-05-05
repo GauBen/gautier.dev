@@ -104,7 +104,7 @@
           reactions = 0,
         }: { comments?: number; reactions?: number } = {})}
           <p style="display: flex; justify-content: space-between">
-            <time datetime={date.toISOString()}>{formatDate(date)}</time>
+            <time datetime={date.toString()}>{formatDate(date)}</time>
             {#if comments + reactions > 0}
               <span>
                 {#if reactions > 0}
@@ -151,8 +151,8 @@
           </h2>
           <p>{description}</p>
           <p>
-            <time datetime={new Date(date).toISOString()}>
-              {formatDate(new Date(date))}
+            <time datetime={date}>
+              {formatDate(Temporal.PlainDate.from(date))}
             </time> for Escape
           </p>
         </Card>

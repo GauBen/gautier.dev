@@ -78,7 +78,10 @@ let interactionsCache:
   | undefined;
 let interactionsCacheTimestamp = 0;
 export const getFreshInteractions = query(async () => {
-  if (interactionsCacheTimestamp > Date.now() - 60_000)
+  if (
+    interactionsCacheTimestamp >
+    Temporal.Now.instant().epochMilliseconds - 60_000
+  )
     return interactionsCache;
 
   try {
@@ -87,7 +90,7 @@ export const getFreshInteractions = query(async () => {
   } catch {
     return undefined;
   } finally {
-    interactionsCacheTimestamp = Date.now();
+    interactionsCacheTimestamp = Temporal.Now.instant().epochMilliseconds;
   }
 });
 

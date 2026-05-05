@@ -18,7 +18,7 @@ export const load = async () => ({
     articles
       .filter(({ date }) => dev || date)
       .sort(({ date: a }, { date: z }) =>
-        a === null ? -1 : z === null ? 1 : z.getTime() - a.getTime(),
+        a === null ? -1 : z === null ? 1 : Temporal.PlainDate.compare(z, a),
       ),
   ),
 });

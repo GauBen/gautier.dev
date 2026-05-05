@@ -30,7 +30,7 @@
     <h1 class:draft={!date}>{title}</h1>
     {#if date}
       <p class="date">
-        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        <time datetime={date.toString()}>{formatDate(date)}</time>
       </p>
     {:else}
       <p class="date">Unpublished draft</p>
