@@ -1,5 +1,4 @@
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
-import adapter from "adapter-node-sea";
 
 /** @type {import("@sveltejs/kit").Config} */
 export default {
@@ -14,7 +13,6 @@ export default {
   },
 
   kit: {
-    adapter: adapter({ precompress: false }),
     alias: {
       $assets: "./src/assets",
       $search: "./src/search",

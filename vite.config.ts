@@ -2,6 +2,7 @@ import { tasklist } from "@mdit/plugin-tasklist";
 import { tex } from "@mdit/plugin-tex";
 import { enhancedImages } from "@sveltejs/enhanced-img";
 import { sveltekit } from "@sveltejs/kit/vite";
+import adapter from "adapter-node-sea";
 import katex from "katex";
 import mdAnchor from "markdown-it-anchor";
 import { defineConfig } from "vite";
@@ -45,6 +46,8 @@ export default defineConfig({
           }),
     }),
     enhancedImages(),
-    sveltekit(),
+    sveltekit({
+      adapter: adapter({ precompress: false }),
+    }),
   ],
 });
