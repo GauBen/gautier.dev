@@ -1,5 +1,5 @@
 # MARK: build
-FROM debian:13-slim@sha256:4ffb3a1511099754cddc70eb1b12e50ffdb67619aa0ab6c13fcd800a78ef7c7a AS build
+FROM debian:13-slim@sha256:109e2c65005bf160609e4ba6acf7783752f8502ad218e298253428690b9eaa4b AS build
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 WORKDIR /workdir
 
@@ -9,7 +9,7 @@ ENV MISE_CONFIG_DIR="/mise"
 ENV MISE_CACHE_DIR="/mise/cache"
 ENV MISE_INSTALL_PATH="/usr/local/bin/mise"
 ENV PATH="/mise/shims:$PATH"
-RUN apt-get update && apt-get -y --no-install-recommends install libatomic1 curl ca-certificates gnupg \
+RUN apt-get update && apt-get -y --no-install-recommends install libatomic1 curl ca-certificates gnupg git \
   && rm -rf /var/lib/apt/lists/* \
   && gpg --keyserver hkps://keys.openpgp.org --recv-keys 24853EC9F655CE80B48E6C3A8B81C9D17413A06D \
   && curl https://mise.jdx.dev/install.sh.sig | gpg | sh
