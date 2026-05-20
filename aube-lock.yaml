@@ -5,13 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@sveltejs/kit': https://github.com/sveltejs/kit.git#version-3&path=packages/kit
+  '@sveltejs/kit': https://github.com/sveltejs/kit.git#f09f84e7d3159ff5ba8bfdf24e8ad32bd313bcb0&path=packages/kit
 
 time:
   polka@1.0.0-next.28: 2024-09-19T13:51:15.898Z
   pretty-bytes@7.1.0: 2025-09-21T07:36:56.073Z
-  regexparam@3.0.0: 2023-12-03T21:39:17.686Z
-  trouter@4.0.0: 2023-12-04T15:20:52.373Z
+  temporal-polyfill@0.3.2: 2026-03-10T22:15:30.818Z
 
 importers:
 
@@ -123,6 +122,9 @@ importers:
       remark-parse:
         specifier: ^11.0.0
         version: 11.0.0
+      rolldown:
+        specifier: 1.0.1
+        version: 1.0.1
       stylelint:
         specifier: ^17.11.1
         version: 17.11.1(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)(css-tree@3.2.1)(keyv@5.6.0)(postcss@8.5.14)(postcss-selector-parser@7.1.1)(typescript@6.0.3)
@@ -144,6 +146,9 @@ importers:
       svelte-check:
         specifier: ^4.4.8
         version: 4.4.8(svelte@5.55.7)(typescript@6.0.3)
+      temporal-polyfill:
+        specifier: ^0.3.2
+        version: 0.3.2
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -1519,6 +1524,12 @@ packages:
   table@6.9.0:
     resolution: {integrity: sha512-9kY+CygyYM6j02t5YFHbNz2FN5QmYGv9zAjVp4lCDjlCw7amdckXlEt/bjMhUIfj4ThGRE4gCUH5+yGnNuPo5A==}
     engines: {node: '>=10.0.0'}
+
+  temporal-polyfill@0.3.2:
+    resolution: {integrity: sha512-TzHthD/heRK947GNiSu3Y5gSPpeUDH34+LESnfsq8bqpFhsB79HFBX8+Z834IVX68P3EUyRPZK5bL/1fh437Eg==}
+
+  temporal-spec@0.3.1:
+    resolution: {integrity: sha512-B4TUhezh9knfSIMwt7RVggApDRJZo73uZdj8AacL2mZ8RP5KtLianh2MXxL06GN9ESYiIsiuoLQhgVfwe55Yhw==}
 
   tinyglobby@0.2.16:
     resolution: {integrity: sha512-pn99VhoACYR8nFHhxqix+uvsbXineAasWm5ojXoN8xEwK5Kd3/TrhNn1wByuD52UxWRLy8pu+kRMniEi6Eq9Zg==}
@@ -2980,6 +2991,12 @@ snapshots:
       slice-ansi: 4.0.0
       string-width: 4.2.3
       strip-ansi: 6.0.1
+
+  temporal-polyfill@0.3.2:
+    dependencies:
+      temporal-spec: 0.3.1
+
+  temporal-spec@0.3.1: {}
 
   tinyglobby@0.2.16(picomatch@4.0.4):
     dependencies:

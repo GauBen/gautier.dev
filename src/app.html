@@ -4,6 +4,14 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%sveltekit.assets%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      // https://caniuse.com/temporal
+      if (typeof Temporal === "undefined") {
+        const script = document.createElement("script");
+        script.src = "/build/temporal.js";
+        document.head.prepend(script);
+      }
+    </script>
     <link
       rel="alternate"
       type="application/atom+xml"
