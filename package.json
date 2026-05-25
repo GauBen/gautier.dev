@@ -14,7 +14,7 @@
     "preview": "vite preview"
   },
   "resolutions": {
-    "@sveltejs/kit": "https://github.com/sveltejs/kit.git#f09f84e7d3159ff5ba8bfdf24e8ad32bd313bcb0&path=packages/kit"
+    "@sveltejs/kit": "https://github.com/sveltejs/kit.git#a2d237b7ed6504fc2bccdd832627175bf84e915a&path=packages/kit"
   },
   "dependencies": {
     "beautiful-mermaid": "^1.1.3",
@@ -33,11 +33,11 @@
     "@sveltejs/kit": "^2.60.1",
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
     "@types/mdast": "^4.0.4",
-    "@types/node": "^25.8.0",
+    "@types/node": "^25.9.1",
     "@types/prismjs": "^1.26.6",
     "adapter-node-sea": "workspace:*",
     "globals": "^17.6.0",
-    "katex": "^0.16.46",
+    "katex": "^0.16.47",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-task-lists": "^2.1.1",
     "modern-normalize": "^3.0.1",
@@ -50,20 +50,20 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
-    "rolldown": "1.0.1",
-    "stylelint": "^17.11.1",
+    "rolldown": "^1.0.2",
+    "stylelint": "^17.12.0",
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-recess-order": "^7.7.0",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-order": "^8.1.1",
-    "svelte": "^5.55.7",
+    "svelte": "^5.55.9",
     "svelte-check": "^4.4.8",
     "temporal-polyfill": "^0.3.2",
     "typescript": "^6.0.3",
     "unified": "^11.0.5",
     "vfile": "^6.0.3",
     "vfile-matter": "^5.0.1",
-    "vite": "^8.0.13",
+    "vite": "^8.0.14",
     "vite-plugin-svelte-md": "^0.6.0"
   },
   "aube": {
