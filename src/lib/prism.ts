@@ -13,6 +13,15 @@ import "prismjs/components/prism-sql.js";
 import "prismjs/components/prism-typescript.js";
 import "prismjs/plugins/diff-highlight/prism-diff-highlight.js";
 
+Prism.languages.caddyfile = {
+  comment: /#.*/,
+  matcher: { pattern: /@[\w-]+/, alias: "variable" },
+  keyword: /\b(?:https_port|layer4|route|proxy|tls|sni)\b/,
+  address: { pattern: /(?:[\w.-]+)?:\d+/, alias: "string" },
+  number: /\b\d+\b/,
+  punctuation: /[{}]/,
+};
+
 Prism.manual = true;
 
 for (const lang of Object.keys(Prism.languages))

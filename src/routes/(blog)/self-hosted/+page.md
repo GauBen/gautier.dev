@@ -21,6 +21,31 @@ Here is my progress so far:
 
   Started as an experiment, but it works so I might as well keep it.
 
+  Using Stalwart behind Caddy (I need Caddy to dispatch requests to the right place) took me a full day to set up. Here is the resulting Caddyfile:
+
+  ```caddyfile
+  {
+    # Internal HTTPS loop
+    https_port 8443
+
+    layer4 {
+      :443 {
+        # Route raw :443 trafic to mail.gautier.dev
+        @mail tls sni mail.gautier.dev
+        route @mail {
+          proxy 192.168.1.104:443
+        }
+        # Let Caddy process the rest with the internal HTTPS loop
+        route {
+          proxy 127.0.0.1:8443
+        }
+      }
+    }
+  }
+  ```
+
+  Note that it requires [caddy-l4](https://github.com/mholt/caddy-l4) to be installed on the Caddy instance. This is required for Stalwart to issue its own TLS certificates using ACME ALPN challenges (HTTP not available for .dev domains).
+
 - [x] Bitwarden → Vaultwarden
 - [x] Google Photos → Immich
 - [ ] Google Keep → TBD
@@ -28,5 +53,6 @@ Here is my progress so far:
 - [ ] Notion → TBD
 - [ ] TOTP Authenticator → TBD
 - [ ] Google Calendar → Whenbanana
+- [ ] Huawei Health → [Gadgetbridge](https://gadgetbridge.org/)
 
 That's a long list, wish me luck! I'll keep this page updated with my progress.
