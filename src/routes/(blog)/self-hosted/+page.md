@@ -33,7 +33,9 @@ Here is my progress so far:
         # Route raw :443 trafic to mail.gautier.dev
         @mail tls sni mail.gautier.dev
         route @mail {
-          proxy 192.168.1.104:443
+          proxy 192.168.1.104:443 {
+            proxy_protocol v2
+          }
         }
         # Let Caddy process the rest with the internal HTTPS loop
         route {
@@ -45,6 +47,8 @@ Here is my progress so far:
   ```
 
   Note that it requires [caddy-l4](https://github.com/mholt/caddy-l4) to be installed on the Caddy instance. This is required for Stalwart to issue its own TLS certificates using ACME ALPN challenges (HTTP not available for .dev domains).
+
+  On the Stalwart instance, I had to set the Caddy IP as a trusted proxy so that Stalwart can get the real client IP for security purposes.
 
 - [x] Bitwarden → Vaultwarden
 - [x] Google Photos → Immich
