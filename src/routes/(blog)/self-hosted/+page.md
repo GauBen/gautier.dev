@@ -58,5 +58,6 @@ Here is my progress so far:
 - [ ] TOTP Authenticator → TBD
 - [ ] Google Calendar → Whenbanana
 - [ ] Huawei Health → [Gadgetbridge](https://gadgetbridge.org/)
+- [ ] Cloudflare Analytics → [Umami](https://umami.is/)
 
 That's a long list, wish me luck! I'll keep this page updated with my progress.
