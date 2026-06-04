@@ -2,6 +2,7 @@ import { tasklist } from "@mdit/plugin-tasklist";
 import { tex } from "@mdit/plugin-tex";
 import { enhancedImages } from "@sveltejs/enhanced-img";
 import { sveltekit } from "@sveltejs/kit/vite";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import adapter from "adapter-node-sea";
 import katex from "katex";
 import mdAnchor from "markdown-it-anchor";
@@ -47,7 +48,24 @@ export default defineConfig({
     }),
     enhancedImages(),
     sveltekit({
+      extensions: [".svelte", ".md"],
+
+      preprocess: [vitePreprocess()],
+
+      compilerOptions: {
+        experimental: {
+          async: true,
+        },
+      },
+
       adapter: adapter({ precompress: false }),
+      alias: {
+        $assets: "./src/assets",
+        $search: "./src/search",
+      },
+      experimental: {
+        remoteFunctions: true,
+      },
     }),
   ],
 });

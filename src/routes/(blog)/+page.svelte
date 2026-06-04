@@ -90,7 +90,7 @@
       </h2>
       {#if Array.isArray(description)}
         {#each description as line (line)}
-          {@const rendered = escape(line)
+          {const rendered = escape(line)
             .replaceAll(/\[hl\](.+?)\[\/hl\]/g, "<mark>$1</mark>")
             .replaceAll("\n", "<br />")}
           <p style="white-space: pre-wrap">{@html rendered}</p>

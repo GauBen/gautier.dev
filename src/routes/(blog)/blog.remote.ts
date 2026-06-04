@@ -1,5 +1,5 @@
+import { GITHUB_TOKEN } from "$app/env/private";
 import { prerender, query } from "$app/server";
-import { env } from "$env/dynamic/private";
 import { articles } from "$lib/articles.js";
 
 process.env.IS_ADAPTER_BUILD || import("$lib/prism.js");
@@ -17,7 +17,7 @@ const fetchInteractions = async () => {
   const response = await fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: {
-      "Authorization": `Token ${env.GITHUB_TOKEN}`,
+      "Authorization": `Token ${GITHUB_TOKEN}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -95,7 +95,7 @@ export const getFreshInteractions = query(async () => {
 });
 
 export const getPrerenderedInteractions = prerender(
-  env.GITHUB_TOKEN
+  GITHUB_TOKEN
     ? fetchInteractions
     : (console.warn("GITHUB_TOKEN not set, fetching interactions skipped"),
       () => new Map<string, { comments: number; reactions: number }>()),
