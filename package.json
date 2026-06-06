@@ -13,9 +13,6 @@
     "postinstall": "svelte-kit sync",
     "preview": "vite preview"
   },
-  "resolutions": {
-    "@sveltejs/kit": "https://github.com/sveltejs/kit.git#1bea4cef289ae41316c82c5a45056db88e7b2d47&path=packages/kit"
-  },
   "dependencies": {
     "beautiful-mermaid": "^1.1.3",
     "devalue": "^5.8.1",
@@ -29,11 +26,11 @@
     "@iconify-svelte/ph": "^1.0.3",
     "@mdit/plugin-tasklist": "^0.23.2",
     "@mdit/plugin-tex": "^0.24.2",
-    "@sveltejs/enhanced-img": "^0.10.4",
-    "@sveltejs/kit": "^2.62.0",
+    "@sveltejs/enhanced-img": "^1.0.0-next.0",
+    "@sveltejs/kit": "^3.0.0-next.1",
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
     "@types/mdast": "^4.0.4",
-    "@types/node": "^25.9.1",
+    "@types/node": "^25.9.2",
     "@types/prismjs": "^1.26.6",
     "adapter-node-sea": "workspace:*",
     "globals": "^17.6.0",
@@ -51,7 +48,7 @@
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
     "rolldown": "^1.1.0",
-    "stylelint": "^17.12.0",
+    "stylelint": "^17.13.0",
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-recess-order": "^7.7.0",
     "stylelint-config-standard": "^40.0.0",
