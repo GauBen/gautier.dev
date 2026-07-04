@@ -2,9 +2,6 @@ import { dev } from "$app/env";
 import { articles } from "$lib/articles.js";
 
 export const load = async () => ({
-  title: "Hey!",
-  description:
-    "Fullstack web engineer, security specialist & design enthusiast.",
   articles: await Promise.all(
     [...articles.entries()].map(async ([slug, { date, load }]) =>
       load().then(({ frontmatter, banner }) => ({

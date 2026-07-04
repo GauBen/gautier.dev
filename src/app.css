@@ -1,7 +1,6 @@
 @import url("modern-normalize/modern-normalize.css");
 @import url("./assets/prism.css");
-@import url("./assets/techna-sans.css");
-@import url("./assets/0xproto.css");
+@import url("./assets/fonts.css");
 
 :root {
   --prism-color: #1c1b1d;

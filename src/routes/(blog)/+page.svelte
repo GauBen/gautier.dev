@@ -2,6 +2,7 @@
   import { resolve } from "$app/paths";
   import { formatDate } from "$lib/articles.js";
   import Card from "$lib/Card.svelte";
+  import Head from "$lib/Head.svelte";
   import Header from "$lib/Header.svelte";
   import Chats from "@iconify-svelte/ph/chats-circle-duotone";
   import Heart from "@iconify-svelte/ph/heart-duotone";
@@ -48,6 +49,11 @@
 
   const prerenderedInterations = $derived(await getPrerenderedInteractions());
 </script>
+
+<Head
+  title="Hey!"
+  description="Fullstack web engineer, security specialist & design enthusiast."
+/>
 
 <Header />
 

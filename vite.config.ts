@@ -1,4 +1,3 @@
-import { tasklist } from "@mdit/plugin-tasklist";
 import { tex } from "@mdit/plugin-tex";
 import { enhancedImages } from "@sveltejs/enhanced-img";
 import { sveltekit } from "@sveltejs/kit/vite";
@@ -35,8 +34,35 @@ export default defineConfig({
               space: false,
             }),
           })
-          // @ts-expect-error markdown-it/markdown-exit type incompatibility
-          .use(tasklist, { label: false })
+          .use((md) => {
+            md.core.ruler.after("inline", "task-list", ({ Token, tokens }) => {
+              for (let i = 2; i < tokens.length; i++) {
+                // Ensure we're in a list item
+                if (
+                  tokens[i - 2].type !== "list_item_open" ||
+                  tokens[i - 1].type !== "paragraph_open" ||
+                  tokens[i].type !== "inline"
+                )
+                  continue;
+
+                // List item starts with raw text
+                const { children } = tokens[i];
+                if (!children?.length || children[0].type !== "text") continue;
+
+                const { content } = children[0];
+                if (!/^\[[ xX]\] /.test(content)) continue;
+                children[0].content = content.slice(3);
+
+                const open = new Token("html_inline", "", 0);
+                open.content = `<label><input type="checkbox" disabled${content.startsWith("[ ]") ? "" : " checked"}>`;
+                children.unshift(open);
+
+                const close = new Token("html_inline", "", 0);
+                close.content = "</label>";
+                children.push(close);
+              }
+            });
+          })
           .use((md) => {
             const originalFence = md.renderer.rules.fence!;
             md.renderer.rules.fence = async (tokens, idx, ...options) => {
