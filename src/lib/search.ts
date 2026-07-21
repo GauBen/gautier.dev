@@ -1,27 +1,29 @@
 import { articles, type Article } from "#lib/articles.js";
-import extractsRaw from "#search/extracts.json?raw";
-import keywordsRaw from "#search/keywords.json?raw";
-import metadataRaw from "#search/metadata.json?raw";
-import { parse } from "devalue";
+import extractsRaw from "#search/extracts.json";
+import keywordsRaw from "#search/keywords.json";
+import metadataRaw from "#search/metadata.json";
+import { unflatten } from "devalue";
 
 /** Number of characters on each side of an highlight. */
 const extractMargin = 60;
 
 /** Indexed keywords. */
 export const weightedKeywords = new Map(
-  Object.entries<unknown[]>(parse(keywordsRaw)).map(([keyword, entries]) => [
-    keyword,
-    Array.from({ length: entries.length / 3 }, (_, i) => ({
-      slug: entries[i * 3] as string,
-      score: entries[i * 3 + 1] as number,
-      nodes: entries[i * 3 + 2] as number[],
-    })),
-  ]),
+  Object.entries<unknown[]>(unflatten(keywordsRaw)).map(
+    ([keyword, entries]) => [
+      keyword,
+      Array.from({ length: entries.length / 3 }, (_, i) => ({
+        slug: entries[i * 3] as string,
+        score: entries[i * 3 + 1] as number,
+        nodes: entries[i * 3 + 2] as number[],
+      })),
+    ],
+  ),
 );
 
 /** Maps articles to relevant text nodes. */
 export const extracts = new Map(
-  Object.entries<unknown[]>(parse(extractsRaw)).map(([slug, entries]) => [
+  Object.entries<unknown[]>(unflatten(extractsRaw)).map(([slug, entries]) => [
     slug,
     Array.from({ length: entries.length / 2 }, (_, i) => ({
       original: entries[i * 2] as string,
@@ -30,10 +32,7 @@ export const extracts = new Map(
   ]),
 );
 
-export const metadata = JSON.parse(metadataRaw) as Record<
-  string,
-  Article["frontmatter"]
->;
+export const metadata = metadataRaw as Record<string, Article["frontmatter"]>;
 
 /** Lowercases and removes non alphanumeric characters from input. */
 const normalize = (str: string) =>

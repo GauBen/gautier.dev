@@ -4,7 +4,7 @@
   import { formatDate } from "#lib/articles";
   import Head from "#lib/Head.svelte";
   import Header from "#lib/Header.svelte";
-  import { getSnippet } from "../../blog.remote.js";
+  import { getSnippet } from "../../remote.js";
 
   const { data } = $props();
   const { slug, title, date, snippet, banner, Article } = $derived(data);

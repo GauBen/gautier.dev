@@ -6,13 +6,13 @@
   import Header from "#lib/Header.svelte";
   import Chats from "@iconify-svelte/ph/chats-circle-duotone";
   import Heart from "@iconify-svelte/ph/heart-duotone";
-  import external from "../../articles/external.json" with { type: "json" };
+  import external from "./external.json";
   import SearchBar from "./SearchBar.svelte";
   import {
     getFreshInteractions,
     getPrerenderedInteractions,
     getSnippet,
-  } from "./blog.remote.js";
+  } from "./remote.js";
   import { page } from "$app/state";
 
   const escape = (s: string) =>
@@ -47,7 +47,7 @@
     });
   });
 
-  const prerenderedInterations = $derived(await getPrerenderedInteractions());
+  const prerenderedInteractions = $derived(await getPrerenderedInteractions());
 </script>
 
 <Head
@@ -128,7 +128,7 @@
         <svelte:boundary>
           {@render footer((await getFreshInteractions())?.get(title))}
           {#snippet pending()}
-            {@render footer(prerenderedInterations.get(title))}
+            {@render footer(prerenderedInteractions.get(title))}
           {/snippet}
         </svelte:boundary>
       {:else}
