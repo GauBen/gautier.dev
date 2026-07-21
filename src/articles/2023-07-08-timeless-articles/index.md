@@ -4,7 +4,7 @@ description: Personal collection of articles that I find myself referring to ove
 ---
 
 <script>
-  import {Tldr} from '$lib/markdown';
+  import {Tldr} from '#lib/markdown';
   import Comments from "@iconify-svelte/ph/chat-dots-duotone";
 </script>
 

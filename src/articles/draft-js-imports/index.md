@@ -11,7 +11,7 @@ snippet:
 ---
 
 <script>
-  import {Tldr, Callout} from '$lib/markdown';
+  import {Tldr, Callout} from '#lib/markdown';
 </script>
 
 <Tldr>

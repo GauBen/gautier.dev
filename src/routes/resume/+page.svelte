@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Head from "$lib/Head.svelte";
+  import Head from "#lib/Head.svelte";
   import Briefcase from "@iconify-svelte/ph/briefcase-duotone";
   import GraduationCap from "@iconify-svelte/ph/graduation-cap-duotone";
   import Medal from "@iconify-svelte/ph/medal-duotone";

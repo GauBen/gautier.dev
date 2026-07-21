@@ -1,9 +1,9 @@
 <script lang="ts">
   import "../app.css";
 
-  import technaUrl from "$assets/techna-sans.woff2?url";
-  import oxprotoRegularUrl from "$assets/0xproto-regular.woff2?url";
-  import oxprotoItalicUrl from "$assets/0xproto-italic.woff2?url";
+  import technaUrl from "#assets/techna-sans.woff2?url";
+  import oxprotoRegularUrl from "#assets/0xproto-regular.woff2?url";
+  import oxprotoItalicUrl from "#assets/0xproto-italic.woff2?url";
 
   const { children } = $props();
 </script>

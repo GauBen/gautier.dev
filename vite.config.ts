@@ -85,10 +85,7 @@ export default defineConfig({
       },
 
       adapter: adapter({ precompress: false }),
-      alias: {
-        $assets: "./src/assets",
-        $search: "./src/search",
-      },
+
       experimental: {
         remoteFunctions: true,
       },

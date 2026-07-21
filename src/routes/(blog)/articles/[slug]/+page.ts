@@ -1,4 +1,4 @@
-import { articles } from "$lib/articles";
+import { articles } from "#lib/articles";
 import { error } from "@sveltejs/kit";
 
 export const entries = () => [...articles.keys()].map((slug) => ({ slug }));

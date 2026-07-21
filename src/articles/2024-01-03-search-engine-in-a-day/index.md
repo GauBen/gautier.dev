@@ -17,7 +17,7 @@ snippet:
   import Explorer from './Explorer.svelte'
   import Measure from './Measure.svelte'
 
-  const search = import('$lib/search')
+  const search = import('#lib/search')
 </script>
 
 > How is [Marginalia](https://search.marginalia.nu/), a search engine built by a single person, so good?

@@ -1,5 +1,5 @@
 <script>
-  import Head from "$lib/Head.svelte";
+  import Head from "#lib/Head.svelte";
 </script>
 
 <Head title="Self-Hosted" description="List of my self-hosted applications and services." />

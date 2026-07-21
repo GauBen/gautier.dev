@@ -10,7 +10,7 @@ snippet:
 ---
 
 <script>
-  import {Example, Tldr} from '$lib/markdown';
+  import {Example, Tldr} from '#lib/markdown';
 </script>
 
 <Tldr>

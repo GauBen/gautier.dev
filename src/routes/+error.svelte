@@ -1,7 +1,7 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
-  import Header from "$lib/Header.svelte";
+  import Header from "#lib/Header.svelte";
   import type { Attachment } from "svelte/attachments";
 
   const velocity = 200;

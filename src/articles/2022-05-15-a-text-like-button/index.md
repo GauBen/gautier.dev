@@ -14,7 +14,7 @@ snippet:
   import Breadcrumbs from './Breadcrumbs.svelte';
   import Dropdown from './Dropdown.svelte';
   import Item from './Item.svelte';
-  import {Example, Table, Tldr} from '$lib/markdown';
+  import {Example, Table, Tldr} from '#lib/markdown';
 </script>
 
 <Tldr>

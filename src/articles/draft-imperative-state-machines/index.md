@@ -9,7 +9,7 @@ snippet:
 ---
 
 <script>
-  import {Example} from '$lib/markdown'
+  import {Example} from '#lib/markdown'
   import TypeWriter from './TypeWriter.svelte'
 </script>
 

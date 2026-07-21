@@ -1,6 +1,6 @@
 <script>
-  import "$assets/markdown-content.css";
-  import Head from "$lib/Head.svelte";
+  import "#assets/markdown-content.css";
+  import Head from "#lib/Head.svelte";
 </script>
 
 <Head title="About Me" description="Who is Gautier Ben Aïm?" />

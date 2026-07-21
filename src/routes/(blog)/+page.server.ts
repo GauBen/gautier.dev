@@ -1,5 +1,5 @@
 import { dev } from "$app/env";
-import { articles } from "$lib/articles.js";
+import { articles } from "#lib/articles.js";
 
 export const load = async () => ({
   articles: await Promise.all(

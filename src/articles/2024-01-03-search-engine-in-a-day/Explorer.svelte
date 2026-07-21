@@ -1,8 +1,8 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import { Table } from "$lib/markdown";
+  import { Table } from "#lib/markdown";
 
-  const { weightedKeywords, metadata }: typeof import("$lib/search.js") =
+  const { weightedKeywords, metadata }: typeof import("#lib/search.js") =
     $props();
 
   const keywords = $derived(

@@ -13,7 +13,7 @@ snippet:
 ---
 
 <script>
-  import { Table, Tldr, Callout } from '$lib/markdown';
+  import { Table, Tldr, Callout } from '#lib/markdown';
 </script>
 
 <Callout icon="pencil">

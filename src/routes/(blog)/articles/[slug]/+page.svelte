@@ -1,9 +1,9 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import "$assets/markdown-content.css";
-  import { formatDate } from "$lib/articles";
-  import Head from "$lib/Head.svelte";
-  import Header from "$lib/Header.svelte";
+  import "#assets/markdown-content.css";
+  import { formatDate } from "#lib/articles";
+  import Head from "#lib/Head.svelte";
+  import Header from "#lib/Header.svelte";
   import { getSnippet } from "../../blog.remote.js";
 
   const { data } = $props();

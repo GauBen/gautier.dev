@@ -3,7 +3,7 @@ title: Meet Piña, a new programming language
 ---
 
 <script>
-  import {Tldr} from '$lib/markdown'
+  import {Tldr} from '#lib/markdown'
 </script>
 
 <Tldr>

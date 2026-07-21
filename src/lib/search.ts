@@ -1,7 +1,7 @@
-import { articles, type Article } from "$lib/articles.js";
-import extractsRaw from "$search/extracts.json?raw";
-import keywordsRaw from "$search/keywords.json?raw";
-import metadataRaw from "$search/metadata.json?raw";
+import { articles, type Article } from "#lib/articles.js";
+import extractsRaw from "#search/extracts.json?raw";
+import keywordsRaw from "#search/keywords.json?raw";
+import metadataRaw from "#search/metadata.json?raw";
 import { parse } from "devalue";
 
 /** Number of characters on each side of an highlight. */

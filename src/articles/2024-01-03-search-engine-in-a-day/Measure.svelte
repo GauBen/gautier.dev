@@ -1,6 +1,6 @@
 <script lang="ts">
   const measure = async () => {
-    const matches = String(() => import("$lib/search.js")).match(
+    const matches = String(() => import("#lib/search.js")).match(
       /import\((["'`]).+?\1\)/,
     );
     if (!matches) throw new Error("No import found");

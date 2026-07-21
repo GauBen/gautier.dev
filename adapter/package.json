@@ -18,19 +18,19 @@
   },
   "dependencies": {
     "@polka/url": "^1.0.0-next.29",
-    "devalue": "^5.8.1",
+    "devalue": "^5.8.2",
     "mrmime": "^2.0.1",
     "polka": "^1.0.0-next.28",
-    "pretty-bytes": "^7.1.0",
-    "rolldown": "^1.1.4"
+    "pretty-bytes": "^7.1.1",
+    "rolldown": "^1.2.0"
   },
   "devDependencies": {
-    "@sveltejs/kit": "^3.0.0-next.6",
-    "@sveltejs/vite-plugin-svelte": "^7.1.2",
-    "@types/node": "^25.9.4",
-    "svelte": "^5.56.4",
+    "@sveltejs/kit": "^3.0.0-next.11",
+    "@sveltejs/vite-plugin-svelte": "^7.2.0",
+    "@types/node": "^25.9.5",
+    "svelte": "^5.56.7",
     "typescript": "^6.0.3",
-    "vite": "^8.1.3"
+    "vite": "^8.1.5"
   },
   "peerDependencies": {
     "@sveltejs/kit": "*"

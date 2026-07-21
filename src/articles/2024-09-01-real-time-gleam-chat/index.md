@@ -12,7 +12,7 @@ snippet:
 ---
 
 <script>
-  import {Tldr} from '$lib/markdown'
+  import {Tldr} from '#lib/markdown'
 </script>
 
 <Tldr>

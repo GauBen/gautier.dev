@@ -12,7 +12,7 @@ snippet:
 ---
 
 <script>
-  import {Tldr} from '$lib/markdown';
+  import {Tldr} from '#lib/markdown';
   import Tracker from './Tracker.svelte';
 
   let src = 'https://accounts.google.com/ServiceLogin?passive=true&continue=https://google.com/favicon.ico'

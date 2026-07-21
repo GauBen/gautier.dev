@@ -3,7 +3,7 @@
   import MagnifyingGlass from "@iconify-svelte/ph/magnifying-glass-bold";
   import X from "@iconify-svelte/ph/x-bold";
   import { slide } from "svelte/transition";
-  import suggestions from "$search/suggestions.json";
+  import suggestions from "#search/suggestions.json";
 
   const { q, autocomplete = [] }: { q?: string; autocomplete?: string[] } =
     $props();

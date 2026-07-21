@@ -15,7 +15,7 @@ snippet:
 ---
 
 <script>
-  import {Example, Table} from '$lib/markdown'
+  import {Example, Table} from '#lib/markdown'
 </script>
 
 <style>
