@@ -69,7 +69,7 @@
   <Header />
   <div style="flex: 4"></div>
   <p style="font-size: 2em">{page.error?.message}</p>
-  <p><a href={resolve("/")}>Go back to homepage</a></p>
+  <p><a href={resolve("")}>Go back to homepage</a></p>
   <div style="flex: 5"></div>
 </article>
 

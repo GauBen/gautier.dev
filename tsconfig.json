@@ -1,12 +1,4 @@
 {
-  "extends": "./.svelte-kit/tsconfig.json",
-  "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": true
-  }
+  "extends": "$app/tsconfig",
+  "include": ["src"]
 }

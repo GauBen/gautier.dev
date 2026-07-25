@@ -5,7 +5,7 @@
 <div class="wrapper">
   <header>
     <h1>
-      <a href={resolve("/")}>
+      <a href={resolve("")}>
         <img src="/favicon.svg" alt="🧔🏻‍♂️" width="72" height="72" />
         gautier.dev
       </a>

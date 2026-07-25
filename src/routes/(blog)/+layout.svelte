@@ -23,7 +23,7 @@
     <a href="https://github.com/GauBen/" rel="author">
       <Github class="icon" aria-label="My GitHub Profile" />
     </a>
-    <a href={resolve("/feed")} rel="feed">
+    <a href={resolve("feed")} rel="feed">
       <Rss class="icon" aria-label="Atom feed" />
     </a>
   </p>

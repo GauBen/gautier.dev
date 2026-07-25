@@ -60,7 +60,7 @@
 <main>
   <h1>Hey!</h1>
   <p>
-    My name is Gautier, I'm a <a href={resolve("/resume")}>developer advocate</a
+    My name is Gautier, I'm a <a href={resolve("resume")}>developer advocate</a
     >, full-stack engineer, cybersecurity specialist, design enthusiast and
     hackathon organizer. I work full-time at
     <a href="https://www.jahia.com/">Jahia</a>
@@ -74,9 +74,9 @@
 
   <nav>
     On this site:<code>
-      {" "}· <a href={resolve("/about")}>/about</a>
-      · <a href={resolve("/resume")}>/resume</a>
-      · <a href={resolve("/self-hosted")}>/self-hosted</a>
+      {" "}· <a href={resolve("about")}>/about</a>
+      · <a href={resolve("resume")}>/resume</a>
+      · <a href={resolve("self-hosted")}>/self-hosted</a>
     </code>
   </nav>
 
@@ -92,7 +92,7 @@
         {/if}
       {/snippet}
       <h2>
-        <a href={resolve(`/articles/${slug}`)}>{title}</a>
+        <a href={resolve(`articles/${slug}`)}>{title}</a>
       </h2>
       {#if Array.isArray(description)}
         {#each description as line (line)}

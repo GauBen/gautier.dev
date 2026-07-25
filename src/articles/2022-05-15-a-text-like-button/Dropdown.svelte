@@ -39,9 +39,9 @@
       event.stopPropagation();
     }}
   >
-    <a href={resolve("/")} onclick={preventDefault}>Gautier</a>
-    <a href={resolve("/")} onclick={preventDefault}>Antoine</a>
-    <a href={resolve("/")} onclick={preventDefault}>Simon</a>
+    <a href={resolve("")} onclick={preventDefault}>Gautier</a>
+    <a href={resolve("")} onclick={preventDefault}>Antoine</a>
+    <a href={resolve("")} onclick={preventDefault}>Simon</a>
   </div>
 </div>
 

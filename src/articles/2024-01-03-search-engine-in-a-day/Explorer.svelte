@@ -83,7 +83,7 @@
         {#each articles as { slug, score } (slug)}
           <tr>
             <td>
-              <a href={resolve(`/articles/${slug}`)}>
+              <a href={resolve(`articles/${slug}`)}>
                 {metadata[slug].title}
               </a>
             </td>

@@ -80,7 +80,7 @@
     </div>
   </section>
   <footer>
-    <p><a href={resolve("/")}>Back to the article list</a></p>
+    <p><a href={resolve("")}>Back to the article list</a></p>
   </footer>
 </article>
 
