@@ -1,8 +1,7 @@
-<script>
-  import Head from "#lib/Head.svelte";
-</script>
-
-<Head title="Self-Hosted" description="List of my self-hosted applications and services." />
+---
+title: Self-Hosted
+description: List of my self-hosted applications and services.
+---
 
 <h1>Self-Hosted</h1>
 

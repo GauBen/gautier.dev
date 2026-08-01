@@ -1,8 +1,6 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import "#assets/markdown-content.css";
   import { formatDate } from "#lib/articles";
-  import Head from "#lib/Head.svelte";
   import Header from "#lib/Header.svelte";
   import { getSnippet } from "../../remote.js";
 
@@ -13,8 +11,6 @@
     import("giscus");
   });
 </script>
-
-<Head {title} description={data.description as string} />
 
 <Header>
   {#if banner}

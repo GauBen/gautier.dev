@@ -1,9 +1,7 @@
-<script>
-  import "#assets/markdown-content.css";
-  import Head from "#lib/Head.svelte";
-</script>
-
-<Head title="About Me" description="Who is Gautier Ben Aïm?" />
+---
+title: About Me
+description: Who is Gautier Ben Aïm?
+---
 
 <h1>About Me</h1>
 

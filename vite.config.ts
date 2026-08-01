@@ -13,7 +13,7 @@ export default defineConfig({
   plugins: [
     svelteMd({
       headEnabled: false,
-      wrapperClasses: "markdown-content",
+      wrapperComponent: "#lib/markdown/Wrapper.svelte",
       markdownItOptions: { highlight },
       use: (md) =>
         md

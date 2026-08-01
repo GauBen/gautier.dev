@@ -46,17 +46,15 @@
 
   const toggle = async () => {
     await goto(q === undefined ? "?q=" : ".", {
-      keepFocus: true,
-      noScroll: true,
+      reset: false,
     });
     input?.focus();
     index = undefined;
   };
   const set = async (value: string) => {
     await goto(`?q=${encodeURIComponent(value)}`, {
-      keepFocus: true,
-      noScroll: true,
-      replaceState: true,
+      reset: false,
+      replace: true,
     });
     input?.focus();
     index = undefined;
@@ -97,15 +95,14 @@
     >
       <input
         name="q"
-        value={q}
         id="search"
         {onkeydown}
         type="search"
         maxlength="100"
         bind:this={input}
         autocomplete="off"
+        bind:value={() => q, set}
         transition:slide={{ duration: 150 }}
-        oninput={({ currentTarget }) => set(currentTarget.value)}
       />
       {#if autocomplete.length > 0 && focus}
         <ul class="autocomplete" transition:slide={{ duration: 150 }}>
