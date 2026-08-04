@@ -63,7 +63,7 @@ export const highlight = (code: string, lang: string) =>
   lang === "mermaid"
     ? renderMermaid(code)
     : lang
-      ? `<pre class="language-${lang}"><code class='language-${lang}'>${Prism.highlight(
+      ? `<pre class='language-${lang}'><code class='language-${lang}'>${Prism.highlight(
           code,
           Prism.languages[lang],
           lang,

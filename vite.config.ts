@@ -14,7 +14,6 @@ export default defineConfig({
     svelteMd({
       headEnabled: false,
       wrapperComponent: "#lib/markdown/Wrapper.svelte",
-      markdownItOptions: { highlight },
       use: (md) =>
         md
           // @ts-expect-error markdown-it/markdown-exit type incompatibility
@@ -35,6 +34,9 @@ export default defineConfig({
             }),
           })
           .use((md) => {
+            md.renderer.rules.fence = (tokens, idx) =>
+              `{@html ${JSON.stringify(highlight(tokens[idx].content, tokens[idx].info.trim()))}}`;
+
             md.core.ruler.after("inline", "task-list", ({ Token, tokens }) => {
               for (let i = 2; i < tokens.length; i++) {
                 // Ensure we're in a list item
@@ -62,14 +64,6 @@ export default defineConfig({
                 children.push(close);
               }
             });
-          })
-          .use((md) => {
-            const originalFence = md.renderer.rules.fence!;
-            md.renderer.rules.fence = async (tokens, idx, ...options) => {
-              if (tokens[idx].info.trim() === "mermaid")
-                return highlight(tokens[idx].content, "mermaid");
-              return originalFence(tokens, idx, ...options);
-            };
           }),
     }),
     enhancedImages(),
