@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { resolve } from "$app/paths";
-  import { formatDate } from "#lib/articles";
   import Header from "#lib/Header.svelte";
+  import { resolve } from "$app/paths";
+  import { formatDate } from "../../date.js";
   import { getSnippet } from "../../remote.js";
 
   const { data } = $props();

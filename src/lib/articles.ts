@@ -1,6 +1,6 @@
 import type { Component } from "svelte";
 
-export type Article = {
+export interface Article {
   frontmatter: {
     title: string;
     description?: string | string[];
@@ -8,7 +8,7 @@ export type Article = {
   };
   banner?: string;
   default: Component;
-};
+}
 
 export const articles = new Map(
   Object.entries(import.meta.glob<Article>("../articles/*/index.md")).map(
@@ -25,6 +25,3 @@ export const articles = new Map(
     },
   ),
 );
-
-export const formatDate = (date: Temporal.PlainDate) =>
-  Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(date);

@@ -1,19 +1,19 @@
 <script lang="ts">
-  import { resolve } from "$app/paths";
-  import { formatDate } from "#lib/articles.js";
   import Card from "#lib/Card.svelte";
   import Head from "#lib/Head.svelte";
   import Header from "#lib/Header.svelte";
+  import { resolve } from "$app/paths";
+  import { page } from "$app/state";
   import Chats from "@iconify-svelte/ph/chats-circle-duotone";
   import Heart from "@iconify-svelte/ph/heart-duotone";
+  import { formatDate } from "./date.js";
   import external from "./external.json";
-  import SearchBar from "./SearchBar.svelte";
   import {
     getFreshInteractions,
     getPrerenderedInteractions,
     getSnippet,
   } from "./remote.js";
-  import { page } from "$app/state";
+  import SearchBar from "./SearchBar.svelte";
 
   const escape = (s: string) =>
     s.replaceAll("&", "&amp;").replaceAll("<", "&lt;");
