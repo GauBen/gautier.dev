@@ -9,7 +9,7 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "outDir": "build",
-    "rootDir": "src",
+    "rootDir": ".",
     "skipLibCheck": true,
     "strict": true
   }

@@ -23,7 +23,6 @@ export default defineConfig({
               return displayMode ? `<p class="math">${html}</p>` : html;
             },
           })
-          // @ts-expect-error markdown-it/markdown-exit type incompatibility
           .use(mdAnchor, {
             tabIndex: false,
             permalink: mdAnchor.permalink.linkInsideHeader({

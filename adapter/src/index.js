@@ -1,10 +1,16 @@
 import { uneval } from "devalue";
 import { execFileSync } from "node:child_process";
-import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import {
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
 import { basename, join } from "node:path";
 import prettyBytes from "pretty-bytes";
 import * as rolldown from "rolldown";
-import { replacePlugin } from "rolldown/plugins";
 
 /** Adapted from @rollup/plugin-virtual under MIT License */
 const PREFIX = `\0virtual:`;
@@ -43,6 +49,7 @@ function totalist(root, subdir = "") {
  * @param {Object} [opt={}] Default is `{}`
  * @param {boolean} [opt.precompress=true] Default is `true`
  * @param {string} [opt.envPrefix=""] Default is `""`
+ * @param {string} [opt.out="build"] Default is `"build"`
  * @param {boolean | import("rolldown").OutputOptions["minify"]} [opt.minify="dce-only"]
  *   See [Rolldown
  *   documentation](https://rolldown.rs/reference/OutputOptions.minify#minify).
@@ -53,6 +60,7 @@ export default function adapter({
   precompress = true,
   envPrefix = "",
   minify = "dce-only",
+  out = "build",
 } = {}) {
   return {
     name: "adapter-node-sea",
@@ -64,14 +72,12 @@ export default function adapter({
 
     async adapt(builder) {
       const cwd = builder.getBuildDirectory("sea");
-      builder.rimraf(cwd);
-      builder.mkdirp(cwd);
+      rmSync(cwd, { force: true, recursive: true });
+      mkdirSync(cwd, { recursive: true });
 
-      builder.writeClient(
-        `${cwd}/assets/client${builder.config.kit.paths.base}`,
-      );
+      builder.writeClient(`${cwd}/assets/client${builder.config.paths.base}`);
       builder.writePrerendered(
-        `${cwd}/assets/prerendered${builder.config.kit.paths.base}`,
+        `${cwd}/assets/prerendered${builder.config.paths.base}`,
       );
 
       if (precompress) await builder.compress(`${cwd}/assets`);
@@ -87,7 +93,6 @@ export default function adapter({
           minify,
         },
         plugins: [
-          replacePlugin({ "process.env.IS_ADAPTER_BUILD": "true" }),
           virtual({
             "virtual:manifest": [
               `export const manifest = ${builder.generateManifest({ relativePath: "./server" })};`,
@@ -179,9 +184,8 @@ module.exports = myaddon.exports;`;
 
       console.info(`node: ${prettyBytes(statSync(`${cwd}/${exe}`).size)}`);
 
-      const out = "build";
-      builder.rimraf(out);
-      builder.mkdirp(out);
+      rmSync(out, { force: true, recursive: true });
+      mkdirSync(out, { recursive: true });
 
       builder.copy(`${cwd}/${exe}`, `${out}/${exe}`);
     },

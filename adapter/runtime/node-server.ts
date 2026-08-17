@@ -177,7 +177,7 @@ async function createNodeServer() {
       let request: Request;
 
       try {
-        request = await getRequest({
+        request = getRequest({
           base: origin || get_origin(req.headers),
           request: req,
           bodySizeLimit: body_size_limit,
@@ -188,7 +188,7 @@ async function createNodeServer() {
         return;
       }
 
-      await setResponse(
+      setResponse(
         res,
         await app.respond(request, {
           platform: { req },
