@@ -1,11 +1,21 @@
 <script lang="ts">
+  import { articles } from "#lib/articles.js";
   import Header from "#lib/Header.svelte";
   import { resolve } from "$app/paths";
+  import { error } from "@sveltejs/kit";
   import { formatDate } from "../../date.js";
   import { getSnippet } from "../../remote.js";
 
-  const { data } = $props();
-  const { slug, title, date, snippet, banner, Article } = $derived(data);
+  const { params } = $props();
+
+  const article = $derived.by(() => {
+    const article = articles.get(params.slug);
+    if (!article) error(404, "Article not found");
+    return article;
+  });
+  const { load, date } = $derived(article);
+  const { frontmatter, banner, default: Article } = $derived(await load());
+  const { title, snippet } = $derived(frontmatter);
 
   $effect(() => {
     import("giscus");
@@ -20,7 +30,7 @@
       style="width: 100%; max-height: 10rem; object-fit: cover"
     />
   {:else if snippet}
-    <div class="snippet">{@html await getSnippet(slug)}</div>
+    <div class="snippet">{@html await getSnippet(params.slug)}</div>
   {/if}
 </Header>
 
