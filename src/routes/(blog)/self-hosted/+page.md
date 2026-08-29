@@ -57,8 +57,8 @@ Here is my progress so far:
 
 - [x] Bitwarden → Vaultwarden
 - [x] Google Photos → Immich
-- [ ] Google Keep → TBD
-- [ ] PDS ATProto (Bluesky)
+- [x] Google Keep → jtx Board
+- [x] PDS ATProto (Bluesky)
 - [ ] Notion → TBD
 - [ ] TOTP Authenticator → TBD
 - [ ] Google Calendar → Whenbanana
