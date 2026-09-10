@@ -70,4 +70,4 @@ export const highlight = (code: string, lang: string) =>
         )
           // Shrink JSON serialization with single quotes
           .replaceAll(/class="([^"]*)"/g, "class='$1'")}</code></pre>`
-      : `<pre>${code}</pre>`;
+      : `<pre>${code.replaceAll(/</g, "&lt;")}</pre>`;
