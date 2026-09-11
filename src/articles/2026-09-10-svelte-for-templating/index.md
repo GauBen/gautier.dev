@@ -174,7 +174,12 @@ console.log(body.replaceAll(/<!--.+?-->/g, ""));
 </ul>
 ```
 
-This should be enough to get you started on using Svelte as a templating language, but we can go a bit further with a few more tools.
+This should be enough to get you started on using Svelte as a templating language, but please be aware that this approach is limited:
+
+- Your Svelte code is inlined in a JS string, with no syntax highlighting or editor support. You can improve your experience a bit by loading the code from a separate `.svelte` file with `fs.readFileSync("./List.svelte", "utf-8")`.
+- You are limited to a single component, which cannot import other components itself. You can use [`{#snippet}`](https://svelte.dev/docs/svelte/snippet) to factor out common pieces within this single component though.
+
+We can go a bit further (and lift these limitations) with a few more tools.
 
 ## With a bundler
 
@@ -235,7 +240,37 @@ We can no longer run `index.mjs` directly through Node: `.svelte` components are
 <ul><li>0</li><li>1</li><li>2</li><li>3</li><li>4</li></ul>
 ```
 
-This setup is more convoluted than the previous one but **scales much better**: your components can be organized into separate files, and you get syntax highlighting and autocompletion in your editor.
+This setup is more convoluted than the previous one but **scales much better**: your components can be organized into separate files, they can import other components, and you get syntax highlighting and autocompletion in your editor.
+
+## Passing props
+
+Both examples above render a component with no parameters --- _props_ --- for brevity, but this is not a limitation: you can pass props to your components through the [`render`](https://svelte.dev/docs/svelte/svelte-server#render) function's second parameter:
+
+```svelte
+<!-- Hello.svelte -->
+<script>
+  const { name } = $props();
+</script>
+
+<h1>Hello {name}!</h1>
+```
+
+```js
+// index.mjs
+import Hello from "./Hello.svelte";
+import { render } from "svelte/server";
+
+const { body } = render(Hello, {
+  props: {
+    name: "World",
+  },
+});
+
+console.log(body.replaceAll(/<!--.+?-->/g, ""));
+// "<h1>Hello World!</h1>"
+```
+
+Note that Svelte supports TypeScript out of the box: if you complete the TypeScript setup of your project, you can write `<script lang="ts">` and type your props with `const { name }: { name: string } = $props()` to get full type checking and autocompletion for `render`'s `props` argument.
 
 If you are curious to see real-life examples of this setup in action, check out [svelte-emails](https://github.com/GauBen/svelte-emails), which uses Svelte components as email templates.
 
