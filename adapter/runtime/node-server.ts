@@ -5,7 +5,7 @@ import process from "node:process";
 import { getRawAsset } from "node:sea";
 import polka, { Middleware } from "polka";
 import { env_prefix, manifest, prerendered } from "virtual:manifest";
-import { Server } from "virtual:server";
+import { server } from "virtual:server";
 import { env, timeout_env } from "./env.js";
 import sirv from "./sirv.js";
 import { parse_as_bytes, parse_origin } from "./utils.js";
@@ -132,22 +132,21 @@ async function createNodeServer() {
   // Initialize the HTTP server here so that we can set properties before starting to listen.
   // Otherwise, polka delays creating the server until listen() is called. Settings these
   // properties after the server has started listening could lead to race conditions.
-  const server = createServer();
+  const nodeServer = createServer();
 
   const keep_alive_timeout = timeout_env("KEEP_ALIVE_TIMEOUT");
   if (keep_alive_timeout !== undefined) {
     // Convert the keep-alive timeout from seconds to milliseconds (the unit Node.js expects).
-    server.keepAliveTimeout = keep_alive_timeout * 1000;
+    nodeServer.keepAliveTimeout = keep_alive_timeout * 1000;
   }
 
   const headers_timeout = timeout_env("HEADERS_TIMEOUT");
   if (headers_timeout !== undefined) {
     // Convert the headers timeout from seconds to milliseconds (the unit Node.js expects).
-    server.headersTimeout = headers_timeout * 1000;
+    nodeServer.headersTimeout = headers_timeout * 1000;
   }
 
-  const app = new Server(manifest);
-  await app.init({
+  await server.init({
     env: process.env as Record<string, string>,
     read: (file) =>
       new ReadableStream({
@@ -158,7 +157,7 @@ async function createNodeServer() {
       }),
   });
 
-  return polka({ server })
+  return polka({ server: nodeServer })
     .use(
       sirv("/client", {
         setHeaders: (res, pathname) => {
@@ -190,7 +189,7 @@ async function createNodeServer() {
 
       setResponse(
         res,
-        await app.respond(request, {
+        await server.respond(request, {
           platform: { req },
           getClientAddress: () => {
             if (address_header) {

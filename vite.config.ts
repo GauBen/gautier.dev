@@ -16,13 +16,13 @@ export default defineConfig({
       wrapperComponent: "#lib/markdown/Wrapper.svelte",
       use: (md) =>
         md
-          // @ts-expect-error markdown-it/markdown-exit type incompatibility
           .use(tex, {
             render: (content, displayMode) => {
               const html = `{@html ${JSON.stringify(katex.renderToString(content, { displayMode }))}}`;
               return displayMode ? `<p class="math">${html}</p>` : html;
             },
           })
+          // @ts-expect-error markdown-it/markdown-exit type incompatibility
           .use(mdAnchor, {
             tabIndex: false,
             permalink: mdAnchor.permalink.linkInsideHeader({

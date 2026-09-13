@@ -11,8 +11,7 @@ import * as mrmime from "mrmime";
 import { IncomingMessage, ServerResponse } from "node:http";
 import { getAssetKeys, getRawAsset } from "node:sea";
 import { Middleware } from "polka";
-import { last_modified, precompress } from "virtual:manifest";
-import { options } from "virtual:server";
+import { version, last_modified, precompress } from "virtual:manifest";
 
 const encodings = new Map([
   [".br", "br"],
@@ -28,7 +27,7 @@ function toHeaders(name: string, asset: ArrayBuffer) {
     "Content-Type": ctype + (ctype === "text/html" ? ";charset=utf-8" : ""),
     "Last-Modified": last_modified,
     "Cache-Control": "no-cache",
-    "ETag": `W/"${asset.byteLength}-${options.version_hash}"`,
+    "ETag": `W/"${asset.byteLength}-${version}"`,
   };
 
   if (enc) headers["Content-Encoding"] = enc;

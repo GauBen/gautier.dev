@@ -82,7 +82,7 @@ export default function adapter({
 
       if (precompress) await builder.compress(`${cwd}/assets`);
 
-      builder.writeServer(`${cwd}/server`);
+      builder.generateServerInstance(`${cwd}/server/index.js`);
       await rolldown.build({
         input: join(import.meta.dirname, "..", "runtime", "index.ts"),
         cwd,
@@ -95,15 +95,15 @@ export default function adapter({
         plugins: [
           virtual({
             "virtual:manifest": [
-              `export const manifest = ${builder.generateManifest({ relativePath: "./server" })};`,
+              `export const version = ${uneval(builder.config.version.name)};`,
+              `export const manifest = ${uneval(builder.manifest)};`,
               `export const prerendered = ${uneval(builder.prerendered)};`,
               `export const last_modified = ${uneval(new Date().toISOString())};`,
               `export const env_prefix = ${uneval(envPrefix)};`,
               `export const precompress = ${uneval(precompress)};`,
             ].join("\n"),
             "virtual:server": [
-              `export { Server } from "./server/index.js";`,
-              `export { options } from "./server/internal.js";`,
+              `export { server } from "./server/index.js";`,
             ].join("\n"),
             "virtual:instrumentation": builder.hasServerInstrumentationFile()
               ? `export * from "./server/instrumentation.server.js";`
