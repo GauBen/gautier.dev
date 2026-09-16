@@ -11,6 +11,7 @@ import {
 import { basename, join } from "node:path";
 import prettyBytes from "pretty-bytes";
 import * as rolldown from "rolldown";
+import { replacePlugin } from "rolldown/plugins";
 
 /** Adapted from @rollup/plugin-virtual under MIT License */
 const PREFIX = `\0virtual:`;
@@ -93,6 +94,9 @@ export default function adapter({
           minify,
         },
         plugins: [
+          replacePlugin({
+            "process.env.NODE_ADAPTER_SEA_BUILD": "true",
+          }),
           virtual({
             "virtual:manifest": [
               `export const version = ${uneval(builder.config.version.name)};`,

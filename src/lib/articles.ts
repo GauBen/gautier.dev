@@ -6,7 +6,7 @@ export interface Article {
     description?: string | string[];
     snippet?: { code: string; lang: string };
   };
-  banner?: string;
+  banner?: { img: { src: string; w: number; h: number } }; // ?enhanced format
   default: Component;
 }
 

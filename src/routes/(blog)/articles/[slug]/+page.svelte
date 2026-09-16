@@ -2,6 +2,7 @@
   import { articles } from "#lib/articles.js";
   import Header from "#lib/Header.svelte";
   import { resolve } from "$app/paths";
+  import { page } from "$app/state";
   import { error } from "@sveltejs/kit";
   import { formatDate } from "../../date.js";
   import { getSnippet } from "../../remote.js";
@@ -21,6 +22,15 @@
     import("giscus");
   });
 </script>
+
+<svelte:head>
+  <meta
+    property="og:image"
+    content={`${new URL(resolve(`/(blog)/articles/[slug]/og.png`, params), page.url as URL)}`}
+  />
+  <meta name="og:image:width" content={`${banner?.img.w ?? 1200}`} />
+  <meta name="og:image:height" content={`${banner?.img.h ?? 630}`} />
+</svelte:head>
 
 <Header>
   {#if banner}

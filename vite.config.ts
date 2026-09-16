@@ -77,6 +77,10 @@ export default defineConfig({
         },
       },
 
+      paths: {
+        origin: "https://gautier.dev",
+      },
+
       adapter: adapter({ precompress: false }),
 
       experimental: {

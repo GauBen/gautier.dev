@@ -4,9 +4,11 @@ description: Composing window functions with UNNEST to compute percentiles of ar
 snippet:
   lang: sql
   code: |
-    SELECT id, PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY duration) AS p50 FROM (
-      SELECT id, UNNEST(durations) AS duration FROM websites
-    ) t GROUP BY id
+    SELECT
+      id,
+      PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY duration) AS p50
+    FROM (SELECT id, UNNEST(durations) AS duration FROM websites) t
+    GROUP BY id
 ---
 
 <script>
