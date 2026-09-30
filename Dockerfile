@@ -21,12 +21,12 @@ COPY mise.toml .
 RUN --mount=type=cache,target=/mise/downloads mise install
 
 # Install js dependencies
-COPY --parents **/package.json aube-lock.yaml ./
-RUN --mount=type=cache,target=/root/.cache/aube aube ci
+COPY --parents **/package.json upm.lock ./
+RUN --mount=type=cache,target=/root/.upm upm ci
 
 # Build the project
 COPY . .
-RUN aube build && ldd build/node
+RUN upm build && ldd build/node
 
 # MARK: arm64
 FROM scratch AS arm64
