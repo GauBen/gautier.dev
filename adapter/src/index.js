@@ -105,6 +105,7 @@ export default function adapter({
               `export const last_modified = ${uneval(new Date().toISOString())};`,
               `export const env_prefix = ${uneval(envPrefix)};`,
               `export const precompress = ${uneval(precompress)};`,
+              `export const origin = ${uneval(builder.config.paths.origin)};`,
             ].join("\n"),
             "virtual:server": [
               `export { server } from "./server/index.js";`,

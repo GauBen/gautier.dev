@@ -4,11 +4,11 @@ import { createServer, IncomingHttpHeaders, IncomingMessage } from "node:http";
 import process from "node:process";
 import { getRawAsset } from "node:sea";
 import polka, { Middleware } from "polka";
-import { env_prefix, manifest, prerendered } from "virtual:manifest";
+import { env_prefix, manifest, origin, prerendered } from "virtual:manifest";
 import { server } from "virtual:server";
 import { env, timeout_env } from "./env.js";
 import sirv from "./sirv.js";
-import { parse_as_bytes, parse_origin } from "./utils.js";
+import { parse_as_bytes } from "./utils.js";
 
 const path = env("SOCKET_PATH", false);
 const host = env("HOST", "0.0.0.0");
@@ -32,7 +32,6 @@ if (listen_fds > 1) {
   );
 }
 
-const origin = parse_origin(env("ORIGIN"));
 const xff_depth = parseInt(env("XFF_DEPTH", "1"));
 const address_header = env("ADDRESS_HEADER", "").toLowerCase();
 const protocol_header = env("PROTOCOL_HEADER", "").toLowerCase();

@@ -33,7 +33,6 @@ FROM scratch AS arm64
 WORKDIR /app
 
 EXPOSE 3000
-ENV ORIGIN="http://localhost:3000"
 
 # Copy all runtime dependencies (ldd build/node)
 COPY --from=build /lib/ld-linux-aarch64.so.1 /lib/ld-linux-aarch64.so.1
@@ -46,7 +45,7 @@ COPY --from=build \
 # Use a non-root user to run the application
 USER 65532:65532
 COPY --from=build --chown=65532:65532 /workdir/build/node .
-HEALTHCHECK --start-interval=2s --start-period=2s CMD ["./node", "--healthcheck", "http://localhost:3000"]
+HEALTHCHECK --start-interval=2s --start-period=2s CMD ["./node", "--healthcheck"]
 ENTRYPOINT ["./node"]
 
 # MARK: amd64
@@ -54,7 +53,6 @@ FROM scratch AS amd64
 WORKDIR /app
 
 EXPOSE 3000
-ENV ORIGIN="http://localhost:3000"
 
 # Copy all runtime dependencies (ldd build/node)
 COPY --from=build /lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
@@ -67,5 +65,5 @@ COPY --from=build \
 # Use a non-root user to run the application
 USER 65532:65532
 COPY --from=build --chown=65532:65532 /workdir/build/node .
-HEALTHCHECK --start-interval=2s --start-period=2s CMD ["./node", "--healthcheck", "http://localhost:3000"]
+HEALTHCHECK --start-interval=2s --start-period=2s CMD ["./node", "--healthcheck"]
 ENTRYPOINT ["./node"]

@@ -5,6 +5,7 @@ declare module "virtual:manifest" {
   export const last_modified: string;
   export const env_prefix: string;
   export const precompress: boolean;
+  export const origin: string;
 }
 
 declare module "virtual:server" {

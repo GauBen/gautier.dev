@@ -1,16 +1,12 @@
 if (process.argv[2] === "--healthcheck") {
-  const origin = process.argv[3];
-
-  if (!origin) {
-    console.error("Origin URL is required for health check");
-    process.exit(1);
-  }
-
   try {
-    const { ok, status } = await fetch(origin, {
-      method: "HEAD",
-      signal: AbortSignal.timeout(1000),
-    });
+    const { ok, status } = await fetch(
+      process.argv[3] ?? `http://localhost:${process.env.PORT ?? 3000}`,
+      {
+        method: "HEAD",
+        signal: AbortSignal.timeout(1000),
+      },
+    );
     if (ok) {
       console.log("Health check successful");
       process.exit(0);
