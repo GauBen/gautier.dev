@@ -66,6 +66,8 @@
     "vfile": "^6.0.3",
     "vfile-matter": "^5.0.1",
     "vite": "^8.3.4",
-    "vite-plugin-svelte-md": "^0.8.0"
+    "vite-plugin-svelte-md": "^0.8.0",
+    "xast-util-to-xml": "^4.0.0",
+    "xastscript": "^4.0.0"
   }
 }

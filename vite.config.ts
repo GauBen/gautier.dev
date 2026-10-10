@@ -64,6 +64,7 @@ export default defineConfig({
     enhancedImages(),
     sveltekit({
       extensions: [".svelte", ".md"],
+      moduleExtensions: [".ts", ".tsx"],
 
       preprocess: [vitePreprocess()],
 

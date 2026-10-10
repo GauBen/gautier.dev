@@ -26,7 +26,10 @@
 <svelte:head>
   <meta
     property="og:image"
-    content={`${new URL(resolve(`/(blog)/articles/[slug]/og.png`, params), page.url as URL)}`}
+    content={new URL(
+      resolve("/(blog)/articles/[slug]/og.png", params),
+      page.url.href,
+    ).href}
   />
   <meta name="og:image:width" content={`${banner?.img.w ?? 1200}`} />
   <meta name="og:image:height" content={`${banner?.img.h ?? 630}`} />

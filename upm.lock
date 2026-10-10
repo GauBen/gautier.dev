@@ -51,7 +51,9 @@
         "vfile": "^6.0.3",
         "vfile-matter": "^5.0.1",
         "vite": "^8.3.4",
-        "vite-plugin-svelte-md": "^0.8.0"
+        "vite-plugin-svelte-md": "^0.8.0",
+        "xast-util-to-xml": "^4.0.0",
+        "xastscript": "^4.0.0"
       }
     },
     "dependencies": {
@@ -100,7 +102,9 @@
       "vfile": "6.0.3",
       "vfile-matter": "5.0.1",
       "vite": "8.3.4",
-      "vite-plugin-svelte-md": "0.8.0"
+      "vite-plugin-svelte-md": "0.8.0",
+      "xast-util-to-xml": "4.0.0",
+      "xastscript": "4.0.0"
     },
     "workspaces": [
       "adapter"
@@ -1032,6 +1036,12 @@
     "@types/unist@3.0.3": {
       "integrity": "sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q=="
     },
+    "@types/xast@2.0.4": {
+      "integrity": "sha512-6Q6HWhHXR5EEKcxgF5YBW5XPAAtCi/GgyCWHx6wR7dZTXF5rv2B2fm0hgpSscJqaVDVm6n1DAVbsM8RSM5PlMw==",
+      "dependencies": {
+        "@types/unist": "3.0.3"
+      }
+    },
     "acorn@8.18.0": {
       "integrity": "sha512-lGq+9yr1/GuAWaVYIHRjvvySG5/4VfKIvC8EWxStPdcDh/Ka7FG3twP6v4d5BkravUilhIAsG4Qj83t02LWUPQ==",
       "bin": {
@@ -1114,6 +1124,12 @@
     },
     "ccount@2.0.1": {
       "integrity": "sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg=="
+    },
+    "character-entities-html4@2.1.0": {
+      "integrity": "sha512-1v7fgQRj6hnSwFpq1Eu0ynr/CDEw0rXo2B61qXrLNdHZmPKgb7fqS1a2JwF0rISo9q77jDI8VMEHoApn8qDoZA=="
+    },
+    "character-entities-legacy@3.0.0": {
+      "integrity": "sha512-RpPp0asT/6ufRm//AJVwpViZbGM/MkjQFxJccQRHmISF/22NBtsHqAWmL+/pmkPWoIUJdWyeVleTl1wydHATVQ=="
     },
     "character-entities@2.0.2": {
       "integrity": "sha512-shx7oQ0Awen/BRIdkjkvz54PnEEI/EjwXDSIZp86/KKdbafHh1Df/RYGBhn4hbe2+uKC9FnT5UCEdyPz3ai9hQ=="
@@ -2652,6 +2668,13 @@
     "string.prototype.codepointat@0.2.1": {
       "integrity": "sha512-2cBVCj6I4IOvEnjgO/hWqXjqBGsY+zwPmHl12Srk9IXSZ56Jwwmy+66XO5Iut/oQVR7t5ihYdLB0GMa4alEUcg=="
     },
+    "stringify-entities@4.0.4": {
+      "integrity": "sha512-IwfBptatlO+QCJUo19AqvrPNqlVMpW9YEL2LIVY+Rpv2qsjCGxaDLNRgeGsQWJhfItebuJhsGSLjaBbNSQ+ieg==",
+      "dependencies": {
+        "character-entities-html4": "2.1.0",
+        "character-entities-legacy": "3.0.0"
+      }
+    },
     "strip-ansi@6.0.1": {
       "integrity": "sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==",
       "dependencies": {
@@ -3077,6 +3100,20 @@
       "integrity": "sha512-OTIk8iR8/aCRWBqvxrzxR0hgxWpnYBblY1S5hDWBQfk/VFmJwzmJgQFN3WsoUKHISv2eAwe+PpbUzyL1CKTLXg==",
       "dependencies": {
         "signal-exit": "4.1.0"
+      }
+    },
+    "xast-util-to-xml@4.0.0": {
+      "integrity": "sha512-r1euIWS5yZJUNpfN+ReE4m7Vld2iytaOPJtuXVuRQacRZwqRN1MAb+dv0aGLrdXOZrpGLyvUFf1Upyrb3R5qBg==",
+      "dependencies": {
+        "@types/xast": "2.0.4",
+        "ccount": "2.0.1",
+        "stringify-entities": "4.0.4"
+      }
+    },
+    "xastscript@4.0.0": {
+      "integrity": "sha512-r7a0kObEyivkML0dLrp/nOH5l51y9v5DL1MT/Xc6qUgGGNP1mZZUmT6NXtWAmx2FLfjonop++PtpVMwp1Hw/Gw==",
+      "dependencies": {
+        "@types/xast": "2.0.4"
       }
     },
     "yaml@2.9.1": {

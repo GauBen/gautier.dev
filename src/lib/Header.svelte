@@ -1,12 +1,12 @@
 <script>
-  import { resolve } from "$app/paths";
+  import { asset, resolve } from "$app/paths";
 </script>
 
 <div class="wrapper">
   <header>
     <h1>
       <a href={resolve("")}>
-        <img src="/favicon.svg" alt="🧔🏻‍♂️" width="72" height="72" />
+        <img src={asset("favicon.svg")} alt="🧔🏻‍♂️" width="72" height="72" />
         gautier.dev
       </a>
     </h1>

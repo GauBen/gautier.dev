@@ -12,5 +12,5 @@
 <Head {...frontmatter} />
 
 <div class="markdown-content">
-  {@render children()}
+  {@render children?.()}
 </div>

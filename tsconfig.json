@@ -1,4 +1,7 @@
 {
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  },
   "extends": "$app/tsconfig",
   "include": ["src"]
 }

@@ -1,23 +1,20 @@
+/** @jsxImportSource satori/jsx */
 import { articles } from "#lib/articles.js";
 import { read } from "$app/server";
 import { error, redirect } from "@sveltejs/kit";
 import type { TokenStream } from "prismjs";
-import { jsx } from "satori/jsx/jsx-runtime";
 import favicon from "/static/favicon.svg";
 import { formatDate } from "../../../date.js";
 import zxproto from "./0xProto-Regular.otf";
 import technasans from "./TechnaSans-Regular.otf";
 import inter200 from "./inter-latin-200-normal.woff";
 import inter400 from "./inter-latin-400-normal.woff";
+import type { RequestEvent } from "./$types.js";
 
 export const prerender = true;
 export const entries = () => [...articles.keys()].map((slug) => ({ slug }));
 
-interface Node {
-  str: string;
-  color?: string;
-}
-export const GET = async ({ params }) => {
+export const GET = async ({ params }: RequestEvent) => {
   if (process.env.NODE_ADAPTER_SEA_BUILD)
     return error(418, "Not available on this server");
 
@@ -69,7 +66,10 @@ export const GET = async ({ params }) => {
 
   const lines = frontmatter.snippet
     ? tokenize(frontmatter.snippet.code, frontmatter.snippet.lang).reduce(
-        function reducer(lines, token: TokenStream): Array<Array<Node>> {
+        function reducer(
+          lines,
+          token: TokenStream,
+        ): Array<Array<{ str: string; color?: string }>> {
           const lastLine = lines[lines.length - 1];
           if (typeof token === "string") {
             const [first, ...rest] = token.split("\n");
@@ -95,114 +95,106 @@ export const GET = async ({ params }) => {
     : [];
 
   const svg = await satori(
-    jsx("div", {
-      style: {
+    <div
+      style={{
         background: "white",
         width: "1200px",
         height: "630px",
         display: "flex",
         flexDirection: "column-reverse", // Draw header last for the box shadow
-      },
-      children: [
-        jsx("div", {
-          style: {
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          padding: "32px 64px",
+          flexGrow: lines.length === 0 ? "1" : "0",
+        }}
+      >
+        <div
+          style={{
+            textWrap: "balance",
+            font: "56px 'Techna Sans'",
+            lineHeight: "1",
+          }}
+        >
+          {frontmatter.title}
+        </div>
+        <div
+          style={{
+            font: "200 40px inter",
+            marginTop: lines.length === 0 ? "16px" : "4px",
+          }}
+        >
+          {date ? formatDate(date) : "Unpublished draft"}
+        </div>
+        {lines.length === 0 && (
+          <div
+            style={{
+              font: "400 32px inter",
+              marginTop: lines.length === 0 ? "40px" : "0",
+              textWrap: "balance",
+            }}
+          >
+            {frontmatter.description}
+          </div>
+        )}
+      </div>
+      {lines.length > 0 && (
+        <div
+          style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
             justifyContent: "center",
-            textAlign: "center",
-            padding: "32px 64px",
-            flexGrow: lines.length === 0 ? "1" : "0",
-          },
-          children: [
-            jsx("div", {
-              style: {
-                textWrap: "balance",
-                font: "56px 'Techna Sans'",
-                lineHeight: "1",
-              },
-              children: frontmatter.title,
-            }),
-            jsx("div", {
-              style: {
-                font: "200 40px inter",
-                marginTop: lines.length === 0 ? "16px" : "4px",
-              },
-              children: date ? formatDate(date) : "Unpublished draft",
-            }),
-            lines.length === 0 &&
-              jsx("div", {
-                style: {
-                  font: "400 32px inter",
-                  marginTop: lines.length === 0 ? "40px" : "0",
-                  textWrap: "balance",
-                },
-                children: frontmatter.description,
-              }),
-          ],
-        }),
-        lines.length > 0 &&
-          jsx("div", {
-            style: {
+            alignItems: "center",
+            flex: "1",
+            color: "#1c1b1d",
+            background: "#fafaff",
+            padding: "16px",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            fontSize: "24px",
+          }}
+        >
+          <div
+            style={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              flex: "1",
-              color: "#1c1b1d",
-              background: "#fafaff",
-              padding: "16px",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              fontSize: "24px",
-            },
-            children: jsx("div", {
-              style: {
-                display: "flex",
-                flexDirection: "column",
-                minWidth: "800px",
-              },
-              children: lines.map((line) =>
-                jsx("div", {
-                  style: {
-                    display: "flex",
-                    whiteSpace: "pre",
-                  },
-                  children: line.map((node) =>
-                    jsx("span", {
-                      style: { color: node.color },
-                      children: node.str,
-                    }),
-                  ),
-                }),
-              ),
-            }),
-          }),
-        jsx("div", {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "16px",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-            padding: "16px",
-          },
-          children: [
-            jsx("img", {
-              src: `data:image/svg+xml;base64,${Buffer.from(await read(favicon).arrayBuffer()).toString("base64")}`,
-              width: 96,
-              height: 96,
-              style: { border: "1px solid black", borderRadius: "999px" },
-            }),
-            jsx("div", {
-              style: {
-                font: "64px 'Techna Sans'",
-              },
-              children: "gautier.dev",
-            }),
-          ],
-        }),
-      ],
-    }),
+              minWidth: "800px",
+            }}
+          >
+            {lines.map((line) => (
+              <div style={{ display: "flex", whiteSpace: "pre" }}>
+                {line.map((node) => (
+                  <span style={{ color: node.color }}>{node.str}</span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "16px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          padding: "16px",
+        }}
+      >
+        <img
+          src={`data:image/svg+xml;base64,${Buffer.from(await read(favicon).arrayBuffer()).toString("base64")}`}
+          width={96}
+          height={96}
+          style={{ border: "1px solid black", borderRadius: "999px" }}
+        />
+        <div style={{ font: "64px 'Techna Sans'" }}>gautier.dev</div>
+      </div>
+    </div>,
     {
       width: 1200,
       height: 630,
