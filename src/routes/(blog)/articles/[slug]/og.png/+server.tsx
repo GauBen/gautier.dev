@@ -65,7 +65,10 @@ export const GET = async ({ params }: RequestEvent) => {
   };
 
   const lines = frontmatter.snippet
-    ? tokenize(frontmatter.snippet.code, frontmatter.snippet.lang).reduce(
+    ? tokenize(
+        frontmatter.snippet.code.trim(),
+        frontmatter.snippet.lang,
+      ).reduce(
         function reducer(
           lines,
           token: TokenStream,
@@ -167,7 +170,13 @@ export const GET = async ({ params }: RequestEvent) => {
             }}
           >
             {lines.map((line) => (
-              <div style={{ display: "flex", whiteSpace: "pre" }}>
+              <div
+                style={{
+                  display: "flex",
+                  whiteSpace: "pre",
+                  minHeight: "36px", // 1.5 * 24px (font size)
+                }}
+              >
                 {line.map((node) => (
                   <span style={{ color: node.color }}>{node.str}</span>
                 ))}

@@ -96,3 +96,8 @@ table {
   height: 1.25em;
   vertical-align: text-bottom;
 }
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+}
