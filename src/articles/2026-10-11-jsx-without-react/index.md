@@ -16,6 +16,7 @@ snippet:
 
 <script>
   import {Tldr, Callout} from "#lib/markdown"
+  import Columns from "./Columns.svelte"
 </script>
 
 You might think JSX and React are the same thing: React is the language, JSX the file extension, and the two are inseparable.
@@ -247,18 +248,9 @@ Satori only supports flex and grid layouts, which are much easier to compute tha
 
 JSX is not mandatory, but Satori does not embed an HTML parser: it takes an AST as input.
 
-<style>
-@media (width >= 82rem) {
-  .columns {
-    width: 80rem;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr 1fr;
-  }
-}
-</style>
+<Columns>
 
-<div class="columns"><div>
+<div>
 
 Without JSX:
 
@@ -346,7 +338,9 @@ Better, right?
 
 Notice this `Hello,{" "}` bit: in JSX, whitespace is collapsed and removed unless explicitly added like this. Without it, we would end up with `Hello,World!`.
 
-</div></div>
+</div>
+
+</Columns>
 
 <figure>
 <enhanced:img src="./output.png" alt="A fancy Hello, World!" />
