@@ -1,9 +1,7 @@
 import node from "@sveltejs/adapter-node";
-import { uneval } from "devalue";
 import { execFileSync } from "node:child_process";
 import {
   existsSync,
-  mkdirSync,
   readdirSync,
   readFileSync,
   rmSync,
@@ -39,20 +37,6 @@ const sea_reader = {
     if (id === "@sveltejs/kit/node") return join(runtime, "kit-node.js");
   },
 };
-
-/** Adapted from @rollup/plugin-virtual under MIT License */
-const PREFIX = `\0virtual:`;
-function virtual(/** @type {Record<string, string>} */ modules) {
-  return {
-    name: "virtual",
-    resolveId(/** @type {string} */ id) {
-      if (id in modules) return PREFIX + id;
-    },
-    load(/** @type {string} */ id) {
-      if (id.startsWith(PREFIX)) return modules[id.slice(PREFIX.length)];
-    },
-  };
-}
 
 /**
  * Returns all files under a directory recursively.
@@ -107,7 +91,6 @@ export default function adapter({
     async adapt(builder) {
       const cwd = builder.getBuildDirectory("sea");
       rmSync(cwd, { force: true, recursive: true });
-      mkdirSync(cwd, { recursive: true });
 
       // adapter-node builds the server, `sea_reader` makes it read from the SEA assets
       await node({ ...options, out: `${cwd}/adapter-node` }).adapt(builder);
@@ -116,6 +99,9 @@ export default function adapter({
         input: join(runtime, "index.ts"),
         cwd,
         platform: "node",
+        resolve: {
+          alias: { "virtual:entry": `${cwd}/adapter-node/index.js` },
+        },
         output: {
           codeSplitting: false,
           file: "bundle.js",
@@ -124,9 +110,6 @@ export default function adapter({
         plugins: [
           replacePlugin({
             "process.env.NODE_ADAPTER_SEA_BUILD": "true",
-          }),
-          virtual({
-            "virtual:entry": `import ${uneval(`${cwd}/adapter-node/index.js`)};`,
           }),
           {
             name: "js-bindings-processor",
@@ -158,7 +141,7 @@ const os = require("node:os");
 const path = require("node:path");
 const { getRawAsset } = require("node:sea");
 
-const name = ${uneval(this.getFileName(emitted).slice("assets".length))};
+const name = ${JSON.stringify(this.getFileName(emitted).slice("assets".length))};
 const addonPath = path.join(os.tmpdir(), name);
 fs.writeFileSync(addonPath, new Uint8Array(getRawAsset(name)));
 const myaddon = { exports: {} };
@@ -215,7 +198,6 @@ module.exports = myaddon.exports;`;
       console.info(`node: ${prettyBytes(statSync(`${cwd}/${exe}`).size)}`);
 
       rmSync(out, { force: true, recursive: true });
-      mkdirSync(out, { recursive: true });
 
       builder.copy(`${cwd}/${exe}`, `${out}/${exe}`);
     },

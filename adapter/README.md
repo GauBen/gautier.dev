@@ -10,4 +10,3 @@ This adapter contains code adapted from different sources:
 
 - [@sveltejs/adapter-node](https://github.com/sveltejs/kit/tree/main/packages/adapter-node): the server itself is built by this official adapter, with its file reads redirected to the SEA assets
 - [totalist](https://github.com/lukeed/totalist): recursively list files in a directory
-- [@rollup/plugin-virtual](https://github.com/rollup/plugins/tree/master/packages/virtual): create virtual modules during the build step
