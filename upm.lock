@@ -9,7 +9,8 @@
         "giscus": "^1.6.0",
         "prism-svelte": "^0.5.0",
         "prismjs": "^1.30.0",
-        "prismjs-gleam": "^1.0.4"
+        "prismjs-gleam": "^1.0.4",
+        "sharp": "^0.35.5"
       },
       "devDependencies": {
         "@iconify-json/ph": "^1.2.2",
@@ -37,7 +38,6 @@
         "remark-parse": "^11.0.0",
         "rolldown": "^1.2.15",
         "satori": "^0.63.2",
-        "sharp": "^0.35.5",
         "stylelint": "^17.16.0",
         "stylelint-config-html": "^2.0.0",
         "stylelint-config-recess-order": "^7.9.0",
@@ -116,10 +116,8 @@
       "version": "0.0.1",
       "specs": {
         "dependencies": {
-          "@polka/url": "^1.0.0-next.29",
+          "@sveltejs/adapter-node": "^6.0.0",
           "devalue": "^6.0.3",
-          "mrmime": "^2.0.1",
-          "polka": "^1.0.0-next.28",
           "pretty-bytes": "^7.2.0",
           "rolldown": "^1.2.15"
         },
@@ -133,13 +131,11 @@
         }
       },
       "dependencies": {
-        "@polka/url": "1.0.0-next.29",
+        "@sveltejs/adapter-node": "6.0.0",
         "@sveltejs/kit": "3.1.0",
         "@sveltejs/vite-plugin-svelte": "7.3.1",
         "@types/node": "26.6.5",
         "devalue": "6.0.3",
-        "mrmime": "2.0.1",
-        "polka": "1.0.0-next.28",
         "pretty-bytes": "7.2.0",
         "rolldown": "1.2.15",
         "svelte": "5.57.3",
@@ -904,6 +900,18 @@
         "acorn": "required"
       }
     },
+    "@sveltejs/adapter-node@6.0.0": {
+      "integrity": "sha512-s7muM4JmJ75OZ8o0G4VRhrEKdi8twuEm3t2o/qQsdlm12hKaX7S/CuUBuw3n983wB/IFBSpzG2ugX0xdGzbKwg==",
+      "dependencies": {
+        "@sveltejs/kit": "3.1.0"
+      },
+      "peerDependencies": {
+        "@sveltejs/kit": "^3.0.0-next.0"
+      },
+      "peers": {
+        "@sveltejs/kit": "required"
+      }
+    },
     "@sveltejs/enhanced-img@1.0.0": {
       "integrity": "sha512-MVY2SNj1NE/DW7yrAePFfOeEnj/PfkHPQvWfeL23h/a0i7r1qEF5qj3iIyxqCF5Vu+akskQ/h5eEEM7hjvFmrQ==",
       "dependencies": {
@@ -940,9 +948,6 @@
         "sirv": "3.0.2",
         "svelte": "5.57.3",
         "vite": "8.3.5"
-      },
-      "optionalDependencies": {
-        "typescript": "6.0.3"
       },
       "bin": {
         "svelte-kit": "svelte-kit.js"
@@ -2287,13 +2292,6 @@
     "picomatch@4.0.7": {
       "integrity": "sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA=="
     },
-    "polka@1.0.0-next.28": {
-      "integrity": "sha512-ryc8D/B5E/YnlWHkNMnRvNntPc4GwU1/+iDBjiXVz1SUjDRqlxYX5Ic0IaDLA/cQ+g7/x+jUzEjv2K16u1J+wA==",
-      "dependencies": {
-        "@polka/url": "1.0.0-next.29",
-        "trouter": "4.0.0"
-      }
-    },
     "postcss-html@2.0.0": {
       "integrity": "sha512-f2Rvw5FCollEfVj3wfN7JdQb7n2rNIthW+epw2EByio7M6P7RH0BTj8a/ODHrUXd0cmO7ychb6YniymV93182Q==",
       "dependencies": {
@@ -2445,9 +2443,6 @@
     },
     "readdirp@4.1.2": {
       "integrity": "sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg=="
-    },
-    "regexparam@3.0.0": {
-      "integrity": "sha512-RSYAtP31mvYLkAHrOlh25pCNQ5hWnT106VukGaaFfuJrZFkGRX5GhUAdPqpSDXxOhA2c4akmRuplv1mRqnBn6Q=="
     },
     "remark-frontmatter@5.0.0": {
       "integrity": "sha512-XTFYvNASMe5iPN0719nPrdItC9aU0ssC4v14mH1BCi1u0n1gAocqcujWUrByftZTbLhRtiKRyjYTSIOcr69UVQ==",
@@ -2895,12 +2890,6 @@
     "trough@2.2.0": {
       "integrity": "sha512-tmMpK00BjZiUyVyvrBK7knerNgmgvcV/KLVyuma/SC+TQN167GrMRciANTz09+k3zW8L8t60jWO1GpfkZdjTaw=="
     },
-    "trouter@4.0.0": {
-      "integrity": "sha512-bwwr76BThfiVwAFZqks5cJ+VoKNM3/2Yg1ZwJslkdmAUQ6S0UNoCoGYFDxdw+u1skfexggdmD2p35kW5Td4Cug==",
-      "dependencies": {
-        "regexparam": "3.0.0"
-      }
-    },
     "tslib@2.8.1": {
       "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
     },
@@ -3037,9 +3026,7 @@
         "tinyglobby": "0.2.17"
       },
       "optionalDependencies": {
-        "@types/node": "26.6.5",
-        "fsevents": "2.3.3",
-        "yaml": "2.9.1"
+        "fsevents": "2.3.3"
       },
       "bin": {
         "vite": "bin/vite.js"

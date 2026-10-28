@@ -20,5 +20,4 @@ if (process.argv[2] === "--healthcheck") {
   }
 }
 
-await import("virtual:instrumentation"); // Empty if instrumentation is not enabled
-await import("./node-server.js");
+await import("virtual:entry"); // adapter-node's server

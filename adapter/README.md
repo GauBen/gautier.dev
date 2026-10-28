@@ -8,7 +8,6 @@ Want to know more about SEA? Check out my article: [Bundling a SvelteKit app int
 
 This adapter contains code adapted from different sources:
 
-- [@sveltejs/adapter-node](https://github.com/sveltejs/kit/tree/main/packages/adapter-node): most of the code structure and logic is adapted from this official adapter
-- [sirv](https://github.com/lukeed/sirv): serve static files, adapted to serve SEA assets
+- [@sveltejs/adapter-node](https://github.com/sveltejs/kit/tree/main/packages/adapter-node): the server itself is built by this official adapter, with its file reads redirected to the SEA assets
 - [totalist](https://github.com/lukeed/totalist): recursively list files in a directory
 - [@rollup/plugin-virtual](https://github.com/rollup/plugins/tree/master/packages/virtual): create virtual modules during the build step

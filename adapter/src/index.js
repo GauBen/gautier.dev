@@ -1,6 +1,8 @@
+import node from "@sveltejs/adapter-node";
 import { uneval } from "devalue";
 import { execFileSync } from "node:child_process";
 import {
+  existsSync,
   mkdirSync,
   readdirSync,
   readFileSync,
@@ -8,10 +10,35 @@ import {
   statSync,
   writeFileSync,
 } from "node:fs";
-import { basename, join } from "node:path";
+import { basename, dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import prettyBytes from "pretty-bytes";
 import * as rolldown from "rolldown";
 import { replacePlugin } from "rolldown/plugins";
+
+const runtime = join(import.meta.dirname, "..", "runtime");
+const adapter_node_src = join(
+  dirname(fileURLToPath(import.meta.resolve("@sveltejs/adapter-node"))),
+  "src",
+);
+
+/**
+ * Makes adapter-node's server read its files from the SEA assets, by replacing
+ * the modules it reads files with
+ *
+ * @type {import("vite").Plugin}
+ */
+const sea_reader = {
+  name: "adapter-node-sea:reader",
+  apply: "build",
+  // before Vite's resolver, which handles both modules on its own
+  enforce: "pre",
+  resolveId(id, importer) {
+    if (!importer?.startsWith(adapter_node_src)) return;
+    if (id === "node:fs") return join(runtime, "fs.js");
+    if (id === "@sveltejs/kit/node") return join(runtime, "kit-node.js");
+  },
+};
 
 /** Adapted from @rollup/plugin-virtual under MIT License */
 const PREFIX = `\0virtual:`;
@@ -63,12 +90,18 @@ export default function adapter({
   minify = "dce-only",
   out = "build",
 } = {}) {
+  const options = { precompress, envPrefix };
+  const { supports, vite } = node(options);
+  const plugins = vite && "plugins" in vite ? vite.plugins : undefined;
+
   return {
     name: "adapter-node-sea",
-
-    supports: {
-      read: () => true,
-      instrumentation: () => true,
+    supports,
+    vite: {
+      ...vite,
+      plugins: Array.isArray(plugins)
+        ? [sea_reader, ...plugins]
+        : { ...plugins, pre: [sea_reader, ...(plugins?.pre ?? [])] },
     },
 
     async adapt(builder) {
@@ -76,16 +109,11 @@ export default function adapter({
       rmSync(cwd, { force: true, recursive: true });
       mkdirSync(cwd, { recursive: true });
 
-      builder.writeClient(`${cwd}/assets/client${builder.config.paths.base}`);
-      builder.writePrerendered(
-        `${cwd}/assets/prerendered${builder.config.paths.base}`,
-      );
+      // adapter-node builds the server, `sea_reader` makes it read from the SEA assets
+      await node({ ...options, out: `${cwd}/adapter-node` }).adapt(builder);
 
-      if (precompress) await builder.compress(`${cwd}/assets`);
-
-      builder.generateServerInstance(`${cwd}/server/index.js`);
       await rolldown.build({
-        input: join(import.meta.dirname, "..", "runtime", "index.ts"),
+        input: join(runtime, "index.ts"),
         cwd,
         platform: "node",
         output: {
@@ -98,21 +126,7 @@ export default function adapter({
             "process.env.NODE_ADAPTER_SEA_BUILD": "true",
           }),
           virtual({
-            "virtual:manifest": [
-              `export const version = ${uneval(builder.config.version.name)};`,
-              `export const manifest = ${uneval(builder.manifest)};`,
-              `export const prerendered = ${uneval(builder.prerendered)};`,
-              `export const last_modified = ${uneval(new Date().toISOString())};`,
-              `export const env_prefix = ${uneval(envPrefix)};`,
-              `export const precompress = ${uneval(precompress)};`,
-              `export const origin = ${uneval(builder.config.paths.origin)};`,
-            ].join("\n"),
-            "virtual:server": [
-              `export { server } from "./server/index.js";`,
-            ].join("\n"),
-            "virtual:instrumentation": builder.hasServerInstrumentationFile()
-              ? `export * from "./server/instrumentation.server.js";`
-              : `export {};`,
+            "virtual:entry": `import ${uneval(`${cwd}/adapter-node/index.js`)};`,
           }),
           {
             name: "js-bindings-processor",
@@ -171,10 +185,21 @@ module.exports = myaddon.exports;`;
             output: `${cwd}/${exe}`,
             mainFormat: "module",
             assets: Object.fromEntries(
-              totalist(`${cwd}/assets`).map((file) => [
-                `/${file}`,
-                `${cwd}/assets/${file}`,
-              ]),
+              // native addons emitted by rolldown, and the files adapter-node serves
+              [
+                `${cwd}/assets`,
+                `${cwd}/adapter-node/client`,
+                `${cwd}/adapter-node/prerendered`,
+              ]
+                .filter((dir) => existsSync(dir))
+                .flatMap((dir) =>
+                  totalist(dir).map((file) => [
+                    dir === `${cwd}/assets`
+                      ? `/${file}`
+                      : `/${basename(dir)}/${file}`,
+                    `${dir}/${file}`,
+                  ]),
+                ),
             ),
           },
           null,
