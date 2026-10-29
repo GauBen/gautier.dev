@@ -8,5 +8,5 @@ Want to know more about SEA? Check out my article: [Bundling a SvelteKit app int
 
 This adapter contains code adapted from different sources:
 
-- [@sveltejs/adapter-node](https://github.com/sveltejs/kit/tree/main/packages/adapter-node): the server itself is built by this official adapter, with its file reads redirected to the SEA assets
+- [@sveltejs/adapter-node](https://github.com/sveltejs/kit/tree/main/packages/adapter-node): the server itself is built by this official adapter, and reads its files from the SEA assets mounted as a [virtual file system](https://nodejs.org/api/vfs.html#use-with-single-executable-applications)
 - [totalist](https://github.com/lukeed/totalist): recursively list files in a directory

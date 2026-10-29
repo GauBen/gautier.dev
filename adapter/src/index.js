@@ -8,34 +8,11 @@ import {
   statSync,
   writeFileSync,
 } from "node:fs";
-import { basename, dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { basename, join } from "node:path";
 import prettyBytes from "pretty-bytes";
 import * as rolldown from "rolldown";
 
 const runtime = join(import.meta.dirname, "..", "runtime");
-const adapter_node_src = join(
-  dirname(fileURLToPath(import.meta.resolve("@sveltejs/adapter-node"))),
-  "src",
-);
-
-/**
- * Makes adapter-node's server read its files from the SEA assets, by replacing
- * the modules it reads files with
- *
- * @type {import("vite").Plugin}
- */
-const sea_reader = {
-  name: "adapter-node-sea:reader",
-  apply: "build",
-  // before Vite's resolver, which handles both modules on its own
-  enforce: "pre",
-  resolveId(id, importer) {
-    if (!importer?.startsWith(adapter_node_src)) return;
-    if (id === "node:fs") return join(runtime, "fs.js");
-    if (id === "@sveltejs/kit/node") return join(runtime, "kit-node.js");
-  },
-};
 
 /**
  * Returns all files under a directory recursively.
@@ -75,23 +52,18 @@ export default function adapter({
 } = {}) {
   const options = { precompress, envPrefix };
   const { supports, vite } = node(options);
-  const plugins = vite && "plugins" in vite ? vite.plugins : undefined;
 
   return {
     name: "adapter-node-sea",
     supports,
-    vite: {
-      ...vite,
-      plugins: Array.isArray(plugins)
-        ? [sea_reader, ...plugins]
-        : { ...plugins, pre: [sea_reader, ...(plugins?.pre ?? [])] },
-    },
+    vite,
 
     async adapt(builder) {
       const cwd = builder.getBuildDirectory("sea");
       rmSync(cwd, { force: true, recursive: true });
 
-      // adapter-node builds the server, `sea_reader` makes it read from the SEA assets
+      // adapter-node builds the server. In the executable, its files are read
+      // from the SEA assets mounted as a virtual file system next to bundle.js
       await node({ ...options, out: `${cwd}/adapter-node` }).adapt(builder);
 
       await rolldown.build({
@@ -131,19 +103,9 @@ export default function adapter({
                   name: basename(id),
                   source: readFileSync(id),
                 });
-                return `
-const fs = require("node:fs");
-const os = require("node:os");
-const path = require("node:path");
-const { getRawAsset } = require("node:sea");
-
-const name = ${JSON.stringify(this.getFileName(emitted).slice("assets".length))};
-const addonPath = path.join(os.tmpdir(), name);
-fs.writeFileSync(addonPath, new Uint8Array(getRawAsset(name)));
-const myaddon = { exports: {} };
-process.dlopen(myaddon, addonPath);
-fs.rmSync(addonPath);
-module.exports = myaddon.exports;`;
+                // loaded from the virtual file system at runtime, not bundled
+                return `const addon = ${JSON.stringify(`./${this.getFileName(emitted)}`)};
+module.exports = require(addon);`;
               },
             },
           },
@@ -163,19 +125,19 @@ module.exports = myaddon.exports;`;
             main: `${cwd}/bundle.js`,
             output: `${cwd}/${exe}`,
             mainFormat: "module",
+            // mounts the assets as a file system, with bundle.js at its root
+            useVfs: true,
             assets: Object.fromEntries(
               // native addons emitted by rolldown, and the files adapter-node serves
               [
-                `${cwd}/assets`,
-                `${cwd}/adapter-node/client`,
-                `${cwd}/adapter-node/prerendered`,
+                [`${cwd}/assets`, "assets"],
+                [`${cwd}/adapter-node/client`, "client"],
+                [`${cwd}/adapter-node/prerendered`, "prerendered"],
               ]
-                .filter((dir) => existsSync(dir))
-                .flatMap((dir) =>
+                .filter(([dir]) => existsSync(dir))
+                .flatMap(([dir, prefix]) =>
                   totalist(dir).map((file) => [
-                    dir === `${cwd}/assets`
-                      ? `/${file}`
-                      : `/${basename(dir)}/${file}`,
+                    `${prefix}/${file}`,
                     `${dir}/${file}`,
                   ]),
                 ),

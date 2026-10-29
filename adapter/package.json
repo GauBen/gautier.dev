@@ -33,6 +33,6 @@
     "@sveltejs/kit": "*"
   },
   "engines": {
-    "node": ">=25.7"
+    "node": ">=26.12"
   }
 }
