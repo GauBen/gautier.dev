@@ -15,9 +15,6 @@ export const prerender = true;
 export const entries = () => [...articles.keys()].map((slug) => ({ slug }));
 
 export const GET = async ({ params }: RequestEvent) => {
-  if (process.env.NODE_ADAPTER_SEA_BUILD)
-    return error(418, "Not available on this server");
-
   const article = articles.get(params.slug);
   if (!article) return error(404, "Article not found");
   const { date, load } = article;

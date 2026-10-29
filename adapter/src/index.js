@@ -12,7 +12,6 @@ import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import prettyBytes from "pretty-bytes";
 import * as rolldown from "rolldown";
-import { replacePlugin } from "rolldown/plugins";
 
 const runtime = join(import.meta.dirname, "..", "runtime");
 const adapter_node_src = join(
@@ -108,9 +107,6 @@ export default function adapter({
           minify,
         },
         plugins: [
-          replacePlugin({
-            "process.env.NODE_ADAPTER_SEA_BUILD": "true",
-          }),
           {
             name: "js-bindings-processor",
             transform: {
