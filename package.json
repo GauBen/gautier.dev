@@ -41,7 +41,6 @@
     "globals": "^17.14.0",
     "katex": "^0.19.1",
     "markdown-it-anchor": "^10.1.0",
-    "modern-normalize": "^3.0.1",
     "prettier": "^3.9.10",
     "prettier-plugin-jsdoc": "^1.8.1",
     "prettier-plugin-organize-imports": "^4.3.0",

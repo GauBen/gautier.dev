@@ -1,6 +1,11 @@
-@import url("modern-normalize/modern-normalize.css");
 @import url("./assets/prism.css");
 @import url("./assets/fonts.css");
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
 
 :root {
   --prism-color: #1c1b1d;
@@ -17,11 +22,18 @@
   --bg: #fff;
   --link: #3a3a99;
 
+  /* stylelint-disable-next-line property-no-vendor-prefix -- Safari only supports the prefixed property */
+  -webkit-text-size-adjust: 100%;
   scrollbar-gutter: stable;
+  font-family: system-ui, sans-serif;
   line-height: 1.5;
   color: var(--color);
   scrollbar-width: thin;
   background-color: var(--bg);
+}
+
+body {
+  margin: 0;
 }
 
 :where(iframe, img, input, video, select, textarea) {
@@ -100,4 +112,29 @@ table {
 hr {
   border: none;
   border-top: 1px solid #ccc;
+}
+
+kbd {
+  font-family: "0xProto", monospace;
+}
+
+sup {
+  position: relative;
+  top: -0.5em;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+}
+
+[type="search"] {
+  appearance: textfield;
+  outline-offset: -2px;
 }
