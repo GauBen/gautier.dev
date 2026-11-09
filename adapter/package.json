@@ -17,17 +17,17 @@
     "build": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@sveltejs/adapter-node": "^6.0.0",
+    "@sveltejs/adapter-node": "^6.0.1",
     "pretty-bytes": "^7.2.0",
-    "rolldown": "^1.2.15"
+    "rolldown": "^1.3.1"
   },
   "devDependencies": {
-    "@sveltejs/kit": "^3.1.0",
+    "@sveltejs/kit": "^3.1.1",
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
-    "@types/node": "^26.6.5",
+    "@types/node": "^26.6.6",
     "svelte": "^5.57.3",
     "typescript": "^6.0.3",
-    "vite": "^8.3.5"
+    "vite": "^8.3.7"
   },
   "peerDependencies": {
     "@sveltejs/kit": "*"
