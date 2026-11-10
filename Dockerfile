@@ -1,4 +1,3 @@
-# MARK: build
 FROM debian:13-slim@sha256:109e2c65005bf160609e4ba6acf7783752f8502ad218e298253428690b9eaa4b AS build
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 WORKDIR /workdir
@@ -24,43 +23,19 @@ RUN --mount=type=cache,target=/mise/downloads mise install
 COPY --parents **/package.json upm.lock ./
 RUN --mount=type=cache,target=/root/.upm upm ci
 
-# Build the project
+# Build the project and collect its shared libraries into /rootfs
 COPY . .
-RUN upm build && ldd build/node
+RUN upm build \
+  && mkdir /rootfs \
+  && ldd build/node | grep --only-matching --extended-regexp '/\S+' | xargs --verbose -- cp --dereference --parents --target-directory=/rootfs --
 
-# MARK: arm64
-FROM scratch AS arm64
+FROM scratch
 WORKDIR /app
 
 EXPOSE 3000
 
-# Copy all runtime dependencies (ldd build/node)
-COPY --from=build /lib/ld-linux-aarch64.so.1 /lib/ld-linux-aarch64.so.1
-COPY --from=build \
-  /lib/aarch64-linux-gnu/libatomic.so.1 /lib/aarch64-linux-gnu/libdl.so.2      \
-  /lib/aarch64-linux-gnu/libm.so.6      /lib/aarch64-linux-gnu/libstdc++.so.6  \
-  /lib/aarch64-linux-gnu/libgcc_s.so.1  /lib/aarch64-linux-gnu/libpthread.so.0 \
-  /lib/aarch64-linux-gnu/libc.so.6      /lib/aarch64-linux-gnu/
-
-# Use a non-root user to run the application
-USER 65532:65532
-COPY --from=build --chown=65532:65532 /workdir/build/node .
-HEALTHCHECK --start-interval=2s --start-period=2s CMD ["./node", "--healthcheck"]
-ENTRYPOINT ["./node"]
-
-# MARK: amd64
-FROM scratch AS amd64
-WORKDIR /app
-
-EXPOSE 3000
-
-# Copy all runtime dependencies (ldd build/node)
-COPY --from=build /lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
-COPY --from=build \
-  /lib/x86_64-linux-gnu/libatomic.so.1 /lib/x86_64-linux-gnu/libdl.so.2      \
-  /lib/x86_64-linux-gnu/libm.so.6      /lib/x86_64-linux-gnu/libstdc++.so.6  \
-  /lib/x86_64-linux-gnu/libgcc_s.so.1  /lib/x86_64-linux-gnu/libpthread.so.0 \
-  /lib/x86_64-linux-gnu/libc.so.6      /lib/x86_64-linux-gnu/
+# Copy all runtime dependencies (resolved by ldd for the target architecture)
+COPY --from=build /rootfs/ /
 
 # Use a non-root user to run the application
 USER 65532:65532
