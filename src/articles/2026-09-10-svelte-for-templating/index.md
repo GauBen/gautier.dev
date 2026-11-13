@@ -24,12 +24,14 @@ Here is the typical render flow of a SvelteKit application with [hydration](http
 flowchart LR
   S(Svelte Code)
   subgraph Server Runtime
-    S -- "server output" --> Ssr[Server-side Rendering] --> H(HTML & CSS)
+    Ssr[Server-side Rendering] --> H(HTML & CSS)
   end
   subgraph Client
-    H --> R[Client Runtime]
-    S -- "client output" --> R --> U(Interactive User Interface)
+    R[Client Runtime] --> U(Interactive User Interface)
   end
+  S -- "server output" --> Ssr
+  S -- "client output" --> R
+  H --> R
 ```
 
 The [`svelte`](https://npmx.dev/package/svelte) npm package exposes all that's needed to reproduce this _Svelte code → HTML & CSS_ transformation in isolation, outside of a full SvelteKit application. The rest of this article is about using these primitives.

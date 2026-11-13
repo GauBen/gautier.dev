@@ -1,4 +1,4 @@
-import { renderMermaidSVG, type RenderOptions } from "beautiful-mermaid";
+import { render as renderMermaidSVG } from "pele";
 import Prism from "prismjs";
 
 import "prism-svelte";
@@ -32,12 +32,21 @@ for (const lang of Object.keys(Prism.languages))
 Prism.languages.pina = Prism.languages.typescript;
 Prism.languages.jsonc = Prism.languages.json;
 
-const options: RenderOptions = {
-  nodeSpacing: 16,
-  padding: 2,
-  componentSpacing: 16,
-  layerSpacing: 16,
-};
+// Pele's root styles live in markdown-content.css (`.mermaid > svg`); fail the
+// build if pele starts emitting variables the stylesheet doesn't declare
+const KNOWN_VARS = new Set("bg fg m l s a b c r tw hw w fm".split(" "));
+
+const stripRootStyle = (svg: string) =>
+  svg.replace(/\sstyle="([^"]*)"/, (_, style: string) => {
+    const unknown = [...style.matchAll(/--([\w-]+):/g)]
+      .map(([, name]) => name)
+      .filter((name) => !(name[0] === "_" && KNOWN_VARS.has(name.slice(1))));
+    if (unknown.length > 0)
+      throw new Error(`New ${unknown.join(", ")}: update markdown-content.css`);
+    return "";
+  });
+
+let diagrams = 0;
 const renderMermaid = (code: string) => {
   let title = "";
   if (code.startsWith("%%")) {
@@ -45,20 +54,26 @@ const renderMermaid = (code: string) => {
     title = code.slice(2, end).trim();
     code = code.slice(end + 1);
   }
-  let html = renderMermaidSVG(code, options);
-  if (code.startsWith("flowchart LR")) {
-    html =
-      html
-        .replace("<svg", '<svg class="lr"')
-        .replaceAll(/id="|url\(#/g, (match) => `${match}lr-`) +
-      renderMermaidSVG(code.replace("flowchart LR", "graph TD"), options)
-        .replace("<svg", '<svg class="td"')
-        .replaceAll(/id="|url\(#/g, (match) => `${match}td-`);
-  }
-  return `<figure class="mermaid">${html.replaceAll(
-    /<style>.*?<\/style>|data-[\w-]+=".*?"\s*|(?<=\d\.\d\d)\d+/gs,
-    "",
-  )}${title && `<figcaption>${title}</figcaption>`}</figure>`;
+  const id = `mermaid-${diagrams++}`;
+  // Pele picks the most compact layout (e.g. flips LR to TD) to fit `maxWidth`
+  const render = (maxWidth: number) => {
+    const { svg, width } = renderMermaidSVG(code, { maxWidth });
+    return {
+      // Drop node and edge ids, only useful for scripting
+      svg: stripRootStyle(svg).replaceAll(/\sdata-id="[^"]*"/g, ""),
+      width,
+    };
+  };
+  const wide = render(800);
+  const narrow = render(360);
+  // Show the narrow layout once the wide one would have to shrink
+  const html =
+    wide.svg === narrow.svg
+      ? wide.svg
+      : `<style>@container(width<${Math.ceil(wide.width)}px){#${id}>[data-wide]{display:none}#${id}>[data-narrow]{display:block}}</style>` +
+        wide.svg.replace("<svg", "<svg data-wide") +
+        narrow.svg.replace("<svg", "<svg data-narrow");
+  return `<figure class="mermaid" id="${id}">${html}${title && `<figcaption>${title}</figcaption>`}</figure>`;
 };
 
 export const highlight = (code: string, lang: string) =>

@@ -3,6 +3,9 @@
 :where(.markdown-content) {
   padding: 0 0.5em;
 
+  /* Diagrams switch layout based on the available width */
+  container-type: inline-size;
+
   > :where(*) {
     width: var(--main-width);
     max-width: 100%;
@@ -101,39 +104,41 @@
     width: auto;
   }
 
+  /* Pele's root styles, stripped from the SVG in prism.ts */
   .mermaid > svg {
-    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
     /* stylelint-disable custom-property-pattern */
-    --_text: var(--fg);
-    --_text-sec: var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
-    --_text-muted: var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
-    --_text-faint: color-mix(in srgb, var(--fg) 25%, var(--bg));
-    --_line: var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
-    --_arrow: var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
-    --_node-fill: var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
-    --_node-stroke: var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
-    --_group-fill: var(--bg);
-    --_group-hdr: color-mix(in srgb, var(--fg) 5%, var(--bg));
-    --_inner-stroke: color-mix(in srgb, var(--fg) 12%, var(--bg));
-    --_key-badge: color-mix(in srgb, var(--fg) 10%, var(--bg));
+    --_bg: var(--bg);
+    --_fg: var(--color);
+    --_m: color-mix(in srgb, var(--color) 60%, var(--bg));
+    --_l: color-mix(in srgb, var(--color) 50%, var(--bg));
+    --_s: color-mix(in srgb, var(--color) 3%, var(--bg));
+    --_a: color-mix(in srgb, var(--color) 6%, var(--bg));
+    --_b: color-mix(in srgb, var(--color) 20%, var(--bg));
+    --_c: #5b7bd5;
+    --_r: 4px;
+    --_tw: bold;
+    --_hw: bold;
+    --_w: bold;
+    --_fm: monospace;
+    /* stylelint-enable custom-property-pattern */
 
     max-width: 100%;
     height: auto;
 
-    text {
-      font-family: system-ui, sans-serif;
-    }
+    /* Pele measures text with Arial metrics when rendering server-side */
+    font:
+      16px arial,
+      helvetica,
+      sans-serif;
+    color: var(--color);
+    text-transform: none;
+    word-spacing: normal;
+    letter-spacing: normal;
+    direction: ltr;
   }
 
-  @media (orientation: portrait) {
-    .mermaid .lr {
-      display: none;
-    }
-  }
-
-  @media (orientation: landscape) {
-    .mermaid .td {
-      display: none;
-    }
+  /* Each diagram toggles these with its own container query */
+  .mermaid > [data-narrow] {
+    display: none;
   }
 }
