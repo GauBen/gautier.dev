@@ -63,7 +63,6 @@
   .colophon {
     margin-top: 0;
     font-size: 0.875em;
-    opacity: 0.8;
 
     .techna {
       font-family: "Techna Sans", sans-serif;
