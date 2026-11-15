@@ -11,11 +11,19 @@
 <slot />
 
 <footer>
-  <p>
+  <p style="margin-bottom: .75em;">
     Gautier Ben Aïm — {Temporal.Now.plainDateISO().year} —
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">
       CC BY-NC-SA 4.0
     </a>
+  </p>
+  <p class="colophon">
+    Set in
+    <a href="https://github.com/somefreefonts/techna-sans" class="techna"
+      >Techna Sans</a
+    >,
+    <a href="https://github.com/sursly/scoutie">Scoutie Sans</a>
+    and <a href="https://github.com/0xType/0xProto" class="proto">0xProto</a>
   </p>
   <p class="icons">
     <a href="https://www.linkedin.com/in/gautier-ben-aim/" rel="author">
@@ -50,6 +58,20 @@
     contain: paint;
     text-align: center;
     text-wrap: balance;
+  }
+
+  .colophon {
+    margin-top: 0;
+    font-size: 0.875em;
+    opacity: 0.8;
+
+    .techna {
+      font-family: "Techna Sans", sans-serif;
+    }
+
+    .proto {
+      font-family: "0xProto", monospace;
+    }
   }
 
   .icons {

@@ -1,44 +1,98 @@
 [
   {
+    "title": "Design System in a CMS: Developer Integration Guide",
+    "url": "https://www.jahia.com/blog/design-system-cms-integration-guide",
+    "banner": "https://www.jahia.com/files/live/sites/jahiacom/files/blog/Articles/design-system-cms-guide-integration/design-system-cms.jpg",
+    "date": "2026-09-03",
+    "description": "Integrating a design system into a CMS: HTML/CSS or React, build-time or consumption-time CSS, composition or configuration, and what to expose to editors.",
+    "company": "Jahia"
+  },
+  {
+    "title": "Under the Hood: Hydrating React Components in Java",
+    "url": "https://www.jahia.com/blog/under-the-hood-hydrating-react-components-in-java",
+    "banner": "https://www.jahia.com/files/live/sites/jahiacom/files/blog/Articles/under-the-hood-hydrating-react-components-in-java/react-hydration-java-share.jpg",
+    "date": "2025-07-18",
+    "description": "How Jahia renders React on the server and hydrates it in the browser: a step-by-step look under the hood at GraalVM, Rolldown and hydrateRoot, with code.",
+    "company": "Jahia"
+  },
+  {
+    "title": "Leveraging the Island Architecture in Jahia CMS",
+    "url": "https://www.jahia.com/blog/leveraging-the-island-architecture-in-jahia-cms",
+    "banner": "https://www.jahia.com/files/live/sites/jahiacom/files/blog/Articles/leveraging-the-island-architecture-in-jahia-cms/islands%20architecture%20schema.svg",
+    "date": "2025-06-19",
+    "description": "What is Island Architecture? Server-side rendering with hydration of only the interactive components keeps pages fast, SEO-friendly and interactive.",
+    "company": "Jahia"
+  },
+  {
     "title": "Leveraging Temporal for resilient remote procedure calls (RPC)",
     "url": "https://escape.tech/blog/leveraging-temporal-for-resilient-remote-procedure-calls/",
     "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2023/10/temporal-rpc-escape-2.png",
     "date": "2023-10-18",
-    "description": "Temporal is not the first technology that comes to mind when discussing RPC technologies, but its broad feature set makes it a notable contender in this space."
+    "description": "Temporal is not the first technology that comes to mind when discussing RPC technologies, but its broad feature set makes it a notable contender in this space.",
+    "company": "Escape"
   },
   {
     "title": "Using Protobuf with TypeScript",
     "url": "https://escape.tech/blog/using-protobuf-typescript/",
     "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2023/09/protobuf-escape.png",
     "date": "2023-09-26",
-    "description": "We recently moved to Protobuf to enforce consistency. Discover the pros and cons of migration to Protobuf and follow the step-by-step guide to create a tiny TypeScript-Protobuf prototype."
+    "description": "We recently moved to Protobuf to enforce consistency. Discover the pros and cons of migration to Protobuf and follow the step-by-step guide to create a tiny TypeScript-Protobuf prototype.",
+    "company": "Escape"
   },
   {
     "title": "How to set up a TypeScript Monorepo",
     "url": "https://escape.tech/blog/setup-typescript-monorepo/",
     "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2023/09/typescript-monorepo.png",
     "date": "2023-09-18",
-    "description": "We write our software in TypeScript because it allows us to iterate quickly without compromising on safety. Discover our setup, how to put it in place and the developer experience it offers."
+    "description": "We write our software in TypeScript because it allows us to iterate quickly without compromising on safety. Discover our setup, how to put it in place and the developer experience it offers.",
+    "company": "Escape"
+  },
+  {
+    "title": "8 Common GraphQL Vulnerabilities & How to Fix Them",
+    "url": "https://escape.tech/blog/8-most-common-graphql-vulnerabilities/",
+    "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2023/01/Blog-Banners--3-.png",
+    "date": "2023-01-26",
+    "description": "Discover the 8 most common GraphQL vulnerabilities, from injection to access control flaws. Learn how to detect and fix them before attackers exploit them.",
+    "company": "Escape"
   },
   {
     "title": "GraphQL errors: the Good, the Bad and the Ugly",
     "url": "https://escape.tech/blog/graphql-errors-the-good-the-bad-and-the-ugly/",
     "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2023/09/graphql-errors.png",
     "date": "2023-01-05",
-    "description": "Managing GraphQL errors can be quite a challenging task, and we tried a lot of different approaches over time. Keep reading to know what we've learned along the way."
+    "description": "Managing GraphQL errors can be quite a challenging task, and we tried a lot of different approaches over time. Keep reading to know what we've learned along the way.",
+    "company": "Escape"
   },
   {
     "title": "Rendering emails with Svelte",
     "url": "https://escape.tech/blog/sveltemails/",
     "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2022/12/Blog-Banners--1-.png",
     "date": "2022-12-15",
-    "description": "We recently rebuilt our whole email stack from scratch to improve the developer experience: we now have an instant feedback loop, leveraging a SvelteKit-powered dev server."
+    "description": "We recently rebuilt our whole email stack from scratch to improve the developer experience: we now have an instant feedback loop, leveraging a SvelteKit-powered dev server.",
+    "company": "Escape"
+  },
+  {
+    "title": "Achieving end-to-end type safety in a modern JS GraphQL stack – Part 2",
+    "url": "https://escape.tech/blog/achieving-end-to-end-type-safety-in-a-modern-js-graphql-stack/",
+    "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2022/11/cover-part2.png",
+    "date": "2022-11-24",
+    "description": "In this second part, we build the front-end of our message board with Svelte and GraphQL Zeus, bringing type safety all the way from the database to the browser.",
+    "company": "Escape"
+  },
+  {
+    "title": "Achieving end-to-end type safety in a modern JS GraphQL stack – Part 1",
+    "url": "https://escape.tech/blog/achieving-end-to-end-type-safety-in-a-modern-js-graphql-stack-part-1/",
+    "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2022/11/cover-part-1.png",
+    "date": "2022-11-17",
+    "description": "In this article, we will create a simple GraphQL application, a message board, by combining many recent open-source technologies that work well together.",
+    "company": "Escape"
   },
   {
     "title": "Forging GraphQL Bombs, the modern version of Zip Bombs",
     "url": "https://escape.tech/blog/forging-graphql-bombs-the-2022-version-of-zip-bombs/",
     "banner": "https://escape.tech/blog/content/images/size/w600/format/webp/2022/08/--Landscape---GraphQL.Security--3-.png",
     "date": "2022-08-12",
-    "description": "Zip Bombs are a thing of the past, but the concept behind them is still relevant nowadays. Indeed, your GraphQL application might be vulnerable to what we'll call GraphQL Bombs in this article."
+    "description": "Zip Bombs are a thing of the past, but the concept behind them is still relevant nowadays. Indeed, your GraphQL application might be vulnerable to what we'll call GraphQL Bombs in this article.",
+    "company": "Escape"
   }
 ]

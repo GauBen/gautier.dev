@@ -142,12 +142,13 @@
   {#if q === undefined}
     <h2 style="margin-block-start: 2rem">Corporate articles</h2>
     <p>
-      These are the articles I have written for corporate blogs. They contain
-      sponsored content and should be regarded as such.
+      These are the articles I have written for corporate blogs. Explaining
+      tricky tech to fellow developers is the part of the job I enjoy most.
+      These articles contain sponsored content and should be regarded as such.
     </p>
 
     <div class="grid">
-      {#each external as { title, url, banner, date, description } (url)}
+      {#each external as { title, url, banner, date, description, company } (url)}
         <Card>
           {#snippet header()}
             <img src={banner} alt="" class="banner" loading="lazy" />
@@ -159,7 +160,8 @@
           <p>
             <time datetime={date}>
               {formatDate(Temporal.PlainDate.from(date))}
-            </time> for Escape
+            </time>
+            for {company}
           </p>
         </Card>
       {/each}
