@@ -155,7 +155,7 @@
           <h2>
             <a href={url} rel="external sponsored">{title}</a>
           </h2>
-          <p>{description}</p>
+          <p style="flex: 1">{description}</p>
           <p>
             <time datetime={date}>
               {formatDate(Temporal.PlainDate.from(date))}

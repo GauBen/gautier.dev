@@ -506,9 +506,10 @@
 
   mark {
     padding: 0.25em;
-    font-family: system-ui;
-    font-size: 1rem;
-    font-weight: normal;
+    font:
+      300 1rem "Scoutie Sans Variable",
+      system-ui,
+      sans-serif;
     background: linear-gradient(to bottom, #fff0 60%, #0d3c7733 61%);
   }
 

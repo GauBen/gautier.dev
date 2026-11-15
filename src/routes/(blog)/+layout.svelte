@@ -5,6 +5,7 @@
   import Github from "@iconify-svelte/ph/github-logo-duotone";
   import Linkedin from "@iconify-svelte/ph/linkedin-logo-duotone";
   import Rss from "@iconify-svelte/ph/rss-duotone";
+  import Butterfly from "@iconify-svelte/ph/butterfly-duotone";
 </script>
 
 <slot />
@@ -22,6 +23,9 @@
     </a>
     <a href="https://github.com/GauBen/" rel="author">
       <Github class="icon" aria-label="My GitHub Profile" />
+    </a>
+    <a href="https://bsky.app/profile/gautier.dev" rel="author">
+      <Butterfly class="icon" aria-label="My Bluesky Profile" />
     </a>
     <a href={resolve("feed")} rel="feed">
       <Rss class="icon" aria-label="Atom feed" />

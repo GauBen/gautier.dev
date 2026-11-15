@@ -25,7 +25,10 @@
   /* stylelint-disable-next-line property-no-vendor-prefix -- Safari only supports the prefixed property */
   -webkit-text-size-adjust: 100%;
   scrollbar-gutter: stable;
-  font-family: system-ui, sans-serif;
+  font:
+    300 1em "Scoutie Sans Variable",
+    system-ui,
+    sans-serif;
   line-height: 1.5;
   color: var(--color);
   scrollbar-width: thin;

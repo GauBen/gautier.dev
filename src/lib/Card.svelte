@@ -15,6 +15,8 @@
 <style>
   .card {
     position: relative;
+    display: flex;
+    flex-direction: column;
     margin-block: 1rem;
     contain: paint;
     border-radius: 0.5em;
@@ -29,6 +31,7 @@
 
     .body {
       display: flex;
+      flex: 1;
       flex-direction: column;
       gap: 0.5em;
       padding: 1rem;
