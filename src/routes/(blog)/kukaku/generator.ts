@@ -1,5 +1,6 @@
 import { neighbors, type Cell, type Grid } from "./grid.js";
-import { countSolutions, type Solution } from "./solver.js";
+import { Difficulty, DIFFICULTY_RANGES, difficultyOf, rate } from "./logic.js";
+import type { Solution } from "./solver.js";
 
 export interface GeneratorOptions {
   width: number;
@@ -12,12 +13,16 @@ export interface GeneratorOptions {
    */
   holes: number;
   seed: number;
+  difficulty?: Difficulty;
 }
 
 export interface Puzzle {
   grid: Grid;
   /** The unique solution. */
   solution: Solution;
+  difficulty: Difficulty;
+  /** Difficulty score, see `rate`. */
+  score: number;
 }
 
 /** Small seeded PRNG (mulberry32), returns floats in [0, 1). */
@@ -97,15 +102,19 @@ function tile(
 }
 
 /**
- * Generates a puzzle with a unique solution.
+ * Generates a puzzle that can be solved by deduction alone (see `logic.ts`),
+ * with the requested difficulty. Such a puzzle has a unique solution.
  *
  * 1. Pick random holes and tile the rest of the grid with groups of cells.
  * 2. Fill each group with a random permutation of 1 to `groupSize`.
- * 3. While other solutions exist, reshuffle the digits of a random group, keeping
- *    the change if it does not increase the number of solutions.
+ * 3. While the logical solver gets stuck, reshuffle the digits of a group it could
+ *    not place, keeping the change if the solver gets at least as far.
+ * 4. While the difficulty is off, reshuffle the digits of a random group, keeping
+ *    the change if the grid stays solvable and its difficulty score gets closer
+ *    to the target range.
  *
- * The intended tiling stays a solution throughout, so the result is unique once
- * the count reaches 1. Restarts from scratch if it gets stuck.
+ * The intended tiling stays a solution throughout. Restarts from scratch if it
+ * gets stuck.
  */
 export function generate({
   width,
@@ -113,6 +122,7 @@ export function generate({
   groupSize,
   holes,
   seed,
+  difficulty = Difficulty.Medium,
 }: GeneratorOptions): Puzzle {
   const size = width * height;
   if (groupSize < 2 || groupSize > 9)
@@ -123,7 +133,14 @@ export function generate({
     );
 
   const rand = random(seed);
-  const CAP = 64;
+  const [low, high] = DIFFICULTY_RANGES[difficulty];
+  /** How far a score is from the target difficulty (0 if on target). */
+  const offTarget = (score: number) =>
+    difficultyOf(score) === difficulty
+      ? 0
+      : score <= low
+        ? low - score + 1e-9
+        : score - high;
 
   for (;;) {
     const holeSet = new Set(
@@ -132,8 +149,9 @@ export function generate({
         rand,
       ).slice(0, holes),
     );
-    const solution = tile(width, height, groupSize, holeSet, rand);
-    if (!solution) continue;
+    const tiling = tile(width, height, groupSize, holeSet, rand);
+    if (!tiling) continue;
+    const solution = tiling.map((group) => group.toSorted((a, b) => a - b));
 
     const cells = Array.from({ length: size }, (): Cell => null);
     const fill = (group: number[]) => {
@@ -146,26 +164,38 @@ export function generate({
     for (const group of solution) fill(group);
 
     const grid: Grid = { width, height, groupSize, cells };
-    let count = countSolutions(grid, CAP);
+    let rating = rate(grid);
+    const budget = 20 * solution.length;
+
+    for (let attempt = 0; !rating.solved && attempt < budget; attempt++) {
+      // Reshuffle a group the solver could not place
+      const placed = new Set(rating.placed.map((group) => group.join()));
+      const stuck = solution.filter((group) => !placed.has(group.join()));
+      const group = stuck[Math.floor(rand() * stuck.length)];
+      const before = group.map((i) => cells[i]);
+      fill(group);
+      const next = rate(grid);
+      if (next.covered >= rating.covered) rating = next;
+      else group.forEach((i, k) => (cells[i] = before[k]));
+    }
+    if (!rating.solved) continue;
 
     for (
       let attempt = 0;
-      count > 1 && attempt < 50 * solution.length;
+      offTarget(rating.score) > 0 && attempt < budget;
       attempt++
     ) {
       const group = solution[Math.floor(rand() * solution.length)];
       const before = group.map((i) => cells[i]);
       fill(group);
-      const next = countSolutions(grid, CAP);
-      if (next <= count) count = next;
+      const next = rate(grid);
+      if (next.solved && offTarget(next.score) <= offTarget(rating.score))
+        rating = next;
       else group.forEach((i, k) => (cells[i] = before[k]));
     }
+    if (offTarget(rating.score) > 0) continue;
 
-    if (count === 1)
-      return {
-        grid,
-        solution: solution.map((group) => group.toSorted((a, b) => a - b)),
-      };
+    return { grid, solution, difficulty, score: rating.score };
   }
 }
 
