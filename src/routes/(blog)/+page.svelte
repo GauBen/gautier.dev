@@ -77,6 +77,7 @@
       {" "}· <a href={resolve("about")}>/about</a>
       · <a href={resolve("resume")}>/resume</a>
       · <a href={resolve("self-hosted")}>/self-hosted</a>
+      · <a href={resolve("kukaku")}>/kukaku</a>
     </code>
   </nav>
 
