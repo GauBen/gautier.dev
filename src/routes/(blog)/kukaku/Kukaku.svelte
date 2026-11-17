@@ -1,4 +1,10 @@
 <script lang="ts">
+  import ClipboardText from "@iconify-svelte/ph/clipboard-text-duotone";
+  import Confetti from "@iconify-svelte/ph/confetti-duotone";
+  import Lightbulb from "@iconify-svelte/ph/lightbulb-duotone";
+  import { prefersReducedMotion } from "svelte/motion";
+  import { formatHints, formatTime } from "./format.js";
+  import Glyph, { glyphName } from "./Glyph.svelte";
   import { deadCells, isConnected, neighbors, type Grid } from "./grid.js";
   import { Rule, type Hint } from "./logic.js";
 
@@ -13,8 +19,11 @@
     onsolve,
     gethint,
     share,
+    symbols = false,
   }: {
     grid: Grid;
+    /** Whether to draw symbols (see `Glyph`) instead of digits. */
+    symbols?: boolean;
     /**
      * Called once when the grid is solved, with the time taken in ms and the
      * number of hints used.
@@ -26,8 +35,30 @@
     share?: () => { title: string; url: string };
   } = $props();
 
-  const PALETTE = 8;
-  const playable = $derived(grid.cells.filter((c) => c !== null).length);
+  /**
+   * Group colors: outline, fill, and square in shared results (distinct, so
+   * that adjacent groups, which get different colors, stay apart).
+   */
+  const PALETTE = [
+    ["#2f6fb3", "#dbe9f8", "🟦"],
+    ["#c0602a", "#fbe3d4", "🟧"],
+    ["#3b8a4f", "#dcf0df", "🟩"],
+    ["#8a4fb3", "#ece0f6", "🟪"],
+    ["#b3366a", "#f8dbe7", "🟥"],
+    ["#2c8c8c", "#d6f0ef", "🟫"],
+    ["#8a7a2a", "#f2edcf", "🟨"],
+    ["#5a5a75", "#e3e3ec", "⬛"],
+  ];
+  const id = $props.id();
+
+  /**
+   * Message read by screen readers after an action. A trailing no-break space
+   * is toggled so that repeating the same message is announced again.
+   */
+  let announcement = $state("");
+  const announce = (message: string) => {
+    announcement = announcement === message ? `${message}\u00a0` : message;
+  };
 
   let groups = $state<Group[]>([]);
   let past = $state<Group[][]>([]);
@@ -43,13 +74,16 @@
     });
     return owner;
   });
-  const complete = $derived(
-    groups.filter((group) => group.cells.length === grid.groupSize),
-  );
+  const isComplete = (group: Group) => group.cells.length === grid.groupSize;
+  const complete = $derived(groups.filter(isComplete));
   const dead = $derived(
     deadCells(grid, new Set(complete.flatMap((group) => group.cells))),
   );
-  const solved = $derived(complete.length * grid.groupSize === playable);
+  /** Number of groups to form. */
+  const total = $derived(
+    grid.cells.filter((c) => c !== null).length / grid.groupSize,
+  );
+  const solved = $derived(complete.length === total);
 
   // Timer: starts on the first interaction, stops when solved
   let startedAt = $state<number>();
@@ -63,9 +97,8 @@
   const elapsed = $derived(
     startedAt === undefined ? 0 : (endedAt ?? now) - startedAt,
   );
-  const formatTime = (ms: number) => {
-    const s = Math.floor(ms / 1000);
-    return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+  const startTimer = () => {
+    if (startedAt === undefined) startedAt = now = Date.now();
   };
 
   // Hints: computed by `gethint`, shown until the next move
@@ -84,7 +117,7 @@
 
   async function askHint() {
     if (!gethint || solved || hintLoading) return;
-    if (startedAt === undefined) startedAt = now = Date.now();
+    startTimer();
     cancel();
     hintLoading = true;
     try {
@@ -92,6 +125,8 @@
       const result = await gethint(asked.map((group) => group.cells));
       computedHint = { hint: result, groups: asked };
       if (result.kind !== "none") hintsUsed++;
+    } catch {
+      // Worker unavailable or restarted: no hint this time
     } finally {
       hintLoading = false;
     }
@@ -105,49 +140,18 @@
         : "";
 
   // Sharing the result: time, hints and groups drawn with colored squares
-  const SQUARES = ["🟥", "🟧", "🟨", "🟩", "🟦", "🟪", "🟫"];
-  /** Square matching each palette color (none for teal). */
-  const PREFERRED = ["🟦", "🟧", "🟩", "🟪", "🟥", "🟩", "🟨", "🟫"];
-
   function shareText() {
     const { title, url } = share?.() ?? {
       title: "Kukaku",
       url: location.href,
     };
-    // Color groups like on screen, unless two adjacent groups would get the
-    // same square: there is no teal square, so teal groups (palette color 5)
-    // pick theirs last, among the squares unused by their neighbors
-    const squares: string[] = [];
-    const order = groups
-      .map((_, g) => g)
-      .sort((a, b) => +(groups[a].color === 5) - +(groups[b].color === 5));
-    for (const g of order) {
-      const taken = new Set(
-        groups[g].cells.flatMap((i) =>
-          neighbors(grid, i)
-            .map((j) => owner[j])
-            .filter((h) => h >= 0 && h !== g)
-            .map((h) => squares[h]),
-        ),
-      );
-      const preferred = PREFERRED[groups[g].color];
-      squares[g] = taken.has(preferred)
-        ? (SQUARES.find((square) => !taken.has(square)) ?? preferred)
-        : preferred;
-    }
-
-    const rows: string[] = [];
-    for (let row = 0; row < grid.height; row++) {
-      let line = "";
-      for (let col = 0; col < grid.width; col++) {
-        const g = owner[row * grid.width + col];
-        line += g >= 0 ? squares[g] : "⬜";
-      }
-      rows.push(line);
-    }
-
-    const hints =
-      hintsUsed > 0 ? ` · 💡 ${hintsUsed} hint${hintsUsed > 1 ? "s" : ""}` : "";
+    const rows = Array.from({ length: grid.height }, (_, row) =>
+      owner
+        .slice(row * grid.width, (row + 1) * grid.width)
+        .map((g) => (g >= 0 ? PALETTE[groups[g].color][2] : "⬜"))
+        .join(""),
+    );
+    const hints = hintsUsed > 0 ? ` · 💡 ${formatHints(hintsUsed)}` : "";
     return [
       title,
       `⏱️ ${formatTime(elapsed)}${hints}`,
@@ -163,8 +167,10 @@
     try {
       await navigator.clipboard.writeText(shareText());
       copied = "yes";
+      announce("Result copied to the clipboard.");
     } catch {
       copied = "no";
+      announce("The result could not be copied.");
     }
     setTimeout(() => (copied = undefined), 2000);
   }
@@ -189,7 +195,7 @@
   const FRAME = 75;
 
   function fireworks() {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (prefersReducedMotion.current) return;
     const { width, height } = grid;
     const light = new Float32Array(width * height);
     const colors = Array.from({ length: width * height }, () => ROCKET_COLOR);
@@ -204,13 +210,31 @@
 
     const pick = <T,>(items: T[]) =>
       items[Math.floor(Math.random() * items.length)];
-    const rockets = Array.from({ length: 4 }, (_, k) => ({
-      // Away from the edges, so that the explosion stays in the grid
-      x: 1 + Math.floor(Math.random() * Math.max(1, width - 2)),
+    // Columns away from the edges, so that the explosions stay in the grid
+    const columns = Array.from({ length: Math.max(1, width - 2) }, (_, k) => [
+      Math.random(),
+      k + 1,
+    ])
+      .sort(([a], [b]) => a - b)
+      .map(([, x]) => x);
+    // An opening salvo of 5 rockets, launched every 3 frames or so (each one
+    // takes about 5 frames to rise, so they overlap) from alternating columns,
+    // then a finale of up to 4 rockets launched almost together, in distinct
+    // columns, while the last ones of the salvo explode
+    const jitter = (frames: number) => Math.floor(Math.random() * frames);
+    const rockets = [
+      ...Array.from({ length: 5 }, (_, k) => [
+        columns[k % columns.length],
+        4 + 3 * k + jitter(2),
+      ]),
+      ...columns.slice(0, 4).map((x) => [x, 20 + jitter(3)]),
+    ].map(([x, start]) => ({
+      x,
       y: height,
-      top: 1 + Math.floor(Math.random() * Math.max(1, height / 2 - 1)),
+      // Explodes between the second row and one row below the middle
+      top: 1 + Math.floor(Math.random() * (Math.max(1, height / 2 - 1) + 1)),
       color: pick(SPARK_COLORS),
-      start: 6 + k * 9,
+      start,
       exploded: false,
     }));
     let sparks: {
@@ -222,7 +246,7 @@
       color: string;
     }[] = [];
 
-    const end = rockets.at(-1)!.start + height + 10;
+    const end = 22 + height + 10; // Once the last rocket has faded
     let frame = 0;
     night = true;
 
@@ -321,6 +345,7 @@
     if (!previous) return;
     future.push(groups);
     groups = previous;
+    announce("Undone.");
   }
 
   function redo() {
@@ -330,20 +355,20 @@
     if (!next) return;
     past.push(groups);
     groups = next;
+    announce("Redone.");
     checkSolved();
   }
 
   function reset() {
     cancel();
     if (groups.length > 0) commit([]);
+    announce("Grid cleared.");
     if (endedAt !== undefined) {
       // Replaying a solved grid: restart the timer
       startedAt = endedAt = undefined;
       stopFireworks?.();
     }
   }
-
-  const isComplete = (group: Group) => group.cells.length === grid.groupSize;
 
   /** Removes group `g` and adds its cells to the selection. */
   function lift(g: number) {
@@ -366,7 +391,7 @@
     );
     const usage = (c: number) =>
       groups.filter((group) => group.color === c).length;
-    const all = Array.from({ length: PALETTE }, (_, c) => c);
+    const all = PALETTE.map((_, c) => c);
     const free = all.filter((c) => !adjacent.has(c));
     const color =
       selectionColor !== undefined && !adjacent.has(selectionColor)
@@ -375,9 +400,13 @@
             usage(c) < usage(best) ? c : best,
           );
     lastCell = selection.at(-1)!;
+    const size = selection.length;
     commit([...groups, { cells: selection, color }]);
     selection = [];
     selectionColor = undefined;
+    if (size < grid.groupSize) announce(`Partial group of ${size} cells.`);
+    else if (!solved)
+      announce(`Group complete, ${complete.length} of ${total}.`);
   }
 
   /**
@@ -389,7 +418,7 @@
   function pick(i: number, dragging: boolean) {
     const digit = grid.cells[i];
     if (digit === null || solved) return;
-    if (startedAt === undefined) startedAt = now = Date.now();
+    startTimer();
 
     const digits = new Set(selection.map((j) => grid.cells[j]));
     const touches = neighbors(grid, i).some((j) => selection.includes(j));
@@ -429,9 +458,31 @@
 
   /**
    * Ends a gesture: a selection of two cells or more is kept as a partial
-   * group, a single cell stays selected.
+   * group. A single cell extends an adjacent partial group that can take its
+   * digit (the most recent one), so that grids can be solved by clicks alone;
+   * otherwise, it stays selected.
    */
   function release() {
+    const [i] = selection;
+    const h =
+      selection.length === 1
+        ? Math.max(
+            -1,
+            ...neighbors(grid, i)
+              .map((j) => owner[j])
+              .filter(
+                (h) =>
+                  h >= 0 &&
+                  !isComplete(groups[h]) &&
+                  groups[h].cells.every((j) => grid.cells[j] !== grid.cells[i]),
+              ),
+          )
+        : -1;
+    if (h >= 0) {
+      selection = [];
+      lift(h);
+      selection.push(i);
+    }
     if (selection.length >= 2) group();
     else if (base) commit(groups);
   }
@@ -460,26 +511,37 @@
     last = i;
     focused = i;
 
+    pressed = click(i);
+  }
+
+  /**
+   * Picks cell `i` at the start of a click. Returns the group clicked, unless
+   * it was merged into the selection.
+   */
+  function click(i: number) {
     const g = owner[i];
     const before = selection.length;
-    if (g >= 0) pick(i, false);
-    // Nothing merged: this is a click (or a drag) on the group itself
-    if (g >= 0 && selection.length === before) pressed = g;
-    else if (g < 0) pick(i, false);
+    pick(i, false);
+    return g >= 0 && selection.length === before ? g : undefined;
+  }
+
+  /** Ends a click: breaks the group clicked, or ends the gesture. */
+  function unclick(g: number | undefined) {
+    if (g === undefined) {
+      release();
+      if (selection.length > 0)
+        announce(`${selection.length} of ${grid.groupSize} cells selected.`);
+      return;
+    }
+    cancel();
+    commit(groups.toSpliced(g, 1));
+    announce("Group removed.");
   }
 
   /** Keyboard equivalent of a click on cell `i`. */
   function press(i: number) {
     if (solved || grid.cells[i] === null) return;
-    const g = owner[i];
-    const before = selection.length;
-    pick(i, false);
-    if (g >= 0 && selection.length === before) {
-      cancel();
-      commit(groups.toSpliced(g, 1));
-    } else {
-      release();
-    }
+    unclick(click(i));
   }
 
   function onpointermove(event: PointerEvent) {
@@ -506,124 +568,142 @@
     if (!dragging) return;
     dragging = false;
     last = -1;
-    if (pressed !== undefined) {
-      cancel();
-      commit(groups.toSpliced(pressed, 1));
-      pressed = undefined;
-    } else {
-      release();
-    }
+    unclick(pressed);
+    pressed = undefined;
   }
 
   // Keyboard interactions: arrows to move, Enter/Space to pick
-  let cellElements = $state<HTMLButtonElement[]>([]);
+  let cellElements = $state<HTMLElement[]>([]);
 
   function onkeydown(event: KeyboardEvent) {
-    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "z") {
+    const key = event.key.toLowerCase();
+    if ((event.ctrlKey || event.metaKey) && (key === "z" || key === "y")) {
       event.preventDefault();
-      if (event.shiftKey) redo();
+      if (key === "y" || event.shiftKey) redo();
       else undo();
       return;
     }
-    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "y") {
-      event.preventDefault();
-      redo();
-      return;
-    }
     if (event.key === "Escape") {
+      if (selection.length > 0) announce("Selection cleared.");
       cancel();
       return;
     }
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      press(focused);
+      return;
+    }
 
-    const row = Math.floor(focused / grid.width);
-    const col = focused % grid.width;
     const moves: Record<string, [number, number]> = {
-      ArrowUp: [row - 1, col],
-      ArrowDown: [row + 1, col],
-      ArrowLeft: [row, col - 1],
-      ArrowRight: [row, col + 1],
+      ArrowUp: [-1, 0],
+      ArrowDown: [1, 0],
+      ArrowLeft: [0, -1],
+      ArrowRight: [0, 1],
     };
-    const target = moves[event.key];
-    if (!target) return;
+    const [dr, dc] = moves[event.key] ?? [0, 0];
+    if (!dr && !dc) return;
     event.preventDefault();
-    const [r, c] = target;
+    const r = Math.floor(focused / grid.width) + dr;
+    const c = (focused % grid.width) + dc;
     if (r < 0 || r >= grid.height || c < 0 || c >= grid.width) return;
     focused = r * grid.width + c;
     cellElements[focused]?.focus();
   }
 
-  /** Inset shadows drawing the outline of the region `i` belongs to. */
-  function outline(i: number, inRegion: (j: number) => boolean, width: string) {
-    const row = Math.floor(i / grid.width);
-    const col = i % grid.width;
-    const sides: [boolean, string][] = [
-      [row === 0 || !inRegion(i - grid.width), `0 ${width}`],
-      [col === grid.width - 1 || !inRegion(i + 1), `-${width} 0`],
-      [row === grid.height - 1 || !inRegion(i + grid.width), `0 -${width}`],
-      [col === 0 || !inRegion(i - 1), `${width} 0`],
-    ];
-    return sides
-      .filter(([edge]) => edge)
-      .map(([, offset]) => `inset ${offset} 0 0 var(--edge)`)
-      .join(", ");
-  }
-
   /**
-   * Corner squares filling the gap at inner elbows of a region: both orthogonal
-   * neighbors of a corner are in the region, the diagonal is not. Returned as
-   * `background-image` and `background-position` lists.
+   * Outline of the region `i` belongs to, as background layers: sides (dashed
+   * for partial groups, 4 dashes per cell split at the corners so that the
+   * pattern runs on from cell to cell), and squares filling inner elbows (both
+   * orthogonal neighbors of a corner are in the region, the diagonal is not).
+   * All backgrounds, so that browsers snap them to device pixels alike.
    */
-  function elbows(i: number, inRegion: (j: number) => boolean) {
+  function backgrounds(
+    i: number,
+    inRegion: (j: number) => boolean,
+    width: string,
+    dashed: boolean,
+  ) {
     const row = Math.floor(i / grid.width);
     const col = i % grid.width;
-    const has = (r: number, c: number) =>
-      r >= 0 &&
-      r < grid.height &&
-      c >= 0 &&
-      c < grid.width &&
-      inRegion(r * grid.width + c);
+    const has = (dr: number, dc: number) =>
+      row + dr >= 0 &&
+      row + dr < grid.height &&
+      col + dc >= 0 &&
+      col + dc < grid.width &&
+      inRegion(i + dr * grid.width + dc);
+    const solid = "linear-gradient(var(--edge) 0 0)";
+    const side = (direction: string) =>
+      dashed
+        ? `repeating-linear-gradient(${direction}, var(--edge) 0 6.25%, transparent 0 18.75%, var(--edge) 0 25%)`
+        : solid;
 
-    const positions: string[] = [];
-    for (const [dr, dc, position] of [
-      [-1, -1, "top left"],
-      [-1, 1, "top right"],
-      [1, 1, "bottom right"],
-      [1, -1, "bottom left"],
-    ] as const) {
-      if (has(row + dr, col) && has(row, col + dc) && !has(row + dr, col + dc))
-        positions.push(position);
-    }
-    if (positions.length === 0)
-      return { image: undefined, position: undefined };
-    return {
-      image: positions.map(() => "linear-gradient(var(--edge) 0 0)").join(", "),
-      position: positions.join(", "),
-    };
+    const layers = [
+      ...(
+        [
+          [-1, 0, "top"],
+          [0, 1, "right"],
+          [1, 0, "bottom"],
+          [0, -1, "left"],
+        ] as const
+      )
+        .filter(([dr, dc]) => !has(dr, dc))
+        .map(([dr, , position]) =>
+          dr
+            ? [side("to right"), `100% ${width}`, position]
+            : [side("to bottom"), `${width} 100%`, position],
+        ),
+      ...(
+        [
+          [-1, -1, "top left"],
+          [-1, 1, "top right"],
+          [1, 1, "bottom right"],
+          [1, -1, "bottom left"],
+        ] as const
+      )
+        .filter(([dr, dc]) => has(dr, 0) && has(0, dc) && !has(dr, dc))
+        .map(([, , position]) => [solid, `${width} ${width}`, position]),
+    ];
+    if (layers.length === 0) return undefined;
+    const list = (k: number) => layers.map((layer) => layer[k]).join(", ");
+    return { image: list(0), size: list(1), position: list(2) };
   }
 
   function describe(i: number) {
     const row = Math.floor(i / grid.width) + 1;
     const col = (i % grid.width) + 1;
     const digit = grid.cells[i];
-    if (digit === null) return `Row ${row}, column ${col}: hole`;
+    const position = `row ${row}, column ${col}`;
+    if (digit === null) return `Hole, ${position}`;
+    const g = owner[i];
     const state =
-      owner[i] >= 0
-        ? `in group ${owner[i] + 1}`
+      g >= 0
+        ? isComplete(groups[g])
+          ? "in a complete group"
+          : `in a partial group of ${groups[g].cells.length}`
         : selection.includes(i)
-          ? "selected"
+          ? `selected, ${selection.length} of ${grid.groupSize}`
           : dead.has(i)
-            ? "free, cannot be completed"
+            ? "free, cannot be grouped anymore"
             : "free";
-    return `Row ${row}, column ${col}: ${digit}, ${state}`;
+    const highlight = !hinted.has(i)
+      ? ""
+      : hint?.kind === "wrong"
+        ? ", wrong group"
+        : ", highlighted by the hint";
+    const value = symbols ? glyphName(digit) : digit;
+    return `${value}, ${state}${highlight}, ${position}`;
   }
 </script>
 
 <div class="kukaku" style:--w={grid.width}>
   <div class="toolbar">
-    <span class="timer" aria-label="Elapsed time">{formatTime(elapsed)}</span>
-    <span class="progress"
-      >{complete.length}/{playable / grid.groupSize} groups</span
+    <span class="timer"
+      ><span class="sr-only">Elapsed time: </span>{formatTime(elapsed)}</span
     >
+    <span class="progress">
+      <span aria-hidden="true">{complete.length}/{total} groups</span>
+      <span class="sr-only">{complete.length} of {total} groups complete</span>
+    </span>
     <span class="actions">
       {#if gethint}
         <button
@@ -654,91 +734,98 @@
     </span>
   </div>
 
-  <div class="board">
-    <div
-      class="grid"
-      class:solved
-      class:night
-      role="grid"
-      aria-label="Kukaku grid"
-      tabindex="-1"
-      {onpointerdown}
-      {onpointermove}
-      {onpointerup}
-      onpointercancel={onpointerup}
-      {onkeydown}
-    >
-      {#each { length: grid.height }, row (row)}
-        <div role="row" class="row">
-          {#each { length: grid.width }, col (col)}
-            {@const i = row * grid.width + col}
-            {@const digit = grid.cells[i]}
-            {@const g = owner[i]}
-            {@const selected = selection.includes(i)}
-            {@const inRegion =
-              g >= 0
-                ? (j: number) => owner[j] === g
-                : selected
-                  ? (j: number) => selection.includes(j)
-                  : undefined}
-            {@const partial = g >= 0 && groups[g].cells.length < grid.groupSize}
-            {@const edgeWidth = selected || partial ? "0.12em" : "0.2em"}
-            {@const corners = inRegion && elbows(i, inRegion)}
-            <button
-              type="button"
-              role="gridcell"
-              class="cell"
-              class:hole={digit === null}
-              class:grouped={g >= 0}
-              class:partial
-              class:selected
-              class:dead={dead.has(i) && g < 0 && !selected}
-              class:hinted={hinted.has(i)}
-              class:wrong={hinted.has(i) && hint?.kind === "wrong"}
-              data-i={i}
-              data-color={g >= 0 ? groups[g].color : undefined}
-              tabindex={i === focused ? 0 : -1}
-              aria-label={describe(i)}
-              aria-selected={selected}
-              disabled={digit === null}
-              style:box-shadow={inRegion && outline(i, inRegion, edgeWidth)}
-              style:background-size={corners?.image &&
-                `${edgeWidth} ${edgeWidth}`}
-              style:background-image={corners?.image}
-              style:background-position={corners?.position}
-              style:--delay="{distance(i) * 60}ms"
-              style:--glow={sky[i]?.color}
-              style:--glow-a={sky[i]?.a ?? 0}
-              bind:this={cellElements[i]}
-              onfocus={() => (focused = i)}
-              onclick={(event) => {
-                // Pointer clicks are handled on pointerdown; this is for keyboards
-                if (event.detail === 0) press(i);
-              }}
-            >
-              {digit ?? ""}
-            </button>
-          {/each}
-        </div>
-      {/each}
-    </div>
+  <div
+    class="grid"
+    class:solved
+    class:night
+    role="grid"
+    aria-label="Kukaku grid"
+    aria-describedby="{id}-keys"
+    tabindex="-1"
+    {onpointerdown}
+    {onpointermove}
+    {onpointerup}
+    onpointercancel={onpointerup}
+    {onkeydown}
+  >
+    {#each { length: grid.height }, row (row)}
+      <div role="row" class="row">
+        {#each { length: grid.width }, col (col)}
+          {@const i = row * grid.width + col}
+          {@const digit = grid.cells[i]}
+          {@const g = owner[i]}
+          {@const selected = selection.includes(i)}
+          {@const inRegion =
+            g >= 0
+              ? (j: number) => owner[j] === g
+              : selected
+                ? (j: number) => selection.includes(j)
+                : undefined}
+          {@const partial = g >= 0 && !isComplete(groups[g])}
+          {@const edgeWidth = selected || partial ? "0.12em" : "0.2em"}
+          {@const layers = inRegion
+            ? backgrounds(i, inRegion, edgeWidth, partial)
+            : undefined}
+          <!-- svelte-ignore a11y_click_events_have_key_events (Enter and Space are handled by the grid, see `onkeydown`) -->
+          <div
+            role="gridcell"
+            class="cell"
+            class:hole={digit === null}
+            class:grouped={g >= 0}
+            class:partial
+            class:selected
+            class:dead={dead.has(i) && g < 0 && !selected}
+            class:hinted={hinted.has(i)}
+            class:wrong={hinted.has(i) && hint?.kind === "wrong"}
+            data-i={i}
+            style:--edge={g >= 0 ? PALETTE[groups[g].color][0] : undefined}
+            style:--fill={g >= 0 ? PALETTE[groups[g].color][1] : undefined}
+            tabindex={i === focused ? 0 : -1}
+            aria-label={describe(i)}
+            aria-selected={selected}
+            aria-disabled={digit === null}
+            style:--layers={layers?.image}
+            style:--layers-size={layers?.size}
+            style:--layers-position={layers?.position}
+            style:--delay="{distance(i) * 60}ms"
+            style:--glow={sky[i]?.color}
+            style:--glow-a={sky[i]?.a ?? 0}
+            bind:this={cellElements[i]}
+            onfocus={() => (focused = i)}
+            onclick={(event) => {
+              // Pointer clicks are handled on pointerdown; this is for
+              // assistive technologies activating the cell
+              if (event.detail === 0) press(i);
+            }}
+          >
+            {#if digit !== null}
+              {#if symbols}<Glyph {digit} />{:else}{digit}{/if}
+            {/if}
+          </div>
+        {/each}
+      </div>
+    {/each}
   </div>
+
+  <p id="{id}-keys" class="sr-only">
+    Use the arrow keys to move, Enter or Space to add a cell to the group being
+    formed or to remove a group, Escape to clear the selection, Control+Z to
+    undo and Control+Y to redo.
+  </p>
+  <p class="sr-only" aria-live="polite">{announcement}</p>
 
   <p class="status" class:won={solved} aria-live="polite">
     {#if solved}
-      🎉 Solved in {formatTime(elapsed)}{hintsUsed > 0
-        ? ` with ${hintsUsed} hint${hintsUsed > 1 ? "s" : ""}`
-        : ""}!
-    {:else if hint?.kind === "wrong"}
-      💡 The highlighted group is not part of the solution.
-    {:else if hint?.kind === "group"}
-      💡 The highlighted cells can only form this group.{ruleExplanation(
-        hint.rule,
-      )}
-    {:else if hint?.kind === "together"}
-      💡 The highlighted cells must be in the same group.{ruleExplanation(
-        hint.rule,
-      )}
+      <Confetti aria-hidden="true" /> Solved in {formatTime(
+        elapsed,
+      )}{hintsUsed > 0 ? ` with ${formatHints(hintsUsed)}` : ""}!
+    {:else if hintLoading}
+      Looking for a hint…
+    {:else if hint && hint.kind !== "none"}
+      <Lightbulb aria-hidden="true" />
+      {hint.kind === "wrong"
+        ? "The highlighted group is not part of the solution."
+        : `The highlighted cells ${hint.kind === "group" ? "can only form this group" : "must be in the same group"}.${ruleExplanation(hint.rule)}`}
     {:else if hint?.kind === "none"}
       No hint available.
     {:else if dead.size > 0}
@@ -751,11 +838,13 @@
   {#if solved}
     <div class="share">
       <button type="button" onclick={copyResult}>
-        {copied === "yes"
-          ? "Copied!"
-          : copied === "no"
-            ? "Copy failed"
-            : "📋 Copy result"}
+        {#if copied === "yes"}
+          Copied!
+        {:else if copied === "no"}
+          Copy failed
+        {:else}
+          <ClipboardText aria-hidden="true" /> Copy result
+        {/if}
       </button>
     </div>
   {/if}
@@ -766,6 +855,7 @@
     --line: #0002;
     --cell: #fff;
     --selected: #fff6b3;
+    --accent: #8a7400; /* Selection and hints, 4.5:1 on white */
 
     max-width: calc(var(--w, 5) * 4.5rem);
     margin-inline: auto;
@@ -800,7 +890,7 @@
     color: inherit;
     cursor: pointer;
     background-color: #fff;
-    border: 1px solid #0003;
+    border: 1px solid #0007; /* 3:1 against the background */
     border-radius: 0.25rem;
 
     &:hover:not(:disabled) {
@@ -844,8 +934,9 @@
     --edge: transparent;
 
     position: relative;
+    display: grid;
+    place-items: center;
     aspect-ratio: 1;
-    padding: 0;
     font:
       500 calc(50cqi / var(--w)) / 1 "Techna Sans",
       sans-serif;
@@ -853,8 +944,18 @@
     text-shadow: var(--digit-shadow, none);
     cursor: var(--cursor, pointer);
     background-color: var(--cell);
+
+    /* Outline layers (see `backgrounds`) over the thin cell separators, which
+       the last column and row do not have */
+    background-image:
+      var(--layers, none), linear-gradient(var(--line) 0 0),
+      linear-gradient(var(--line) 0 0);
     background-repeat: no-repeat;
-    border: 0;
+    background-position: var(--layers-position, 0 0), right, bottom;
+    background-size:
+      var(--layers-size, auto),
+      var(--separator-x, 1px) 100%,
+      100% var(--separator-y, 1px);
     isolation: isolate;
     transition:
       background-color 100ms,
@@ -877,18 +978,18 @@
       transition: opacity 600ms;
     }
 
-    &::after {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      content: "";
-    }
-
     &:focus-visible {
-      position: relative;
       z-index: 1;
       outline: 0.15em solid var(--link);
       outline-offset: -0.15em;
+    }
+
+    &:last-child {
+      --separator-x: 0;
+    }
+
+    .row:last-child & {
+      --separator-y: 0;
     }
 
     &:hover:not(.grouped, .selected, .hole) {
@@ -896,26 +997,19 @@
     }
   }
 
-  /* Thin cell separators, drawn over the cells so group outlines stay unbroken */
-  .cell:not(:last-child)::after {
-    border-right: 1px solid var(--line);
-  }
-
-  .row:not(:last-child) .cell::after {
-    border-bottom: 1px solid var(--line);
-  }
-
   .hole {
-    cursor: default;
-    background: repeating-linear-gradient(
+    --layers: repeating-linear-gradient(
       -45deg,
       #ddd 0 0.25em,
       #eee 0.25em 0.5em
     );
+    --layers-size: 100% 100%;
+
+    cursor: default;
   }
 
   .selected {
-    --edge: #b39800;
+    --edge: var(--accent);
 
     background-color: var(--selected);
   }
@@ -927,7 +1021,7 @@
 
   .hinted {
     z-index: 1;
-    outline: 0.15em dashed #b39800;
+    outline: 0.15em dashed var(--accent);
     outline-offset: -0.35em;
     animation: hint 1s ease-in-out infinite alternate;
   }
@@ -944,51 +1038,20 @@
 
   .grouped {
     background-color: var(--fill);
-
-    &[data-color="0"] {
-      --edge: #2f6fb3;
-      --fill: #dbe9f8;
-    }
-
-    &[data-color="1"] {
-      --edge: #c0602a;
-      --fill: #fbe3d4;
-    }
-
-    &[data-color="2"] {
-      --edge: #3b8a4f;
-      --fill: #dcf0df;
-    }
-
-    &[data-color="3"] {
-      --edge: #8a4fb3;
-      --fill: #ece0f6;
-    }
-
-    &[data-color="4"] {
-      --edge: #b3366a;
-      --fill: #f8dbe7;
-    }
-
-    &[data-color="5"] {
-      --edge: #2c8c8c;
-      --fill: #d6f0ef;
-    }
-
-    &[data-color="6"] {
-      --edge: #8a7a2a;
-      --fill: #f2edcf;
-    }
-
-    &[data-color="7"] {
-      --edge: #5a5a75;
-      --fill: #e3e3ec;
-    }
   }
 
-  /* Partial groups: lighter fill and thinner outline (see `edgeWidth`) */
+  /* Partial groups: lighter fill and thinner dashed outline (see `edgeWidth`) */
   .partial {
     background-color: color-mix(in srgb, var(--fill) 55%, var(--cell));
+  }
+
+  .status,
+  .share {
+    :global(svg) {
+      width: 1.25em;
+      height: 1.25em;
+      vertical-align: -0.25em;
+    }
   }
 
   .status {
@@ -1025,11 +1088,6 @@
   }
 
   /* Victory animation */
-  .board {
-    position: relative;
-    container-type: inline-size;
-  }
-
   /* stylelint-disable-next-line keyframes-name-pattern -- Global (unscoped) so that it can be referenced from a custom property */
   @keyframes -global-kukaku-wave {
     0%,
@@ -1048,6 +1106,14 @@
     from {
       opacity: 0;
       scale: 0.6;
+    }
+  }
+
+  /* Groups are drawn with backgrounds and shadows, which forced colors (such as
+     Windows high contrast) would remove: keep the colors of the grid */
+  @media (forced-colors: active) {
+    .grid {
+      forced-color-adjust: none;
     }
   }
 

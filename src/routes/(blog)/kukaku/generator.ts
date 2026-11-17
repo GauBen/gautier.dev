@@ -1,6 +1,15 @@
 import { neighbors, type Cell, type Grid } from "./grid.js";
-import { Difficulty, DIFFICULTY_RANGES, difficultyOf, rate } from "./logic.js";
-import type { Solution } from "./solver.js";
+import { Difficulty, rate, type Rating } from "./logic.js";
+
+/** A solution: a list of groups, each a sorted list of cell indices. */
+export type Solution = number[][];
+
+/** Score ranges of each difficulty, see `rate`: (low, high]. */
+const RANGES: Record<Difficulty, [number, number]> = {
+  [Difficulty.Easy]: [-Infinity, 0.25],
+  [Difficulty.Medium]: [0.25, 0.6],
+  [Difficulty.Hard]: [0.6, Infinity],
+};
 
 export interface GeneratorOptions {
   width: number;
@@ -16,13 +25,26 @@ export interface GeneratorOptions {
   difficulty?: Difficulty;
 }
 
+/** Options of a square grid, with as few holes as possible. */
+export const squareGrid = (
+  size: number,
+  groupSize: number,
+  difficulty: Difficulty,
+  seed: number,
+): GeneratorOptions => ({
+  width: size,
+  height: size,
+  groupSize,
+  holes: (size * size) % groupSize,
+  difficulty,
+  seed,
+});
+
 export interface Puzzle {
   grid: Grid;
   /** The unique solution. */
   solution: Solution;
   difficulty: Difficulty;
-  /** Difficulty score, see `rate`. */
-  score: number;
 }
 
 /** Small seeded PRNG (mulberry32), returns floats in [0, 1). */
@@ -102,6 +124,12 @@ function tile(
 }
 
 /**
+ * Restarts before giving up. Every supported setting succeeds within about 10
+ * restarts; each restart is bounded, so generation always ends.
+ */
+const MAX_RESTARTS = 100;
+
+/**
  * Generates a puzzle that can be solved by deduction alone (see `logic.ts`),
  * with the requested difficulty. Such a puzzle has a unique solution.
  *
@@ -114,7 +142,8 @@ function tile(
  *    to the target range.
  *
  * The intended tiling stays a solution throughout. Restarts from scratch if it
- * gets stuck.
+ * gets stuck, and gives up after `MAX_RESTARTS` restarts: some settings never
+ * reach the requested difficulty (with groups of 2, everything is easy).
  */
 export function generate({
   width,
@@ -133,16 +162,14 @@ export function generate({
     );
 
   const rand = random(seed);
-  const [low, high] = DIFFICULTY_RANGES[difficulty];
+  const [low, high] = RANGES[difficulty];
   /** How far a score is from the target difficulty (0 if on target). */
   const offTarget = (score: number) =>
-    difficultyOf(score) === difficulty
-      ? 0
-      : score <= low
-        ? low - score + 1e-9
-        : score - high;
+    score <= low ? low - score + 1e-9 : Math.max(0, score - high);
 
-  for (;;) {
+  for (let restart = 0; ; restart++) {
+    if (restart > MAX_RESTARTS)
+      throw new Error("No grid found with these settings");
     const holeSet = new Set(
       shuffle(
         Array.from({ length: size }, (_, i) => i),
@@ -166,17 +193,23 @@ export function generate({
     const grid: Grid = { width, height, groupSize, cells };
     let rating = rate(grid);
     const budget = 20 * solution.length;
+    /** Reshuffles `group`, keeping the change if the new rating is `better`. */
+    const refill = (group: number[], better: (next: Rating) => boolean) => {
+      const before = group.map((i) => cells[i]);
+      fill(group);
+      const next = rate(grid);
+      if (better(next)) rating = next;
+      else group.forEach((i, k) => (cells[i] = before[k]));
+    };
 
     for (let attempt = 0; !rating.solved && attempt < budget; attempt++) {
       // Reshuffle a group the solver could not place
       const placed = new Set(rating.placed.map((group) => group.join()));
       const stuck = solution.filter((group) => !placed.has(group.join()));
-      const group = stuck[Math.floor(rand() * stuck.length)];
-      const before = group.map((i) => cells[i]);
-      fill(group);
-      const next = rate(grid);
-      if (next.covered >= rating.covered) rating = next;
-      else group.forEach((i, k) => (cells[i] = before[k]));
+      refill(
+        stuck[Math.floor(rand() * stuck.length)],
+        (next) => next.covered >= rating.covered,
+      );
     }
     if (!rating.solved) continue;
 
@@ -184,30 +217,14 @@ export function generate({
       let attempt = 0;
       offTarget(rating.score) > 0 && attempt < budget;
       attempt++
-    ) {
-      const group = solution[Math.floor(rand() * solution.length)];
-      const before = group.map((i) => cells[i]);
-      fill(group);
-      const next = rate(grid);
-      if (next.solved && offTarget(next.score) <= offTarget(rating.score))
-        rating = next;
-      else group.forEach((i, k) => (cells[i] = before[k]));
-    }
+    )
+      refill(
+        solution[Math.floor(rand() * solution.length)],
+        (next) =>
+          next.solved && offTarget(next.score) <= offTarget(rating.score),
+      );
     if (offTarget(rating.score) > 0) continue;
 
-    return { grid, solution, difficulty, score: rating.score };
+    return { grid, solution, difficulty };
   }
-}
-
-/** Formats a grid in the text form read by `parseGrid`. */
-export function formatGrid({ width, cells }: Grid): string {
-  const rows: string[] = [];
-  for (let i = 0; i < cells.length; i += width)
-    rows.push(
-      cells
-        .slice(i, i + width)
-        .map((c) => c ?? "#")
-        .join(" "),
-    );
-  return rows.join("\n");
 }

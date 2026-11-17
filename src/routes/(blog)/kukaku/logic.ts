@@ -1,5 +1,4 @@
 import { neighbors, type Grid } from "./grid.js";
-import { candidateGroups } from "./solver.js";
 
 /**
  * Deduction rules, from easiest to hardest. Every rule is sound: it only
@@ -28,14 +27,30 @@ export const Rule = {
 } as const;
 export type Rule = (typeof Rule)[keyof typeof Rule];
 
-export interface Step {
-  rule: Rule;
-  /** Group placed by the step (`Forced`). */
-  placed?: number[];
-  /** Cells deduced to be together (`Together`). */
-  together?: [number, number];
-  /** Groups eliminated by the step. */
-  eliminated: number[][];
+/**
+ * Every possible group of the grid: `groupSize` orthogonally connected cells
+ * holding each digit once. Each group is a sorted list of cell indices.
+ */
+export function candidateGroups(grid: Grid): number[][] {
+  const found = new Map<string, number[]>();
+  const grow = (group: number[]) => {
+    if (group.length === grid.groupSize) {
+      const sorted = group.toSorted((a, b) => a - b);
+      found.set(sorted.join(), sorted);
+      return;
+    }
+    const digits = new Set(group.map((i) => grid.cells[i]));
+    for (const cell of group) {
+      for (const n of neighbors(grid, cell)) {
+        if (grid.cells[n] === null || group.includes(n)) continue;
+        if (!digits.has(grid.cells[n])) grow([...group, n]);
+      }
+    }
+  };
+  grid.cells.forEach((digit, i) => {
+    if (digit !== null) grow([i]);
+  });
+  return [...found.values()];
 }
 
 /** State of a logical resolution: possible groups and placed groups. */
@@ -76,22 +91,14 @@ export class Deduction {
   }
 
   /** Places candidate `g`, eliminating the candidates overlapping it. */
-  place(g: number): number[][] {
-    const eliminated: number[][] = [];
+  place(g: number) {
     const group = this.candidates[g];
     for (const i of group) {
       this.taken[i] = 1;
-      for (const h of this.byCell[i]) {
-        if (h !== g && this.alive[h]) {
-          this.alive[h] = 0;
-          eliminated.push(this.candidates[h]);
-        }
-      }
+      for (const h of this.byCell[i]) this.alive[h] = 0;
     }
-    this.alive[g] = 0;
     this.placed.push(group);
     this.free -= group.length;
-    return eliminated;
   }
 
   /** Index of the candidate made of exactly `cells`, or -1. */
@@ -125,54 +132,49 @@ export class Deduction {
     );
   }
 
-  /** Applies the easiest rule (up to `maxRule`) that makes progress. */
-  step(maxRule: Rule = Rule.Lookahead): Step | undefined {
+  /** Applies the easiest rule that makes progress, and returns it. */
+  step(): Rule | undefined {
     return (
       this.forced() ??
-      (maxRule >= Rule.Together ? this.togetherRule() : undefined) ??
-      (maxRule >= Rule.Region ? this.regionRule() : undefined) ??
-      (maxRule >= Rule.Lookahead ? this.lookaheadRule() : undefined)
+      this.togetherRule() ??
+      this.eliminate(Rule.Region, (group) => !this.balancedWithout(group)) ??
+      this.eliminate(Rule.Lookahead, (group) => this.starves(group))
     );
   }
 
-  /** Applies rules until stuck or solved; returns the hardest rule used. */
-  run(maxRule: Rule = Rule.Lookahead): Rule | 0 {
-    let hardest: Rule | 0 = 0;
-    for (let step = this.step(maxRule); step; step = this.step(maxRule))
-      if (step.rule > hardest) hardest = step.rule;
-    return hardest;
-  }
-
-  private forced(): Step | undefined {
+  private forced() {
     for (let i = 0; i < this.taken.length; i++) {
-      if (this.taken[i]) continue;
-      const options = this.options(i);
+      const options = this.taken[i] ? [] : this.options(i);
       if (options.length === 1) {
-        const placed = this.candidates[options[0]];
-        return {
-          rule: Rule.Forced,
-          placed,
-          eliminated: this.place(options[0]),
-        };
+        this.place(options[0]);
+        return Rule.Forced;
       }
     }
   }
 
-  private togetherRule(): Step | undefined {
+  private togetherRule() {
     for (let a = 0; a < this.taken.length; a++) {
       if (this.taken[a]) continue;
       for (const b of this.partners(a)) {
-        const eliminated: number[][] = [];
-        for (const g of this.byCell[b]) {
-          if (this.alive[g] && !this.candidates[g].includes(a)) {
-            this.alive[g] = 0;
-            eliminated.push(this.candidates[g]);
-          }
-        }
-        if (eliminated.length > 0)
-          return { rule: Rule.Together, together: [a, b], eliminated };
+        const split = this.byCell[b].filter(
+          (g) => this.alive[g] && !this.candidates[g].includes(a),
+        );
+        for (const g of split) this.alive[g] = 0;
+        if (split.length > 0) return Rule.Together;
       }
     }
+  }
+
+  /** Eliminates the alive candidates failing `test`, if any. */
+  private eliminate(rule: Rule, test: (group: number[]) => boolean) {
+    let progress = false;
+    this.alive.forEach((alive, g) => {
+      if (alive && test(this.candidates[g])) {
+        this.alive[g] = 0;
+        progress = true;
+      }
+    });
+    if (progress) return rule;
   }
 
   /** Whether placing `group` leaves only regions with balanced digits. */
@@ -201,17 +203,6 @@ export class Deduction {
     return true;
   }
 
-  private regionRule(): Step | undefined {
-    const eliminated: number[][] = [];
-    this.alive.forEach((alive, g) => {
-      if (alive && !this.balancedWithout(this.candidates[g])) {
-        this.alive[g] = 0;
-        eliminated.push(this.candidates[g]);
-      }
-    });
-    if (eliminated.length > 0) return { rule: Rule.Region, eliminated };
-  }
-
   /** Whether placing `group` leaves some free cell without any option. */
   private starves(group: readonly number[]): boolean {
     const inGroup = new Set(group);
@@ -232,28 +223,10 @@ export class Deduction {
     }
     return false;
   }
-
-  private lookaheadRule(): Step | undefined {
-    const eliminated: number[][] = [];
-    this.alive.forEach((alive, g) => {
-      if (alive && this.starves(this.candidates[g])) {
-        this.alive[g] = 0;
-        eliminated.push(this.candidates[g]);
-      }
-    });
-    if (eliminated.length > 0) return { rule: Rule.Lookahead, eliminated };
-  }
 }
 
 export const Difficulty = { Easy: 1, Medium: 2, Hard: 3 } as const;
 export type Difficulty = (typeof Difficulty)[keyof typeof Difficulty];
-
-/** Score ranges of each difficulty, see `rate`. */
-export const DIFFICULTY_RANGES: Record<Difficulty, [number, number]> = {
-  [Difficulty.Easy]: [0, 0.25],
-  [Difficulty.Medium]: [0.25, 0.6],
-  [Difficulty.Hard]: [0.6, Infinity],
-};
 
 export interface Rating {
   solved: boolean;
@@ -277,8 +250,8 @@ export function rate(grid: Grid): Rating {
   const total = deduction.free;
   let effort = 0;
   for (let step = deduction.step(); step; step = deduction.step()) {
-    if (step.rule === Rule.Together) effort += 1;
-    else if (step.rule > Rule.Together) effort += 2;
+    if (step === Rule.Together) effort += 1;
+    else if (step > Rule.Together) effort += 2;
   }
   return {
     solved: deduction.solved,
@@ -287,13 +260,6 @@ export function rate(grid: Grid): Rating {
     score: effort / (total / grid.groupSize),
   };
 }
-
-export const difficultyOf = (score: number): Difficulty =>
-  score <= DIFFICULTY_RANGES[Difficulty.Easy][1]
-    ? Difficulty.Easy
-    : score <= DIFFICULTY_RANGES[Difficulty.Medium][1]
-      ? Difficulty.Medium
-      : Difficulty.Hard;
 
 export type Hint =
   | { kind: "wrong"; cells: number[] }
@@ -368,6 +334,6 @@ export function hint(
     if (found) return found;
     const step = deduction.step();
     if (!step) return { kind: "none" };
-    rule = step.rule;
+    rule = step;
   }
 }

@@ -10,29 +10,6 @@ export interface Grid {
   cells: Cell[];
 }
 
-/**
- * Parses a grid from its text form: one row per line, cells separated by
- * whitespace, `#` for holes. The group size is the largest digit.
- */
-export function parseGrid(text: string): Grid {
-  const rows = text
-    .trim()
-    .split("\n")
-    .map((line) => line.trim().split(/\s+/));
-  const width = rows[0].length;
-  if (rows.some((row) => row.length !== width))
-    throw new Error("All rows must have the same length");
-
-  const cells = rows.flat().map((token): Cell => {
-    if (token === "#") return null;
-    if (/^[1-9]$/.test(token)) return Number(token);
-    throw new Error(`Invalid cell: ${token}`);
-  });
-  const groupSize = Math.max(...cells.map((cell) => cell ?? 0));
-
-  return { width, height: rows.length, groupSize, cells };
-}
-
 /** Orthogonal neighbors of cell `i`. */
 export function neighbors({ width, height }: Grid, i: number): number[] {
   const row = Math.floor(i / width);

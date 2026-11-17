@@ -2,6 +2,7 @@ import type { GeneratorOptions, Puzzle } from "./generator.js";
 import type { Grid } from "./grid.js";
 import type { Hint } from "./logic.js";
 import type { WorkerRequest, WorkerResponse } from "./worker.js";
+import KukakuWorker from "./worker.js?worker";
 
 type Pending = {
   resolve: (value: never) => void;
@@ -15,9 +16,7 @@ const pending = new Map<number, Pending>();
 
 function getWorker() {
   if (worker) return worker;
-  worker = new Worker(new URL("./worker.ts", import.meta.url), {
-    type: "module",
-  });
+  worker = new KukakuWorker();
   worker.onmessage = ({ data }: MessageEvent<WorkerResponse>) => {
     const request = pending.get(data.id);
     if (!request) return;
@@ -25,7 +24,17 @@ function getWorker() {
     if ("error" in data) request.reject(new Error(data.error));
     else request.resolve(data.result as never);
   };
+  // Failed to load (e.g. its file changed since the page loaded) or crashed
+  worker.onerror = () => restart("Worker error");
   return worker;
+}
+
+/** Terminates the worker, rejecting every pending request. */
+function restart(error: string) {
+  worker?.terminate();
+  worker = undefined;
+  for (const request of pending.values()) request.reject(new Error(error));
+  pending.clear();
 }
 
 type DistributiveOmit<T, K extends PropertyKey> = T extends unknown
@@ -45,13 +54,8 @@ function send<T>(request: DistributiveOmit<WorkerRequest, "id">): Promise<T> {
  * the worker is restarted, and the previous promise is rejected.
  */
 export function generatePuzzle(options: GeneratorOptions): Promise<Puzzle> {
-  if ([...pending.values()].some((request) => request.type === "generate")) {
-    worker?.terminate();
-    worker = undefined;
-    for (const request of pending.values())
-      request.reject(new Error("Cancelled"));
-    pending.clear();
-  }
+  if ([...pending.values()].some((request) => request.type === "generate"))
+    restart("Cancelled");
   return send<Puzzle>({ type: "generate", options: $state.snapshot(options) });
 }
 

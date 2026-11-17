@@ -1,4 +1,4 @@
-import type { GeneratorOptions } from "./generator.js";
+import { squareGrid, type GeneratorOptions } from "./generator.js";
 import { Difficulty } from "./logic.js";
 
 /**
@@ -21,12 +21,6 @@ const SCHEDULE: Record<
 /** Generator options of the daily grid of `date`. */
 export function dailyOptions(date: Temporal.PlainDate): GeneratorOptions {
   const [size, groupSize, difficulty] = SCHEDULE[date.dayOfWeek];
-  return {
-    width: size,
-    height: size,
-    groupSize,
-    holes: (size * size) % groupSize,
-    difficulty,
-    seed: date.year * 10_000 + date.month * 100 + date.day,
-  };
+  const seed = date.year * 10_000 + date.month * 100 + date.day;
+  return squareGrid(size, groupSize, difficulty, seed);
 }
