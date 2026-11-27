@@ -41,6 +41,6 @@ COPY --from=build /rootfs/ /
 USER 65532:65532
 COPY --from=build /workdir/build/node .
 
-COPY --from=busybox:1.37-musl@sha256:f6a95d611e0a8780fabdb2aec43e31275b2720dfefa3e41b16835bfc42454478 /bin/busybox /busybox
-HEALTHCHECK --start-interval=2s --start-period=2s CMD ["/busybox", "wget", "-q", "--spider", "-T", "1", "http://127.0.0.1:3000/"]
+COPY --from=ghcr.io/tarampampam/microcheck:1.4.0@sha256:c9f79cd408626de7c10f2d487d67339f49adf0ba61dde96ede65343269db1f85 /bin/httpcheck /httpcheck
+HEALTHCHECK --start-interval=2s --start-period=2s CMD ["/httpcheck", "-t", "1", "http://127.0.0.1:3000/"]
 ENTRYPOINT ["./node"]
