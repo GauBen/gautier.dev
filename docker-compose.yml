@@ -1,0 +1,41 @@
+# Deployed by .forgejo/workflows/deploy.yml, see services/ct108-web/apps/
+# in the self-hosted repo.
+name: gautier-dev
+
+services:
+  web:
+    build:
+      context: .
+      secrets:
+        - github_token
+    restart: unless-stopped
+    environment:
+      GITHUB_TOKEN: ${GH_TOKEN:?GH_TOKEN is the GitHub token for comment counts}
+    networks:
+      - web
+    labels:
+      traefik.enable: 'true'
+      traefik.http.services.gautier-dev.loadbalancer.server.port: '3000'
+
+      traefik.http.routers.gautier-dev.rule: Host(`gautier.dev`)
+      traefik.http.routers.gautier-dev.service: gautier-dev
+
+      traefik.http.routers.gautier-dev-assets.rule: Host(`gautier.dev`) && PathPrefix(`/_app/immutable/assets/`)
+      traefik.http.routers.gautier-dev-assets.service: gautier-dev
+      traefik.http.routers.gautier-dev-assets.middlewares: gautier-dev-cors
+      traefik.http.middlewares.gautier-dev-cors.headers.customResponseHeaders.Access-Control-Allow-Origin: '*'
+
+      traefik.http.routers.gautier-dev-www.rule: Host(`www.gautier.dev`)
+      traefik.http.routers.gautier-dev-www.service: gautier-dev
+      traefik.http.routers.gautier-dev-www.middlewares: gautier-dev-www
+      traefik.http.middlewares.gautier-dev-www.redirectregex.regex: ^https?://www\.gautier\.dev/(.*)
+      traefik.http.middlewares.gautier-dev-www.redirectregex.replacement: https://gautier.dev/$${1}
+      traefik.http.middlewares.gautier-dev-www.redirectregex.permanent: 'true'
+
+networks:
+  web:
+    external: true
+
+secrets:
+  github_token:
+    environment: GH_TOKEN

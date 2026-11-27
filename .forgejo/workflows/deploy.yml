@@ -1,0 +1,17 @@
+# Runs on git.gautier.dev, on the copy pushed by mirror.yml.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One deploy at a time: two rollouts at once leave extra containers.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    uses: ./.forgejo/workflows/deploy-app.yml
+    secrets: inherit
