@@ -20,12 +20,17 @@ COPY mise.toml .
 RUN --mount=type=cache,target=/mise/downloads mise install
 
 # Install js dependencies
-COPY --parents **/package.json upm.lock ./
+# Not COPY --parents: Debian 13's Docker doesn't support it.
+COPY package.json upm.lock ./
+COPY adapter/package.json adapter/
 RUN --mount=type=cache,target=/root/.upm upm ci
 
 # Build the project and collect its shared libraries into /rootfs
 COPY . .
-RUN upm build \
+# GITHUB_TOKEN prerenders the comment counts. A secret mount, not an ARG,
+# so it stays out of the image's layers.
+RUN --mount=type=secret,id=github_token \
+  GITHUB_TOKEN="$(cat /run/secrets/github_token 2>/dev/null || true)" upm build \
   && mkdir /rootfs \
   && ldd build/node | grep --only-matching --extended-regexp '/\S+' | xargs --verbose -- cp --dereference --parents --target-directory=/rootfs --
 
@@ -42,5 +47,5 @@ USER 65532:65532
 COPY --from=build /workdir/build/node .
 
 COPY --from=ghcr.io/tarampampam/microcheck:1.4.0@sha256:c9f79cd408626de7c10f2d487d67339f49adf0ba61dde96ede65343269db1f85 /bin/httpcheck /httpcheck
-HEALTHCHECK --start-interval=2s --start-period=2s CMD ["/httpcheck", "-t", "1", "http://127.0.0.1:3000/"]
+HEALTHCHECK --start-interval=2s --start-period=30s CMD ["/httpcheck", "-t", "1", "http://127.0.0.1:3000/"]
 ENTRYPOINT ["./node"]

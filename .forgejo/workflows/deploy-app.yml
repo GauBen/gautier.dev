@@ -1,0 +1,94 @@
+# Reusable: deploys the calling repo to CT 108, see services/ct108-web/apps/
+# in the self-hosted repo. Lives in this repo because Forgejo can only
+# call workflows from public repos.
+name: Deploy an app
+
+on:
+  workflow_call:
+    inputs:
+      rollout:
+        description: Space-separated services to swap with docker rollout
+        type: string
+        default: web
+      up:
+        description: Space-separated services to `docker compose up -d` first
+        type: string
+        default: ''
+    secrets:
+      DEPLOY_SSH_KEY:
+        required: true
+      NTFY_URL:
+        required: false
+
+env:
+  # CT 108's SSH host key, from the Proxmox host:
+  #   pct exec 108 -- cat /etc/ssh/ssh_host_ed25519_key.pub
+  CT108_HOST_KEY: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsVTbvocrrWAsLH0E/JzIzjGM1MzzOO+cjGDCWN3xqO
+  # Bump by hand, checksum included.
+  DOCKER_ROLLOUT_VERSION: v0.14
+  DOCKER_ROLLOUT_SHA256: cdeaba6ae9eee3b0b606286e585bbda6787283d801a6ad6d9b9d2bc347fda05b
+
+jobs:
+  deploy:
+    runs-on: linux-amd64
+    container: docker:29.10.1-cli
+    env:
+      DOCKER_HOST: ssh://deploy@192.168.1.108
+    steps:
+      # Alpine: node for the checkout action, ssh for DOCKER_HOST.
+      - run: apk add --no-cache bash git jq nodejs openssh-client
+
+      - uses: https://code.forgejo.org/actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up SSH and docker-rollout
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh ~/.docker/cli-plugins
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '192.168.1.108 %s\n' "$CT108_HOST_KEY" > ~/.ssh/known_hosts
+          wget -qO ~/.docker/cli-plugins/docker-rollout \
+            "https://github.com/wowu/docker-rollout/releases/download/$DOCKER_ROLLOUT_VERSION/docker-rollout"
+          echo "$DOCKER_ROLLOUT_SHA256  $HOME/.docker/cli-plugins/docker-rollout" | sha256sum -c
+          chmod +x ~/.docker/cli-plugins/docker-rollout
+
+      # The caller's secrets (`secrets: inherit`) as environment variables,
+      # for the compose file to interpolate. Not Forgejo's own tokens, this
+      # workflow's secrets, or names that would steer Docker or Compose.
+      - name: Expose secrets to Compose
+        env:
+          SECRETS: ${{ toJSON(secrets) }}
+        run: >-
+          printf '%s' "$SECRETS" | jq -r
+          'to_entries[]
+          | select(.key | test("^(github_|gitea_|forgejo_|docker_|compose_)|^(deploy_ssh_key|ntfy_url)$"; "i") | not)
+          | "\(.key)<<EOS3CRET5\n\(.value)\nEOS3CRET5"' >> "$GITHUB_ENV"
+
+      - run: docker compose build
+
+      - name: Bring up the services that aren't rolled out
+        if: inputs.up != ''
+        env:
+          SERVICES: ${{ inputs.up }}
+        run: docker compose up -d $SERVICES
+
+      - name: Roll out
+        env:
+          SERVICES: ${{ inputs.rollout }}
+        run: |
+          for service in $SERVICES; do
+            docker rollout "$service"
+          done
+
+      - name: Notify on failure
+        if: failure()
+        env:
+          NTFY_URL: ${{ secrets.NTFY_URL }}
+          TITLE: ${{ github.repository }} deploy failed
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_number }}
+        run: |
+          [ -n "$NTFY_URL" ] || exit 0
+          wget -qO- --header "Title: $TITLE" --header "Priority: high" \
+            --header "Tags: rotating_light" --header "Click: $RUN_URL" \
+            --post-data "$RUN_URL" "$NTFY_URL"
