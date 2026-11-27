@@ -1,6 +1,7 @@
 # Reusable: deploys the calling repo to CT 108, see services/ct108-web/apps/
 # in the self-hosted repo. Lives in this repo because Forgejo can only
-# call workflows from public repos.
+# call workflows from public repos. Needs `secrets: inherit`, with
+# DEPLOY_SSH_KEY and optionally NTFY_URL (Forgejo can't declare them).
 name: Deploy an app
 
 on:
@@ -14,11 +15,6 @@ on:
         description: Space-separated services to `docker compose up -d` first
         type: string
         default: ''
-    secrets:
-      DEPLOY_SSH_KEY:
-        required: true
-      NTFY_URL:
-        required: false
 
 env:
   # CT 108's SSH host key, from the Proxmox host:
