@@ -39,7 +39,7 @@ COPY --from=build /rootfs/ /
 
 # Use a non-root user to run the application
 USER 65532:65532
-COPY --from=build --chown=65532:65532 /workdir/build/node .
+COPY --from=build /workdir/build/node .
 
 COPY --from=busybox:1.37-musl@sha256:f6a95d611e0a8780fabdb2aec43e31275b2720dfefa3e41b16835bfc42454478 /bin/busybox /busybox
 HEALTHCHECK --start-interval=2s --start-period=2s CMD ["/busybox", "wget", "-q", "--spider", "-T", "1", "http://127.0.0.1:3000/"]
